@@ -1,0 +1,50 @@
+--- 
+layout: default-blog 
+---
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-header">
+        <h1 class="post-title title-more-margin" itemprop="name headline">{{ page.title | escape }}</h1>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %} {{ page.date | date: date_format }}
+            </time>
+            {% if page.author %} •
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">{{ page.author }}</span>
+            </span>
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="post-content" itemprop="articleBody">
+        {{ content }}
+    </div>
+    <div class="pagination">
+        <!-- {% if page.previous.url %}
+            <span class="tooltip">
+                <button class="previous-article" onclick='javascript:location.href="{{ page.previous.url }}"'>Previous Article</button>
+                <span class="tooltiptext">{{ page.previous.title }}</span>
+            </span>
+        {% endif %} 
+        {% if page.next.url %}
+            <span class="tooltip">
+                <button class="next-article" onclick='javascript:location.href="{{ page.next.url }}"'>Next Article</button>
+                <span class="tooltiptext">{{ page.next.title }}</span>
+            </span>
+        {% endif %}  -->
+
+        {% if page.previous.url %}
+            <a class="previous-article" href="{{page.previous.url}}" style="padding: 0 5px 0 0;"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> {{page.previous.title}}</a>
+        {% endif %}
+        {% if page.next.url %}
+            <a class="next-article" href="{{page.next.url}}" style="padding: 0 0 0 5px;">{{page.next.title}} <i class="fas fa-chevron-circle-right" style="padding: 0 5px; font-size: 12.5px;"></i></a>
+        {% endif %}
+    </div>
+    <div class="rss-subscribe">
+        <button class="rss-subscribe-button" onclick='javascript:location.href="{{ "feed.xml" | relative_url }}"'>
+            <i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+    </div>
+    <br>
+    {% include disqus_comments.html %}
+</article>

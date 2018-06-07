@@ -1,0 +1,25 @@
+@mixin positioning() {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto auto;
+}
+
+@mixin parent() {
+    .site-parent-container {
+        @include positioning();
+        background-color: #ffffff;
+        // border: 2px solid #000000;
+        height: 540px;
+        width: 700px; 
+    }
+
+    .site-parent-container-blog {
+        margin: 50px auto 50px auto;
+        background-color: #ffffff;
+        height: 100%;
+        width: 700px; 
+    }
+}

@@ -1,0 +1,27 @@
+@mixin site-sidebar () {
+    header {
+        .site-sidebar {
+            nav {
+                text-align: center;
+                button {
+                    border-radius: 50%;
+                    transition: all .3s ease-in-out;
+                    margin: 0 20px;
+                    padding: 0;
+                    .fa-home {
+                        padding: 6px 6px 2px 6px;
+                    }
+                    .fa-file-alt {
+                        padding: 6px 8.4px 2px 8.4px;
+                    }
+                    .fa-info {
+                        padding: 6px 11px 2px 11px;
+                    }
+                    .fa-phone {
+                        padding: 6px 6.3px 2px 6.3px;
+                    }
+                }
+            }
+        }
+    }
+}

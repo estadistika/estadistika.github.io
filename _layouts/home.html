@@ -1,0 +1,50 @@
+--- 
+layout: default-blog 
+---
+
+<div class="home">
+    {{ content }}
+
+    <!-- This loops through the paginated posts -->
+    <ul class="post-list">
+        {% for post in paginator.posts %}
+        <li>
+            {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+            <span class="post-meta">{{ post.date | date: date_format }}</span>
+            <h2>
+                <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            </h2>
+
+            {% assign start = "<!-- excerpt.start -->" %} 
+            {% assign end = " <!-- excerpt.end -->" %} 
+            {% if post.content contains start and post.content contains end %} 
+                {% assign first_split = post.content | split: start | last %} 
+                {% assign second_split = first_split | split: end | first %} 
+                {{ second_split | strip_html | truncatewords: 50 }} 
+            {% else %} 
+                {{ post.content | strip_html | truncatewords: 50 }} 
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Pagination links -->
+    <div class="pagination">
+        {% if paginator.previous_page %}
+            <button onclick='javascript:location.href="{{ paginator.previous_page_path }}"' class="previous"><i class="fas fa-chevron-circle-left" style="margin: 0 5px 0 0; font-size: 12.5px;"></i>Previous</button>
+        {% else %}
+
+        {% endif %}
+
+        <span class="page_number ">Page: {{ paginator.page }} / {{ paginator.total_pages }}</span>
+
+        {% if paginator.next_page %}
+            <button onclick='javascript:location.href="{{ paginator.next_page_path }}"' class="next">Next<i class="fas fa-chevron-circle-right" style="margin: 0 0 0 5px; font-size: 12.5px;"></i></button>
+        {% else %}
+        {% endif %}
+    </div>
+    <div class="rss-subscribe">
+        <button class="rss-subscribe-button" onclick ='javascript:location.href="{{ "feed.xml" | relative_url }}"'><i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+    </div>
+
+</div>

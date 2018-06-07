@@ -1,0 +1,26 @@
+$bg-color: rgb(255, 255, 255);
+$quran-bg-color: rgba(0,0,0,.03);
+$link-color: #a07b03;
+$sb-bg-color: #483c32;
+$sb-nav-color: #d4af37;
+$islamic-green: #009000;
+$bb-bg-color: #003153;
+$sec-bg-color: #696969;
+
+$body-line_height: 26px;
+$body-text-align: justify;
+
+$font-body: 'Roboto', sans-serif;
+$font-post-meta: 'Saira Condensed';
+$font-size-post-meta: 14px;
+$font-post-title-link: 'Quicksand', sans-serif;
+$font-quran-translation: 'Amita', cursive;
+$font-size-body: 16px;
+
+$sidebar-container-width: 250px;
+$main-container-width: 650px;
+$main-container-margin-left-right: 100px;
+$main-container-margin-top-bottom: 50px;
+$main-container-margin: $main-container-margin-top-bottom $main-container-margin-left-right;
+$parent-container-width: $sidebar-container-width + $main-container-width + $main-container-margin-left-right * 2;
+$parent-container-height: 100%;
