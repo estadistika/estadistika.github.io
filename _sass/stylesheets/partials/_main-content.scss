@@ -17,7 +17,7 @@
         }
 
         div.welcome-logo {
-            margin: 200px auto 250px auto;
+            margin: 220px auto 250px auto;
             font-size: 150px;
             font-family: 'Amiri', serif; //'Reem Kufi', sans-serif;
             display: block;
@@ -25,7 +25,7 @@
             text-align: center;
             transition: all .3s ease-in-out;
         }
-
+        
         div.welcome-logo:hover {
             color: $sb-nav-color;
         }
