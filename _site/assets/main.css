@@ -3,11 +3,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,300i");
 @import url("https://fonts.googleapis.com/css?family=Quicksand");
 @import url("https://fonts.googleapis.com/css?family=Saira+Condensed:200");
-@import url("https://fonts.googleapis.com/css?family=Amiri");
 @import url("https://fonts.googleapis.com/css?family=Berkshire+Swash");
 @import url("https://fonts.googleapis.com/css?family=Reem+Kufi");
 @import url("https://fonts.googleapis.com/css?family=Amita|Galdeano|Offside");
 @import url("https://fonts.googleapis.com/css?family=Rochester");
+@import url("https://fonts.googleapis.com/css?family=Bungee+Outline");
 html body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
@@ -91,9 +91,9 @@ html body {
     margin: 50px;
     text-align: center; }
   html body main.site-main-content div.welcome-logo {
-    margin: 220px auto 250px auto;
-    font-size: 150px;
-    font-family: 'Amiri', serif;
+    margin: 230px auto 230px auto;
+    font-size: 100px;
+    font-family: 'Bungee Outline', cursive;
     display: block;
     text-align: center;
     transition: all .3s ease-in-out; }
