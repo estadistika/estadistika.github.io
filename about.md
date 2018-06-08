@@ -9,3 +9,6 @@ I'm an Assistant Professor at the Department of Mathematics and Statistics, [Ili
 
 
 Finally, I am open for private consultation (data science, biostatistics, econometrics, social statistics, etc.) and collaborative projects especially open-source (see my projects on [Github](https://github.com/alstat)). You can contact me at al-ahmadgaid.asaad@g.msuiit.edu.ph or follow me on twitter [@realalstat](https://twitter.com/realalstat).
+<br>
+<br>
+<center><b>•</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b></center>
