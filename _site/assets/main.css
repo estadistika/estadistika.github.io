@@ -17,6 +17,9 @@ html body {
     text-decoration: none;
     color: #a07b03;
     padding: 0; }
+  html body img {
+    margin: 20px auto;
+    display: block; }
   html body button {
     padding: 1px 7px; }
   html body button, html body a.previous-article, html body a.next-article {
