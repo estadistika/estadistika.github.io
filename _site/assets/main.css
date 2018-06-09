@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre");
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,300i");
-@import url("https://fonts.googleapis.com/css?family=Chathura");
+@import url("https://fonts.googleapis.com/css?family=Aubrey");
 @import url("https://fonts.googleapis.com/css?family=Saira+Condensed:200");
 @import url("https://fonts.googleapis.com/css?family=Berkshire+Swash");
 @import url("https://fonts.googleapis.com/css?family=Reem+Kufi");
@@ -115,8 +115,8 @@ html body {
   html body main.site-main-content button.more-button {
     font-size: 16px; }
   html body main.site-main-content a.post-link, html body main.site-main-content h1.post-title {
-    font-family: "Chathura", sans-serif;
-    font-size: 50px;
+    font-family: "Aubrey", cursive;
+    font-size: 35px;
     text-decoration: none;
     color: #483c32; }
   html body main.site-main-content .title-more-margin {
