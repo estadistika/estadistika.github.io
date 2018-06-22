@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre");
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,300i");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono");
 @import url("https://fonts.googleapis.com/css?family=Aubrey");
 @import url("https://fonts.googleapis.com/css?family=Saira+Condensed:200");
 @import url("https://fonts.googleapis.com/css?family=Berkshire+Swash");
@@ -84,6 +85,23 @@ html body {
         padding: 6px 11px 2px 11px; }
       html body header .site-sidebar nav button .fa-phone {
         padding: 6px 6.3px 2px 6.3px; }
+  html body main.site-main-content .post-content {
+    margin-bottom: 30px; }
+  html body main.site-main-content .section {
+    margin-top: 25px;
+    margin-bottom: 8px; }
+  html body main.site-main-content div.gist-meta {
+    display: none;
+    border-width: 0;
+    background-color: #f7f7f7 !important; }
+  html body main.site-main-content .gist .gist-file {
+    border-bottom-width: 0;
+    background-color: #ddd !important; }
+  html body main.site-main-content .gist .gist-data {
+    border-radius: 2px; }
+  html body main.site-main-content .gist {
+    margin-top: 15px;
+    margin-bottom: 5px; }
   html body main.site-main-content div.post-header {
     display: block !important; }
   html body main.site-main-content span.web-title {
@@ -116,9 +134,17 @@ html body {
     font-size: 16px; }
   html body main.site-main-content a.post-link, html body main.site-main-content h1.post-title {
     font-family: "Aubrey", cursive;
-    font-size: 35px;
+    font-size: 28px;
     text-decoration: none;
     color: #483c32; }
+  html body main.site-main-content code {
+    padding: 2px 4px;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 100% !important;
+    color: #f44d14;
+    text-shadow: 0 1px white;
+    background-color: #f9f2f4;
+    border-radius: 4px; }
   html body main.site-main-content .title-more-margin {
     margin: 50px 0 0 0; }
   html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination {
