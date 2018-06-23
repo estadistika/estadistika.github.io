@@ -56,6 +56,6 @@ For multiple operations, it is convenient to use piping and that is the reason w
 is equivalent to the following Julia code using [JuliaDBMeta.jl](https://piever.github.io/JuliaDBMeta.jl/latest/):
 <script src="https://gist.github.com/alstat/a91f46846a8bc6ef0ac2992293734f90.js"></script>
 <h3 class="section">Conclusion</h3>
-I've demonstrated how easy it is to use Julia for doing data wrangling, and I love it. In fact, there is a library that can query any table-like data structure in Julia, and is called [Query.jl](https://github.com/davidanthoff/Query.jl) (will definitely do an article for this in the future).
+I've demonstrated how easy it is to use Julia for doing data wrangling, and I love it. In fact, there is a library that can query any table-like data structure in Julia, and is called [Query.jl](https://github.com/davidanthoff/Query.jl) (will definitely write a separate article for this in the future).
 
 For more on [JuliaDB.jl](http://juliadb.org/latest/), watch the [Youtube tutorial](https://www.youtube.com/watch?v=d5SzUh2_ono).
