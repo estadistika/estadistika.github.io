@@ -12,7 +12,7 @@ For data wrangling, there are two packages that we can use, and these are [DataF
 By default, the libraries I mentioned above are not built-in in Julia, and hence we need to install it:
 <script src="https://gist.github.com/alstat/78138748ba87580653416a6181693caa.js"></script>
 <h3 class="section">Data: nycflights13</h3>
-In order to compare Julia's capability on data wrangling with that of R's [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), we'll reproduce the example in this [site](https://cran.rstudio.com/web/packages/dplyr/vignettes/dplyr.html). It uses all 336,776 flights that departed from New York City in 2013, and I have a copy of it on github. To download and load the data, run the following:
+In order to compare Julia's capability on data wrangling with that of R's [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), we'll reproduce the example in this [site](https://cran.rstudio.com/web/packages/dplyr/vignettes/dplyr.html). It uses all 336,776 flights that departed from New York City in 2013. I have a copy of it on github, and the following will download and load the data:
 <script src="https://gist.github.com/alstat/c0c2bc4e5355ac55ad83fc07fa8561c8.js"></script>
 The rows of the data are not displayed as we execute <code>nycflights</code> in line 7, that's because we have a lot of columns, and by default [JuliaDB.jl](http://juliadb.org/latest/) will not print all these unless you have a big display (unfortunately, I'm using my 13 inch laptop screen, and that's why). Hence, for the rest of the article, we'll be using selected columns only:
 <script src="https://gist.github.com/alstat/2cde6bb6e7ede38ddcdba7d47fb1fed7.js"></script>
@@ -56,6 +56,6 @@ For multiple operations, it is convenient to use piping and that is the reason w
 is equivalent to the following Julia code using [JuliaDBMeta.jl](https://piever.github.io/JuliaDBMeta.jl/latest/):
 <script src="https://gist.github.com/alstat/a91f46846a8bc6ef0ac2992293734f90.js"></script>
 <h3 class="section">Conclusion</h3>
-I've demonstrated how easy it is to use Julia for doing data wrangling, and I love it. In fact, there is a library that can query any table-like data structure in Julia, and is called [Query.jl](https://github.com/davidanthoff/Query.jl)
+I've demonstrated how easy it is to use Julia for doing data wrangling, and I love it. In fact, there is a library that can query any table-like data structure in Julia, and is called [Query.jl](https://github.com/davidanthoff/Query.jl) (will definitely do an article for this in the future).
 
 For more on [JuliaDB.jl](http://juliadb.org/latest/), watch the [Youtube tutorial](https://www.youtube.com/watch?v=d5SzUh2_ono).
