@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Julia: Introduction to Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl"
+title:  "Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl"
 date:   2018-6-8 12:00:00 +0800
 categories: Data Analyses Wrangling Julia Programming Packages
 comments: true
