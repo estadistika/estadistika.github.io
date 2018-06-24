@@ -43,7 +43,7 @@ The data can be summarized using the <code>JuliaDB.summarize</code> function
 <h3 class="section">Grouped Operations</h3>
 For grouped operations, we can use the <code>JuliaDB.groupby</code> function or the <code>JuliaDBMeta.@groupby</code>:
 <script src="https://gist.github.com/alstat/523976efd34a747f8fe6211b16ad6bf0.js"></script>
-We'll use the summarized data above and plot the average delay in relation to the distance travelled. We'll use the [Gadfly.jl](http://gadflyjl.org/stable/) package for plotting and [IterableTables.jl](https://github.com/davidanthoff/IterableTables.jl) for converting [JuliaDB.jl](http://juliadb.org/latest/)'s IndexedTable objects to DataFrames.DataFrame object, that's because Gadfly.plot has no direct method for JuliaDB.IndexedTables.
+We'll use the summarized data above and plot the flight delay in relation to the distance travelled. We'll use the [Gadfly.jl](http://gadflyjl.org/stable/) package for plotting and [IterableTables.jl](https://github.com/davidanthoff/IterableTables.jl) for converting [JuliaDB.jl](http://juliadb.org/latest/)'s IndexedTable objects to DataFrames.DataFrame object, that's because Gadfly.plot has no direct method for JuliaDB.IndexedTables.
 <script src="https://gist.github.com/alstat/c8485c39992d82c9129ccd2e5e2745c2.js"></script>
 To plot, run the following:
 <script src="https://gist.github.com/alstat/2d6322571f78ec940af76c6011ed9f1f.js"></script>
