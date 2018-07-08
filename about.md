@@ -8,7 +8,7 @@ permalink: /about/
 Moreover, I am also the owner of the [Analysis with Programming](http://alstatr.blogspot.com/) website, which I maintained from 2013 to 2017, and I made this blog as a successor to it. You can contact me at 
 <br>
 <center>al-ahmadgaid.asaad@g.msuiit.edu.ph</center>
-or follow me on twitter [@realalstat](https://twitter.com/realalstat).
+or follow me on twitter [@iamalstat](https://twitter.com/iamalstat).
 <br>
 <br>
 <center><b>•</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>•</b></center>
