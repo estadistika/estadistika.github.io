@@ -194,7 +194,7 @@ html body {
       html body div.site-parent-container-blog main.site-main-content center.home {
         display: none; }
       html body div.site-parent-container-blog main.site-main-content article.post {
-        padding: 10px;
+        padding: 10px 0;
         margin-top: 40px; }
         html body div.site-parent-container-blog main.site-main-content article.post div.post-header h1.post-title.title-more-margin {
           font-size: 22px !important;
