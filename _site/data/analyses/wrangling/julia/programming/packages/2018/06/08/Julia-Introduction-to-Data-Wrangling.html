@@ -8,6 +8,7 @@
 
   <title>ESTADISTIKA</title>
   <meta name="description" content="let's investigate Islam">
+  <meta name="theme-color" content="#1f1e1e">
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -22,6 +23,21 @@
         <header>
     <!-- <img src="/assets/bible-psalms.jpg"> -->
     <div class="site-sidebar">
+        <div class="dropdown" style="display: none;">
+            <button class="dropbtn"><a class="fa fa-bars"></a></button>
+            <div class="dropdown-content">
+                <a id="home-button" href="/index.html">Home</a>
+                <a href="/blog">Articles</a>
+            </div>
+        </div>
+        <div id="website-name-wrapper" style="display: none;">
+            <div id="website-name">
+                <a style="color: white;" href="/index.html">Estadistika</a>
+            </div>
+            <div id="website-description">
+                . . . statistics / machine learning / data science
+            </div>
+        </div>
         <nav>
             <button onclick='javascript:location.href="/"'>
                 <i class="fas fa-home"></i>
@@ -112,16 +128,9 @@ is equivalent to the following Julia code using <a href="https://piever.github.i
     </div>
     <div class="pagination">
         <!--  
-        
-            <span class="tooltip">
-                <button class="next-article" onclick='javascript:location.href="/linear/least/square/data/analyses/julia/python/r/2018/06/23/Julia-Introduction-to-Linear-Regression.html"'>Next Article</button>
-                <span class="tooltiptext">Julia, Python, R: Introduction to Linear Regression</span>
-            </span>
           -->
 
         
-        
-            <a class="next-article" href="/linear/least/square/data/analyses/julia/python/r/2018/06/23/Julia-Introduction-to-Linear-Regression.html" style="padding: 0 0 0 5px;">Julia, Python, R: Introduction to Linear Regression <i class="fas fa-chevron-circle-right" style="padding: 0 5px; font-size: 12.5px;"></i></a>
         
     </div>
     <div class="rss-subscribe">
