@@ -56,7 +56,7 @@
             font-family: 'Saira Condensed', sans-serif;
             color: #b9b9b9; }
         html body div.site-parent-container header .site-sidebar div.dropdown {
-          margin: 3px 0;
+          margin: 2px 0;
           position: relative;
           display: inline-block !important;
           box-sizing: border-box; }
@@ -67,7 +67,6 @@
             border: none;
             cursor: pointer; }
             html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn a {
-              font-size: 24px;
               color: white; }
           html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content {
             display: none;
@@ -147,7 +146,7 @@
             font-family: 'Saira Condensed', sans-serif;
             color: #b9b9b9; }
         html body div.site-parent-container-blog header .site-sidebar div.dropdown {
-          margin: 3px 0;
+          margin: 2px 0;
           position: relative;
           display: inline-block !important;
           box-sizing: border-box; }
