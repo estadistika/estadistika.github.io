@@ -1,7 +1,7 @@
 html {
-    body {
-        @media only screen and (min-width: 200px) and (max-width: 800px) {
-
+    @media only screen and (min-width: 200px) and (max-width: 800px) {
+        body {
+            margin: 0;
             div.site-parent-container {
                 @include positioning();
                 padding: 0;
@@ -114,13 +114,14 @@ html {
                 }
 
                 main.site-main-content {
+                    margin: 74px 10px 0 10px;
                     center.home {
                         display: none;
                     }
 
                     div.home-mobile {
                         display: block !important;
-                        padding: 10px;
+                        // padding: 15px;
                         margin-top: 40px;
 
                         header.post-header {
@@ -131,7 +132,7 @@ html {
                     }
 
                     article.post {
-                        padding: 10px;
+                        // padding: 10px 15px;
                         margin-top: 40px;
 
                         header.post-header {
@@ -161,7 +162,6 @@ html {
                         box-sizing: border-box;
                         height: 50px;
                         box-shadow: 0px 1px 5px #888888;
-                        margin-left: -8px;
 
                         div#website-name-wrapper {
                             margin: 3px 0;
@@ -256,13 +256,14 @@ html {
                 }
 
                 main.site-main-content {
+                    margin: 40px 10px 0 10px;
                     center.home {
                         display: none;
                     }
 
                     article.post {
-                        padding: 10px;
-                        margin-top: 40px;
+                        // padding: 10px 0;
+                        margin-top: 73px;
                         div.post-header {
                             h1.post-title.title-more-margin {
                                 font-size: 22px !important;
@@ -279,7 +280,7 @@ html {
 
                     div.home {
                         margin-top: 40px;
-
+                        // padding: 0;
                         ul.post-list {
                             li {
                                 h2 {
@@ -293,6 +294,9 @@ html {
                 }
             }
         }
+    }
+    
+    body {
         
         font-size: $font-size-body;
         font-family: $font-body;
