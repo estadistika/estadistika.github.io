@@ -102,6 +102,7 @@ html body {
       html body div.site-parent-container main.site-main-content center.home {
         display: none; }
       html body div.site-parent-container main.site-main-content div.home-mobile {
+        display: block !important;
         padding: 10px;
         margin-top: 40px; }
         html body div.site-parent-container main.site-main-content div.home-mobile header.post-header h1.post-title {
