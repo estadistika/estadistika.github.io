@@ -13,14 +13,15 @@ html {
                 header {
                     .site-sidebar {     
                         background-image: linear-gradient(rgb(29, 29, 29), #1f1e1e, #1f1e1e, rgb(29, 29, 29));
-                        // opacity: 0.97;
+                        opacity: 0.97;
                         position: fixed;
                         top: 0%;
                         width: 100%;
                         border-radius: 0px;
                         box-sizing: border-box;
                         height: 50px;
-                        box-shadow: 0px 1px 5px #888888;
+                        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+                        z-index: 9999;
 
                         div#website-name-wrapper {
                                 margin: 3px 0;
@@ -154,14 +155,15 @@ html {
                 header {
                     .site-sidebar {     
                         background-image: linear-gradient(rgb(29, 29, 29), #1f1e1e, #1f1e1e, rgb(29, 29, 29));
-                        // opacity: 0.97;
+                        opacity: 0.97;
                         position: fixed;
                         top: 0%;
                         width: 100%;
                         border-radius: 0px;
                         box-sizing: border-box;
                         height: 50px;
-                        box-shadow: 0px 1px 5px #888888;
+                        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+                        z-index: 9999;
 
                         div#website-name-wrapper {
                             margin: 3px 0;
