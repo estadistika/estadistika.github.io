@@ -1,4 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-29T20:53:31+08:00</updated><id>http://localhost:4000/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html" rel="alternate" type="text/html" title="Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl" /><published>2018-06-08T12:00:00+08:00</published><updated>2018-06-08T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html">&lt;p&gt;I’m a heavy user of Python’s &lt;a href=&quot;https://pandas.pydata.org/&quot;&gt;pandas&lt;/a&gt; and R’s &lt;a href=&quot;https://cran.r-project.org/web/packages/dplyr/index.html&quot;&gt;dplyr&lt;/a&gt; both at work and when I was taking my master’s degree. Hands down, both of these tools are very good at handling the data. So what about Julia? It’s a fairly new programming language that’s been around for almost 6 years already with a very active community. If you have no idea, I encourage you to visit &lt;a href=&quot;http://julialang.org/&quot;&gt;Julialang.org&lt;/a&gt;. In summary, it’s a programming language that walks like a &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, but runs like a &lt;a href=&quot;https://en.wikipedia.org/wiki/C_%28programming_language%29&quot;&gt;C&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-07T23:48:02+08:00</updated><id>http://localhost:4000/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">R, Python, Julia: Introduction to Bayesian Linear Regression</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference.html" rel="alternate" type="text/html" title="R, Python, Julia: Introduction to Bayesian Linear Regression" /><published>2018-09-08T12:00:00+08:00</published><updated>2018-09-08T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference.html">&lt;p&gt;In Bayesian statistics, Reverend Thomas Bayes (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of Laplace (1986). The Bayes’ theorem has the following form:&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\label{eq:bayes-theorem}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})}
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;where &lt;span class=&quot;math&quot;&gt;$\mathbf{w}$&lt;/span&gt; is the weight vector and $\mathbf{y}$ is the data. This simple formula is the main foundation of Bayesian modeling. Any model estimated using Maximum Likelihood can be estimated using the above conditional probability. What makes it different, is that the Bayes’ theorem considers uncertainty not only on the observations but also uncertainty on the weights or the objective parameters.&lt;/p&gt;
+
+&lt;p&gt;As an illustration of Bayesian inference to basic modeling, this article attempts to discuss the Bayesian approach to linear regression. Let ${\mathscr{D}={(\mathbf{x}_1,y_1),\cdots,(\mathbf{x}_n,y_n)}}$ where $\mathbf{x}_i\in\mathbb{R}^{d}, y_i\in \mathbb{R}$ be the pairwised dataset.&lt;/p&gt;
+
+&lt;p&gt;Suppose the response values, $y_1,\cdots,y_n$, are independent given the parameter $\mathbf{w}$, and is distributed as $y_i\sim\mathcal{N}(\mathbf{w}^{\text{T}}\mathbf{x}_i,\alpha^{-1})$, where $\alpha^{-1}$ is referred to as the &lt;i&gt;precision&lt;/i&gt; parameter — useful for later derivation. In Bayesian perspective, the weights are assumed to be random and are governed by some &lt;i&gt;a priori&lt;/i&gt; distribution. The choice of this distribution is subjective, but choosing arbitrary &lt;i&gt;a priori&lt;/i&gt; can sometimes or often result to an intractable integration, especially for interesting models. For simplicity, a conjugate prior is used for the latent weights. Specifically, assume that ${\mathbf{w}\sim\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I})}$ such that $\beta&amp;gt;0$ is the hyperparameter supposed in this experiment as known value. The posterior distribution based on the Bayes’ rule is given by
+\begin{equation}\label{eq:bayesrulepost}
+	\mathbb{P}(\mathbf{w}|\mathbf{y})=\frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})},
+\end{equation}
+where $\mathbb{P}(\mathbf{w})$ is the &lt;i&gt;a priori&lt;/i&gt; distribution of the parameter, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. The likelihood is given by
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    \mathbb{P}(\mathbf{y}|\mathbf{w})&amp;=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\\
+    &amp;=\left(\frac{\alpha}{2\pi}\right)^{n/2}\exp\left[-\sum_{i=1}^n\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right].\label{eq:likelihood:blreg}
+\end{align} %]]&gt;&lt;/script&gt;
+In matrix form, this can be written as
+\begin{equation}
+    \mathbb{P}(\mathbf{y}|\mathbf{w})\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]
+\end{equation}
+where $\boldsymbol{\mathfrak{A}}=\left[(\mathbf{x}_i^{\text{T}})\right]$, i.e. $\boldsymbol{\mathfrak{A}}\in(\mathbb{R}^{n}\times\mathbb{R}^d)$, this matrix is known as the &lt;i&gt;design matrix&lt;/i&gt;. Given that $\mathbf{w}$ has the following prior distribution
+\begin{equation}\label{eq:wpriori}
+    \mathbb{P}(\mathbf{w})=\frac{1}{\sqrt{(2\pi)^{d}|\beta^{-1}\mathbf{I}|}}\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right],
+\end{equation}
+implies that the posterior has the following form:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    \mathbb{P}(\mathbf{w}|\mathbf{y})&amp;\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\\
+&amp;=\exp\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
+\end{align} %]]&gt;&lt;/script&gt;
+Expanding the terms in the exponent, becomes
+\begin{equation}\label{eq:expterms}
+    \alpha\mathbf{y}^{\text{T}}\mathbf{y}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}+\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w}.
+\end{equation}
+The next step is to complete the square of the above equation such that it resembles the inner terms of the exponential factor of the Gaussian distribution. The quadratic form of the exponential term of a $\mathcal{N}(\mathbf{w}|\boldsymbol{\mu},\boldsymbol{\Sigma}^{-1})$ is given by
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&amp;=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\\
+&amp;=\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-
+2\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}.\label{eq:expnorm}
+\end{align} %]]&gt;&lt;/script&gt;
+The terms in Equation (\ref{eq:expterms}) are matched up with that in (\ref{eq:expnorm}), so that
+\begin{equation}\label{eq:sigmablrgauss}
+    \boldsymbol{\Sigma}^{-1}=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I}
+\end{equation}
+and
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\\
+    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\\
+    \boldsymbol{\mu}&amp;=\alpha\boldsymbol{\Sigma}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}.\label{eq:mublrgauss}
+\end{align} %]]&gt;&lt;/script&gt;
+Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}).&lt;/p&gt;</content><author><name></name></author><summary type="html">In Bayesian statistics, Reverend Thomas Bayes (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of Laplace (1986). The Bayes’ theorem has the following form: \begin{equation} \label{eq:bayes-theorem} \mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})} \end{equation} where $\mathbf{w}$ is the weight vector and $\mathbf{y}$ is the data. This simple formula is the main foundation of Bayesian modeling. Any model estimated using Maximum Likelihood can be estimated using the above conditional probability. What makes it different, is that the Bayes’ theorem considers uncertainty not only on the observations but also uncertainty on the weights or the objective parameters.</summary></entry><entry><title type="html">Introduction to Bayesian Inference via Metropolis-Hasting MCMC</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Apache-Spark-for-Big-Data.html" rel="alternate" type="text/html" title="Introduction to Bayesian Inference via Metropolis-Hasting MCMC" /><published>2018-09-08T12:00:00+08:00</published><updated>2018-09-08T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Apache-Spark-for-Big-Data</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Apache-Spark-for-Big-Data.html">&lt;p&gt;Although Equation (\ref{eq:bayes-theorem}) has simplicity in its form, this expression can be challenging to solve, especially when the dimension of the parameter $\mathbf{w}$ is high, or when the problem involves complex models. Specifically, the main concern lies in the computation of the $\mathbb{P}(\mathbf{y})$, which involve hierarchical summation for discrete variable or high-dimensional integration for continuous variable.&lt;/p&gt;
+
+&lt;p&gt;In order to address the limitation, Hastings (1970) worked on the generalization of the Metropolis, Rosenbluth, Rosenbluth, Teller, and Teller (1953) algorithm. The idea of the proposed algorithm is to compute the a posteriori by approximation through the use of sampling, and this is called Markov Chain Monte Carlo (MCMC). The problem with MCMC, however, is the practical aspect of it since it requires fast processor computers which back then were not yet available. Hence, with the advances in machines, more MCMC algorithms were proposed for efficient sampling.&lt;/p&gt;
+
+&lt;h3 id=&quot;metropolis-hasting&quot;&gt;Metropolis-Hasting&lt;/h3&gt;
+&lt;p&gt;The idea of the Metropolis-Hasting (MH) algorithm is to randomly walk in the support of the target density such that the random step is governed by the proposal distribution $\mathbb{G}(·)$. The assumption is that the posterior distribution has no closed-form solution, but the kernel, which is the unnormalized form of the target density is easy to evaluate. This is the advantage of the Metropolis-Hasting algorithm where the a posteriori is not necessarily be normalized — often the difficulty in simplifying the model evidence of the Bayes’ rule. Let $\mathbb{P}(·)$ be the a posteriori, then the Metropolis-Hasting algorithm is given in Algorithm 1.&lt;/p&gt;
+
+&lt;table class=&quot;algorithm&quot;&gt;
+    &lt;thead&gt;
+        &lt;th colspan=&quot;2&quot;&gt;Algorithm 1: Metropolis-Hasting Markov Chain Monte Carlo&lt;/th&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;1:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                Initialize $\mathbf{w}_{r}\sim\mathbb{G}(\mathbf{w})$, $r = 0$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;2:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &lt;b&gt;for&lt;/b&gt; $r \in \{1,··· ,r_{\text{max}}\}$ &lt;b&gt;do&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;3:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                Propose: $\mathbf{w}_{\text{new}} \sim \mathbb{G}(\mathbf{w}_{\text{new}} | \mathbf{w}_{r−1} )$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;4:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                Acceptance: $\alpha(\mathbf{w}_{\text{new}}|\mathbf{w}_{r−1})\triangleq\text{min}\left\{1,\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{w}_{r−1})\mathbb{P}(\mathbf{w}_{r−1}|\mathbf{w}_{\text{new}})}{\mathbb{G}(\mathbf{w}_{r−1}|\mathbf{w}_{\text{new}}) \mathbb{G}(\mathbf{w}_{\text{new}}|\mathbf{w}_{r−1})}\right\}$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;5:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                Draw $\mathbf{x} \sim \text{Unif}(0, 1)$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;6:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;b&gt;if&lt;/b&gt; $\mathbf{x}\lt\alpha(\mathbf{w}_{\text{new}}|\mathbf{w}_{r−1})$ &lt;b&gt;then&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;7:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                $\mathbf{w}_r\triangleq\mathbf{w}_{\text{new}}$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;8:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;b&gt;else&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;9:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                $\mathbf{w}_r\triangleq\mathbf{w}_{r-1}$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;10:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;b&gt;end if&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;11:&lt;/td&gt;
+            &lt;td align=&quot;left&quot;&gt;
+                &lt;b&gt;end for&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;table&gt;
+
+&lt;br /&gt;
+Suppose we want to predict the height of both men and women in the workplace. What would be our best prediction? Of course, it would be the mean of their distribution, which in this case must be a bivariate distribution so we can model both heights of men and women, simultaneously. For simplicity but without loss of generality, let's assume the distribution to be bivariate Gaussian. The following is the model with mean defined as $\boldsymbol{\mu}$ and variance as $\boldsymbol{\Sigma}$:
+\begin{equation}
+f(\mathbf{x}|\boldsymbol{\mu},\boldsymbol{\Sigma})\triangleq\frac{1}{\sqrt{(2\pi)^{d}|\boldsymbol{\Sigma}|}}\text{exp}\left[-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right].
+\end{equation}
+We can estimate the parameters of the above model using Maximum Likelihood (frequentist approach), and we will end up with a fixed estimate both for mean and variance, for the given dataset. But that's not our interest here, what we want is to estimate the model using Bayesian approach. Let's start with the exact Bayesian solution for the above parameters given the &lt;i&gt;a priori&lt;/i&gt; as Gaussian
+&lt;/table&gt;&lt;/table&gt;</content><author><name></name></author><summary type="html">Although Equation (\ref{eq:bayes-theorem}) has simplicity in its form, this expression can be challenging to solve, especially when the dimension of the parameter $\mathbf{w}$ is high, or when the problem involves complex models. Specifically, the main concern lies in the computation of the $\mathbb{P}(\mathbf{y})$, which involve hierarchical summation for discrete variable or high-dimensional integration for continuous variable.</summary></entry><entry><title type="html">Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html" rel="alternate" type="text/html" title="Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl" /><published>2018-06-08T12:00:00+08:00</published><updated>2018-06-08T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html">&lt;p&gt;I’m a heavy user of Python’s &lt;a href=&quot;https://pandas.pydata.org/&quot;&gt;pandas&lt;/a&gt; and R’s &lt;a href=&quot;https://cran.r-project.org/web/packages/dplyr/index.html&quot;&gt;dplyr&lt;/a&gt; both at work and when I was taking my master’s degree. Hands down, both of these tools are very good at handling the data. So what about Julia? It’s a fairly new programming language that’s been around for almost 6 years already with a very active community. If you have no idea, I encourage you to visit &lt;a href=&quot;http://julialang.org/&quot;&gt;Julialang.org&lt;/a&gt;. In summary, it’s a programming language that walks like a &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, but runs like a &lt;a href=&quot;https://en.wikipedia.org/wiki/C_%28programming_language%29&quot;&gt;C&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;For data wrangling, there are two packages that we can use, and these are &lt;a href=&quot;https://github.com/JuliaData/DataFrames.jl&quot;&gt;DataFrames.jl&lt;/a&gt; and &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;. Let me reserve a separate post for &lt;a href=&quot;https://github.com/JuliaData/DataFrames.jl&quot;&gt;DataFrames.jl&lt;/a&gt;, and instead focus on &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt; and &lt;a href=&quot;https://piever.github.io/JuliaDBMeta.jl/latest/&quot;&gt;JuliaDBMeta.jl&lt;/a&gt; (an alternative for querying the data, like that of R’s &lt;a href=&quot;https://cran.r-project.org/web/packages/dplyr/index.html&quot;&gt;dplyr&lt;/a&gt;) packages.&lt;/p&gt;
 &lt;h3 class=&quot;section&quot;&gt;Package Installation&lt;/h3&gt;
