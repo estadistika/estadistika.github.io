@@ -7,7 +7,7 @@ permalink: /about/
 Data Scientist at <a href="http://neuralmechanics.net/" target="_blank">NeuralMechanics, Inc.</a> 
 (see my <a href="https://www.linkedin.com/in/al-ahmadgaid-asaad-68613a44/" target="_blank">LinkedIn profile</a>) --
 and I'm the editor-in-cheif. Unless otherwise stated, some of the articles, especially on the frequentist approach to time series analyses, will be a 
-joint work with <a href="https://alstat.github.io/" target="_blank">Minnette Lois Morales</a> -- a trend analysts at <a href="https://www.manilawater.com/" target="_blank">Manila Water Company, Inc.</a> 
+joint work with <a href="https://alstat.github.io/" target="_blank">Minnette Lois Morales</a> -- a trend analyst at <a href="https://www.manilawater.com/" target="_blank">Manila Water Company, Inc.</a> 
 (see her <a href="https://www.linkedin.com/in/al-ahmadgaid-asaad-68613a44/" target="_blank">LinkedIn profile</a>).
      
 I made this blog to share my thoughts about Data Science, Machine/Deep Learning, and Artificial Intelligence with emphasis on the use of Statistics. This also serves as my notes for possible research I want to pursue in the future. Needless to say, everything I post here represents my views and not the opinions of my employer.
