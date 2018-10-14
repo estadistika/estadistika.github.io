@@ -2,6 +2,51 @@
     main.site-main-content {
         .post-content {
             margin-bottom: 30px;
+            img {
+                width: 100%;
+            }
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            // background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+            transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        // .tab button:hover {
+        //     background-color: #ddd;
+        // }
+
+        // /* Create an active/current tablink class */
+        .tab button.active {
+            color: $link-color;
+            font-weight: bold;
+        }
+
+        /* Style the tab content */
+        .first {
+            display: block;
+        }
+
+        // .tabcontent {
+        //     display: none;
+        //     padding: 0;
+        //     border-width: none;
+        // }
+        
+        button.tablinks {
+            padding: 0 10px 0 5px;
         }
 
         .section {

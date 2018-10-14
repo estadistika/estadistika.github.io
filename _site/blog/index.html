@@ -13,7 +13,24 @@
   <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script> -->
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
   <script src="/assets/functions.js"></script>
 </head>
 
@@ -62,34 +79,6 @@
 
     <!-- This loops through the paginated posts -->
     <ul class="post-list">
-        
-        <li>
-            
-            <span class="post-meta">Sep 8, 2018</span>
-            <h2>
-                <a class="post-link" href="/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference.html">R, Python, Julia: Introduction to Bayesian Linear Regression</a>
-            </h2>
-
-             
-             
-             
-                In Bayesian statistics, Reverend Thomas Bayes (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of Laplace (1986). The Bayes’ theorem has the following form: \begin{equation} \label{eq:bayes-theorem} \mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})} \end{equation} where... 
-            
-        </li>
-        
-        <li>
-            
-            <span class="post-meta">Sep 8, 2018</span>
-            <h2>
-                <a class="post-link" href="/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Apache-Spark-for-Big-Data.html">Introduction to Bayesian Inference via Metropolis-Hasting MCMC</a>
-            </h2>
-
-             
-             
-             
-                Although Equation (\ref{eq:bayes-theorem}) has simplicity in its form, this expression can be challenging to solve, especially when the dimension of the parameter $\mathbf{w}$ is high, or when the problem involves complex models. Specifically, the main concern lies in the computation of the $\mathbb{P}(\mathbf{y})$, which involve hierarchical summation for discrete variable... 
-            
-        </li>
         
         <li>
             

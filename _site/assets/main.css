@@ -222,7 +222,7 @@ html body {
     color: #ffffff;
     border-width: 0px;
     font-family: "Saira Condensed", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     transition: all .3s ease-in-out; }
   html body button:hover, html body a.previous-article:hover, html body a.next-article:hover {
@@ -281,196 +281,219 @@ html body {
         padding: 6px 11px 2px 11px; }
       html body header .site-sidebar nav button .fa-phone {
         padding: 6px 6.3px 2px 6.3px; }
-  html body main.site-main-content .post-content {
-    margin-bottom: 30px; }
-  html body main.site-main-content .section {
-    margin-top: 25px;
-    margin-bottom: 8px; }
-  html body main.site-main-content div.gist-meta {
-    display: none;
-    border-width: 0;
-    background-color: #f7f7f7 !important; }
-  html body main.site-main-content .gist .gist-file {
-    border-bottom-width: 0;
-    background-color: #ddd !important; }
-  html body main.site-main-content .gist .gist-data {
-    border-radius: 2px; }
-  html body main.site-main-content .gist {
-    margin-top: 15px;
-    margin-bottom: 5px; }
-  html body main.site-main-content div.post-header {
-    display: block !important; }
-  html body main.site-main-content span.web-title {
-    font-family: 'Berkshire Swash', cursive;
-    font-size: 50px;
-    color: #d4af37;
-    display: block;
-    margin: 50px;
-    text-align: center; }
-  html body main.site-main-content div.welcome-logo {
-    margin: 230px auto 230px auto;
-    font-size: 100px;
-    font-family: 'Bungee Outline', cursive;
-    display: block;
-    text-align: center;
-    transition: all .3s ease-in-out; }
-  html body main.site-main-content div.welcome-logo:hover {
-    color: #d4af37; }
-  html body main.site-main-content div.home-desc {
-    display: block; }
-  html body main.site-main-content .previous {
-    margin: 0 10px 0 0; }
-  html body main.site-main-content .next {
-    margin: 0 0 0 10px; }
-  html body main.site-main-content .previous-article {
-    margin: 0 5px 0 0; }
-  html body main.site-main-content .next-article {
-    margin: 0 0 0 5px; }
-  html body main.site-main-content button.more-button {
-    font-size: 16px; }
-  html body main.site-main-content a.post-link, html body main.site-main-content h1.post-title {
-    font-family: "Aubrey", cursive;
-    font-size: 28px;
-    text-decoration: none;
-    color: #483c32; }
-  html body main.site-main-content code {
-    padding: 2px 4px;
-    font-family: 'Ubuntu Mono', monospace;
-    font-size: 100% !important;
-    color: #f44d14;
-    text-shadow: 0 1px white;
-    background-color: #f9f2f4;
-    border-radius: 4px; }
-  html body main.site-main-content .title-more-margin {
-    margin: 50px 0 0 0; }
-  html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination {
-    font-family: "Saira Condensed", sans-serif;
-    font-size: 14px; }
-  html body main.site-main-content div.pagination {
-    float: right; }
-  html body main.site-main-content time, html body main.site-main-content div#rss-subscribe-post.rss-subscribe {
-    display: inline; }
-  html body main.site-main-content ul.post-list {
-    list-style: none;
-    padding: 0; }
-    html body main.site-main-content ul.post-list li {
-      padding: 30px 0; }
-  html body main.site-main-content div.with-left-border, html body main.site-main-content div.question, html body main.site-main-content div.question-christian, html body main.site-main-content div.reference {
-    padding: 10px;
-    border-left: 2px solid rgba(0, 0, 0, 0.1); }
-  html body main.site-main-content div.with-top-border, html body main.site-main-content div.answer {
-    padding: 10px 0 0 0;
-    border-top: 2px solid rgba(0, 0, 0, 0.1); }
-  html body main.site-main-content div.with-all-border {
-    padding: 10px;
-    border: 2px solid rgba(0, 0, 0, 0.1); }
-  html body main.site-main-content div.reference {
-    margin: 0 0 50px 0; }
-    html body main.site-main-content div.reference ol {
+  html body main.site-main-content {
+    /* Style the tab */
+    /* Style the buttons inside the tab */
+    /* Change background color of buttons on hover */
+    /* Style the tab content */ }
+    html body main.site-main-content .post-content {
+      margin-bottom: 30px; }
+      html body main.site-main-content .post-content img {
+        width: 100%; }
+    html body main.site-main-content .tab {
+      overflow: hidden; }
+    html body main.site-main-content .tab button {
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 0;
+      transition: 0.3s; }
+    html body main.site-main-content .tab button.active {
+      color: #a07b03;
+      font-weight: bold; }
+    html body main.site-main-content .first {
+      display: block; }
+    html body main.site-main-content button.tablinks {
+      padding: 0 10px 0 5px; }
+    html body main.site-main-content .section {
+      margin-top: 25px;
+      margin-bottom: 8px; }
+    html body main.site-main-content div.gist-meta {
+      display: none;
+      border-width: 0;
+      background-color: #f7f7f7 !important; }
+    html body main.site-main-content .gist .gist-file {
+      border-bottom-width: 0;
+      background-color: #ddd !important; }
+    html body main.site-main-content .gist .gist-data {
+      border-radius: 2px; }
+    html body main.site-main-content .gist {
+      margin-top: 15px;
+      margin-bottom: 5px; }
+    html body main.site-main-content div.post-header {
+      display: block !important; }
+    html body main.site-main-content span.web-title {
+      font-family: 'Berkshire Swash', cursive;
+      font-size: 50px;
+      color: #d4af37;
+      display: block;
+      margin: 50px;
+      text-align: center; }
+    html body main.site-main-content div.welcome-logo {
+      margin: 230px auto 230px auto;
+      font-size: 100px;
+      font-family: 'Bungee Outline', cursive;
+      display: block;
+      text-align: center;
+      transition: all .3s ease-in-out; }
+    html body main.site-main-content div.welcome-logo:hover {
+      color: #d4af37; }
+    html body main.site-main-content div.home-desc {
+      display: block; }
+    html body main.site-main-content .previous {
+      margin: 0 10px 0 0; }
+    html body main.site-main-content .next {
+      margin: 0 0 0 10px; }
+    html body main.site-main-content .previous-article {
+      margin: 0 5px 0 0; }
+    html body main.site-main-content .next-article {
+      margin: 0 0 0 5px; }
+    html body main.site-main-content button.more-button {
+      font-size: 16px; }
+    html body main.site-main-content a.post-link, html body main.site-main-content h1.post-title {
+      font-family: "Aubrey", cursive;
+      font-size: 28px;
+      text-decoration: none;
+      color: #483c32; }
+    html body main.site-main-content code {
+      padding: 2px 4px;
+      font-family: 'Ubuntu Mono', monospace;
+      font-size: 100% !important;
+      color: #f44d14;
+      text-shadow: 0 1px white;
+      background-color: #f9f2f4;
+      border-radius: 4px; }
+    html body main.site-main-content .title-more-margin {
+      margin: 50px 0 0 0; }
+    html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination {
+      font-family: "Saira Condensed", sans-serif;
+      font-size: 16px; }
+    html body main.site-main-content div.pagination {
+      float: right; }
+    html body main.site-main-content time, html body main.site-main-content div#rss-subscribe-post.rss-subscribe {
+      display: inline; }
+    html body main.site-main-content ul.post-list {
+      list-style: none;
+      padding: 0; }
+      html body main.site-main-content ul.post-list li {
+        padding: 30px 0; }
+    html body main.site-main-content div.with-left-border, html body main.site-main-content div.question, html body main.site-main-content div.question-christian, html body main.site-main-content div.reference {
+      padding: 10px;
+      border-left: 2px solid rgba(0, 0, 0, 0.1); }
+    html body main.site-main-content div.with-top-border, html body main.site-main-content div.answer {
+      padding: 10px 0 0 0;
+      border-top: 2px solid rgba(0, 0, 0, 0.1); }
+    html body main.site-main-content div.with-all-border {
+      padding: 10px;
+      border: 2px solid rgba(0, 0, 0, 0.1); }
+    html body main.site-main-content div.reference {
+      margin: 0 0 50px 0; }
+      html body main.site-main-content div.reference ol {
+        margin: 0;
+        padding: 0 0 0 15px; }
+    html body main.site-main-content div.question-christian ol {
       margin: 0;
       padding: 0 0 0 15px; }
-  html body main.site-main-content div.question-christian ol {
-    margin: 0;
-    padding: 0 0 0 15px; }
-  html body main.site-main-content span.question-label, html body main.site-main-content span.answer-label, html body main.site-main-content span.question-christian-label, html body main.site-main-content span.reference-label, html body main.site-main-content span.investigation-label, html body main.site-main-content span.section-label {
-    font-family: "Saira Condensed";
-    color: #ffffff;
-    padding: 2px 7px; }
-  html body main.site-main-content div.question-label-wrapper {
-    margin: 35px 0 0 0; }
-    html body main.site-main-content div.question-label-wrapper span.question-label {
-      background-color: #FF6961; }
-  html body main.site-main-content div.answer-label-wrapper {
-    margin: 30px 0 0 0; }
-    html body main.site-main-content div.answer-label-wrapper span.answer-label {
-      background-color: #FFB347; }
-  html body main.site-main-content div.question-christian-wrapper {
-    margin: 30px 0 0 0; }
-    html body main.site-main-content div.question-christian-wrapper span.question-christian-label {
-      background-color: #966FD6; }
-  html body main.site-main-content div.reference-label-wrapper {
-    margin: 20px 0 0 0; }
-    html body main.site-main-content div.reference-label-wrapper span.reference-label {
-      background-color: #77DD77; }
-  html body main.site-main-content div.investigation-wrapper {
-    margin: 30px 0 0 0; }
-    html body main.site-main-content div.investigation-wrapper span.investigation-label {
-      background-color: #779ECB; }
-  html body main.site-main-content div.section-wrapper {
-    margin: 30px 0 0 0; }
-    html body main.site-main-content div.section-wrapper span.section-label {
-      background-color: #696969; }
-  html body main.site-main-content .more-button-wrapper {
-    text-align: right; }
-  html body main.site-main-content .translation {
-    font-family: "Amita", cursive;
-    display: block; }
-  html body main.site-main-content div.more-quran-wrapper {
-    margin: 15px; }
-    html body main.site-main-content div.more-quran-wrapper div.quran-wrapper {
-      margin: 0px; }
-  html body main.site-main-content div.quran-wrapper, html body main.site-main-content div.bible-wrapper {
-    margin: 15px;
-    background-color: rgba(0, 0, 0, 0.03); }
-  html body main.site-main-content div.quran-verse, html body main.site-main-content div.bible-verse {
-    background-color: rgba(0, 0, 0, 0.03);
-    padding: 10px; }
-  html body main.site-main-content div.verse-no, html body main.site-main-content div.bible-verse-no {
-    border-width: 1px;
-    width: 100%;
-    clear: both;
-    color: #ffffff;
-    font-family: "Saira Condensed";
-    text-align: center; }
-    html body main.site-main-content div.verse-no div.book, html body main.site-main-content div.bible-verse-no div.book {
-      float: left;
-      width: 100px; }
-    html body main.site-main-content div.verse-no div.chapter-verse, html body main.site-main-content div.bible-verse-no div.chapter-verse {
-      float: right;
-      width: 100px; }
-    html body main.site-main-content div.verse-no div.chapter, html body main.site-main-content div.bible-verse-no div.chapter {
-      margin: 0 auto !important;
-      width: 300px;
+    html body main.site-main-content span.question-label, html body main.site-main-content span.answer-label, html body main.site-main-content span.question-christian-label, html body main.site-main-content span.reference-label, html body main.site-main-content span.investigation-label, html body main.site-main-content span.section-label {
+      font-family: "Saira Condensed";
+      color: #ffffff;
+      padding: 2px 7px; }
+    html body main.site-main-content div.question-label-wrapper {
+      margin: 35px 0 0 0; }
+      html body main.site-main-content div.question-label-wrapper span.question-label {
+        background-color: #FF6961; }
+    html body main.site-main-content div.answer-label-wrapper {
+      margin: 30px 0 0 0; }
+      html body main.site-main-content div.answer-label-wrapper span.answer-label {
+        background-color: #FFB347; }
+    html body main.site-main-content div.question-christian-wrapper {
+      margin: 30px 0 0 0; }
+      html body main.site-main-content div.question-christian-wrapper span.question-christian-label {
+        background-color: #966FD6; }
+    html body main.site-main-content div.reference-label-wrapper {
+      margin: 20px 0 0 0; }
+      html body main.site-main-content div.reference-label-wrapper span.reference-label {
+        background-color: #77DD77; }
+    html body main.site-main-content div.investigation-wrapper {
+      margin: 30px 0 0 0; }
+      html body main.site-main-content div.investigation-wrapper span.investigation-label {
+        background-color: #779ECB; }
+    html body main.site-main-content div.section-wrapper {
+      margin: 30px 0 0 0; }
+      html body main.site-main-content div.section-wrapper span.section-label {
+        background-color: #696969; }
+    html body main.site-main-content .more-button-wrapper {
+      text-align: right; }
+    html body main.site-main-content .translation {
+      font-family: "Amita", cursive;
+      display: block; }
+    html body main.site-main-content div.more-quran-wrapper {
+      margin: 15px; }
+      html body main.site-main-content div.more-quran-wrapper div.quran-wrapper {
+        margin: 0px; }
+    html body main.site-main-content div.quran-wrapper, html body main.site-main-content div.bible-wrapper {
+      margin: 15px;
+      background-color: rgba(0, 0, 0, 0.03); }
+    html body main.site-main-content div.quran-verse, html body main.site-main-content div.bible-verse {
+      background-color: rgba(0, 0, 0, 0.03);
+      padding: 10px; }
+    html body main.site-main-content div.verse-no, html body main.site-main-content div.bible-verse-no {
+      border-width: 1px;
+      width: 100%;
+      clear: both;
+      color: #ffffff;
+      font-family: "Saira Condensed";
+      text-align: center; }
+      html body main.site-main-content div.verse-no div.book, html body main.site-main-content div.bible-verse-no div.book {
+        float: left;
+        width: 100px; }
+      html body main.site-main-content div.verse-no div.chapter-verse, html body main.site-main-content div.bible-verse-no div.chapter-verse {
+        float: right;
+        width: 100px; }
+      html body main.site-main-content div.verse-no div.chapter, html body main.site-main-content div.bible-verse-no div.chapter {
+        margin: 0 auto !important;
+        width: 300px;
+        display: inline-block; }
+    html body main.site-main-content div.verse-no {
+      background-color: #483c32; }
+    html body main.site-main-content div.bible-verse-no {
+      background-color: #003153; }
+    html body main.site-main-content div#more-quran-10-89-93, html body main.site-main-content div#more-quran-3-151 {
+      display: none;
+      opacity: 0;
+      transform: scaleX(0);
+      transition: 1s ease opacity, 1s ease transform; }
+    html body main.site-main-content .tooltip {
+      position: relative;
       display: inline-block; }
-  html body main.site-main-content div.verse-no {
-    background-color: #483c32; }
-  html body main.site-main-content div.bible-verse-no {
-    background-color: #003153; }
-  html body main.site-main-content div#more-quran-10-89-93, html body main.site-main-content div#more-quran-3-151 {
-    display: none;
-    opacity: 0;
-    transform: scaleX(0);
-    transition: 1s ease opacity, 1s ease transform; }
-  html body main.site-main-content .tooltip {
-    position: relative;
-    display: inline-block; }
-  html body main.site-main-content .tooltip .tooltiptext {
-    font-family: "Saira Condensed";
-    font-size: 14px;
-    visibility: hidden;
-    width: 150px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    line-height: 135%;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -75px;
-    opacity: 0;
-    transition: opacity 0.3s; }
-  html body main.site-main-content .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent; }
-  html body main.site-main-content .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1; }
+    html body main.site-main-content .tooltip .tooltiptext {
+      font-family: "Saira Condensed";
+      font-size: 16px;
+      visibility: hidden;
+      width: 150px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      line-height: 135%;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -75px;
+      opacity: 0;
+      transition: opacity 0.3s; }
+    html body main.site-main-content .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent; }
+    html body main.site-main-content .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1; }
