@@ -9,9 +9,12 @@
   <link rel="stylesheet" href="{{ "/assets/main.css" }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "feed.xml" | relative_url }}">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  {% if page.use_math %}
+    {% include mathjax_support %}
+  {% endif %}
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script> -->
   <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-  <script type="text/x-mathjax-config">
+  <!-- <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       TeX: {
         equationNumbers: {
@@ -27,6 +30,6 @@
   </script>
   <script type="text/javascript"
           src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  </script> -->
   <script src="/assets/functions.js"></script>
 </head>

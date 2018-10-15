@@ -4,6 +4,7 @@ title:  "Julia, Python, R: Introduction to Bayesian Linear Regression"
 date:   2018-10-14 12:00:00 +0800
 categories: Data Analyses Wrangling Julia Programming Packages
 comments: true
+use_math : true
 ---
 <a href="https://en.wikipedia.org/wiki/Thomas_Bayes" target="_blank">Reverend Thomas Bayes</a> (see Bayes, 1763) is known to be the first to formulate the Bayes' theorem, but the comprehensive mathematical formulation of this result is credited to the works of <a href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace" target="_blank">Laplace</a> (1986). The Bayes' theorem has the following form:
 <div class="math">
