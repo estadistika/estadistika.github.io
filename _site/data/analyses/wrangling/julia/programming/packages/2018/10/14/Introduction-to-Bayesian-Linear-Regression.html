@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang=" en ">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ESTADISTIKA</title>
+  <meta name="description" content="let's investigate Islam">
+  <meta name="theme-color" content="#1f1e1e">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="/feed.xml">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script> -->
+  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script src="/assets/functions.js"></script>
+</head>
+
+<body>
+    <div class="site-parent-container-blog">
+
+        <header>
+    <!-- <img src="/assets/bible-psalms.jpg"> -->
+    <div class="site-sidebar">
+        <div class="dropdown" style="display: none;">
+            <button class="dropbtn"><a class="fa fa-bars" style="font-size: 24px !important;"></a></button>
+            <div class="dropdown-content">
+                <a id="home-button" href="/index.html">Home</a>
+                <a href="/blog">Articles</a>
+            </div>
+        </div>
+        <div id="website-name-wrapper" style="display: none;">
+            <div id="website-name">
+                <a style="color: white;" href="/index.html">Estadistika</a>
+            </div>
+            <div id="website-description">
+                . . . statistics / machine learning / data science
+            </div>
+        </div>
+        <nav>
+            <button onclick='javascript:location.href="/"'>
+                <i class="fas fa-home"></i>
+            </button>
+            <button onclick='javascript:location.href="/blog"'>
+                <i class="fas fa-file-alt"></i>
+            </button>
+            <button onclick='javascript:location.href="/about"'>
+                <i class="fas fa-info"></i>
+            </button>
+            <!-- <button onclick='javascript:location.href="#"'>
+                <i class="fas fa-phone"></i>
+            </button> -->
+        </nav>
+    </div>
+</header>
+
+        <main class="site-main-content">
+
+            <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-header">
+        <h1 class="post-title title-more-margin" itemprop="name headline">Julia, Python, R: Introduction to Bayesian Linear Regression</h1>
+        <p class="post-meta">
+            <time datetime="2018-10-14T12:00:00+08:00" itemprop="datePublished">
+                 Oct 14, 2018
+            </time>
+            
+        </p>
+    </div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p><a href="https://en.wikipedia.org/wiki/Thomas_Bayes" target="_blank">Reverend Thomas Bayes</a> (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of <a href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace" target="_blank">Laplace</a> (1986). The Bayes’ theorem has the following form:</p>
+<div class="math">
+\begin{equation}
+\label{eq:bayes-theorem}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})}
+\end{equation}
+</div>
+<p>where $\mathbf{w}$ is the weight vector and $\mathbf{y}$ is the data. This simple formula is the main foundation of Bayesian modeling. Any model estimated using Maximum Likelihood can be estimated using the above conditional probability. What makes it different, is that the Bayes’ theorem considers uncertainty not only on the observations but also uncertainty on the weights or the objective parameters.</p>
+
+<p>As an illustration of Bayesian inference to basic modeling, this article attempts to discuss the Bayesian approach to linear regression. Let ${\mathscr{D}={(\mathbf{x}_1,y_1),\cdots,(\mathbf{x}_n,y_n)}}$ where $\mathbf{x}_i\in\mathbb{R}^{d}, y_i\in \mathbb{R}$ be the pairwised dataset. Suppose the response values, $y_1,\cdots,y_n$, are independent given the parameter $\mathbf{w}$, and is distributed as $y_i\sim\mathcal{N}(\mathbf{w}^{\text{T}}\mathbf{x}_i,\alpha^{-1})$, where $\alpha^{-1}$ is referred to as the <i>precision</i> parameter — useful for later derivation. In Bayesian perspective, the weights are assumed to be random and are governed by some <i>a priori</i> distribution. The choice of this distribution is subjective, but choosing arbitrary <i>a priori</i> can sometimes or often result to an intractable integration, especially for interesting models. For simplicity, a conjugate prior is used for the latent weights. Specifically, assume that ${\mathbf{w}\sim\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I})}$ such that $\beta&gt;0$ is the hyperparameter supposed in this experiment as known value. The posterior distribution based on the Bayes’ rule is given by
+\begin{equation}\label{eq:bayesrulepost}
+	\mathbb{P}(\mathbf{w}|\mathbf{y})=\frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})},
+\end{equation}
+where $\mathbb{P}(\mathbf{w})$ is the <i>a priori</i> distribution of the parameter, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. The likelihood is given by
+<script type="math/tex">% <![CDATA[
+\begin{align}
+    \mathbb{P}(\mathbf{y}|\mathbf{w})&=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\nonumber\\
+    &=\left(\frac{\alpha}{2\pi}\right)^{n/2}\exp\left[-\sum_{i=1}^n\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right].\label{eq:likelihood:blreg}
+\end{align} %]]></script>
+In matrix form, this can be written as
+\begin{equation}
+    \mathbb{P}(\mathbf{y}|\mathbf{w})\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]
+\end{equation}
+where $\boldsymbol{\mathfrak{A}}=\left[(\mathbf{x}_i^{\text{T}})\right]$, i.e. $\boldsymbol{\mathfrak{A}}\in(\mathbb{R}^{n}\times\mathbb{R}^d)$, this matrix is known as the <i>design matrix</i>. Given that $\mathbf{w}$ has the following prior distribution
+\begin{equation}\label{eq:wpriori}
+    \mathbb{P}(\mathbf{w})=\frac{1}{\sqrt{(2\pi)^{d}|\beta^{-1}\mathbf{I}|}}\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right],
+\end{equation}
+implies that the posterior has the following form:
+<script type="math/tex">% <![CDATA[
+\begin{align}
+    \mathbb{P}(\mathbf{w}|\mathbf{y})&\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\nonumber\\
+&=\exp\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
+\end{align} %]]></script>
+Expanding the terms in the exponent, becomes
+\begin{equation}\label{eq:expterms}
+    \alpha\mathbf{y}^{\text{T}}\mathbf{y}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}+\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w}.
+\end{equation}
+The next step is to complete the square of the above equation such that it resembles the inner terms of the exponential factor of the Gaussian distribution. That is, the quadratic form of the exponential term of a $\mathcal{N}(\mathbf{w}|\boldsymbol{\mu},\boldsymbol{\Sigma}^{-1})$ is given by
+<script type="math/tex">% <![CDATA[
+\begin{align}
+    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\nonumber\\
+&=\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-
+2\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}.\label{eq:expnorm}
+\end{align} %]]></script>
+The terms in Equation (\ref{eq:expterms}) are matched up with that in (\ref{eq:expnorm}), so that
+\begin{equation}\label{eq:sigmablrgauss}
+    \boldsymbol{\Sigma}^{-1}=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I}
+\end{equation}
+and
+<script type="math/tex">% <![CDATA[
+\begin{align}
+    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
+    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
+    \boldsymbol{\mu}&=\alpha\boldsymbol{\Sigma}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}.\label{eq:mublrgauss}
+\end{align} %]]></script>
+Thus the <i>a posteriori</i> is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}). I’ll leave to the reader the proper mathematical derivation of $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ without matching like what we did above.</p>
+<h3 id="simulation-experiment">Simulation Experiment</h3>
+<p>In this section, we are going to apply the theory above using simulated data. I will use Julia as the primary programming language for this article, but I also provided codes for R and Python. To start with, load the following libraries:</p>
+<div class="tab" style="margin-bottom: -16px;">
+  <button class="tablinks" onclick="openCity(event, 'julia-1', 'tabcontent-1')">Julia</button>
+  <button class="tablinks" onclick="openCity(event, 'python-1', 'tabcontent-1')">Python</button>
+</div>
+
+<div id="julia-1" class="tabcontent-1 first">
+  <script src="https://gist.github.com/alstat/00ac3ea439baddddab166ca40902f4b0.js"></script>
+</div>
+
+<div id="python-1" class="tabcontent-1" style="display: none;">
+  <script src="https://gist.github.com/alstat/e814d09d53a8c3cba1e27d7be4c46d02.js"></script>
+</div>
+<p>Next, define the following functions for data simulation and parameter estimation. The estimate of the paramters is governed by the <i>a posteriori</i> which from above is a multivariate Gaussian distribution, with mean given by Equation (\ref{eq:mublrgauss}) and variance-covariance matrix defined by the inverse of Equation (\ref{eq:sigmablrgauss}).</p>
+<div class="tab" style="margin-bottom: -16px;">
+  <button class="tablinks" onclick="openCity(event, 'julia-2', 'tabcontent-2')">Julia</button>
+  <button class="tablinks" onclick="openCity(event, 'python-2', 'tabcontent-2')">Python</button>
+  <button class="tablinks" onclick="openCity(event, 'r-2', 'tabcontent-2')">R</button>
+</div>
+
+<div id="julia-2" class="tabcontent-2 first">
+  <script src="https://gist.github.com/alstat/df66b766a478aac49c45c2d792184534.js"></script>
+</div>
+
+<div id="python-2" class="tabcontent-2" style="display: none;">
+  <script src="https://gist.github.com/alstat/42c43fe8cbf482e192da1283c0e7756c.js"></script>
+</div>
+
+<div id="r-2" class="tabcontent-2" style="display: none;">
+  <script src="https://gist.github.com/alstat/a100a97eaf25659490a01121d1da8fa3.js"></script>
+</div>
+
+<p>Execute the above functions and return the necessary values as follows:</p>
+<div class="tab" style="margin-bottom: -16px;">
+  <button class="tablinks" onclick="openCity(event, 'julia-3', 'tabcontent-3')">Julia</button>
+  <button class="tablinks" onclick="openCity(event, 'python-3', 'tabcontent-3')">Python</button>
+  <button class="tablinks" onclick="openCity(event, 'r-3', 'tabcontent-3')">R</button>
+</div>
+
+<div id="julia-3" class="tabcontent-3 first">
+  <script src="https://gist.github.com/alstat/0a60ea652e1caca60544cea239ccae4b.js"></script>
+</div>
+
+<div id="python-3" class="tabcontent-3" style="display: none;">
+  <script src="https://gist.github.com/alstat/5dfa29ebb09275b961806f67e89e5530.js"></script>
+</div>
+
+<div id="r-3" class="tabcontent-3" style="display: none;">
+  <script src="https://gist.github.com/alstat/5defe8880d40bdbf35ae36688bbcf98a.js"></script>
+</div>
+<p>Finally, plot the fitted lines whose weights are samples from the <i>a posteriori</i>. The red line in the plot below is the Maximum <i>A Posteriori</i> (MAP) of the parameter of interest. Note that, however, the code provided for the animated plot below is Julia. Python and R users can use <a href="https://matplotlib.org/index.html" target="_blank">matplotlib.pyplot</a> (Julia’s Plots backend) and <a href="https://github.com/thomasp85/gganimate" target="_blank">gganimate</a>, respectively.
+<script src="https://gist.github.com/alstat/023ff855025d0da2fa50b7923b834fd8.js"></script>
+<img src="https://raw.githubusercontent.com/estadistika/assets/master/imgs/2018-10-10-p1-c.gif?sanitize=true" /></p>
+
+<h3 id="end-note">End Note</h3>
+<p>There are many libraries available for Bayesian modeling, for Julia we have: <a href="https://github.com/JuliaStats/Klara.jl" target="_blank">Klara.jl</a>, <a href="https://github.com/brian-j-smith/Mamba.jl" target="_blank">Mamba.jl</a>, <a href="https://github.com/goedman/Stan.jl" target="_blank">Stan.jl</a>, <a href="https://github.com/TuringLang/Turing.jl" target="_blank">Turing.jl</a> and <a href="https://juliaobserver.com/categories/Bayesian" target="_blank">more related</a>;
+for Python, my favorite is <a href="https://docs.pymc.io/" target="_blank">PyMC3</a>; and for R, I prefer <a href="http://mc-stan.org/users/interfaces/rstan" target="_blank">RStan</a>.</p>
+
+<p>As always, coding from scratch is a good exercise and it helps you appreciate the math. Further, I found Julia to be quite easy to use as a tool for statistical problems. In fact, Julia’s linear algebra API is very close to the mathematical formulae above.</p>
+
+<h3 id="references">References</h3>
+<ul>
+  <li>Bayes, T. (1763). An essay towards solving a problem in the doctrine of chances. <em>Philosophical Transactions</em>, 53, 370-418. URL: http://www.jstor.org/stable/105741</li>
+  <li>Laplace, P. S. (1986). Memoir on the probability of the causes of events. <em>Statist. Sci.</em>, 1(3), 364–378. URL: http://dx.doi.org/10.1214/ss/1177013621 doi: 10.1214/ss/1177013621</li>
+</ul>
+
+<h3 id="software-versions">Software Versions</h3>
+<script src="https://gist.github.com/alstat/53a54b8e96ec1f45883d1447efeab0ff.js"></script>
+
+
+    </div>
+    <div class="pagination">
+        <!-- 
+            <span class="tooltip">
+                <button class="previous-article" onclick='javascript:location.href="/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html"'>Previous Article</button>
+                <span class="tooltiptext">Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</span>
+            </span>
+         
+          -->
+
+        
+            <a class="previous-article" href="/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html" style="padding: 0 5px 0 0;"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</a>
+        
+        
+    </div>
+    <div class="rss-subscribe">
+        <button class="rss-subscribe-button" onclick='javascript:location.href="/feed.xml"'>
+            <i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+    </div>
+    <br>
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'estadistika'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+
+        </main>
+
+        <!-- <footer class="site-footer">
+    
+      <div class="wrapper">
+    
+        <h2 class="footer-heading">Your awesome title</h2>
+    
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li>
+                
+                  Your awesome title
+                
+                </li>
+                
+                <li><a href="mailto:your-email@example.com">your-email@example.com</a></li>
+                
+            </ul>
+          </div>
+    
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list">
+              
+              <li>
+                <a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">jekyll</span></a>
+
+              </li>
+              
+    
+              
+              <li>
+                <a href="https://twitter.com/jekyllrb"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">jekyllrb</span></a>
+
+              </li>
+              
+            </ul>
+          </div>
+    
+          <div class="footer-col footer-col-3">
+            <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+          </div>
+        </div>
+    
+      </div>
+    
+    </footer>
+     -->
+
+    </div>
+</body>
+
+</html>
