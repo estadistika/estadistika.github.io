@@ -79,15 +79,15 @@
     <div class="post-header">
         <h1 class="post-title title-more-margin" itemprop="name headline">Julia, Python, R: Introduction to Bayesian Linear Regression</h1>
         <p class="post-meta">
-            <time datetime="2018-09-08T12:00:00+08:00" itemprop="datePublished">
-                 Sep 8, 2018
+            <time datetime="2018-10-14T12:00:00+08:00" itemprop="datePublished">
+                 Oct 14, 2018
             </time>
             
         </p>
     </div>
 
     <div class="post-content" itemprop="articleBody">
-        <p>Reverend Thomas Bayes (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of Laplace (1986). The Bayes’ theorem has the following form:</p>
+        <p><a href="https://en.wikipedia.org/wiki/Thomas_Bayes" target="_blank">Reverend Thomas Bayes</a> (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of <a href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace" target="_blank">Laplace</a> (1986). The Bayes’ theorem has the following form:</p>
 <div class="math">
 \begin{equation}
 \label{eq:bayes-theorem}
@@ -103,7 +103,7 @@
 where $\mathbb{P}(\mathbf{w})$ is the <i>a priori</i> distribution of the parameter, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. The likelihood is given by
 <script type="math/tex">% <![CDATA[
 \begin{align}
-    \mathbb{P}(\mathbf{y}|\mathbf{w})&=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\\
+    \mathbb{P}(\mathbf{y}|\mathbf{w})&=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\nonumber\\
     &=\left(\frac{\alpha}{2\pi}\right)^{n/2}\exp\left[-\sum_{i=1}^n\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right].\label{eq:likelihood:blreg}
 \end{align} %]]></script>
 In matrix form, this can be written as
@@ -117,7 +117,7 @@ where $\boldsymbol{\mathfrak{A}}=\left[(\mathbf{x}_i^{\text{T}})\right]$, i.e. $
 implies that the posterior has the following form:
 <script type="math/tex">% <![CDATA[
 \begin{align}
-    \mathbb{P}(\mathbf{w}|\mathbf{y})&\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\\
+    \mathbb{P}(\mathbf{w}|\mathbf{y})&\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\nonumber\\
 &=\exp\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
 \end{align} %]]></script>
 Expanding the terms in the exponent, becomes
@@ -127,7 +127,7 @@ Expanding the terms in the exponent, becomes
 The next step is to complete the square of the above equation such that it resembles the inner terms of the exponential factor of the Gaussian distribution. That is, the quadratic form of the exponential term of a $\mathcal{N}(\mathbf{w}|\boldsymbol{\mu},\boldsymbol{\Sigma}^{-1})$ is given by
 <script type="math/tex">% <![CDATA[
 \begin{align}
-    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\\
+    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\nonumber\\
 &=\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-
 2\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}.\label{eq:expnorm}
 \end{align} %]]></script>
@@ -138,13 +138,13 @@ The terms in Equation (\ref{eq:expterms}) are matched up with that in (\ref{eq:e
 and
 <script type="math/tex">% <![CDATA[
 \begin{align}
-    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\\
-    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\\
+    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
+    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
     \boldsymbol{\mu}&=\alpha\boldsymbol{\Sigma}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}.\label{eq:mublrgauss}
 \end{align} %]]></script>
-Thus the <i>a posteriori</i> is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}). I’ll leave to the reader the proper mathematical derivation of the estimates of $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ instead of matching it with known form of multivariate Gaussian distribution.</p>
+Thus the <i>a posteriori</i> is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}). I’ll leave to the reader the proper mathematical derivation of $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ without matching like what we did above.</p>
 <h3 id="simulation-experiment">Simulation Experiment</h3>
-<p>In this section, we are going to apply the theory above into a simulated data. I am using Julia as the primary programming language, but I also provided codes for R and Python. To start with, load the following libraries:</p>
+<p>In this section, we are going to apply the theory above using simulated data. I will use Julia as the primary programming language for this article, but I also provided codes for R and Python. To start with, load the following libraries:</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-1', 'tabcontent-1')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-1', 'tabcontent-1')">Python</button>
@@ -157,7 +157,7 @@ Thus the <i>a posteriori</i> is a Gaussian distribution with location parameter 
 <div id="python-1" class="tabcontent-1" style="display: none;">
   <script src="https://gist.github.com/alstat/e814d09d53a8c3cba1e27d7be4c46d02.js"></script>
 </div>
-<p>Next, define the following functions for simulating the data and estimating the parameters. The estimate of the paramters is defined by the <i>a posteriori</i> which from above is a multivariate Gaussian distribution, with mean given by Equation (\ref{eq:mublrgauss}) and variance-covariance matrix defined by the inverse of Equation (\ref{eq:sigmablrgauss}).</p>
+<p>Next, define the following functions for data simulation and parameter estimation. The estimate of the paramters is governed by the <i>a posteriori</i> which from above is a multivariate Gaussian distribution, with mean given by Equation (\ref{eq:mublrgauss}) and variance-covariance matrix defined by the inverse of Equation (\ref{eq:sigmablrgauss}).</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-2', 'tabcontent-2')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-2', 'tabcontent-2')">Python</button>
@@ -194,12 +194,15 @@ Thus the <i>a posteriori</i> is a Gaussian distribution with location parameter 
 <div id="r-3" class="tabcontent-3" style="display: none;">
   <script src="https://gist.github.com/alstat/5defe8880d40bdbf35ae36688bbcf98a.js"></script>
 </div>
-<p>Finally, we plot the fitted lines whose weights are samples from the <i>a posteriori</i>. The red line in the plot below is the maximum <i>a posteriori</i> (MAP) of the parameter of interest.
+<p>Finally, plot the fitted lines whose weights are samples from the <i>a posteriori</i>. The red line in the plot below is the Maximum <i>A Posteriori</i> (MAP) of the parameter of interest. Note that, however, the code provided for the animated plot below is Julia. Python and R users can use <a href="https://matplotlib.org/index.html" target="_blank">matplotlib.pyplot</a> (Julia’s Plots backend) and <a href="https://github.com/thomasp85/gganimate" target="_blank">gganimate</a>, respectively.
 <script src="https://gist.github.com/alstat/023ff855025d0da2fa50b7923b834fd8.js"></script>
 <img src="https://raw.githubusercontent.com/estadistika/assets/master/imgs/2018-10-10-p1-c.gif?sanitize=true" /></p>
 
 <h3 id="end-note">End Note</h3>
-<p>This has been a good exercise on my part, and I found Julia to be quite easy to use as tool for statistical problems.</p>
+<p>There are many libraries available for Bayesian modeling, for Julia we have: <a href="https://github.com/JuliaStats/Klara.jl" target="_blank">Klara.jl</a>, <a href="https://github.com/brian-j-smith/Mamba.jl" target="_blank">Mamba.jl</a>, <a href="https://github.com/goedman/Stan.jl" target="_blank">Stan.jl</a>, <a href="https://github.com/TuringLang/Turing.jl" target="_blank">Turing.jl</a> and <a href="https://juliaobserver.com/categories/Bayesian" target="_blank">more related</a>;
+for Python, my favorite is <a href="https://docs.pymc.io/" target="_blank">PyMC3</a>; and for R, I prefer <a href="http://mc-stan.org/users/interfaces/rstan" target="_blank">RStan</a>. I will write about these packages in my future articles.</p>
+
+<p>As always, coding from scratch is a good exercise and it helps you appreciate the math, especially when your code works. Further, I found Julia to be quite easy to use as a tool for statistical problems. In fact, Julia’s linear algebra API is very close to the mathematical formulae above, given that it supports unicode as well.</p>
 
 <h3 id="references">References</h3>
 <ul>

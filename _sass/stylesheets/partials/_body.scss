@@ -58,7 +58,7 @@ html {
                                 box-sizing: border-box;
                                 background-color: #00000000;
                                 padding: 10px;
-                                // font-size: 16px;
+                                font-size: 14px;
                                 border: none;
                                 cursor: pointer;
                 
@@ -124,6 +124,7 @@ html {
                         display: block !important;
                         // padding: 15px;
                         margin-top: 40px;
+                        margin-bottom: 40px;
 
                         header.post-header {
                             h1.post-title {
@@ -282,6 +283,7 @@ html {
 
                     div.home {
                         margin-top: 40px;
+                        margin-bottom: 40px;
                         // padding: 0;
                         ul.post-list {
                             li {

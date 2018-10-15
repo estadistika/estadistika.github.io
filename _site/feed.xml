@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-15T00:21:48+08:00</updated><id>http://localhost:4000/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Julia, Python, R: Introduction to Bayesian Linear Regression</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference.html" rel="alternate" type="text/html" title="Julia, Python, R: Introduction to Bayesian Linear Regression" /><published>2018-09-08T12:00:00+08:00</published><updated>2018-09-08T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/09/08/Introduction-to-Bayesian-Inference.html">&lt;p&gt;Reverend Thomas Bayes (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of Laplace (1986). The Bayes’ theorem has the following form:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-15T14:06:52+08:00</updated><id>http://localhost:4000/</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Julia, Python, R: Introduction to Bayesian Linear Regression</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression.html" rel="alternate" type="text/html" title="Julia, Python, R: Introduction to Bayesian Linear Regression" /><published>2018-10-14T12:00:00+08:00</published><updated>2018-10-14T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression.html">&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Thomas_Bayes&quot; target=&quot;_blank&quot;&gt;Reverend Thomas Bayes&lt;/a&gt; (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of &lt;a href=&quot;https://en.wikipedia.org/wiki/Pierre-Simon_Laplace&quot; target=&quot;_blank&quot;&gt;Laplace&lt;/a&gt; (1986). The Bayes’ theorem has the following form:&lt;/p&gt;
 &lt;div class=&quot;math&quot;&gt;
 \begin{equation}
 \label{eq:bayes-theorem}
@@ -14,7 +14,7 @@
 where $\mathbb{P}(\mathbf{w})$ is the &lt;i&gt;a priori&lt;/i&gt; distribution of the parameter, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. The likelihood is given by
 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \begin{align}
-    \mathbb{P}(\mathbf{y}|\mathbf{w})&amp;=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\\
+    \mathbb{P}(\mathbf{y}|\mathbf{w})&amp;=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\nonumber\\
     &amp;=\left(\frac{\alpha}{2\pi}\right)^{n/2}\exp\left[-\sum_{i=1}^n\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right].\label{eq:likelihood:blreg}
 \end{align} %]]&gt;&lt;/script&gt;
 In matrix form, this can be written as
@@ -28,7 +28,7 @@ where $\boldsymbol{\mathfrak{A}}=\left[(\mathbf{x}_i^{\text{T}})\right]$, i.e. $
 implies that the posterior has the following form:
 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \begin{align}
-    \mathbb{P}(\mathbf{w}|\mathbf{y})&amp;\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\\
+    \mathbb{P}(\mathbf{w}|\mathbf{y})&amp;\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\nonumber\\
 &amp;=\exp\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
 \end{align} %]]&gt;&lt;/script&gt;
 Expanding the terms in the exponent, becomes
@@ -38,7 +38,7 @@ Expanding the terms in the exponent, becomes
 The next step is to complete the square of the above equation such that it resembles the inner terms of the exponential factor of the Gaussian distribution. That is, the quadratic form of the exponential term of a $\mathcal{N}(\mathbf{w}|\boldsymbol{\mu},\boldsymbol{\Sigma}^{-1})$ is given by
 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \begin{align}
-    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&amp;=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\\
+    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&amp;=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\nonumber\\
 &amp;=\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-
 2\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}.\label{eq:expnorm}
 \end{align} %]]&gt;&lt;/script&gt;
@@ -49,13 +49,13 @@ The terms in Equation (\ref{eq:expterms}) are matched up with that in (\ref{eq:e
 and
 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \begin{align}
-    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\\
-    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\\
+    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
+    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
     \boldsymbol{\mu}&amp;=\alpha\boldsymbol{\Sigma}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}.\label{eq:mublrgauss}
 \end{align} %]]&gt;&lt;/script&gt;
-Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}). I’ll leave to the reader the proper mathematical derivation of the estimates of $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ instead of matching it with known form of multivariate Gaussian distribution.&lt;/p&gt;
+Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}). I’ll leave to the reader the proper mathematical derivation of $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ without matching like what we did above.&lt;/p&gt;
 &lt;h3 id=&quot;simulation-experiment&quot;&gt;Simulation Experiment&lt;/h3&gt;
-&lt;p&gt;In this section, we are going to apply the theory above into a simulated data. I am using Julia as the primary programming language, but I also provided codes for R and Python. To start with, load the following libraries:&lt;/p&gt;
+&lt;p&gt;In this section, we are going to apply the theory above using simulated data. I will use Julia as the primary programming language for this article, but I also provided codes for R and Python. To start with, load the following libraries:&lt;/p&gt;
 &lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
   &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-1', 'tabcontent-1')&quot;&gt;Julia&lt;/button&gt;
   &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-1', 'tabcontent-1')&quot;&gt;Python&lt;/button&gt;
@@ -68,7 +68,7 @@ Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with locatio
 &lt;div id=&quot;python-1&quot; class=&quot;tabcontent-1&quot; style=&quot;display: none;&quot;&gt;
   &lt;script src=&quot;https://gist.github.com/alstat/e814d09d53a8c3cba1e27d7be4c46d02.js&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
-&lt;p&gt;Next, define the following functions for simulating the data and estimating the parameters. The estimate of the paramters is defined by the &lt;i&gt;a posteriori&lt;/i&gt; which from above is a multivariate Gaussian distribution, with mean given by Equation (\ref{eq:mublrgauss}) and variance-covariance matrix defined by the inverse of Equation (\ref{eq:sigmablrgauss}).&lt;/p&gt;
+&lt;p&gt;Next, define the following functions for data simulation and parameter estimation. The estimate of the paramters is governed by the &lt;i&gt;a posteriori&lt;/i&gt; which from above is a multivariate Gaussian distribution, with mean given by Equation (\ref{eq:mublrgauss}) and variance-covariance matrix defined by the inverse of Equation (\ref{eq:sigmablrgauss}).&lt;/p&gt;
 &lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
   &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-2', 'tabcontent-2')&quot;&gt;Julia&lt;/button&gt;
   &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-2', 'tabcontent-2')&quot;&gt;Python&lt;/button&gt;
@@ -105,12 +105,15 @@ Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with locatio
 &lt;div id=&quot;r-3&quot; class=&quot;tabcontent-3&quot; style=&quot;display: none;&quot;&gt;
   &lt;script src=&quot;https://gist.github.com/alstat/5defe8880d40bdbf35ae36688bbcf98a.js&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
-&lt;p&gt;Finally, we plot the fitted lines whose weights are samples from the &lt;i&gt;a posteriori&lt;/i&gt;. The red line in the plot below is the maximum &lt;i&gt;a posteriori&lt;/i&gt; (MAP) of the parameter of interest.
+&lt;p&gt;Finally, plot the fitted lines whose weights are samples from the &lt;i&gt;a posteriori&lt;/i&gt;. The red line in the plot below is the Maximum &lt;i&gt;A Posteriori&lt;/i&gt; (MAP) of the parameter of interest. Note that, however, the code provided for the animated plot below is Julia. Python and R users can use &lt;a href=&quot;https://matplotlib.org/index.html&quot; target=&quot;_blank&quot;&gt;matplotlib.pyplot&lt;/a&gt; (Julia’s Plots backend) and &lt;a href=&quot;https://github.com/thomasp85/gganimate&quot; target=&quot;_blank&quot;&gt;gganimate&lt;/a&gt;, respectively.
 &lt;script src=&quot;https://gist.github.com/alstat/023ff855025d0da2fa50b7923b834fd8.js&quot;&gt;&lt;/script&gt;
 &lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/2018-10-10-p1-c.gif?sanitize=true&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;end-note&quot;&gt;End Note&lt;/h3&gt;
-&lt;p&gt;This has been a good exercise on my part, and I found Julia to be quite easy to use as tool for statistical problems.&lt;/p&gt;
+&lt;p&gt;There are many libraries available for Bayesian modeling, for Julia we have: &lt;a href=&quot;https://github.com/JuliaStats/Klara.jl&quot; target=&quot;_blank&quot;&gt;Klara.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/brian-j-smith/Mamba.jl&quot; target=&quot;_blank&quot;&gt;Mamba.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/goedman/Stan.jl&quot; target=&quot;_blank&quot;&gt;Stan.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/TuringLang/Turing.jl&quot; target=&quot;_blank&quot;&gt;Turing.jl&lt;/a&gt; and &lt;a href=&quot;https://juliaobserver.com/categories/Bayesian&quot; target=&quot;_blank&quot;&gt;more related&lt;/a&gt;;
+for Python, my favorite is &lt;a href=&quot;https://docs.pymc.io/&quot; target=&quot;_blank&quot;&gt;PyMC3&lt;/a&gt;; and for R, I prefer &lt;a href=&quot;http://mc-stan.org/users/interfaces/rstan&quot; target=&quot;_blank&quot;&gt;RStan&lt;/a&gt;. I will write about these packages in my future articles.&lt;/p&gt;
+
+&lt;p&gt;As always, coding from scratch is a good exercise and it helps you appreciate the math, especially when your code works. Further, I found Julia to be quite easy to use as a tool for statistical problems. In fact, Julia’s linear algebra API is very close to the mathematical formulae above, given that it supports unicode as well.&lt;/p&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 &lt;ul&gt;

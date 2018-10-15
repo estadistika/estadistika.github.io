@@ -65,6 +65,7 @@
             box-sizing: border-box;
             background-color: #00000000;
             padding: 10px;
+            font-size: 14px;
             border: none;
             cursor: pointer; }
             html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn a {
@@ -102,7 +103,8 @@
           display: none; }
         html body div.site-parent-container main.site-main-content div.home-mobile {
           display: block !important;
-          margin-top: 40px; }
+          margin-top: 40px;
+          margin-bottom: 40px; }
           html body div.site-parent-container main.site-main-content div.home-mobile header.post-header h1.post-title {
             font-size: 22px !important; }
         html body div.site-parent-container main.site-main-content article.post {
@@ -200,7 +202,8 @@
           html body div.site-parent-container-blog main.site-main-content article.post div.post-content img {
             width: 100%; }
         html body div.site-parent-container-blog main.site-main-content div.home {
-          margin-top: 40px; }
+          margin-top: 40px;
+          margin-bottom: 40px; }
           html body div.site-parent-container-blog main.site-main-content div.home ul.post-list li h2 a.post-link {
             font-size: 22px; } }
 html body {
