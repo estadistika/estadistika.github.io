@@ -122,9 +122,9 @@ Finally, plot the fitted lines whose weights are samples from the <i>a posterior
 
 ### End Note
 There are many libraries available for Bayesian modeling, for Julia we have: <a href="https://github.com/JuliaStats/Klara.jl" target="_blank">Klara.jl</a>, <a href="https://github.com/brian-j-smith/Mamba.jl" target="_blank">Mamba.jl</a>, <a href="https://github.com/goedman/Stan.jl" target="_blank">Stan.jl</a>, <a href="https://github.com/TuringLang/Turing.jl" target="_blank">Turing.jl</a> and <a href="https://juliaobserver.com/categories/Bayesian" target="_blank">more related</a>;
-for Python, my favorite is <a href="https://docs.pymc.io/" target="_blank">PyMC3</a>; and for R, I prefer <a href="http://mc-stan.org/users/interfaces/rstan" target="_blank">RStan</a>. I will write about these packages in my future articles.
+for Python, my favorite is <a href="https://docs.pymc.io/" target="_blank">PyMC3</a>; and for R, I prefer <a href="http://mc-stan.org/users/interfaces/rstan" target="_blank">RStan</a>.
 
-As always, coding from scratch is a good exercise and it helps you appreciate the math, especially when your code works. Further, I found Julia to be quite easy to use as a tool for statistical problems. In fact, Julia's linear algebra API is very close to the mathematical formulae above, given that it supports unicode as well.
+As always, coding from scratch is a good exercise and it helps you appreciate the math. Further, I found Julia to be quite easy to use as a tool for statistical problems. In fact, Julia's linear algebra API is very close to the mathematical formulae above.
 
 ### References
 * Bayes, T. (1763). An essay towards solving a problem in the doctrine of chances. *Philosophical Transactions*, 53, 370-418. URL: http://www.jstor.org/stable/105741

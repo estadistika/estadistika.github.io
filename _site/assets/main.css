@@ -308,7 +308,7 @@ html body {
     html body main.site-main-content .first {
       display: block; }
     html body main.site-main-content button.tablinks {
-      padding: 0 10px 0 5px; }
+      padding: 0 10px; }
     html body main.site-main-content .section {
       margin-top: 25px;
       margin-bottom: 8px; }
