@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)"
-date:   2018-10-14 12:00:00 +0800
+date:   2018-10-30 12:00:00 +0800
 categories: Web Scraping Philippines Julia Programming Packages
 comments: true
 use_math : true
