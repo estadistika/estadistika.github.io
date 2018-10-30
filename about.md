@@ -10,7 +10,7 @@ and I'm the author. Statistician by training with <a href="http://www.stat.upd.e
 
 Estadistika will serve as my notes for possible research I want to pursue in the future, and its main purpose is to share my thoughts about Data Science, Machine/Deep Learning, and Artificial Intelligence with emphasis on the use of Statistics. Needless to say, everything I post here represents my views and not the opinions of my employer.
 
-Lastly, I am the owner of the <a href="http://alstatr.blogspot.com/" target="_blank">Analysis with Programming</a> website, which I maintained from 2013 to 2017, and I made Estadistika as a successor to it. You can contact me at 
+Lastly, I am the owner of <a href="http://alstatr.blogspot.com/" target="_blank">Analysis with Programming</a> website, which I maintained from 2013 to 2017, and I made Estadistika as a successor to it. You can contact me at 
 
 <center>al-ahmadgaid.asaad@g.msuiit.edu.ph</center>
 
