@@ -15,3 +15,16 @@ Lastly, I am the owner of <a href="http://alstatr.blogspot.com/" target="_blank"
 <center>al-ahmadgaid.asaad@g.msuiit.edu.ph</center>
 
 or follow me on twitter <a href="https://twitter.com/iamalstat" target="_blank">@iamalstat</a>. You can find me on github (<a href="https://github.com/alstat" target="_blank">@alstat</a>) as well where most of my projects are hosted including this website.
+
+
+### Peer-Reviewed Paper
+1. Asaad  CO, Caraos  GL, Robles GM, Asa AD, Cobar MC, **Asaad A.** <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5292908/">*Enhancing cytogenetic biological dosimetry capabilities of the philippines for nuclear incident preparedness*</a>. Genome Integr 2016;7:4.
+
+### Conference Papers
+1. **Asaad A.**, Salvacion A., Yen B.T. (2016). <a href="https://drive.google.com/file/d/1S_HrUPQokjhIGzvdU-1Ec-sHiLzj_WVQ/view?usp=sharing" target="_blank">*ALUES: R Package for Evaluating Land Suitability for Agricultural Production*</a>. 13th National Convention on Statistics - Philippine Statistics Authority, ISLA Ballroom, Edsa Shangri-La Hotel, Mandaluyong City.
+2. Mapa C.D., Del Prado D.G, Poliquit I.A., **Asaad A**. (2016). <a href="https://drive.google.com/file/d/1d4JsfLRXjV6f7jt2yRH92eWViRUKNBYp/view?usp=sharing" target="_blank">*Enhancement of the Composite Leading Economic Indicator System of the Philippines*</a>. 13th National Convention on Statistics - Philippine Statistics Authority, ISLA Ballroom, Edsa Shangri-La Hotel, Mandaluyong City.
+3. Mapa C.D., Del Prado D.G, Poliquit I.A., **Asaad A**. (2016). <a href="https://drive.google.com/file/d/1x9sV0LPm1qRongko21vQr_xRNrWC16np/view?usp=sharing" target="_blank">*Composite Leading Economic Indicators using Autoregressive Distributed Lag Model*</a>. 13th National Convention on Statistics - Philippine Statistics Authority, ISLA Ballroom, Edsa Shangri-La Hotel, Mandaluyong City.
+
+### Theses
+1. **Asaad A.** (2017). <a href="https://drive.google.com/file/d/1ZBC0s5uJJ_Aclo7CZWLrTQu26omRpfc4/view?usp=sharing" target="_blank">*Bayesian Autoregressive Distributed Lag* via *Stochastic Gradient Hamiltonian Monte Carlo*</a>. Master's Thesis. School of Statistics, University of the Philippines Diliman.
+2. **Asaad A.** (2013). <a href="https://drive.google.com/file/d/1wJu5bWYuXzfxtlXTe46NzU94aBQDqJka/view?usp=sharing" target="_blank">*Space-Time Autoregressive Integrated Moving Average*</a>. Undergraduate Thesis. Department of Mathematics and Statistics, Iligan Institute of Technology of the Mindanao State University.
