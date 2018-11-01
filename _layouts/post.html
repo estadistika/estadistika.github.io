@@ -38,8 +38,8 @@ layout: default-blog
             <!-- <div style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; padding-right: 5px;">
                 <a class="previous-article" href="{{page.previous.url}}"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> {{page.previous.title}}</a>
             </div> -->
-            <div style="background-color:#000; display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; padding: 0 10px;">
-                <a class="previous-article" href="{{page.previous.url}}">{{page.previous.title}}</a>
+            <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 10px; padding-right: 5px; background-color: #000; color: #fff;">
+                <a class="previous-article" href="{{page.previous.url}}" style="padding-left: 0px; background-color: initial;">{{page.previous.title}}</a>
             </div>
         {% endif %}
         {% if page.next.url %}
@@ -58,7 +58,7 @@ layout: default-blog
             
             <!-- <div style="display: inline-block; background-color:#000; color:#fff; width: 150px;"> -->
                 <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 5px; background-color: #000; color: #fff;">
-                    <a class="next-article" href="{{page.next.url}}" style="padding-left: 0px; background-color: initial;">{{page.next.title}} </a>
+                    <a class="next-article" href="{{page.next.url}}" style="padding-left: 0px; background-color: initial;">{{page.next.title}}</a>
                 </div>
                 <!-- <div style="display: inline-block; text-align: left;">
                     <i class="fas fa-chevron-circle-right" style="margin-top: -10px; font-size: 12.5px;"></i>
