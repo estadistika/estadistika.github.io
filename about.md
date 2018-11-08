@@ -16,7 +16,7 @@ Lastly, I am the owner of <a href="http://alstatr.blogspot.com/" target="_blank"
 
 or follow me on twitter <a href="https://twitter.com/iamalstat" target="_blank">@iamalstat</a>. You can find me on github (<a href="https://github.com/alstat" target="_blank">@alstat</a>) as well where most of my projects are hosted including this website.
 
-### Peer-Reviewed Paper
+### Journal-Reviewed Paper
 1. Asaad  CO, Caraos  GL, Robles GM, Asa AD, Cobar MC, **Asaad A.** <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5292908/">*Enhancing cytogenetic biological dosimetry capabilities of the philippines for nuclear incident preparedness*</a>. Genome Integr 2016;7:4.
 
 ### Conference Papers
