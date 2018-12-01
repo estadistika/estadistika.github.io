@@ -5,6 +5,7 @@ date:   2018-10-30 12:00:00 +0800
 categories: Web Scraping Philippines Julia Programming Packages
 comments: true
 use_math : true
+tag: julia
 ---
 Data nowadays are almost everywhere, often stored in as simple as traditional log books, to as complex as multi-connected-databases. Efficient collection of these datasets is crucial for analytics since data processing takes almost 50% of the overall workflow. An example where manual data collection can be automated is in the case of datasets published in the website, where providers are usually government agencies. For example in the Philippines, there is a website dedicated to <a href="http://openstat.psa.gov.ph/" target="_blank">Open Stat</a> initiated by the <a href="https://psa.gov.ph/" target="_blank">Philippine Statistics Authority (PSA)</a>. The site hoards public datasets for researchers to use and are well prepared in CSV format, so consumers can simply download the file. Unfortunately, for some agencies this feature is not yet available. That is, users need to either copy-paste the data from the website, or request it to the agency directly (this also takes time). A good example of this is the seismic events of the <a href="https://www.phivolcs.dost.gov.ph/" target="_blank">Philippine Institute of Volcanology and Seismology (PHIVOLCS)</a>. 
 
