@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <div class="site-parent-container">
+    <div class="site-parent-container-blog">
 
         <header>
     <!-- <img src="/assets/bible-psalms.jpg"> -->
@@ -78,27 +78,44 @@
 
         <main class="site-main-content">
 
-            <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+            <div class="home">
+    
 
-<div class="container">
-  <h1>404</h1>
+    <!-- This loops through the paginated posts -->
+    <ul class="post-list">
+        
+        <li>
+            
+            <span class="post-meta">Jun 8, 2018</span>
+            <h2>
+                <a class="post-link" href="/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html">Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</a>
+            </h2>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+             
+             
+             
+                I’m a heavy user of Python’s pandas and R’s dplyr both at work and when I was taking my master’s degree. Hands down, both of these tools are very good at handling the data. So what about Julia? It’s a fairly new programming language that’s been around for almost 6... 
+            
+        </li>
+        
+    </ul>
+
+    <!-- Pagination links -->
+    <div class="pagination">
+        
+            <button onclick='javascript:location.href="/blog/"' class="previous"><i class="fas fa-chevron-circle-left" style="margin: 0 5px 0 0; font-size: 12.5px;"></i>Previous</button>
+        
+
+        <span class="page_number ">Page: 2 / 2</span>
+
+        
+        
+    </div>
+    <div class="rss-subscribe">
+        <button class="rss-subscribe-button" onclick ='javascript:location.href="/feed.xml"'><i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+    </div>
+
 </div>
-
 
         </main>
 
