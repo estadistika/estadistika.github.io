@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Estadistika -- Julia</title>
+    <description>Statistics, Data Science, Machine/Deep Learning</description>
+    <link>http://localhost:4000</link>
+    
+		
+			
+		 
+    
+		
+				
+				
+				  <item>
+					  <title>Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</title>
+					  <description>&lt;p&gt;Data nowadays are almost everywhere, often stored in as simple as traditional log books, to as complex as multi-connected-databases. Efficient collection of these datasets is crucial for analytics since data processing takes almost 50% of the overall workflow. An example where manual data collection can be automated is in the case of datasets published in the website, where providers are usually government agencies. For example in the Philippines, there is a website dedicated to &lt;a href=&quot;http://openstat.psa.gov.ph/&quot; target=&quot;_blank&quot;&gt;Open Stat&lt;/a&gt; initiated by the &lt;a href=&quot;https://psa.gov.ph/&quot; target=&quot;_blank&quot;&gt;Philippine Statistics Authority (PSA)&lt;/a&gt;. The site hoards public datasets for researchers to use and are well prepared in CSV format, so consumers can simply download the file. Unfortunately, for some agencies this feature is not yet available. That is, users need to either copy-paste the data from the website, or request it to the agency directly (this also takes time). A good example of this is the seismic events of the &lt;a href=&quot;https://www.phivolcs.dost.gov.ph/&quot; target=&quot;_blank&quot;&gt;Philippine Institute of Volcanology and Seismology (PHIVOLCS)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Data encoded in HTML can be parsed and saved into formats that’s workable for doing analyses (e.g. CSV, TSV, etc.). The task of harvesting and parsing data from the web is called &lt;strong&gt;web scraping&lt;/strong&gt;, and PHIVOLCS’ &lt;a href=&quot;https://www.phivolcs.dost.gov.ph/html/update_SOEPD/EQLatest.html&quot; target=&quot;_blank&quot;&gt;Latest Seismic Events&lt;/a&gt; is a good playground for beginners. There are several tutorials available especially for Python (see &lt;a href=&quot;https://www.dataquest.io/blog/web-scraping-tutorial-python/&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;) and R (see &lt;a href=&quot;https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;), but not much for Julia. Hence, this article is primarily for Julia users. However, this work introduces web tools as well – how to use it for inspecting the components of the website – which can be useful for non-Julia users.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-julia&quot;&gt;Why Julia?&lt;/h3&gt;
+&lt;p&gt;The creators of the language described it well in their first announcement (I suggest you read the full post): &lt;a href=&quot;https://julialang.org/blog/2012/02/why-we-created-julia&quot; target=&quot;_blank&quot;&gt;Why we created Julia?&lt;/a&gt; Here’s part of it:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;We are greedy: we want more.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;We want a language that’s open source, with a liberal license. We want the speed of C with the dynamism of Ruby. We want a language that’s homoiconic, with true macros like Lisp, but with obvious, familiar mathematical notation like Matlab. We want something as usable for general programming as Python, as easy for statistics as R, as natural for string processing as Perl, as powerful for linear algebra as Matlab, as good at gluing programs together as the shell. Something that is dirt simple to learn, yet keeps the most serious hackers happy. We want it interactive and we want it compiled.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;(Did we mention it should be as fast as C?)&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I used Julia in my master’s thesis for my &lt;a href=&quot;https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo&quot; target=&quot;_blank&quot;&gt;MCMC simulations&lt;/a&gt; and benchmarked it against R. It took seconds in Julia while R took more than an hour (sampling over the posterior distribution). I could have optimized my R code using &lt;a href=&quot;http://www.rcpp.org/&quot; target=&quot;_blank&quot;&gt;Rcpp&lt;/a&gt; (writting the performance-critical part in C++ to speed up and wrapped/call it in R), but I have no time for that. Hence, Julia solves the &lt;a href=&quot;https://www.quora.com/What-is-the-2-language-problem-in-data-science&quot; target=&quot;_blank&quot;&gt;two-language problem&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;getting-to-know-html&quot;&gt;Getting to know HTML&lt;/h3&gt;
+&lt;p&gt;Since the data published in the websites are usually encoded as a table, it is therefore best to understand the structure of the HTML document before performing web scraping. HTML (Hypertext Markup Language) is a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages [&lt;a href=&quot;https://www.google.com/search?q=what+is+HTML&amp;amp;ie=utf-8&amp;amp;oe=utf-8&amp;amp;client=firefox-b-ab&quot; target=&quot;_blank&quot;&gt;1&lt;/a&gt;]. For example, bold text in HTML is enclosed inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;b&amp;gt;&lt;/code&gt; tag, e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;b&amp;gt;&lt;/code&gt;text&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/b&amp;gt;&lt;/code&gt;, the result is &lt;b&gt;text&lt;/b&gt;. A webpage is a HTML document that can be structured in several ways, one possible case is as follows:
+&lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/html-4.png?sanitize=true&quot; /&gt;
+Scrapers must be familiar with the hierarchy of the HTML document as this will be the template for the frontend source code of every website. Following the structure of the above figure, data encoded in HTML table are placed inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; (table data) tag, where &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; is under &lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt; (table row), &lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt; is under &lt;code class=&quot;highlighter-rouge&quot;&gt;tbody&lt;/code&gt; (table body), and so on. &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; is the lowest level tag (sorting by hierarchy) from the figure above that can contain data. However, &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; can also take precedence over &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; (paragraph), &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; (hyperlink), &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; (bold), &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; (italic), &lt;code class=&quot;highlighter-rouge&quot;&gt;span&lt;/code&gt; (span), and even &lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt; (division). So expect to encounter these under &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; as well.&lt;/p&gt;
+
+&lt;p&gt;As indicated in the figure, each HTML tag can have attributes, such as &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt;. To understand how the two differ, consider &lt;code class=&quot;highlighter-rouge&quot;&gt;id=&quot;yellow&quot;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;id=&quot;orange&quot;&lt;/code&gt;, these are unique identities (&lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;s) of colors. These &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;s can be grouped into a class, e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;class=&quot;colors&quot;&lt;/code&gt;. HTML tags are not required to have these attributes but are useful for adding custom styles and behavior when doing web development. This article will not dive into the details of the HTML document, but rather to give the reader a high level understanding. There are many resources available on the web, just google.&lt;/p&gt;
+&lt;h3 id=&quot;inspecting-the-source-of-the-website&quot;&gt;Inspecting the Source of the Website&lt;/h3&gt;
+&lt;p&gt;In order to have an idea on the structure of the website, browsers such as Google Chrome and Mozilla Firefox include tools for Web Developers. For purpose of illustration but without loss of generality, this article will only scrape portion (why? read on and see the explanation below) of the &lt;a href=&quot;https://www.phivolcs.dost.gov.ph/html/update_SOEPD/EQLatest-Monthly/2018/2018_September.html&quot; target=&quot;_blank&quot;&gt;September 2018 earthquake events&lt;/a&gt;. The web developer tools can be accessed from &lt;b&gt;Tools &amp;gt; Web Developer&lt;/b&gt; in Firefox, and can be accessed from &lt;b&gt;View &amp;gt; Developer&lt;/b&gt; in Google Chrome. The following video shows how to use the inspector tool of the Mozilla Firefox.&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;400px&quot; src=&quot;https://www.youtube.com/embed/RJEnugditnA&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&quot;scraping-using-julia&quot;&gt;Scraping using Julia&lt;/h3&gt;
+&lt;p&gt;To perform web scraping, Julia offers three libraries for the job, and these are &lt;a href=&quot;https://github.com/Algocircle/Cascadia.jl&quot; target=&quot;_blank&quot;&gt;Cascadia.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/JuliaWeb/Gumbo.jl&quot; target=&quot;_blank&quot;&gt;Gumbo.jl&lt;/a&gt; and &lt;a href=&quot;https://github.com/JuliaWeb/HTTP.jl&quot; target=&quot;_blank&quot;&gt;HTTP.jl&lt;/a&gt;. &lt;a href=&quot;https://github.com/JuliaWeb/HTTP.jl&quot; target=&quot;_blank&quot;&gt;HTTP.jl&lt;/a&gt; is used to download the frontend source code of the website, which then is parsed by &lt;a href=&quot;https://github.com/JuliaWeb/Gumbo.jl&quot; target=&quot;_blank&quot;&gt;Gumbo.jl&lt;/a&gt; into a hierarchical structured object; and &lt;a href=&quot;https://github.com/Algocircle/Cascadia.jl&quot; target=&quot;_blank&quot;&gt;Cascadia.jl&lt;/a&gt; provides a CSS selector API for easy navigation.&lt;/p&gt;
+
+&lt;p&gt;To start with, the following code will download the frontend source code of the PHIVOLCS’ Seismic Events for September 2018. 
+&lt;script src=&quot;https://gist.github.com/alstat/4e5bbbb9587b6506c4341a8097804c69.js&quot;&gt;&lt;/script&gt;
+Extract the HTML source code and parsed it as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/deb9ef2abe52af58fc03be63f0482ccf.js&quot;&gt;&lt;/script&gt;
+Now to extract the header of the HTML table, use the Web Developer Tools for preliminary inspection on the components of the website. As shown in the screenshot below, the header of the table is enclosed inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; tag of the &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt;. Further, the &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; tag is of class &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style33&lt;/code&gt;, which can be accessed via CSS selector by simply prefixing it with &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;, i.e. &lt;code class=&quot;highlighter-rouge&quot;&gt;.auto-style33&lt;/code&gt;.
+&lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/firefox-inspector.png?sanitize=true&quot; /&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/63c8855a48c9a33669c9bdd4d3ae2e9a.js&quot;&gt;&lt;/script&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;qres&lt;/code&gt; contains the HTML tags that matched the CSS selector’s query. The result is further cleaned by removing the tabs, spaces and line breaks via &lt;a href=&quot;https://en.wikipedia.org/wiki/Regular_expression&quot; target=&quot;_blank&quot;&gt;Regular Expressions&lt;/a&gt;, and is done as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/94e5af21b303b995d93af24a8ae69841.js&quot;&gt;&lt;/script&gt;
+Having the header names, next is to extract the data from the HTML table. Upon inspection, the &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt;s containing the data next to the header rows seem to have the following classes (see screenshot below): &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style21&lt;/code&gt; for first column (Date-Time), &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style81&lt;/code&gt; for second column (Latitude), &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style80&lt;/code&gt; for third and fourth columns (Longitude and Depth), &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style74&lt;/code&gt; for fifth column (Magnitude), and &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style79&lt;/code&gt; for sixth column (Location). Unfortunately, this is not consistent across rows (&lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt;s), and is therefore best not to use it with &lt;a href=&quot;https://github.com/Algocircle/Cascadia.jl&quot; target=&quot;_blank&quot;&gt;Cascadia.jl&lt;/a&gt;. Instead, use &lt;a href=&quot;https://github.com/JuliaWeb/Gumbo.jl&quot; target=&quot;_blank&quot;&gt;Gumbo.jl&lt;/a&gt; to navigate down the hierarchy of the &lt;a href=&quot;&quot; target=&quot;_blank&quot;&gt;Document Object Model&lt;/a&gt; of the HTML.
+&lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/firefox-inspector-data.png?sanitize=true&quot; /&gt;
+Starting with the &lt;code class=&quot;highlighter-rouge&quot;&gt;table&lt;/code&gt; tag which is of class &lt;code class=&quot;highlighter-rouge&quot;&gt;.MsoNormalTable&lt;/code&gt; (see screenshot below), the extraction proceeds down to &lt;code class=&quot;highlighter-rouge&quot;&gt;tbody&lt;/code&gt; then to &lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt; and finally to &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt;.
+&lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/firefox-inspector-table.png?sanitize=true&quot; /&gt;
+The following code describes how parsing is done, read the comments:
+&lt;script src=&quot;https://gist.github.com/alstat/b4fbfe5dc8330ef16ad1abc05d44056f.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;complete-code-for-phivolcs-september-2018-portion-seismic-events&quot;&gt;Complete Code for PHIVOLCS’ September 2018 (Portion) Seismic Events&lt;/h3&gt;
+&lt;p&gt;The September 2018 Seismic Events are encoded in two separate HTML tables of the same class, named &lt;code class=&quot;highlighter-rouge&quot;&gt;MsoNormalTable&lt;/code&gt;. For purpose of simplicity, this article will only scrape the first portion (3rd-indexed, see line 14 below: &lt;code class=&quot;highlighter-rouge&quot;&gt;tbody = html[3][1];&lt;/code&gt;) of the table (581 rows). The second portion (4th-indexed, change line 14 below to: &lt;code class=&quot;highlighter-rouge&quot;&gt;tbody = html[4][1];&lt;/code&gt;) is left to the reader to try out and scrape it as well.&lt;/p&gt;
+
+&lt;p&gt;The following code wraps the parsers into functions, namely &lt;code class=&quot;highlighter-rouge&quot;&gt;htmldoc&lt;/code&gt; (downloads and parses the HTML source code of the site), &lt;code class=&quot;highlighter-rouge&quot;&gt;scraper&lt;/code&gt; (scrapes the downloaded HTML document), &lt;code class=&quot;highlighter-rouge&quot;&gt;firstcolumn&lt;/code&gt; (logic for parsing the first column of the table, used inside &lt;code class=&quot;highlighter-rouge&quot;&gt;scraper&lt;/code&gt; function).
+&lt;script src=&quot;https://gist.github.com/alstat/698125867d853b941ab4284de34d9362.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/5b7463964703db410b05214f124bf028.js&quot;&gt;&lt;/script&gt;
+Having the data, analyst can now proceed to do exploratory analyses, for example the following is the descriptive statistics of the variables:
+&lt;script src=&quot;https://gist.github.com/alstat/8e7506524552f00bf8d8cdb690bda27b.js&quot;&gt;&lt;/script&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;describe&lt;/code&gt; is clever enough not only to not return &lt;code class=&quot;highlighter-rouge&quot;&gt;mean&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;median&lt;/code&gt; for non-continuous variables, but also determine the &lt;code class=&quot;highlighter-rouge&quot;&gt;min&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;max&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;nunique&lt;/code&gt; (number of uniques) for these variables (date and location).&lt;/p&gt;
+&lt;h3 id=&quot;end-note&quot;&gt;End Note&lt;/h3&gt;
+&lt;p&gt;I use Python primarily at work with &lt;a href=&quot;https://www.crummy.com/software/BeautifulSoup/bs4/doc/&quot; target=&quot;_blank&quot;&gt;BeautifulSoup&lt;/a&gt; as my go-to library for web scraping. Compared to &lt;a href=&quot;https://github.com/Algocircle/Cascadia.jl&quot; target=&quot;_blank&quot;&gt;Cascadia.jl&lt;/a&gt; and &lt;a href=&quot;https://github.com/JuliaWeb/Gumbo.jl&quot; target=&quot;_blank&quot;&gt;Gumbo.jl&lt;/a&gt;, &lt;a href=&quot;https://www.crummy.com/software/BeautifulSoup/bs4/doc/&quot; target=&quot;_blank&quot;&gt;BeautifulSoup&lt;/a&gt; offers comprehensive documentations and other resources that are useful for figuring out bugs, and understand how the module works. Having said, I hope this article somehow contributed to the documentation of the said Julia libraries. Further, I am confident to say that &lt;a href=&quot;https://github.com/Algocircle/Cascadia.jl&quot; target=&quot;_blank&quot;&gt;Cascadia.jl&lt;/a&gt; and &lt;a href=&quot;https://github.com/JuliaWeb/Gumbo.jl&quot; target=&quot;_blank&quot;&gt;Gumbo.jl&lt;/a&gt; are stable enough for the job.&lt;/p&gt;
+
+&lt;p&gt;Lastly, as a precaution to beginners, make sure to read the privacy policy (if any) of any website you want to scrape.&lt;/p&gt;
+
+&lt;h3 id=&quot;software-versions&quot;&gt;Software Versions&lt;/h3&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/12f52ef5b2c76fdeb5f927fc3239c613.js&quot;&gt;&lt;/script&gt;
+
+</description>
+					  <pubDate>2018-10-30T12:00:00+08:00</pubDate>
+					  <link>http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html</link>
+					  <guid isPermaLink="true">http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html</guid>
+				  </item>
+				
+			
+		 
+    
+		
+				
+				
+				  <item>
+					  <title>Julia, Python, R: Introduction to Bayesian Linear Regression</title>
+					  <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Thomas_Bayes&quot; target=&quot;_blank&quot;&gt;Reverend Thomas Bayes&lt;/a&gt; (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of &lt;a href=&quot;https://en.wikipedia.org/wiki/Pierre-Simon_Laplace&quot; target=&quot;_blank&quot;&gt;Laplace&lt;/a&gt; (1986). The Bayes’ theorem has the following form:&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\label{eq:bayes-theorem}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})}
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;where $\mathbf{w}$ is the weight vector and $\mathbf{y}$ is the data. This simple formula is the main foundation of Bayesian modeling. Any model estimated using Maximum Likelihood can be estimated using the above conditional probability. What makes it different, is that the Bayes’ theorem considers uncertainty not only on the observations but also uncertainty on the weights or the objective parameters.&lt;/p&gt;
+
+&lt;p&gt;As an illustration of Bayesian inference to basic modeling, this article attempts to discuss the Bayesian approach to linear regression. Let ${\mathscr{D}={(\mathbf{x}_1,y_1),\cdots,(\mathbf{x}_n,y_n)}}$ where $\mathbf{x}_i\in\mathbb{R}^{d}, y_i\in \mathbb{R}$ be the pairwised dataset. Suppose the response values, $y_1,\cdots,y_n$, are independent given the parameter $\mathbf{w}$, and is distributed as $y_i\sim\mathcal{N}(\mathbf{w}^{\text{T}}\mathbf{x}_i,\alpha^{-1})$, where $\alpha^{-1}$ (assumed to be known in this article) is referred to as the &lt;i&gt;precision&lt;/i&gt; parameter — useful for later derivation. In Bayesian perspective, the weights are assumed to be random and are governed by some &lt;i&gt;a priori&lt;/i&gt; distribution. The choice of this distribution is subjective, but choosing arbitrary &lt;i&gt;a priori&lt;/i&gt; can sometimes or often result to an intractable integration, especially for interesting models. For simplicity, a conjugate prior is used for the latent weights. Specifically, assume that ${\mathbf{w}\sim\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I})}$ such that $\beta&amp;gt;0$ is the hyperparameter supposed in this experiment as known value. The posterior distribution based on the Bayes’ rule is given by
+\begin{equation}\label{eq:bayesrulepost}
+	\mathbb{P}(\mathbf{w}|\mathbf{y})=\frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})},
+\end{equation}
+where $\mathbb{P}(\mathbf{w})$ is the &lt;i&gt;a priori&lt;/i&gt; distribution of the parameter, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. The likelihood is given by
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    \mathbb{P}(\mathbf{y}|\mathbf{w})&amp;=\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi\alpha^{-1}}}\exp\left[-\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right]\nonumber\\
+    &amp;=\left(\frac{\alpha}{2\pi}\right)^{n/2}\exp\left[-\sum_{i=1}^n\frac{\alpha(y_i-\mathbf{w}^{\text{T}}\mathbf{x}_i)^2}{2}\right].\label{eq:likelihood:blreg}
+\end{align} %]]&gt;&lt;/script&gt;
+In matrix form, this can be written as
+\begin{equation}
+    \mathbb{P}(\mathbf{y}|\mathbf{w})\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]
+\end{equation}
+where $\boldsymbol{\mathfrak{A}}=\left[(\mathbf{x}_i^{\text{T}})\right]$, i.e. $\boldsymbol{\mathfrak{A}}\in(\mathbb{R}^{n}\times\mathbb{R}^d)$, this matrix is known as the &lt;i&gt;design matrix&lt;/i&gt;. Given that $\mathbf{w}$ has the following prior distribution
+\begin{equation}\label{eq:wpriori}
+    \mathbb{P}(\mathbf{w})=\frac{1}{\sqrt{(2\pi)^{d}|\beta^{-1}\mathbf{I}|}}\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right],
+\end{equation}
+implies that the posterior has the following form:
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    \mathbb{P}(\mathbf{w}|\mathbf{y})&amp;\propto\exp\left[-\frac{\alpha}{2}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\nonumber\\
+&amp;=\exp\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
+\end{align} %]]&gt;&lt;/script&gt;
+Expanding the terms in the exponent, becomes
+\begin{equation}\label{eq:expterms}
+    \alpha\mathbf{y}^{\text{T}}\mathbf{y}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}+\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w}.
+\end{equation}
+The next step is to complete the square of the above equation such that it resembles the inner terms of the exponential factor of the Gaussian distribution. That is, the quadratic form of the exponential term of a $\mathcal{N}(\mathbf{w}|\boldsymbol{\mu},\boldsymbol{\Sigma}^{-1})$ is given by
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    (\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})&amp;=(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}(\boldsymbol{\Sigma}^{-1}\mathbf{w}-\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})\nonumber\\
+&amp;=\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-
+2\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}.\label{eq:expnorm}
+\end{align} %]]&gt;&lt;/script&gt;
+The terms in Equation (\ref{eq:expterms}) are matched up with that in (\ref{eq:expnorm}), so that
+\begin{equation}\label{eq:sigmablrgauss}
+    \boldsymbol{\Sigma}^{-1}=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I}
+\end{equation}
+and
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align}
+    \mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
+    \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}&amp;=\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\nonumber\\
+    \boldsymbol{\mu}&amp;=\alpha\boldsymbol{\Sigma}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}.\label{eq:mublrgauss}
+\end{align} %]]&gt;&lt;/script&gt;
+Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with location parameter in Equation (\ref{eq:mublrgauss}) and scale parameter given by the inverse of Equation (\ref{eq:sigmablrgauss}). I’ll leave to the reader the proper mathematical derivation of $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ without matching like what we did above.&lt;/p&gt;
+&lt;h3 id=&quot;simulation-experiment&quot;&gt;Simulation Experiment&lt;/h3&gt;
+&lt;p&gt;In this section, we are going to apply the theory above using simulated data. I will use Julia as the primary programming language for this article, but I also provided codes for R and Python. To start with, load the following libraries:&lt;/p&gt;
+&lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-1', 'tabcontent-1')&quot;&gt;Julia&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-1', 'tabcontent-1')&quot;&gt;Python&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;julia-1&quot; class=&quot;tabcontent-1 first&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/00ac3ea439baddddab166ca40902f4b0.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;python-1&quot; class=&quot;tabcontent-1&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/e814d09d53a8c3cba1e27d7be4c46d02.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;Next, define the following functions for data simulation and parameter estimation. The estimate of the paramters is governed by the &lt;i&gt;a posteriori&lt;/i&gt; which from above is a multivariate Gaussian distribution, with mean given by Equation (\ref{eq:mublrgauss}) and variance-covariance matrix defined by the inverse of Equation (\ref{eq:sigmablrgauss}).&lt;/p&gt;
+&lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-2', 'tabcontent-2')&quot;&gt;Julia&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-2', 'tabcontent-2')&quot;&gt;Python&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'r-2', 'tabcontent-2')&quot;&gt;R&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;julia-2&quot; class=&quot;tabcontent-2 first&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/df66b766a478aac49c45c2d792184534.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;python-2&quot; class=&quot;tabcontent-2&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/42c43fe8cbf482e192da1283c0e7756c.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;r-2&quot; class=&quot;tabcontent-2&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/a100a97eaf25659490a01121d1da8fa3.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Execute the above functions and return the necessary values as follows:&lt;/p&gt;
+&lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-3', 'tabcontent-3')&quot;&gt;Julia&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-3', 'tabcontent-3')&quot;&gt;Python&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'r-3', 'tabcontent-3')&quot;&gt;R&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;julia-3&quot; class=&quot;tabcontent-3 first&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/0a60ea652e1caca60544cea239ccae4b.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;python-3&quot; class=&quot;tabcontent-3&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/5dfa29ebb09275b961806f67e89e5530.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;r-3&quot; class=&quot;tabcontent-3&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/5defe8880d40bdbf35ae36688bbcf98a.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;Finally, plot the fitted lines whose weights are samples from the &lt;i&gt;a posteriori&lt;/i&gt;. The red line in the plot below is the Maximum &lt;i&gt;A Posteriori&lt;/i&gt; (MAP) of the parameter of interest. Note that, however, the code provided for the animated plot below is Julia. Python and R users can use &lt;a href=&quot;https://matplotlib.org/index.html&quot; target=&quot;_blank&quot;&gt;matplotlib.pyplot&lt;/a&gt; (Julia’s Plots backend) and &lt;a href=&quot;https://github.com/thomasp85/gganimate&quot; target=&quot;_blank&quot;&gt;gganimate&lt;/a&gt;, respectively.
+&lt;script src=&quot;https://gist.github.com/alstat/023ff855025d0da2fa50b7923b834fd8.js&quot;&gt;&lt;/script&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/2018-10-10-p1-c.gif?sanitize=true&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;end-note&quot;&gt;End Note&lt;/h3&gt;
+&lt;p&gt;There are many libraries available for Bayesian modeling, for Julia we have: &lt;a href=&quot;https://github.com/JuliaStats/Klara.jl&quot; target=&quot;_blank&quot;&gt;Klara.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/brian-j-smith/Mamba.jl&quot; target=&quot;_blank&quot;&gt;Mamba.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/goedman/Stan.jl&quot; target=&quot;_blank&quot;&gt;Stan.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/TuringLang/Turing.jl&quot; target=&quot;_blank&quot;&gt;Turing.jl&lt;/a&gt; and &lt;a href=&quot;https://juliaobserver.com/categories/Bayesian&quot; target=&quot;_blank&quot;&gt;more related&lt;/a&gt;;
+for Python, my favorite is &lt;a href=&quot;https://docs.pymc.io/&quot; target=&quot;_blank&quot;&gt;PyMC3&lt;/a&gt;; and for R, I prefer &lt;a href=&quot;http://mc-stan.org/users/interfaces/rstan&quot; target=&quot;_blank&quot;&gt;RStan&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As always, coding from scratch is a good exercise and it helps you appreciate the math. Further, I found Julia to be quite easy to use as a tool for statistical problems. In fact, Julia’s linear algebra API is very close to the mathematical formulae above.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bayes, T. (1763). An essay towards solving a problem in the doctrine of chances. &lt;em&gt;Philosophical Transactions&lt;/em&gt;, 53, 370-418. URL: http://www.jstor.org/stable/105741&lt;/li&gt;
+  &lt;li&gt;Laplace, P. S. (1986). Memoir on the probability of the causes of events. &lt;em&gt;Statist. Sci.&lt;/em&gt;, 1(3), 364–378. URL: http://dx.doi.org/10.1214/ss/1177013621 doi: 10.1214/ss/1177013621&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;software-versions&quot;&gt;Software Versions&lt;/h3&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/53a54b8e96ec1f45883d1447efeab0ff.js&quot;&gt;&lt;/script&gt;
+
+</description>
+					  <pubDate>2018-10-14T12:00:00+08:00</pubDate>
+					  <link>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression.html</link>
+					  <guid isPermaLink="true">http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression.html</guid>
+				  </item>
+				
+			
+		 
+    
+		
+				
+				
+				  <item>
+					  <title>Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</title>
+					  <description>&lt;p&gt;I’m a heavy user of Python’s &lt;a href=&quot;https://pandas.pydata.org/&quot;&gt;pandas&lt;/a&gt; and R’s &lt;a href=&quot;https://cran.r-project.org/web/packages/dplyr/index.html&quot;&gt;dplyr&lt;/a&gt; both at work and when I was taking my master’s degree. Hands down, both of these tools are very good at handling the data. So what about Julia? It’s a fairly new programming language that’s been around for almost 6 years already with a very active community. If you have no idea, I encourage you to visit &lt;a href=&quot;http://julialang.org/&quot;&gt;Julialang.org&lt;/a&gt;. In summary, it’s a programming language that walks like a &lt;a href=&quot;https://www.python.org/&quot;&gt;Python&lt;/a&gt;, but runs like a &lt;a href=&quot;https://en.wikipedia.org/wiki/C_%28programming_language%29&quot;&gt;C&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For data wrangling, there are two packages that we can use, and these are &lt;a href=&quot;https://github.com/JuliaData/DataFrames.jl&quot;&gt;DataFrames.jl&lt;/a&gt; and &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;. Let me reserve a separate post for &lt;a href=&quot;https://github.com/JuliaData/DataFrames.jl&quot;&gt;DataFrames.jl&lt;/a&gt;, and instead focus on &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt; and &lt;a href=&quot;https://piever.github.io/JuliaDBMeta.jl/latest/&quot;&gt;JuliaDBMeta.jl&lt;/a&gt; (an alternative for querying the data, like that of R’s &lt;a href=&quot;https://cran.r-project.org/web/packages/dplyr/index.html&quot;&gt;dplyr&lt;/a&gt;) packages.&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Package Installation&lt;/h3&gt;
+&lt;p&gt;By default, the libraries I mentioned above are not built-in in Julia, and hence we need to install it:
+&lt;script src=&quot;https://gist.github.com/alstat/78138748ba87580653416a6181693caa.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Data: nycflights13&lt;/h3&gt;
+&lt;p&gt;In order to compare Julia’s capability on data wrangling with that of R’s &lt;a href=&quot;https://cran.r-project.org/web/packages/dplyr/index.html&quot;&gt;dplyr&lt;/a&gt;, we’ll reproduce the example in this &lt;a href=&quot;https://cran.rstudio.com/web/packages/dplyr/vignettes/dplyr.html&quot;&gt;site&lt;/a&gt;. It uses all 336,776 flights that departed from New York City in 2013. I have a copy of it on github, and the following will download and load the data:
+&lt;script src=&quot;https://gist.github.com/alstat/c0c2bc4e5355ac55ad83fc07fa8561c8.js&quot;&gt;&lt;/script&gt;
+The rows of the data are not displayed as we execute &lt;code&gt;nycflights&lt;/code&gt; in line 7, that’s because we have a lot of columns, and by default &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt; will not print all these unless you have a big display (unfortunately, I’m using my 13 inch laptop screen, and that’s why). Hence, for the rest of the article, we’ll be using selected columns only:
+&lt;script src=&quot;https://gist.github.com/alstat/2cde6bb6e7ede38ddcdba7d47fb1fed7.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Filter Rows&lt;/h3&gt;
+&lt;p&gt;Filtering is a row-wise operation and is done using the &lt;code&gt;Base.filter&lt;/code&gt; function with extended method for &lt;code&gt;JuliaDB.IndexedTables&lt;/code&gt;.
+Therefore, to filter the data for month equal to 1 (January) and day equal to 1 (first day of the month), is done as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/fe17e7133a3de644bfc853b624bb6af3.js&quot;&gt;&lt;/script&gt;
+To see the output for line 2 using &lt;code&gt;Base.filter&lt;/code&gt;, simply remove the semicolon and you’ll have the same output as that of line 5 (using &lt;code&gt;JuliaDBMeta.@filter&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 class=&quot;section&quot;&gt;Arrange Rows&lt;/h3&gt;
+&lt;p&gt;To arrange the rows of the columns, use &lt;code&gt;Base.sort&lt;/code&gt; function:
+&lt;script src=&quot;https://gist.github.com/alstat/1211792bac2febc1d7c4ba058107e2d9.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Select Columns&lt;/h3&gt;
+&lt;p&gt;We’ve seen above how to select the columns, but we can also use ranges of columns for selection.
+&lt;script src=&quot;https://gist.github.com/alstat/785e35fe4535c84cc8f60dafa9b39e69.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Rename Column&lt;/h3&gt;
+&lt;p&gt;To rename the column, use &lt;code&gt;JuliaDB.renamecol&lt;/code&gt; function:
+&lt;script src=&quot;https://gist.github.com/alstat/048463d348450873dba81f3a96a473d1.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Add New Column&lt;/h3&gt;
+&lt;p&gt;To add a new column, use &lt;code&gt;insertcol&lt;/code&gt;, &lt;code&gt;insertcolafter&lt;/code&gt; and &lt;code&gt;insertcolbefore&lt;/code&gt; of the &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;.
+&lt;script src=&quot;https://gist.github.com/alstat/a5a2df1fbdb3feaad408a2ca92244e30.js&quot;&gt;&lt;/script&gt;
+or use the &lt;code&gt;@transform&lt;/code&gt; macro of the &lt;a href=&quot;https://piever.github.io/JuliaDBMeta.jl/latest/&quot;&gt;JuliaDBMeta.jl&lt;/a&gt;:
+&lt;script src=&quot;https://gist.github.com/alstat/ee7f0ab8405473aa88c5f52193ede352.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Summarize Data&lt;/h3&gt;
+&lt;p&gt;The data can be summarized using the &lt;code&gt;JuliaDB.summarize&lt;/code&gt; function
+&lt;script src=&quot;https://gist.github.com/alstat/3891fec973a923dcc0f6cc451ead4859.js&quot;&gt;&lt;/script&gt;
+&lt;code&gt;@with&lt;/code&gt; macro is an alternative from &lt;a href=&quot;https://piever.github.io/JuliaDBMeta.jl/latest/&quot;&gt;JuliaDBMeta.jl&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Grouped Operations&lt;/h3&gt;
+&lt;p&gt;For grouped operations, we can use the &lt;code&gt;JuliaDB.groupby&lt;/code&gt; function or the &lt;code&gt;JuliaDBMeta.@groupby&lt;/code&gt;:
+&lt;script src=&quot;https://gist.github.com/alstat/523976efd34a747f8fe6211b16ad6bf0.js&quot;&gt;&lt;/script&gt;
+We’ll use the summarized data above and plot the flight delay in relation to the distance travelled. We’ll use the &lt;a href=&quot;http://gadflyjl.org/stable/&quot;&gt;Gadfly.jl&lt;/a&gt; package for plotting and &lt;a href=&quot;https://github.com/davidanthoff/IterableTables.jl&quot;&gt;IterableTables.jl&lt;/a&gt; for converting &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;’s IndexedTable objects to DataFrames.DataFrame object, that’s because Gadfly.plot has no direct method for JuliaDB.IndexedTables.
+&lt;script src=&quot;https://gist.github.com/alstat/c8485c39992d82c9129ccd2e5e2745c2.js&quot;&gt;&lt;/script&gt;
+To plot, run the following:
+&lt;script src=&quot;https://gist.github.com/alstat/2d6322571f78ec940af76c6011ed9f1f.js&quot;&gt;&lt;/script&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/estadistika/assets/master/imgs/2018-6-8-p2.svg?sanitize=true&quot; /&gt;
+To find the number of planes and the number of flights that go to each possible destination, run:
+&lt;script src=&quot;https://gist.github.com/alstat/6a78c1dc19914326c39a4c47eecb7b8e.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Piping Multiple Operations&lt;/h3&gt;
+&lt;p&gt;For multiple operations, it is convenient to use piping and that is the reason why we have tools like &lt;a href=&quot;https://piever.github.io/JuliaDBMeta.jl/latest/&quot;&gt;JuliaDBMeta.jl&lt;/a&gt;. The following example using &lt;a href=&quot;https://cran.rstudio.com/web/packages/dplyr/vignettes/dplyr.html&quot;&gt;R’s dplyr&lt;/a&gt;:
+&lt;script src=&quot;https://gist.github.com/alstat/1ef5992f368ebdb4be5e8b95678e6021.js&quot;&gt;&lt;/script&gt;
+is equivalent to the following Julia code using &lt;a href=&quot;https://piever.github.io/JuliaDBMeta.jl/latest/&quot;&gt;JuliaDBMeta.jl&lt;/a&gt;:
+&lt;script src=&quot;https://gist.github.com/alstat/a91f46846a8bc6ef0ac2992293734f90.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 class=&quot;section&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;I’ve demonstrated how easy it is to use Julia for doing data wrangling, and I love it. In fact, there is a library that can query any table-like data structure in Julia, and is called &lt;a href=&quot;https://github.com/davidanthoff/Query.jl&quot;&gt;Query.jl&lt;/a&gt; (will definitely write a separate article for this in the future).&lt;/p&gt;
+
+&lt;p&gt;For more on &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;, watch the &lt;a href=&quot;https://www.youtube.com/watch?v=d5SzUh2_ono&quot;&gt;Youtube tutorial&lt;/a&gt;.&lt;/p&gt;
+</description>
+					  <pubDate>2018-06-08T12:00:00+08:00</pubDate>
+					  <link>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html</link>
+					  <guid isPermaLink="true">http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html</guid>
+				  </item>
+				
+			
+		 
+    
+  </channel>
+</rss>
