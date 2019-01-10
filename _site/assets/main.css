@@ -9,7 +9,7 @@
 @import url("https://fonts.googleapis.com/css?family=Amita|Galdeano|Offside");
 @import url("https://fonts.googleapis.com/css?family=Rochester");
 @import url("https://fonts.googleapis.com/css?family=Bungee+Outline");
-@media only screen and (min-width: 200px) and (max-width: 800px) {
+@media (min-width: 320px) and (max-width: 480px) {
   html body {
     margin: 0; }
     html body div.site-parent-container {
@@ -206,6 +206,784 @@
           margin-bottom: 40px; }
           html body div.site-parent-container-blog main.site-main-content div.home ul.post-list li h2 a.post-link {
             font-size: 22px; } }
+@media (min-width: 481px) and (max-width: 767px) {
+  html body {
+    margin: 0; }
+    html body div.site-parent-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto auto;
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      font-size: 14px !important;
+      text-align: left !important; }
+      html body div.site-parent-container header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn a {
+              color: white; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container main.site-main-content {
+        margin: 74px 10px 0 10px; }
+        html body div.site-parent-container main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container main.site-main-content div.home-mobile {
+          display: block !important;
+          margin-top: 40px;
+          margin-bottom: 40px; }
+          html body div.site-parent-container main.site-main-content div.home-mobile header.post-header h1.post-title {
+            font-size: 22px !important; }
+        html body div.site-parent-container main.site-main-content article.post {
+          margin-top: 40px; }
+          html body div.site-parent-container main.site-main-content article.post header.post-header h1.post-title {
+            font-size: 22px !important; }
+    html body div.site-parent-container-blog {
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      font-size: 14px !important;
+      text-align: left !important; }
+      html body div.site-parent-container-blog header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
+              font-size: 24px;
+              color: white; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container-blog header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container-blog main.site-main-content {
+        margin: 40px 10px 0 10px; }
+        html body div.site-parent-container-blog main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container-blog main.site-main-content article.post {
+          margin-top: 73px; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-header h1.post-title.title-more-margin {
+            font-size: 22px !important;
+            margin-top: 20px !important; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-content img {
+            width: 100%; }
+        html body div.site-parent-container-blog main.site-main-content div.home {
+          margin-top: 40px;
+          margin-bottom: 40px; }
+          html body div.site-parent-container-blog main.site-main-content div.home ul.post-list li h2 a.post-link {
+            font-size: 22px; } }
+@media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
+  html body {
+    margin: 0; }
+    html body div.site-parent-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto auto;
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      font-size: 14px !important;
+      text-align: left !important; }
+      html body div.site-parent-container header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn a {
+              color: white; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container main.site-main-content {
+        margin: 74px 65px 0 65px; }
+        html body div.site-parent-container main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container main.site-main-content div.home-mobile {
+          display: block !important;
+          margin-top: 40px;
+          margin-bottom: 40px; }
+          html body div.site-parent-container main.site-main-content div.home-mobile header.post-header h1.post-title {
+            font-size: 22px !important; }
+        html body div.site-parent-container main.site-main-content article.post {
+          margin-top: 40px; }
+          html body div.site-parent-container main.site-main-content article.post header.post-header h1.post-title {
+            font-size: 22px !important; }
+    html body div.site-parent-container-blog {
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      font-size: 14px !important;
+      text-align: left !important; }
+      html body div.site-parent-container-blog header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
+              font-size: 24px;
+              color: white; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container-blog header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container-blog main.site-main-content {
+        margin: 40px 65px 0 65px; }
+        html body div.site-parent-container-blog main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container-blog main.site-main-content article.post {
+          margin-top: 73px; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-header h1.post-title.title-more-margin {
+            font-size: 22px !important;
+            margin-top: 20px !important; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-content img {
+            width: 100%; }
+        html body div.site-parent-container-blog main.site-main-content div.home {
+          margin-top: 40px;
+          margin-bottom: 40px; }
+          html body div.site-parent-container-blog main.site-main-content div.home ul.post-list li h2 a.post-link {
+            font-size: 22px; } }
+@media (min-width: 768px) and (max-width: 1024px) {
+  html body {
+    margin: 0; }
+    html body div.site-parent-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto auto;
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      text-align: left !important; }
+      html body div.site-parent-container header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn a {
+              color: white; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container main.site-main-content {
+        margin: 74px 50px 0 50px; }
+        html body div.site-parent-container main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container main.site-main-content div.home-mobile {
+          display: block !important;
+          margin-top: 40px;
+          margin-bottom: 40px; }
+          html body div.site-parent-container main.site-main-content div.home-mobile header.post-header h1.post-title {
+            font-size: 22px !important; }
+        html body div.site-parent-container main.site-main-content article.post {
+          margin-top: 40px; }
+          html body div.site-parent-container main.site-main-content article.post header.post-header h1.post-title {
+            font-size: 22px !important; }
+    html body div.site-parent-container-blog {
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      text-align: left !important; }
+      html body div.site-parent-container-blog header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
+              font-size: 24px;
+              color: white; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container-blog header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container-blog main.site-main-content {
+        margin: 40px 50px 0 50px; }
+        html body div.site-parent-container-blog main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container-blog main.site-main-content article.post {
+          margin-top: 73px; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-header h1.post-title.title-more-margin {
+            margin-top: 20px !important; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-content img {
+            width: 100%; }
+        html body div.site-parent-container-blog main.site-main-content div.home {
+          margin-top: 40px;
+          margin-bottom: 40px; } }
+@media (min-width: 950px) and (max-width: 1024px) and (orientation: landscape) {
+  html body {
+    margin: 0; }
+    html body div.site-parent-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto auto;
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      text-align: left !important; }
+      html body div.site-parent-container header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn a {
+              color: white; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container main.site-main-content {
+        margin: 74px 150px 0 150px; }
+        html body div.site-parent-container main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container main.site-main-content div.home-mobile {
+          display: block !important;
+          margin-top: 40px;
+          margin-bottom: 40px; }
+          html body div.site-parent-container main.site-main-content div.home-mobile header.post-header h1.post-title {
+            font-size: 22px !important; }
+        html body div.site-parent-container main.site-main-content article.post {
+          margin-top: 40px; }
+          html body div.site-parent-container main.site-main-content article.post header.post-header h1.post-title {
+            font-size: 22px !important; }
+    html body div.site-parent-container-blog {
+      padding: 0;
+      margin: 0;
+      background-color: #ffffff;
+      width: 100% !important;
+      text-align: left !important; }
+      html body div.site-parent-container-blog header .site-sidebar {
+        background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
+        opacity: 0.97;
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        border-radius: 0px;
+        box-sizing: border-box;
+        height: 50px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+        z-index: 2; }
+        html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper {
+          margin: 3px 0;
+          text-align: right;
+          float: right;
+          display: table !important; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-name {
+            padding: 0px 10px 0px 0px;
+            margin: 0;
+            color: #cfcfcf;
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div#website-name-wrapper div#website-description {
+            padding-right: 10px;
+            display: block;
+            margin-top: -8px;
+            font-size: 13px;
+            font-family: 'Saira Condensed', sans-serif;
+            color: #b9b9b9; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown {
+          margin: 2px 0;
+          position: relative;
+          display: inline-block !important;
+          box-sizing: border-box; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
+            box-sizing: border-box;
+            background-color: #00000000;
+            padding: 10px;
+            border: none;
+            cursor: pointer; }
+            html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
+              font-size: 24px;
+              color: white; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f1e1e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a {
+            color: white !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content a:hover {
+            background-color: #161616;
+            color: white !important; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content {
+          display: block; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover div.dropdown-content a:hover {
+            font-weight: bold;
+            color: black; }
+        html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
+          background-color: #161616; }
+          html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
+            color: white; }
+        html body div.site-parent-container-blog header .site-sidebar nav {
+          display: none !important; }
+      html body div.site-parent-container-blog main.site-main-content {
+        margin: 40px 180px 0 180px; }
+        html body div.site-parent-container-blog main.site-main-content center.home {
+          display: none; }
+        html body div.site-parent-container-blog main.site-main-content article.post {
+          margin-top: 73px; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-header h1.post-title.title-more-margin {
+            margin-top: 20px !important; }
+          html body div.site-parent-container-blog main.site-main-content article.post div.post-content img {
+            width: 100%; }
+        html body div.site-parent-container-blog main.site-main-content div.home {
+          margin-top: 40px;
+          margin-bottom: 40px; } }
 html body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
@@ -500,5 +1278,3 @@ html body {
     html body main.site-main-content .tooltip:hover .tooltiptext {
       visibility: visible;
       opacity: 1; }
-
-/*# sourceMappingURL=main.css.map */

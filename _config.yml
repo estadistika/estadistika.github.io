@@ -34,7 +34,7 @@ mathjax: true
 plugins:
   - jekyll-feed
 
-paginate: 3
+paginate: 4
 paginate_path: "/blog/page:num/"
 
 # Exclude from processing.
