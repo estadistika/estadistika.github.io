@@ -15,6 +15,22 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+    equationNumbers: {
+        autoNumber: "AMS"
+    }
+    },
+    tex2jax: {
+    inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+    displayMath: [ ['$$','$$'] ],
+    processEscapes: true,
+    }
+});
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+  
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script> -->
   <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
   <script type="text/x-mathjax-config">
@@ -78,58 +94,88 @@
 
         <main class="site-main-content">
 
-            <div class="home">
-    
+            <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <!-- This loops through the paginated posts -->
-    <ul class="post-list">
-        
-        <li>
+    <div class="post-header">
+        <h1 class="post-title title-more-margin" itemprop="name headline">Julia: Introduction to Collaborative Filtering</h1>
+        <p class="post-meta">
+            <time datetime="2018-11-20T12:00:00+08:00" itemprop="datePublished">
+                 Nov 20, 2018
+            </time>
             
-            <span class="post-meta">Oct 14, 2018</span>
-            <h2>
-                <a class="post-link" href="/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression.html">Julia, Python, R: Introduction to Bayesian Linear Regression</a>
-            </h2>
+        </p>
+    </div>
 
-             
-             
-             
-                Reverend Thomas Bayes (see Bayes, 1763) is known to be the first to formulate the Bayes’ theorem, but the comprehensive mathematical formulation of this result is credited to the works of Laplace (1986). The Bayes’ theorem has the following form: \begin{equation} \label{eq:bayes-theorem} \mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})} \end{equation} where $\mathbf{w}$ is the... 
-            
-        </li>
-        
-        <li>
-            
-            <span class="post-meta">Jun 8, 2018</span>
-            <h2>
-                <a class="post-link" href="/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html">Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl</a>
-            </h2>
+    <div class="post-content" itemprop="articleBody">
+        <p>Recommendation system is one of the hottest</p>
 
-             
-             
-             
-                I’m a heavy user of Python’s pandas and R’s dplyr both at work and when I was taking my master’s degree. Hands down, both of these tools are very good at handling the data. So what about Julia? It’s a fairly new programming language that’s been around for almost 6... 
-            
-        </li>
-        
-    </ul>
-
-    <!-- Pagination links -->
+    </div>
     <div class="pagination">
+        <!-- 
+            <span class="tooltip">
+                <button class="previous-article" onclick='javascript:location.href="/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html"'>Previous Article</button>
+                <span class="tooltiptext">Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</span>
+            </span>
+         
         
-            <button onclick='javascript:location.href="/blog/"' class="previous"><i class="fas fa-chevron-circle-left" style="margin: 0 5px 0 0; font-size: 12.5px;"></i>Previous</button>
+            <span class="tooltip">
+                <button class="next-article" onclick='javascript:location.href="/data/analyses/wrangling/julia/programming/packages/2019/02/01/Julia-Intro-to-Metropolis-Hasting-using-Turingjl.html"'>Next Article</button>
+                <span class="tooltiptext">Julia: Introduction to Metropolis-Hasting and Gibbs Sampling</span>
+            </span>
+          -->
+
         
-
-        <span class="page_number ">Page: 2 / 2</span>
-
+            <!-- <div style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; padding-right: 5px;">
+                <a class="previous-article" href="/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</a>
+            </div> -->
+            <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 10px; padding-right: 5px; background-color: #000; color: #fff;">
+                <a class="previous-article" href="/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html" style="padding-left: 0px; background-color: initial;">Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</a>
+            </div>
+        
+        
+            
+            <!-- <div style="width: 150px">
+                <a class="next-article" href="/data/analyses/wrangling/julia/programming/packages/2019/02/01/Julia-Intro-to-Metropolis-Hasting-using-Turingjl.html">
+                    <div style="display: inline-block; text-align: left; width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 5px;">
+                            Julia: Introduction to Metropolis-Hasting and Gibbs Sampling 
+                    </div>
+                
+                    <div style="display: inline-block; text-align: right; width: 20px;">
+                        <i class="fas fa-chevron-circle-right" style="padding: 0 5px; font-size: 12.5px;"></i>
+                    </div>
+                </a>    
+            </div>                 -->
+            
+            <!-- <div style="display: inline-block; background-color:#000; color:#fff; width: 150px;"> -->
+                <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 5px; background-color: #000; color: #fff;">
+                    <a class="next-article" href="/data/analyses/wrangling/julia/programming/packages/2019/02/01/Julia-Intro-to-Metropolis-Hasting-using-Turingjl.html" style="padding-left: 0px; background-color: initial;">Julia: Introduction to Metropolis-Hasting and Gibbs Sampling</a>
+                </div>
+                <!-- <div style="display: inline-block; text-align: left;">
+                    <i class="fas fa-chevron-circle-right" style="margin-top: -10px; font-size: 12.5px;"></i>
+                </div> -->
+            <!-- </div> -->
         
         
     </div>
     <div class="rss-subscribe">
-        <button class="rss-subscribe-button" onclick ='javascript:location.href="/feed.xml"'><i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+        <button class="rss-subscribe-button" onclick='javascript:location.href="/feed.xml"'>
+            <i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
     </div>
+    <br>
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'estadistika'; // required: replace example with your forum shortname
 
-</div>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
 
         </main>
 

@@ -107,3 +107,26 @@ and
 \mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{\text{new}})\mathbb{P}(\mathbf{w}_{\text{new}})}{\mathbb{P}(\mathbf{x})}
 \end{equation}
 </div>
+and
+<div class="math">
+\begin{equation}
+\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{r-1})\mathbb{P}(\mathbf{w}_{r-1})}{\mathbb{P}(\mathbf{x})}.
+\end{equation}
+</div>
+Hence,
+<div class="math">
+\begin{equation}
+\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})}=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{\text{new}})\mathbb{P}(\mathbf{w}_{\text{new}})}{\mathbb{P}(\mathbf{x}|\mathbf{w}_{r-1})\mathbb{P}(\mathbf{w}_{r-1})}.
+\end{equation}
+</div>
+At this point, let's understand how the algorithm works step-by-step. The goal here is to randomly walk on a space, which contains an energy spread over its region (domain). Some space contains dense energy and some don't. So the goal of this random walk is to somehow direct ourselves towards a region of dense energy. However, we don't have any idea as to where this dense energy is, but for each step we can measure the energy. In order to do this, we need to propose a step with random direction. So we'll start with the initial step located at $\mathbf{w}_0$. Next, we propose a second step with random direction, either north, south, west, east, nort west, etc. that is, the next step can have all possible degrees for that direction. Note that this proposed random direction is governed by some energy (distribution) as well. Each proposed random direction is assessed, via an <i>acceptance function</i> given by $\alpha$(·) in line 4 of Algorithm 1. In order to accept the proposed direction for the next step, the ratio at line 4 must satisfy the following:
+<div class="math">
+\begin{equation}
+\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})}\gt 0\quad\text{and}\quad 
+\frac{\mathbb{G}(\mathbf{w}_{r-1}|\mathbf{x})}{\mathbb{G}(\mathbf{w}_{\text{new}}|\mathbf{x})}\lt 1.
+\end{equation}
+</div>
+ That is,
+ <span class="math">$\mathbf{w}_{\text{new}}$</span>
+  must have high probability/energy under $\mathbb{P}$(·) and under $\mathbb{G}$(·) compared to the previous location, which is given by 
+  <span class="math">$\mathbf{w}_{r-1}$</span>. So that, the first ratio is greater than 0 and second ratio is less than 1. Having this, the product of the two ratios will be big. Hence, taking the minimum between this value and 1, will be 1.

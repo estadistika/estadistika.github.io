@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang=" en ">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Estadistika</title>
+  <meta name="description" content="statistics, data science, machine/deep learning">
+  <meta name="theme-color" content="#1f1e1e">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="alternate" type="application/rss+xml" title="Estadistika" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Estadistika" href="/feed.julia.xml">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script> -->
+  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+  <!-- <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script src="/assets/functions.js"></script>
+</head>
+
+<body>
+    <div class="site-parent-container-blog">
+
+        <header>
+    <!-- <img src="/assets/bible-psalms.jpg"> -->
+    <div class="site-sidebar">
+        <div class="dropdown" style="display: none;">
+            <button class="dropbtn"><a class="fa fa-bars" style="font-size: 24px !important;"></a></button>
+            <div class="dropdown-content">
+                <a id="home-button" href="/index.html">Home</a>
+                <a href="/blog">Articles</a>
+            </div>
+        </div>
+        <div id="website-name-wrapper" style="display: none;">
+            <div id="website-name">
+                <a style="color: white;" href="/index.html">Estadistika</a>
+            </div>
+            <div id="website-description">
+                . . . statistics / machine learning / data science
+            </div>
+        </div>
+        <nav>
+            <button onclick='javascript:location.href="/"'>
+                <i class="fas fa-home"></i>
+            </button>
+            <button onclick='javascript:location.href="/blog"'>
+                <i class="fas fa-file-alt"></i>
+            </button>
+            <button onclick='javascript:location.href="/about"'>
+                <i class="fas fa-info"></i>
+            </button>
+            <!-- <button onclick='javascript:location.href="#"'>
+                <i class="fas fa-phone"></i>
+            </button> -->
+        </nav>
+    </div>
+</header>
+
+        <main class="site-main-content">
+
+            <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-header">
+        <h1 class="post-title title-more-margin" itemprop="name headline">Julia: Introduction to Metropolis-Hasting and Gibbs Sampling</h1>
+        <p class="post-meta">
+            <time datetime="2019-02-01T12:00:00+08:00" itemprop="datePublished">
+                 Feb 1, 2019
+            </time>
+            
+        </p>
+    </div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>A typical approach to modeling is done by minimizing the residual sum of squares (RSS) with respect to the weights of the model, which is equivalent to maximization of the likelihood of the parameters. This is the universal theme of the estimation procedure for most linear and nonlinear models, including the popular Neural Networks. In Statistics, this approach to estimation or learning is known as <b>Frequentist inference</b>, which assumes the objective parameters to be unknown but fixed. Hence, the estimated parameters return single solution for the given data. On the other hand, by assuming randomness governed by some distribution on the unknown parameters, returns multiple solution characterized by some distribution. In Statistics, this approach to estimation is called <b>Bayesian inference</b>.</p>
+
+<p>In my previous article, I introduced the concept of Bayesian inference for estimating the popular model, linear regression. The estimation as emphasized in the article is centered around the Bayes’ theorem defined below:</p>
+<div class="math">
+\begin{equation}
+\label{eq:bayes-theorem}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})}
+\end{equation}
+</div>
+<p>where $\mathbb{P}(\mathbf{w}|\mathbf{y})$ is the posterior (or <em>a posteriori</em>) distribution, $\mathbb{P}(\mathbf{w})$ is the prior (or <em>a priori</em>) distribution, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood of the data, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. While Equation (\ref{eq:bayes-theorem}) is simple in its form, theoretically, it can be complex especially for interesting models. The problem lies in the denominator of Equation (\ref{eq:bayes-theorem}), which is the normalizing factor and is solved by integrating all possible values of the parameters on the likelihood of the data, as seen in Equation (\ref{eq:bayes-theorem-expanded}). This is problematic especially for large number of parameters that lead to high dimensional integration.</p>
+<div class="math">
+\begin{equation}
+\label{eq:bayes-theorem-expanded}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})} = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\int_{\mathbf{w}}\mathbb{P}(\mathbf{y}|\mathbf{w})\operatorname{d}\mathbf{w}}
+\end{equation}
+</div>
+<p>Hence, researchers on Bayesian inference mostly worked on algorithms that tries to address the above problem, and one popular solution is to do it computationally via a family of algorithms called Markov Chain Monte Carlo (MCMC).</p>
+<h3>Markov Chain Monte Carlo</h3>
+<p>MCMC is a family of algorithms that is based on sampling. These algorithms work by taking samples from the posterior distribution, via a set of procedures that avoids having to deal with the denominator of the Bayes’ theorem. The goal of the sampling is of course to converge to a stationary distribution, which should be the <em>a posteriori</em>.</p>
+
+<h3>Metropolis-Hasting</h3>
+<p>The idea of the MH algorithm is to randomly walk in the support of the target density such that the random steps are governed by the proposal distribution $\mathbb{G}$(·). The assumption is that the posterior distribution has no closed-form solution, but the kernel, which is the unnormalized form of the target density is easy to evaluate. This is the advantage of the MH algorithm where the <i>a posteriori</i> is not necessarily be normalized — often the difficulty in simplifying the model evidence of the Bayes’ rule. Let $\mathbb{P}$(·) be the posterior distribution and $\mathbf{x}$ be the data, then MH has the following iterative process detailed in Algorithm 1.</p>
+<table class="algorithm">
+    <thead>
+        <th colspan="2"><b>Algorithm 1: Metropolis-Hasting</b></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 1%;">1:</td><td style="width: 99%;">Initialize $\theta$, $\mathbf{w}_r \sim \mathbb{G}(\theta), r = 0$</td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">2:</td><td style="width: 99%;">
+                <b>for</b> $r\,\in\,\{1,\cdots, r_{\text{max}}\}$ <b>do</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">3:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Propose: $\mathbf{w}_{\text{new}}\sim\mathbb{G}(\mathbf{w}_{r-1})$
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">4:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Acceptance: $\alpha(\mathbf{w}_{\text{new}}|\mathbf{w}_{r-1})\triangleq\text{min}\left\{1, \frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})\mathbb{G}(\mathbf{w}_{r-1})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})\mathbb{G}(\mathbf{w}_{\text{new}})}\right\}$
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">5:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Draw $x\sim\text{Unif}(0, 1)$
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">6:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <b>if</b> $x &lt; \alpha(\mathbf{w}_{\text{new}}|\mathbf{w}_{r-1})$ <b>then</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">7:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                $\mathbf{w}_r\triangleq\mathbf{w}_{\text{new}}$
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">8:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <b>else</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">9:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                $\mathbf{w}_r\triangleq\mathbf{w}_{r-1}$
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">10:</td><td style="width: 99%;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <b>end if</b>        
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 1%;">11:</td><td style="width: 99%;">
+                <b>end for</b>        
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>The line 4 of the Algorithm 1 is the only place where we observed the <i>a posteriori</i>, $\mathbb{P}$(·). At first glance, it is apparent that these posteriors, 
+<span>$\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})$</span> 
+and 
+<span>$\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})$</span>, need not be normalized since the denominators will simply cancel-out. That is,</p>
+<div class="math">
+\begin{equation}
+\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{\text{new}})\mathbb{P}(\mathbf{w}_{\text{new}})}{\mathbb{P}(\mathbf{x})}
+\end{equation}
+</div>
+<p>and</p>
+<div class="math">
+\begin{equation}
+\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{r-1})\mathbb{P}(\mathbf{w}_{r-1})}{\mathbb{P}(\mathbf{x})}.
+\end{equation}
+</div>
+<p>Hence,</p>
+<div class="math">
+\begin{equation}
+\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})}=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{\text{new}})\mathbb{P}(\mathbf{w}_{\text{new}})}{\mathbb{P}(\mathbf{x}|\mathbf{w}_{r-1})\mathbb{P}(\mathbf{w}_{r-1})}.
+\end{equation}
+</div>
+<p>At this point, let’s understand how the algorithm works step-by-step. The goal here is to randomly walk on a space, which contains an energy spread over its region (domain). Some space contains dense energy and some don’t. So the goal of this random walk is to somehow direct ourselves towards a region of dense energy. However, we don’t have any idea as to where this dense energy is, but for each step we can measure the energy. In order to do this, we need to propose a step with random direction. So we’ll start with the initial step located at $\mathbf{w}_0$. Next, we propose a second step with random direction, either north, south, west, east, nort west, etc. that is, the next step can have all possible degrees for that direction. Note that this proposed random direction is governed by some energy (distribution) as well. Each proposed random direction is assessed, via an <i>acceptance function</i> given by $\alpha$(·) in line 4 of Algorithm 1. In order to accept the proposed direction for the next step, the ratio at line 4 must satisfy the following:</p>
+<div class="math">
+\begin{equation}
+\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})}\gt 0\quad\text{and}\quad 
+\frac{\mathbb{G}(\mathbf{w}_{r-1}|\mathbf{x})}{\mathbb{G}(\mathbf{w}_{\text{new}}|\mathbf{x})}\lt 1.
+\end{equation}
+</div>
+<p>That is,
+ <span class="math">$\mathbf{w}_{\text{new}}$</span>
+  must have high probability/energy under $\mathbb{P}$(·) and under $\mathbb{G}$(·) compared to the previous location, which is given by 
+  <span class="math">$\mathbf{w}_{r-1}$</span>. So that, the first ratio is greater than 0 and second ratio is less than 1. Having this, the product of the two ratios will be big. Hence, taking the minimum between this value and 1, will be 1.</p>
+
+    </div>
+    <div class="pagination">
+        <!-- 
+            <span class="tooltip">
+                <button class="previous-article" onclick='javascript:location.href="/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html"'>Previous Article</button>
+                <span class="tooltiptext">Julia: Introduction to Collaborative Filtering</span>
+            </span>
+         
+          -->
+
+        
+            <!-- <div style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; padding-right: 5px;">
+                <a class="previous-article" href="/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> Julia: Introduction to Collaborative Filtering</a>
+            </div> -->
+            <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 10px; padding-right: 5px; background-color: #000; color: #fff;">
+                <a class="previous-article" href="/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html" style="padding-left: 0px; background-color: initial;">Julia: Introduction to Collaborative Filtering</a>
+            </div>
+        
+        
+    </div>
+    <div class="rss-subscribe">
+        <button class="rss-subscribe-button" onclick='javascript:location.href="/feed.xml"'>
+            <i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+    </div>
+    <br>
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'estadistika'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+
+        </main>
+
+        <!-- <footer class="site-footer">
+    
+      <div class="wrapper">
+    
+        <h2 class="footer-heading">Estadistika</h2>
+    
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li>
+                
+                  Estadistika
+                
+                </li>
+                
+            </ul>
+          </div>
+    
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list">
+              
+              <li>
+                <a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">jekyll</span></a>
+
+              </li>
+              
+    
+              
+              <li>
+                <a href="https://twitter.com/jekyllrb"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">jekyllrb</span></a>
+
+              </li>
+              
+            </ul>
+          </div>
+    
+          <div class="footer-col footer-col-3">
+            <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+          </div>
+        </div>
+    
+      </div>
+    
+    </footer>
+     -->
+
+    </div>
+</body>
+
+</html>

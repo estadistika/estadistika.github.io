@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-12-01T21:39:43+08:00</updated><id>http://localhost:4000/</id><title type="html">Estadistika</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Julia: Introduction to Collaborative Filtering</title><link href="http://localhost:4000/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html" rel="alternate" type="text/html" title="Julia: Introduction to Collaborative Filtering" /><published>2018-11-20T12:00:00+08:00</published><updated>2018-11-20T12:00:00+08:00</updated><id>http://localhost:4000/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering</id><content type="html" xml:base="http://localhost:4000/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html">&lt;p&gt;Recommendation system is one of the hottest&lt;/p&gt;</content><author><name></name></author><summary type="html">Recommendation system is one of the hottest</summary></entry><entry><title type="html">Julia: Introduction to Web Scraping (PHIVOLCS’ Seismic Events)</title><link href="http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html" rel="alternate" type="text/html" title="Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)" /><published>2018-10-30T12:00:00+08:00</published><updated>2018-10-30T12:00:00+08:00</updated><id>http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia</id><content type="html" xml:base="http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html">&lt;p&gt;Data nowadays are almost everywhere, often stored in as simple as traditional log books, to as complex as multi-connected-databases. Efficient collection of these datasets is crucial for analytics since data processing takes almost 50% of the overall workflow. An example where manual data collection can be automated is in the case of datasets published in the website, where providers are usually government agencies. For example in the Philippines, there is a website dedicated to &lt;a href=&quot;http://openstat.psa.gov.ph/&quot; target=&quot;_blank&quot;&gt;Open Stat&lt;/a&gt; initiated by the &lt;a href=&quot;https://psa.gov.ph/&quot; target=&quot;_blank&quot;&gt;Philippine Statistics Authority (PSA)&lt;/a&gt;. The site hoards public datasets for researchers to use and are well prepared in CSV format, so consumers can simply download the file. Unfortunately, for some agencies this feature is not yet available. That is, users need to either copy-paste the data from the website, or request it to the agency directly (this also takes time). A good example of this is the seismic events of the &lt;a href=&quot;https://www.phivolcs.dost.gov.ph/&quot; target=&quot;_blank&quot;&gt;Philippine Institute of Volcanology and Seismology (PHIVOLCS)&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-11T15:46:14+08:00</updated><id>http://localhost:4000/</id><title type="html">Estadistika</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Julia: Introduction to Metropolis-Hasting and Gibbs Sampling</title><link href="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2019/02/01/Julia-Intro-to-Metropolis-Hasting-using-Turingjl.html" rel="alternate" type="text/html" title="Julia: Introduction to Metropolis-Hasting and Gibbs Sampling" /><published>2019-02-01T12:00:00+08:00</published><updated>2019-02-01T12:00:00+08:00</updated><id>http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2019/02/01/Julia-Intro-to-Metropolis-Hasting-using-Turingjl</id><content type="html" xml:base="http://localhost:4000/data/analyses/wrangling/julia/programming/packages/2019/02/01/Julia-Intro-to-Metropolis-Hasting-using-Turingjl.html">&lt;p&gt;A typical approach to modeling is done by minimizing the residual sum of squares (RSS) with respect to the weights of the model, which is equivalent to maximization of the likelihood of the parameters. This is the universal theme of the estimation procedure for most linear and nonlinear models, including the popular Neural Networks. In Statistics, this approach to estimation or learning is known as &lt;b&gt;Frequentist inference&lt;/b&gt;, which assumes the objective parameters to be unknown but fixed. Hence, the estimated parameters return single solution for the given data. On the other hand, by assuming randomness governed by some distribution on the unknown parameters, returns multiple solution characterized by some distribution. In Statistics, this approach to estimation is called &lt;b&gt;Bayesian inference&lt;/b&gt;.&lt;/p&gt;
+
+&lt;p&gt;In my previous article, I introduced the concept of Bayesian inference for estimating the popular model, linear regression. The estimation as emphasized in the article is centered around the Bayes’ theorem defined below:&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\label{eq:bayes-theorem}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})}
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;where $\mathbb{P}(\mathbf{w}|\mathbf{y})$ is the posterior (or &lt;em&gt;a posteriori&lt;/em&gt;) distribution, $\mathbb{P}(\mathbf{w})$ is the prior (or &lt;em&gt;a priori&lt;/em&gt;) distribution, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the likelihood of the data, and $\mathbb{P}(\mathbf{y})$ is the normalizing factor. While Equation (\ref{eq:bayes-theorem}) is simple in its form, theoretically, it can be complex especially for interesting models. The problem lies in the denominator of Equation (\ref{eq:bayes-theorem}), which is the normalizing factor and is solved by integrating all possible values of the parameters on the likelihood of the data, as seen in Equation (\ref{eq:bayes-theorem-expanded}). This is problematic especially for large number of parameters that lead to high dimensional integration.&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\label{eq:bayes-theorem-expanded}
+\mathbb{P}(\mathbf{w}|\mathbf{y}) = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})} = \frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\int_{\mathbf{w}}\mathbb{P}(\mathbf{y}|\mathbf{w})\operatorname{d}\mathbf{w}}
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;Hence, researchers on Bayesian inference mostly worked on algorithms that tries to address the above problem, and one popular solution is to do it computationally via a family of algorithms called Markov Chain Monte Carlo (MCMC).&lt;/p&gt;
+&lt;h3&gt;Markov Chain Monte Carlo&lt;/h3&gt;
+&lt;p&gt;MCMC is a family of algorithms that is based on sampling. These algorithms work by taking samples from the posterior distribution, via a set of procedures that avoids having to deal with the denominator of the Bayes’ theorem. The goal of the sampling is of course to converge to a stationary distribution, which should be the &lt;em&gt;a posteriori&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Metropolis-Hasting&lt;/h3&gt;
+&lt;p&gt;The idea of the MH algorithm is to randomly walk in the support of the target density such that the random steps are governed by the proposal distribution $\mathbb{G}$(·). The assumption is that the posterior distribution has no closed-form solution, but the kernel, which is the unnormalized form of the target density is easy to evaluate. This is the advantage of the MH algorithm where the &lt;i&gt;a posteriori&lt;/i&gt; is not necessarily be normalized — often the difficulty in simplifying the model evidence of the Bayes’ rule. Let $\mathbb{P}$(·) be the posterior distribution and $\mathbf{x}$ be the data, then MH has the following iterative process detailed in Algorithm 1.&lt;/p&gt;
+&lt;table class=&quot;algorithm&quot;&gt;
+    &lt;thead&gt;
+        &lt;th colspan=&quot;2&quot;&gt;&lt;b&gt;Algorithm 1: Metropolis-Hasting&lt;/b&gt;&lt;/th&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;1:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;Initialize $\theta$, $\mathbf{w}_r \sim \mathbb{G}(\theta), r = 0$&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;2:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &lt;b&gt;for&lt;/b&gt; $r\,\in\,\{1,\cdots, r_{\text{max}}\}$ &lt;b&gt;do&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;3:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                Propose: $\mathbf{w}_{\text{new}}\sim\mathbb{G}(\mathbf{w}_{r-1})$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;4:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                Acceptance: $\alpha(\mathbf{w}_{\text{new}}|\mathbf{w}_{r-1})\triangleq\text{min}\left\{1, \frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})\mathbb{G}(\mathbf{w}_{r-1})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})\mathbb{G}(\mathbf{w}_{\text{new}})}\right\}$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;5:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                Draw $x\sim\text{Unif}(0, 1)$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;6:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;b&gt;if&lt;/b&gt; $x &amp;lt; \alpha(\mathbf{w}_{\text{new}}|\mathbf{w}_{r-1})$ &lt;b&gt;then&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;7:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                $\mathbf{w}_r\triangleq\mathbf{w}_{\text{new}}$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;8:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;b&gt;else&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;9:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                $\mathbf{w}_r\triangleq\mathbf{w}_{r-1}$
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;10:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                &lt;b&gt;end if&lt;/b&gt;        
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 1%;&quot;&gt;11:&lt;/td&gt;&lt;td style=&quot;width: 99%;&quot;&gt;
+                &lt;b&gt;end for&lt;/b&gt;        
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The line 4 of the Algorithm 1 is the only place where we observed the &lt;i&gt;a posteriori&lt;/i&gt;, $\mathbb{P}$(·). At first glance, it is apparent that these posteriors, 
+&lt;span&gt;$\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})$&lt;/span&gt; 
+and 
+&lt;span&gt;$\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})$&lt;/span&gt;, need not be normalized since the denominators will simply cancel-out. That is,&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{\text{new}})\mathbb{P}(\mathbf{w}_{\text{new}})}{\mathbb{P}(\mathbf{x})}
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{r-1})\mathbb{P}(\mathbf{w}_{r-1})}{\mathbb{P}(\mathbf{x})}.
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;Hence,&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})}=\frac{\mathbb{P}(\mathbf{x}|\mathbf{w}_{\text{new}})\mathbb{P}(\mathbf{w}_{\text{new}})}{\mathbb{P}(\mathbf{x}|\mathbf{w}_{r-1})\mathbb{P}(\mathbf{w}_{r-1})}.
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;At this point, let’s understand how the algorithm works step-by-step. The goal here is to randomly walk on a space, which contains an energy spread over its region (domain). Some space contains dense energy and some don’t. So the goal of this random walk is to somehow direct ourselves towards a region of dense energy. However, we don’t have any idea as to where this dense energy is, but for each step we can measure the energy. In order to do this, we need to propose a step with random direction. So we’ll start with the initial step located at $\mathbf{w}_0$. Next, we propose a second step with random direction, either north, south, west, east, nort west, etc. that is, the next step can have all possible degrees for that direction. Note that this proposed random direction is governed by some energy (distribution) as well. Each proposed random direction is assessed, via an &lt;i&gt;acceptance function&lt;/i&gt; given by $\alpha$(·) in line 4 of Algorithm 1. In order to accept the proposed direction for the next step, the ratio at line 4 must satisfy the following:&lt;/p&gt;
+&lt;div class=&quot;math&quot;&gt;
+\begin{equation}
+\frac{\mathbb{P}(\mathbf{w}_{\text{new}}|\mathbf{x})}{\mathbb{P}(\mathbf{w}_{r-1}|\mathbf{x})}\gt 0\quad\text{and}\quad 
+\frac{\mathbb{G}(\mathbf{w}_{r-1}|\mathbf{x})}{\mathbb{G}(\mathbf{w}_{\text{new}}|\mathbf{x})}\lt 1.
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;That is,
+ &lt;span class=&quot;math&quot;&gt;$\mathbf{w}_{\text{new}}$&lt;/span&gt;
+  must have high probability/energy under $\mathbb{P}$(·) and under $\mathbb{G}$(·) compared to the previous location, which is given by 
+  &lt;span class=&quot;math&quot;&gt;$\mathbf{w}_{r-1}$&lt;/span&gt;. So that, the first ratio is greater than 0 and second ratio is less than 1. Having this, the product of the two ratios will be big. Hence, taking the minimum between this value and 1, will be 1.&lt;/p&gt;</content><author><name></name></author><category term="julia" /><summary type="html">A typical approach to modeling is done by minimizing the residual sum of squares (RSS) with respect to the weights of the model, which is equivalent to maximization of the likelihood of the parameters. This is the universal theme of the estimation procedure for most linear and nonlinear models, including the popular Neural Networks. In Statistics, this approach to estimation or learning is known as Frequentist inference, which assumes the objective parameters to be unknown but fixed. Hence, the estimated parameters return single solution for the given data. On the other hand, by assuming randomness governed by some distribution on the unknown parameters, returns multiple solution characterized by some distribution. In Statistics, this approach to estimation is called Bayesian inference.</summary></entry><entry><title type="html">Julia: Introduction to Collaborative Filtering</title><link href="http://localhost:4000/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html" rel="alternate" type="text/html" title="Julia: Introduction to Collaborative Filtering" /><published>2018-11-20T12:00:00+08:00</published><updated>2018-11-20T12:00:00+08:00</updated><id>http://localhost:4000/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering</id><content type="html" xml:base="http://localhost:4000/julia/collaborative/filtering/2018/11/20/Julia-Introduction-to-Collaborative-Filtering.html">&lt;p&gt;Recommendation system is one of the hottest&lt;/p&gt;</content><author><name></name></author><summary type="html">Recommendation system is one of the hottest</summary></entry><entry><title type="html">Julia: Introduction to Web Scraping (PHIVOLCS’ Seismic Events)</title><link href="http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html" rel="alternate" type="text/html" title="Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)" /><published>2018-10-30T12:00:00+08:00</published><updated>2018-10-30T12:00:00+08:00</updated><id>http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia</id><content type="html" xml:base="http://localhost:4000/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html">&lt;p&gt;Data nowadays are almost everywhere, often stored in as simple as traditional log books, to as complex as multi-connected-databases. Efficient collection of these datasets is crucial for analytics since data processing takes almost 50% of the overall workflow. An example where manual data collection can be automated is in the case of datasets published in the website, where providers are usually government agencies. For example in the Philippines, there is a website dedicated to &lt;a href=&quot;http://openstat.psa.gov.ph/&quot; target=&quot;_blank&quot;&gt;Open Stat&lt;/a&gt; initiated by the &lt;a href=&quot;https://psa.gov.ph/&quot; target=&quot;_blank&quot;&gt;Philippine Statistics Authority (PSA)&lt;/a&gt;. The site hoards public datasets for researchers to use and are well prepared in CSV format, so consumers can simply download the file. Unfortunately, for some agencies this feature is not yet available. That is, users need to either copy-paste the data from the website, or request it to the agency directly (this also takes time). A good example of this is the seismic events of the &lt;a href=&quot;https://www.phivolcs.dost.gov.ph/&quot; target=&quot;_blank&quot;&gt;Philippine Institute of Volcanology and Seismology (PHIVOLCS)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Data encoded in HTML can be parsed and saved into formats that’s workable for doing analyses (e.g. CSV, TSV, etc.). The task of harvesting and parsing data from the web is called &lt;strong&gt;web scraping&lt;/strong&gt;, and PHIVOLCS’ &lt;a href=&quot;https://www.phivolcs.dost.gov.ph/html/update_SOEPD/EQLatest.html&quot; target=&quot;_blank&quot;&gt;Latest Seismic Events&lt;/a&gt; is a good playground for beginners. There are several tutorials available especially for Python (see &lt;a href=&quot;https://www.dataquest.io/blog/web-scraping-tutorial-python/&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;) and R (see &lt;a href=&quot;https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/&quot; target=&quot;_blank&quot;&gt;this&lt;/a&gt;), but not much for Julia. Hence, this article is primarily for Julia users. However, this work introduces web tools as well – how to use it for inspecting the components of the website – which can be useful for non-Julia users.&lt;/p&gt;
 

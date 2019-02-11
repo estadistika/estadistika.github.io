@@ -348,14 +348,16 @@ html {
             border-collapse:collapse;
 
             thead {
-                background-color: $sb-bg-color;
+                background-color: white;
                 padding: 5px; 
 
-                td {
+                th {
                     font-family: $font-post-meta; 
-                    color: $sb-nav-color;
+                    // color: black;
                     padding: 5px; 
                     text-align: center;
+                    border-top: 2px solid black;
+                    border-bottom: 2px solid black;
                 }
             }
 
@@ -368,7 +370,22 @@ html {
                     padding: 5px 10px;
                     border-bottom: 1px solid rgba(0,0,0,.05);
                 }
-                
+            }
+        }
+
+        table.algorithm {
+            tbody {
+                background-color: white;
+
+                td {
+                    border-bottom-width: 0px;
+                }
+
+                tr:last-child {
+                    td {
+                        border-bottom: 2px solid black;
+                    }
+                }
             }
         }
 
