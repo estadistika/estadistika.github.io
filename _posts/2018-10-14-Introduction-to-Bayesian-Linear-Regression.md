@@ -120,7 +120,7 @@ Execute the above functions and return the necessary values as follows:
 </div>
 Finally, plot the fitted lines whose weights are samples from the <i>a posteriori</i>. The red line in the plot below is the Maximum <i>A Posteriori</i> (MAP) of the parameter of interest. Note that, however, the code provided for the animated plot below is Julia. Python and R users can use <a href="https://matplotlib.org/index.html" target="_blank">matplotlib.pyplot</a> (Julia's Plots backend) and <a href="https://github.com/thomasp85/gganimate" target="_blank">gganimate</a>, respectively.
 <script src="https://gist.github.com/alstat/023ff855025d0da2fa50b7923b834fd8.js"></script>
-<img src="https://raw.githubusercontent.com/estadistika/assets/master/imgs/2018-10-10-p1-c.gif?sanitize=true">
+<img src="http://drive.google.com/uc?export=view&id=1XhKHztWM4OpxL1t_KzPxeU1kd40czUvK">
 
 ### End Note
 There are many libraries available for Bayesian modeling, for Julia we have: <a href="https://github.com/JuliaStats/Klara.jl" target="_blank">Klara.jl</a>, <a href="https://github.com/brian-j-smith/Mamba.jl" target="_blank">Mamba.jl</a>, <a href="https://github.com/goedman/Stan.jl" target="_blank">Stan.jl</a>, <a href="https://github.com/TuringLang/Turing.jl" target="_blank">Turing.jl</a> and <a href="https://juliaobserver.com/categories/Bayesian" target="_blank">more related</a>;
