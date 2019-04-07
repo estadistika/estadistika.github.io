@@ -40,14 +40,14 @@ To start with, the following code will download the frontend source code of the 
 Extract the HTML source code and parsed it as follows:
 <script src="https://gist.github.com/alstat/deb9ef2abe52af58fc03be63f0482ccf.js"></script>
 Now to extract the header of the HTML table, use the Web Developer Tools for preliminary inspection on the components of the website. As shown in the screenshot below, the header of the table is enclosed inside the `p` tag of the `td`. Further, the `p` tag is of class `auto-style33`, which can be accessed via CSS selector by simply prefixing it with `.`, i.e. `.auto-style33`.
-<img src="https://raw.githubusercontent.com/estadistika/assets/master/imgs/firefox-inspector.png?sanitize=true">
+<img src="http://drive.google.com/uc?export=view&id=1LVNFZRHdT-o-vX-0dLiBMiVv3872LXpE">
 <script src="https://gist.github.com/alstat/63c8855a48c9a33669c9bdd4d3ae2e9a.js"></script>
 `qres` contains the HTML tags that matched the CSS selector's query. The result is further cleaned by removing the tabs, spaces and line breaks via <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">Regular Expressions</a>, and is done as follows:
 <script src="https://gist.github.com/alstat/94e5af21b303b995d93af24a8ae69841.js"></script>
 Having the header names, next is to extract the data from the HTML table. Upon inspection, the `td`s containing the data next to the header rows seem to have the following classes (see screenshot below): `auto-style21` for first column (Date-Time), `auto-style81` for second column (Latitude), `auto-style80` for third and fourth columns (Longitude and Depth), `auto-style74` for fifth column (Magnitude), and `auto-style79` for sixth column (Location). Unfortunately, this is not consistent across rows (`tr`s), and is therefore best not to use it with <a href="https://github.com/Algocircle/Cascadia.jl" target="_blank">Cascadia.jl</a>. Instead, use <a href="https://github.com/JuliaWeb/Gumbo.jl" target="_blank">Gumbo.jl</a> to navigate down the hierarchy of the <a href="" target="_blank">Document Object Model</a> of the HTML.
-<img src="https://raw.githubusercontent.com/estadistika/assets/master/imgs/firefox-inspector-data.png?sanitize=true">
+<img src="http://drive.google.com/uc?export=view&id=1XEkudOAB7o4Cix5CY4tqSJe2J0BpoJ_G">
 Starting with the `table` tag which is of class `.MsoNormalTable` (see screenshot below), the extraction proceeds down to `tbody` then to `tr` and finally to `td`.
-<img src="https://raw.githubusercontent.com/estadistika/assets/master/imgs/firefox-inspector-table.png?sanitize=true">
+<img src="http://drive.google.com/uc?export=view&id=1x3N58LE_5ENyzMbyyhrx8Zrlgp40EBNI">
 The following code describes how parsing is done, read the comments:
 <script src="https://gist.github.com/alstat/b4fbfe5dc8330ef16ad1abc05d44056f.js"></script>
 
