@@ -1136,7 +1136,8 @@ html body {
       font-family: "Aubrey", cursive;
       font-size: 28px;
       text-decoration: none;
-      color: #483c32; }
+      color: #483c32;
+      line-height: 1.1; }
     html body main.site-main-content code {
       padding: 2px 4px;
       font-family: 'Ubuntu Mono', monospace;
