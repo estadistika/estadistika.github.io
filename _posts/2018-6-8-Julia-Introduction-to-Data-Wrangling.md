@@ -4,6 +4,7 @@ title:  "Julia: Data Wrangling using JuliaDB.jl and JuliaDBMeta.jl"
 date:   2018-6-8 12:00:00 +0800
 categories: Data Analyses Wrangling Julia Programming Packages
 comments: true
+author: Al-Ahmadgaid Asaad
 tag: julia
 ---
 I'm a heavy user of Python's [pandas](https://pandas.pydata.org/) and R's [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) both at work and when I was taking my master's degree. Hands down, both of these tools are very good at handling the data. So what about Julia? It's a fairly new programming language that's been around for almost 6 years already with a very active community. If you have no idea, I encourage you to visit [Julialang.org](http://julialang.org/). In summary, it's a programming language that walks like a [Python](https://www.python.org/), but runs like a [C](https://en.wikipedia.org/wiki/C_%28programming_language%29). 

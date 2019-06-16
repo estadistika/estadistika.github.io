@@ -1148,7 +1148,7 @@ html body {
       border-radius: 4px; }
     html body main.site-main-content .title-more-margin {
       margin: 50px 0 0 0; }
-    html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination {
+    html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination, html body main.site-main-content span.author-name {
       font-family: "Saira Condensed", sans-serif;
       font-size: 16px; }
     html body main.site-main-content div.pagination {
@@ -1279,5 +1279,3 @@ html body {
     html body main.site-main-content .tooltip:hover .tooltiptext {
       visibility: visible;
       opacity: 1; }
-
-/*# sourceMappingURL=main.css.map */
