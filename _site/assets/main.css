@@ -1147,7 +1147,8 @@ html body {
       background-color: #f9f2f4;
       border-radius: 4px; }
     html body main.site-main-content .title-more-margin {
-      margin: 50px 0 0 0; }
+      margin: 50px 0 0 0;
+      text-align: left; }
     html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination {
       font-family: "Saira Condensed", sans-serif;
       font-size: 16px; }
