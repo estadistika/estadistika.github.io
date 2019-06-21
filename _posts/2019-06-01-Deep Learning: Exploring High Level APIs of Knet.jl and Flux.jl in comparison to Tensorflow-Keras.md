@@ -114,7 +114,7 @@ The codes below specifies the model:
 Coming from TensorFlow-Keras, Flux.jl provides Keras-like API for model specification, with <code>Flux.Chain</code> as the counterpart for Keras' <code>Sequential</code>. This is different from Knet.jl where the highest level API you can get are the nuts and bolts for constructing the layers. Having said, however, <code>Flux.Dense</code> is defined almost exactly as the Dense struct of the Knet.jl code above (check the source code <a href="https://github.com/FluxML/Flux.jl/blob/1902c0e7c568a1bdb0cda7dca4d69f3896c023c7/src/layers/basic.jl#L82-L100">here</a>). In addition, since both Flux.jl and Knet.jl are written purely in Julia, makes the source codes under the hood accessible to beginners. Thus, giving the user a full understanding of not just the code, but also the math. Check the screenshot below for the distribution of the file types in the Github repos of the three frameworks:
 <img src="http://drive.google.com/uc?export=view&id=1hmWiYy6C01q_X8HGl5xDSjQClJz5H7Ym">
 <img src="http://drive.google.com/uc?export=view&id=17VAf7wOT9Ej47OZQu9B6o4kOCCs4G_tw">
-<img src="http://drive.google.com/uc?export=view&id=1ZJn6gKATLLGgnQlQFrOItbWljs_EOzn9">
+<img src="http://drive.google.com/uc?export=view&id=18RmeurpIX0uzBP9sKwiN24QI_VVLicYF">
 From the above figure, it's clear that Flux.jl is 100% Julia. On the other hand, Knet.jl while not apparent is actually 100% Julia as well. The 41.4% of Jupyter Notebooks and other small percentages account for the tutorials, tests and examples and not the <a href="https://github.com/denizyuret/Knet.jl/tree/master/src">source codes</a>.
 <!-- There are several -->
 <!-- <img src="http://drive.google.com/uc?export=view&id=1HKlC04oVF_3ggraWE7qnMNvW-Atxc89N"> -->
