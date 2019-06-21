@@ -8,7 +8,7 @@ Data Scientist at <a href="http://neuralmechanics.net/" target="_blank">NeuralMe
 (see my <a href="https://www.linkedin.com/in/al-ahmadgaid-asaad-68613a44/" target="_blank">LinkedIn profile</a>) --
 and I'm the author. Statistician by training with <a href="http://www.stat.upd.edu.ph/" target="_blank">MSc in Statistics</a> from University of the Philippines Diliman. My research interest is in the field of Bayesian inference for big data and its application to deep learning models, both for computer vision and natural language processing. I worked with Dr. Magadia on my thesis entitled *Bayesian Autoregressive Distributed Lag* via *Stochastic Gradient Hamiltonian Monte Carlo*.
 
-Estadistika will serve as my notes for possible research I want to pursue in the future, and its main purpose is to share my thoughts about Data Science, Machine/Deep Learning, and Artificial Intelligence with emphasis on the use of Statistics. Needless to say, everything I post here represents my views and not the opinions of my employer.
+Estadistika will serve as my notes for possible research I want to pursue in the future, and its main purpose is to share my thoughts about Data Science, Machine/Deep Learning, and Artificial Intelligence. Needless to say, everything I post here represents my views and not the opinions of my employer.
 
 Lastly, I am the owner of <a href="http://alstatr.blogspot.com/" target="_blank">Analysis with Programming</a> website, which I maintained from 2013 to 2017, and I made Estadistika as a successor to it. You can contact me at 
 
