@@ -497,7 +497,7 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 65px 0 65px; }
-        html body div.site-parent-container main.site-main-content .gist {
+        html body div.site-parent-container main.site-main-content .gist .gist-file {
           font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
@@ -695,7 +695,7 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 50px 0 50px; }
-        html body div.site-parent-container main.site-main-content .gist {
+        html body div.site-parent-container main.site-main-content .gist .gist-file {
           font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
