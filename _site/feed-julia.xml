@@ -269,7 +269,7 @@ or use the &lt;code&gt;@transform&lt;/code&gt; macro of the &lt;a href=&quot;htt
 &lt;h3 class=&quot;section&quot;&gt;Grouped Operations&lt;/h3&gt;
 &lt;p&gt;For grouped operations, we can use the &lt;code&gt;JuliaDB.groupby&lt;/code&gt; function or the &lt;code&gt;JuliaDBMeta.@groupby&lt;/code&gt;:
 &lt;script src=&quot;https://gist.github.com/alstat/523976efd34a747f8fe6211b16ad6bf0.js&quot;&gt;&lt;/script&gt;
-We’ll use the summarized data above and plot the flight delay in relation to the distance travelled. We’ll use the &lt;a href=&quot;http://gadflyjl.org/stable/&quot;&gt;Gadfly.jl&lt;/a&gt; package for plotting and &lt;a href=&quot;https://github.com/davidanthoff/IterableTables.jl&quot;&gt;IterableTables.jl&lt;/a&gt; for converting &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;’s IndexedTable objects to DataFrames.DataFrame object, that’s because Gadfly.plot has no direct method for JuliaDB.IndexedTables.
+We’ll use the summarized data above and plot the flight delay in relation to the distance travelled. We’ll use the &lt;a href=&quot;http://gadflyjl.org/stable/&quot;&gt;Gadfly.jl&lt;/a&gt; package for plotting and &lt;a href=&quot;https://github.com/JuliaData/DataFrames.jl&quot;&gt;DataFrames.jl&lt;/a&gt; for converting &lt;a href=&quot;http://juliadb.org/latest/&quot;&gt;JuliaDB.jl&lt;/a&gt;’s IndexedTable objects to DataFrames.DataFrame object, that’s because Gadfly.plot has no direct method for JuliaDB.IndexedTables.
 &lt;script src=&quot;https://gist.github.com/alstat/c8485c39992d82c9129ccd2e5e2745c2.js&quot;&gt;&lt;/script&gt;
 To plot, run the following:
 &lt;script src=&quot;https://gist.github.com/alstat/2d6322571f78ec940af76c6011ed9f1f.js&quot;&gt;&lt;/script&gt;
