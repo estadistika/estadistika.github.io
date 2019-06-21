@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras"
-date:   2019-6-15 12:00:00 +0800
+date:   2019-6-20 12:00:00 +0800
 categories: Julia Python Packages Knet Flux TensorFlow Machine-Learning Deep-Learning
 comments: true
 author: Al-Ahmadgaid B. Asaad
