@@ -181,7 +181,7 @@ Flux.jl and Knet.jl, and we are going to use the <a href="https://en.wikipedia.o
 <p>The model that we are going to use is a <a href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer Perceptron</a> with the following architecture: 4 neurons for the input layer, 10 neurons for the hidden layer, and 3 neurons for the output layer.  The first two layers contain bias, and the neurons of the last two layers are activated with Rectified Linear Unit (ReLU) and softmax functions, respectively.  The diagram below illustrates the architecture described:
 <img src="http://drive.google.com/uc?export=view&amp;id=1oYnD8KZ1NQqbJccw8NYugj0kqihQZBJX" />
 <!-- https://drive.google.com/file/d/1jqASeBjmbSImp5hEoEZxHMizKUkSLyC8/view?usp=sharing -->
-The codes below specifies the model:</p>
+The codes below specify the model:</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-knet-060319-5', 'tabcontent-5')">Julia (Knet.jl)</button>
   <button class="tablinks" onclick="openCity(event, 'julia-flux-060319-5', 'tabcontent-5')">Julia (Flux.jl)</button>
@@ -199,7 +199,7 @@ The codes below specifies the model:</p>
 <div id="python-060319-5" class="tabcontent-5 first" style="display: none;">
   <script src="https://gist.github.com/alstat/b99baeaf255f8704e64a0ff9077e0283.js"></script>
 </div>
-<p>Coming from TensorFlow-Keras, Flux.jl provides Keras-like API for model specification, with <code>Flux.Chain</code> as the counterpart for Keras’ <code>Sequential</code>. This is different from Knet.jl where the highest level API you can get are the nuts and bolts for constructing the layers. Having said, however, <code>Flux.Dense</code> is defined almost exactly as the Dense struct of the Knet.jl code above (check the source code <a href="https://github.com/FluxML/Flux.jl/blob/1902c0e7c568a1bdb0cda7dca4d69f3896c023c7/src/layers/basic.jl#L82-L100">here</a>). In addition, since both Flux.jl and Knet.jl are written purely in Julia, makes the source codes under the hood accessible to beginners. Thus, giving the user a full understanding of not just the code, but also the math. Check the screenshot below for the distribution of the file types in the Github repos of the three frameworks:
+<p>Coming from TensorFlow-Keras, Flux.jl provides Keras-like API for model specification, with <code>Flux.Chain</code> as the counterpart for Keras’ <code>Sequential</code>. This is different from Knet.jl where the highest level API you can get are the nuts and bolts for constructing the layers. Having said, however, <code>Flux.Dense</code> is defined almost exactly as the Dense struct of the Knet.jl code above (check the source code <a href="https://github.com/FluxML/Flux.jl/blob/1902c0e7c568a1bdb0cda7dca4d69f3896c023c7/src/layers/basic.jl#L82-L100">here</a>). In addition, since both Flux.jl and Knet.jl are written purely in Julia, makes the source codes under the hood accessible to beginners. Thus, giving the user a full understanding of not just the code, but also the math. Check the screenshots below for the distribution of the file types in the Github repos of the three frameworks:
 <img src="http://drive.google.com/uc?export=view&amp;id=1hmWiYy6C01q_X8HGl5xDSjQClJz5H7Ym" />
 <img src="http://drive.google.com/uc?export=view&amp;id=17VAf7wOT9Ej47OZQu9B6o4kOCCs4G_tw" />
 <img src="http://drive.google.com/uc?export=view&amp;id=18RmeurpIX0uzBP9sKwiN24QI_VVLicYF" />
