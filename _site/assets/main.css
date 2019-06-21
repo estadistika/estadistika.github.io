@@ -493,6 +493,8 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 65px 0 65px; }
+        html body div.site-parent-container main.site-main-content .gist {
+          font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
         html body div.site-parent-container main.site-main-content div.home-mobile {
