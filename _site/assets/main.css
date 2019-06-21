@@ -99,6 +99,8 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 10px 0 10px; }
+        html body div.site-parent-container main.site-main-content .gist {
+          font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
         html body div.site-parent-container main.site-main-content div.home-mobile {
@@ -296,6 +298,8 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 10px 0 10px; }
+        html body div.site-parent-container main.site-main-content .gist {
+          font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
         html body div.site-parent-container main.site-main-content div.home-mobile {
@@ -691,6 +695,8 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 50px 0 50px; }
+        html body div.site-parent-container main.site-main-content .gist {
+          font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
         html body div.site-parent-container main.site-main-content div.home-mobile {
@@ -883,6 +889,8 @@
           display: none !important; }
       html body div.site-parent-container main.site-main-content {
         margin: 74px 150px 0 150px; }
+        html body div.site-parent-container main.site-main-content .gist {
+          font-size: 16px !important; }
         html body div.site-parent-container main.site-main-content center.home {
           display: none; }
         html body div.site-parent-container main.site-main-content div.home-mobile {
