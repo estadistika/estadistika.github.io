@@ -196,7 +196,7 @@ At this point, we are going to record the training time of each framework.
   <script src="https://gist.github.com/alstat/cf2bf0fac9fe9e55051f524d353aaf97.js"></script>  
 </div>
 The benchmark was done by running the above code repeatedly for about 10 times for each framework, I then took the lowest timestamp out of the results. In addition, before running the code for each framework, I keep a fresh start of my machine.
-<img src="http://drive.google.com/uc?export=view&id=1yrBkRiZ-UM656u2HSftOgIIIGBAMnzVu">
+<img src="http://drive.google.com/uc?export=view&id=1u0selT5l8vP7n-LNdvac_bzyMGC1vSDD">
 The code of the above figure is given below (make sure to load Gadfly.jl and other related libraries mentioned earlier in generating the loss plots):
 <script src="https://gist.github.com/alstat/c1bc13ab6e772a4104b51d164f4e172d.js"></script>
 ### Conclusion
