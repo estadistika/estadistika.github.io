@@ -81,10 +81,10 @@
             <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-header">
-        <h1 class="post-title title-more-margin" itemprop="name headline">Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</h1>
+        <h1 class="post-title title-more-margin" itemprop="name headline">Julia, Python: Working with Structured Databases using MySQL.jl and PyMySQL</h1>
         <p class="post-meta">
-            <time datetime="2019-06-20T12:00:00+08:00" itemprop="datePublished">
-                 Jun 20, 2019
+            <time datetime="2019-06-22T12:00:00+08:00" itemprop="datePublished">
+                 Jun 22, 2019
             </time>
              <i><span class="author-name">by</span></i>
             <span class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -95,7 +95,9 @@
     </div>
 
     <div class="post-content" itemprop="articleBody">
-        <p>When it comes to complex modeling, specifically in the field of deep learning, the go-to tool for <a href="https://towardsdatascience.com/which-deep-learning-framework-is-growing-fastest-3f77f14aa318">most researchers</a> is the <a href="https://www.tensorflow.org/">Google’s TensorFlow</a>. There are a number of good reason as to why, one of it is the fact that it provides both high and low level APIs that suit the needs of both beginners and advanced users, respectively. I have used it in some of my projects, and indeed it was powerful enough for the task. This is also due to the fact that TensorFlow is one of the <a href="https://github.com/tensorflow/tensorflow/graphs/contributors">most actively</a> developed deep learning framework, with Bayesian inference or probabilistic reasoning as the recent extension (see <a href="https://www.tensorflow.org/probability/">TensorFlow Probability</a>, another extension is the <a href="https://www.tensorflow.org/js">TensorFlow.js</a>). While the library is written majority in C++ for optimization, the main API is served in Python for ease of use. This design works around the static computational graph that needs to be defined declaratively before executed. The static nature of this graph, however, led to difficulty on debugging the models since the codes are itself data for defining the computational graph. Hence, you cannot use a debugger to check the results of the models line by line. Thankfully, it’s 2019 already and we have a stable <a href="https://www.tensorflow.org/guide/eager">Eager Execution</a> that allows users to immediately check the results of any TensorFlow operations. Indeed, this is more intuitive and more pythonic. In this article, however, we’ll attempt to explore, what else we have in 2019. In particular, let’s take look at Julia’s deep learning libraries and compare it to high level APIs of TensorFlow, i.e. Keras’ model specification.</p>
+        <p>Structured databases such as MySQL</p>
+
+<p>When it comes to complex modeling, specifically in the field of deep learning, the go-to tool for <a href="https://towardsdatascience.com/which-deep-learning-framework-is-growing-fastest-3f77f14aa318">most researchers</a> is the <a href="https://www.tensorflow.org/">Google’s TensorFlow</a>. There are a number of good reason as to why, one of it is the fact that it provides both high and low level APIs that suit the needs of both beginners and advanced users, respectively. I have used it in some of my projects, and indeed it was powerful enough for the task. This is also due to the fact that TensorFlow is one of the <a href="https://github.com/tensorflow/tensorflow/graphs/contributors">most actively</a> developed deep learning framework, with Bayesian inference or probabilistic reasoning as the recent extension (see <a href="https://www.tensorflow.org/probability/">TensorFlow Probability</a>, another extension is the <a href="https://www.tensorflow.org/js">TensorFlow.js</a>). While the library is written majority in C++ for optimization, the main API is served in Python for ease of use. This design works around the static computational graph that needs to be defined declaratively before executed. The static nature of this graph, however, led to difficulty on debugging the models since the codes are itself data for defining the computational graph. Hence, you cannot use a debugger to check the results of the models line by line. Thankfully, it’s 2019 already and we have a stable <a href="https://www.tensorflow.org/guide/eager">Eager Execution</a> that allows users to immediately check the results of any TensorFlow operations. Indeed, this is more intuitive and more pythonic. In this article, however, we’ll attempt to explore, what else we have in 2019. In particular, let’s take look at Julia’s deep learning libraries and compare it to high level APIs of TensorFlow, i.e. Keras’ model specification.</p>
 
 <p>As a language that leans towards numerical computation, it’s no surprise that Julia offers a number of choices for doing deep learning, here are the stable libraries:</p>
 <ol>
@@ -326,47 +328,19 @@ The code of the above figure is given below (make sure to load Gadfly.jl and oth
     <div class="pagination">
         <!-- 
             <span class="tooltip">
-                <button class="previous-article" onclick='javascript:location.href="/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html"'>Previous Article</button>
-                <span class="tooltiptext">Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</span>
+                <button class="previous-article" onclick='javascript:location.href="/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html"'>Previous Article</button>
+                <span class="tooltiptext">Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</span>
             </span>
          
-        
-            <span class="tooltip">
-                <button class="next-article" onclick='javascript:location.href="/julia/python/packages/mysql/structured-databases/2019/06/22/Julia-Python-Working-with-Databases-using-MySQL.jl-and-PyMySQL.html"'>Next Article</button>
-                <span class="tooltiptext">Julia, Python: Working with Structured Databases using MySQL.jl and PyMySQL</span>
-            </span>
           -->
 
         
             <!-- <div style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; padding-right: 5px;">
-                <a class="previous-article" href="/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</a>
+                <a class="previous-article" href="/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</a>
             </div> -->
             <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 10px; padding-right: 5px; background-color: #000; color: #fff;">
-                <a class="previous-article" href="/web/scraping/philippines/julia/programming/packages/2018/10/30/Introduction-to-Web-Scraping-Julia.html" style="padding-left: 0px; background-color: initial;">Julia: Introduction to Web Scraping (PHIVOLCS' Seismic Events)</a>
+                <a class="previous-article" href="/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html" style="padding-left: 0px; background-color: initial;">Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</a>
             </div>
-        
-        
-            
-            <!-- <div style="width: 150px">
-                <a class="next-article" href="/julia/python/packages/mysql/structured-databases/2019/06/22/Julia-Python-Working-with-Databases-using-MySQL.jl-and-PyMySQL.html">
-                    <div style="display: inline-block; text-align: left; width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 5px;">
-                            Julia, Python: Working with Structured Databases using MySQL.jl and PyMySQL 
-                    </div>
-                
-                    <div style="display: inline-block; text-align: right; width: 20px;">
-                        <i class="fas fa-chevron-circle-right" style="padding: 0 5px; font-size: 12.5px;"></i>
-                    </div>
-                </a>    
-            </div>                 -->
-            
-            <!-- <div style="display: inline-block; background-color:#000; color:#fff; width: 150px;"> -->
-                <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 5px; background-color: #000; color: #fff;">
-                    <a class="next-article" href="/julia/python/packages/mysql/structured-databases/2019/06/22/Julia-Python-Working-with-Databases-using-MySQL.jl-and-PyMySQL.html" style="padding-left: 0px; background-color: initial;">Julia, Python: Working with Structured Databases using MySQL.jl and PyMySQL</a>
-                </div>
-                <!-- <div style="display: inline-block; text-align: left;">
-                    <i class="fas fa-chevron-circle-right" style="margin-top: -10px; font-size: 12.5px;"></i>
-                </div> -->
-            <!-- </div> -->
         
         
     </div>
