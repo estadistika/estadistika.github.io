@@ -12,6 +12,13 @@
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="alternate" type="application/rss+xml" title="Estadistika" href="/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="Estadistika" href="/feed.julia.xml">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="particles.js"></script>
+  <script>
+    particlesJS.load('particles-js', '/assets/particles.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   
@@ -40,7 +47,7 @@
 
 <body>
     <div class="site-parent-container">
-
+        <div id="particles-js"></div>
         <header>
     <!-- <img src="/assets/bible-psalms.jpg"> -->
     <div class="site-sidebar">

@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="{{ "/assets/main.css" }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "feed.xml" | relative_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "feed.julia.xml" | relative_url }}">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="particles.js"></script>
+  <script>
+    particlesJS.load('particles-js', '/assets/particles.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   {% if page.use_math %}

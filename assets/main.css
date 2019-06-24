@@ -1050,7 +1050,15 @@ html body {
     padding: 50px;
     background-color: #ffffff;
     height: 540px;
-    width: 700px; }
+    width: 700px;
+    z-index: 2; }
+    html body .site-parent-container #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1; }
   html body .site-parent-container-blog {
     margin: 50px auto 50px auto;
     padding: 50px;
