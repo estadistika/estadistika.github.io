@@ -25,6 +25,8 @@
       width: 100% !important;
       font-size: 14px !important;
       text-align: left !important; }
+      html body div.site-parent-container #particles-js {
+        position: fixed !important; }
       html body div.site-parent-container header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
         opacity: 0.97;
@@ -224,6 +226,8 @@
       width: 100% !important;
       font-size: 14px !important;
       text-align: left !important; }
+      html body div.site-parent-container #particles-js {
+        position: fixed !important; }
       html body div.site-parent-container header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
         opacity: 0.97;
@@ -423,6 +427,8 @@
       width: 100% !important;
       font-size: 14px !important;
       text-align: left !important; }
+      html body div.site-parent-container #particles-js {
+        position: fixed !important; }
       html body div.site-parent-container header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
         opacity: 0.97;
@@ -621,6 +627,8 @@
       background-color: #ffffff;
       width: 100% !important;
       text-align: left !important; }
+      html body div.site-parent-container #particles-js {
+        position: fixed !important; }
       html body div.site-parent-container header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
         opacity: 0.97;
@@ -815,6 +823,8 @@
       background-color: #ffffff;
       width: 100% !important;
       text-align: left !important; }
+      html body div.site-parent-container #particles-js {
+        position: fixed !important; }
       html body div.site-parent-container header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
         opacity: 0.97;

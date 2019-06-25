@@ -10,6 +10,9 @@
                 width: 100% !important; 
                 // font-size: 14px !important;
                 text-align: left !important;
+                #particles-js {
+                    position: fixed !important;
+                }
                 header {
                     .site-sidebar {     
                         background-image: linear-gradient(rgb(29, 29, 29), #1f1e1e, #1f1e1e, rgb(29, 29, 29));
