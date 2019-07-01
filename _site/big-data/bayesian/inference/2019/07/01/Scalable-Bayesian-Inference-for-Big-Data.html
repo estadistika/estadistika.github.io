@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang=" en ">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Estadistika</title>
+  <meta name="description" content="statistics, data science, machine/deep learning">
+  <meta name="theme-color" content="#1f1e1e">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="alternate" type="application/rss+xml" title="Estadistika" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Estadistika" href="/feed.julia.xml">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="particles.js"></script>
+  <script>
+    particlesJS.load('particles-js', '/assets/particles.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+    equationNumbers: {
+        autoNumber: "AMS"
+    }
+    },
+    tex2jax: {
+    inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+    displayMath: [ ['$$','$$'] ],
+    processEscapes: true,
+    }
+});
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+  
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script> -->
+  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        equationNumbers: {
+          autoNumber: "AMS"
+        }
+      },
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+  <!-- <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script src="/assets/functions.js"></script>
+</head>
+
+<body>
+    <div class="site-parent-container-blog">
+
+        <header>
+    <!-- <img src="/assets/bible-psalms.jpg"> -->
+    <div class="site-sidebar">
+        <div class="dropdown" style="display: none;">
+            <button class="dropbtn"><a class="fa fa-bars" style="font-size: 24px !important;"></a></button>
+            <div class="dropdown-content">
+                <a id="home-button" href="/index.html">Home</a>
+                <a href="/blog">Articles</a>
+            </div>
+        </div>
+        <div id="website-name-wrapper" style="display: none;">
+            <div id="website-name">
+                <a style="color: white;" href="/index.html">Estadistika</a>
+            </div>
+            <div id="website-description">
+                . . . statistics / machine learning / data science
+            </div>
+        </div>
+        <nav>
+            <button onclick='javascript:location.href="/"'>
+                <i class="fas fa-home"></i>
+            </button>
+            <button onclick='javascript:location.href="/blog"'>
+                <i class="fas fa-file-alt"></i>
+            </button>
+            <button onclick='javascript:location.href="/about"'>
+                <i class="fas fa-info"></i>
+            </button>
+            <!-- <button onclick='javascript:location.href="#"'>
+                <i class="fas fa-phone"></i>
+            </button> -->
+        </nav>
+    </div>
+</header>
+
+        <main class="site-main-content">
+
+            <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-header">
+        <h1 class="post-title title-more-margin" itemprop="name headline">Scalable Bayesian Inference for Big Data</h1>
+        <p class="post-meta">
+            <time datetime="2019-07-01T12:00:00+08:00" itemprop="datePublished">
+                 Jul 1, 2019
+            </time>
+             <i><span class="author-name">by</span></i>
+            <span class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">Al-Ahmadgaid B. Asaad</span>
+            </span>
+            
+        </p>
+    </div>
+
+    <div class="post-content" itemprop="articleBody">
+        <p>In Statistics, inference is a process of characterizing the population from a given data. There are two approaches to inference, namely <b>Frequentist</b> and <b>Bayesian</b> approaches. The former is based on the assumption that, the objective parameter of the model (e.g. density curve for the population distribution) given the data, is fixed and unknown. On the other hand, the latter (Bayesian inference) describes this parameter as random (following some distribution) and unknown. Having this understanding then, suggests that Bayesian inference somehow extends the Frequentist solution by giving out multiple parameter estimates that behave according to some derived distribution — referred to as the posterior distribution or <b>a posteriori</b> — as opposed to single point estimate on the objective parameters. Therefore, of the two approaches, the Frequentist procedure to inference is more popular in terms of the availability of tools, ranging from handling small data to big data. Big data as <a href="https://www.ibmbigdatahub.com/infographic/four-vs-big-data">defined by the International Business Machines (IBM)</a>, can refer to data that are either big in <b>volume</b>, real-time in <b>velocity</b>, varied in <b>variety</b>, and dirty in <b>veracity</b>. The last two attributes (<b>variety</b> and <b>veracity</b>) mentioned are well-studied in Statistics, but not the first two attributes. Hence, with the advent of big data, recent theoretical developments now include statistics for analyzing data that are big in both <b>volume</b> and <b>velocity</b>. For this paper, however, the focus will be on handling the <b>volume</b>; but needless to say, there are interesting research for handling streaming data as well, one of it is called <b>online statistics</b> [1].</p>
+
+<p>Data that are big in <b>volume</b> can either refer to big in <b>n</b> or <b>tall data</b>, which means the number of records is big (e.g. in the range of millions, billions and more); or big in <b>p</b> also referred to as <b>wide data</b>, in which the number of variables or features not only is bigger than the number of records or rows, but also large enough that it could also go millions and more. In theory, Bayesian is well-known to be good at handling small data in comparison to Frequentist, thanks to the prior specification. However, when it comes to big data, the availability of stable software leaned towards the Frequentist algorithms. A good example of this is the Machine Learning (ML) library of the <a href="https://spark.apache.org/">Apache Spark</a> — a software developed for handling big data (mostly big <b>n</b>). A typical example of big in <b>n</b> data is the transaction log of store front business, where records goes Gigabytes to Terabytes or more in size, but are often stored in relational table. On the other hand, wide data or data that are big in <b>p</b> often are unstructured in form, for example images and videos. This follows from the fact that, images are represented by its pixels and channels (e.g. RGB — Red, Green, and Blue channels) of each pixel. Hence, vectorizing these pixels across height ($h$), width ($w$) and channels ($\lambda$) of an image, generates a $h\times w\times\lambda$ dimensions. In matrix format, this translate to saying, each row represents an image, and each image (row) has corresponding $h\times w\times\lambda$ columns/variables that describe this image. So for a 500$\times$500 colored image with 3 channels (RGB), if vectorized, can have 750,000 dimensions. For this paper, we refer to images as a type of big data since it is unstructured as well. Having said, numerous models have been proposed including the complex ones for handling images, these models are called <b>Deep Learning</b> (DL) models. In fact, the success of AI nowadays are due to these models, most of which are not Bayesian in nature. The success is also due to the availability of software that can do <b>automatic differentiation</b> on any specified models. As such, derivation of complex loss functions is not anymore a problem of doing it manually, since computers can do it quite well already. Thus, coming up with a new architecture or a new variant of <b>Deep Neural Networks</b> or any other complex models is now relatively easy to implement and train, thanks to high-level Application Program Interfaces (APIs) of tools like <b>Google’s Tensorflow</b> and <b>Torch</b> projects. Therefore, the success of AI recently in terms of computer vision and natural language processing as stressed above, is partly due to the availability of the stable tools, of which the estimation is based on the Frequentist’s assumption of the weights.</p>
+
+<p>While recent computer visions and natural language processing techniques gained significant improvements on the predictive capability under the Frequentist approach, this type of inference, as mentioned earlier is based on the assumption that the objective parameter is fixed. Having this nature, however, somehow limits the researcher on specifying other known characteristics of the model that could further contribute to the solutions of the problem. As an illustration, consider the Michaelis-Menten model below:
+\begin{equation}\label{eq:mm}
+    y = \frac{\beta_0 x}{\beta_1 + x}.
+\end{equation}
+This equation is popular for modeling enzyme kinetics, and the goal is to find the optimal value for $\beta_0$ and $\beta_1$ given the data. The estimation procedure can be done via <b>mathematical programming</b> since there is no closed form solution to this nonlinear regression. However, this model can be linearly transformed and have a closed form solution. In any case, the user will only get single solution for the values of $\beta_0$ and $\beta_1$, which is not a problem, but wouldn’t it be nice to further express what we know about the parameters we are interested in? For example, the two parameters above must be positive in practice. Wouldn’t it be useful to specify this? Wouldn’t it be predictive if we can specify how they behave? If so, then consider using Bayesian inference — where instead of minimizing the error of Equation (\ref{eq:mm}) given below:
+\begin{equation}\label{eq:mm-error}
+    \varepsilon = y - \frac{\beta_0 x}{\beta_1 + x},
+\end{equation}
+and optimized over the weights, what Bayesian does is to solve this probabilistically by first specifying the problem as follows, for example:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+    \label{eq:iidys}
+    y &\sim \mathcal{N}\left(\mu = \frac{\beta_0 x}{\beta_1 + x}, \frac{1}{5}\right)\\
+    \label{eq:apriori}
+    (\beta_0, \beta_1) &\sim \mathcal{TN}(\mu = 0, \sigma = 100, a = 0, b = \infty),
+\end{align} %]]></script>
+
+<p>where $\mathcal{TN}(\cdot)$ is the notation for the Truncated Normal distribution.
+After that, estimation is done by deriving the posterior distribution of the objective parameters by simplifying the Bayes’ theorem given below:
+\begin{equation}\label{eq:bayes-thm-0}
+\mathbb{P}(\boldsymbol{\beta}|\mathbf{y}) = \frac{\mathbb{P}(\boldsymbol{\beta})\mathbb{P}(\mathbf{y}|\boldsymbol{\beta})}{\mathbb{P}(\mathbf{y})},
+\end{equation}
+where $\mathbb{P}(\mathbf{y}|\boldsymbol{\beta})$ is the likelihood, which is the product of Equation (\ref{eq:iidys}), and is described by a Normal density function; $\mathbb{P}(\boldsymbol{\beta})$ is the prior distribution or <b>a priori</b> given by Equation (\ref{eq:apriori}), and is characterized by a Truncated Normal with support between 0 and $\infty$; $\mathbb{P}(\mathbf{y})$ is the normalizing constant obtained by integrating out $\boldsymbol{\beta}$ from the likelihood, i.e. $\mathbb{P}(\mathbf{y})=\int \mathbb{P}(\mathbf{y}|\boldsymbol{\beta})\operatorname{d}\boldsymbol{\beta}$. Therefore, in comparison to Frequentist approach, inference in Bayesian is based fully on probability theory.
+In this paper, the author will review the recent advances of Bayesian inference with regards to big data problems, specifically for big <b>n</b> and big <b>p</b>. Along these, is a review on actively developed open-source tools for scaling Bayesian inference, which is computationally referred to as <b>probabilistic programming</b>; and finally a review on the application of Bayesian inference for big data, specifically for computer vision and natural language processing.</p>
+<h3 id="sequential-bayesian-learning">Sequential Bayesian Learning</h3>
+<p>As an illustration of how Bayesian inference works,  consider the input variable $x$ and a target variable $y$ such that the true function is the simple linear regression with parameters $w_0\triangleq-.3$ and $w_1\triangleq-.5$. Suppose the random values of $x$ are taken from a uniform distribution having domain $[-1,1]$; then the target variable $y=h(x,\mathbf{w})+\varepsilon=w_0+w_1x+\varepsilon$, where $\varepsilon$ is a Gaussian noise having mean $0$ and standard deviation $5$. The goal is to recover the true value of $w_0$ and $w_1$ from the data. Using the <b>a priori</b> defined by a standard Gaussian distribution, the plot of this density is given in the first row, second column of Figure 1. This is the case in which no data point yet is observed. The white diamond point in the contour plot of the prior density is the true value of the parameters that needs to be estimated. The corresponding 20 samples of straight lines with weights sampled from the <b>a priori</b> are plotted in the far right hand side of the first row of the figure. These sampled lines form the so called <b>model uncertainty</b>. The second row depicts the case where first observation is observed. The likelihood of this data point is shown in the left hand side of the row, and using this likelihood multiplied by the <b>a priori</b> in the previous row, and further multiply it with the normalizing constant, returns the <b>a posteriori</b> in the middle column of the second row. The corresponding fitted lines are placed in the right hand side of the row. Following the same procedure for the third row, with likelihood of the first five observations shown in the left hand side of the row, and <b>a priori</b> given by the <b>a posteriori</b> of the second row, returns a more concentrated posterior distribution of the weights with 20 sampled fitted lines in the third column of the third row. The process is repeated until the fourth row consisting of 20 observations. This example is based from \cite{bishop} which illustrates the sequential Bayesian learning to fitting a straight line to a simulated data.
+<img src="http://drive.google.com/uc?export=view&amp;id=1o9kg2rtzb77eFSUtGGQmeYLqxWPW3ONL" style="width: 95%" /></p>
+<center>Figure 1: Sequential Bayesian Learning of Fitting Straight Line.</center>
+
+<h3 id="references">References</h3>
+<ul>
+  <li>J. T. Day, Online Algorithms for Statistics, Ph.D. thesis, 2018.</li>
+  <li>Yuret, Deniz (2016). <a href="https://pdfs.semanticscholar.org/28ee/845420b8ba275cf1d695fbf383cc21922fbd.pdf">Knet: beginning deep learning with 100 lines of Julia</a>. 30th Conference on Neural Information Processing Systems (NIPS 2016), Barcelona, Spain.</li>
+  <li>Innes, Mike (2018). <a href="http://joss.theoj.org/papers/10.21105/joss.00602">Flux: Elegant machine learning with Julia</a>. Journal of Open Source Software, 3(25), 602, https://doi.org/10.21105/joss.00602</li>
+  <li>Abadi, Martin et al (2016). <a href="https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf">TensorFlow-Keras: A system for large-scale machine learning</a>. 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16). p265–283.</li>
+</ul>
+
+    </div>
+    <div class="pagination">
+        <!-- 
+            <span class="tooltip">
+                <button class="previous-article" onclick='javascript:location.href="/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html"'>Previous Article</button>
+                <span class="tooltiptext">Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</span>
+            </span>
+         
+          -->
+
+        
+            <!-- <div style="display: inline-block; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; padding-right: 5px;">
+                <a class="previous-article" href="/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html"><i class="fas fa-chevron-circle-left" style="padding: 0 5px; font-size: 12.5px;"></i> Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</a>
+            </div> -->
+            <div style="display: inline-block; text-align: left; width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 10px; padding-right: 5px; background-color: #000; color: #fff;">
+                <a class="previous-article" href="/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html" style="padding-left: 0px; background-color: initial;">Deep Learning: Exploring High Level APIs of Knet.jl and Flux.jl in comparison to Tensorflow-Keras</a>
+            </div>
+        
+        
+    </div>
+    <div class="rss-subscribe">
+        <button class="rss-subscribe-button" onclick='javascript:location.href="/feed.xml"'>
+            <i class="fas fa-rss" style="font-size:11px; margin: 0 2px 0 0;"></i>&nbsp;subscribe</button>
+    </div>
+    <br>
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'estadistika'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+
+        </main>
+
+        <!-- <footer class="site-footer">
+    
+      <div class="wrapper">
+    
+        <h2 class="footer-heading">Estadistika</h2>
+    
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li>
+                
+                  Estadistika
+                
+                </li>
+                
+            </ul>
+          </div>
+    
+          <div class="footer-col footer-col-2">
+            <ul class="social-media-list">
+              
+              <li>
+                <a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">jekyll</span></a>
+
+              </li>
+              
+    
+              
+              <li>
+                <a href="https://twitter.com/jekyllrb"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">jekyllrb</span></a>
+
+              </li>
+              
+            </ul>
+          </div>
+    
+          <div class="footer-col footer-col-3">
+            <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+          </div>
+        </div>
+    
+      </div>
+    
+    </footer>
+     -->
+
+    </div>
+</body>
+
+</html>
