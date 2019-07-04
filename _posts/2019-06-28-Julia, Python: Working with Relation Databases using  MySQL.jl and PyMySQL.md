@@ -150,7 +150,13 @@ To check if we have indeed populated the table, run the following:
   <script src="https://gist.github.com/alstat/09cf619f91773599b9902ba77fde7d76.js"></script>
 </div>
 
+### Benchmark
+For the benchmark, I timed the population of the table by sending request to the MySQL server. I also recorded the reading time of the server response on populated table.
+<img src="http://drive.google.com/uc?export=view&id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH">
+### Conclusion
 
+### Software Versions
+<script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
 
 
 
