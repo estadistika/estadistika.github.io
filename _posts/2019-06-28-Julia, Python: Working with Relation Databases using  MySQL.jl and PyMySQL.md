@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Interfacing with Relational Databases using MySQL.jl and PyMySQL"
-date:   2019-06-28 12:00:00 +0800
+title:  "Interfacing with Relational Database using MySQL.jl and PyMySQL"
+date:   2019-07-05 12:00:00 +0800
 categories: Julia Python Packages Relational-Databases
 comments: true
 author: Al-Ahmadgaid B. Asaad
 tag: julia python
 ---
-Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor's time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers. The figure below illustrates the request and response communcations between client and servers.
+Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor's time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers (e.g. <a href="http://flask.pocoo.org/">Flask</a> and <a href="https://www.djangoproject.com/">Django</a>). The figure below illustrates the request and response communcations between client and servers.
 <img src="http://drive.google.com/uc?export=view&id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ">
 As mentioned earlier, databases are meant to store data for <i>later use</i> --- in the sense that we can use it as a response to client's requests, such as viewing or data extraction for insights. In this article, we are interested in data extraction from the database. In particular, the objective is to illustrate how to send request to MySQL server both from Julia and Python.
 ### MySQL Server Setup
@@ -18,8 +18,10 @@ To start with, we need to setup MySQL server in our machine. Click the following
 
 Note that I recommend you to download the latest version of MySQL since the setup above is using the old version.
 ### Query: Creating Database
-In order to appreciate what we are aiming in this article, we need to go through some basic SQL queries, to understand what type of request to send to MySQL server. I'm using macOS, but the following should work on windows as well. For macOS user, open the MySQL Server Shell by running <code>mysql -u root -p</code> (hit Enter, and type in your MySQL root password you specified during the installation setup from the previous section) in the terminal. For windows, try to look for it in the Start Menu.
-<img src="http://drive.google.com/uc?export=view&id=1wRuD_gG4tJpp1ZKj3jCbwbzWAtERSjsn" style="margin: -4px auto -30px auto;">
+In order to appreciate what we are aiming in this article, we need to go through some basic SQL queries to understand what type of request to send to MySQL server. I'm using macOS, but the following should work on Windows as well. For macOS users, open the MySQL Server Shell by running <code>mysql -u root -p</code> (hit <kbd>return</kbd> or <kbd>enter</kbd> , and type in your MySQL root password you specified during the installation setup from the previous section) in the terminal. For windows, try to look for it in the Start Menu.
+<!-- <img src="http://drive.google.com/uc?export=view&id=1wRuD_gG4tJpp1ZKj3jCbwbzWAtERSjsn" style="margin: -4px auto -30px auto;"> -->
+<img src="http://drive.google.com/uc?export=view&id=1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb" style="margin: -4px auto -30px auto;">
+<!-- https://drive.google.com/file/d/1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb/view?usp=sharing -->
 From here, we are going to check the available databases in MySQL server. To do this, run the following:
 <script src="https://gist.github.com/alstat/1dbad1187130a31091aead6145dc0151.js"></script>
 Indeed, there are four out-of-the-box defined databases already, and we don't want to touch that. Instead, we going to create our own database, let's call it <code>tutorial</code>. To do this, run the following codes:
@@ -94,7 +96,7 @@ To test the connection, let's send our first request --- to show the tables in t
 <div id="python-062819-4" class="tabcontent-4" style="display: none;">
   <script src="https://gist.github.com/alstat/84b1c60e618d93b00ab2294c13438c35.js"></script>
 </div>
-
+In Julia, the response is recieved as a MySQL.Query object, and can be viewed using DataFrame. For Python, however, you will a tuple object.
 ### Create NYC Flights Table
 At this point, we can now create the table for our dataset. To do this, run the following:
 <div class="tab" style="margin-bottom: -16px;">
@@ -109,7 +111,7 @@ At this point, we can now create the table for our dataset. To do this, run the 
 <div id="python-062819-5" class="tabcontent-5" style="display: none;">
   <script src="https://gist.github.com/alstat/890fe4cdc2e50f694a749448594cb248.js"></script>
 </div>
-You can manually write the SQL query to create the table, or automate it like what we have above. To check if we have indeed created the table, run the following codes:
+As shown in the previous section, sending request to the server both in Julia and in Python is done by simply using a string of SQL query as input to MySQL.jl and PyMySQL APIs. Hence, the <code>query</code> object (referring to the Julia code) in line 3 above, simply automates the concatenation of SQL query for creating a table. Having said, you can of course write the query manually. To check if we have indeed created the table, run the following codes:
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-6', 'tabcontent-6')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-6', 'tabcontent-6')">Python</button>
@@ -122,7 +124,7 @@ You can manually write the SQL query to create the table, or automate it like wh
 <div id="python-062819-6" class="tabcontent-6" style="display: none;">
   <script src="https://gist.github.com/alstat/789b5aae723486aee01b6c018e61c60a.js"></script>
 </div>
-As you can see, we've created it with no entry yet.
+As you can see, we've created it already, but with no entry yet.
 ### Populating the Table
 Finally, we are going to populate the table in the database by inserting the values row by row.
 <div class="tab" style="margin-bottom: -16px;">
@@ -137,7 +139,7 @@ Finally, we are going to populate the table in the database by inserting the val
 <div id="python-062819-7" class="tabcontent-7" style="display: none;">
   <script src="https://gist.github.com/alstat/2f22ad0b1dd5f3ed39f360d2244c32f7.js"></script>
 </div>
-Notice from the above Julia code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 8 above pushes the values in vector into the SQL statement <code>stmt</code>, by mapping one-to-one the values of the vector into the tuples of <code>?</code> in <code>stmt</code>. To check if we have indeed populated the table, run the following:
+Notice from the above Julia code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 9 above maps the values of the vector, one-to-one, to the elements (<code>?</code>) of the tuple in <code>stmt</code>. One major difference between these libraries is that, PyMySQL will not populate the table even after executing all sorts of SQL queries unless you commit it (<code>con.commit</code>), as shown above. This is contrary to MySQL.jl which automatically commits every execution of the SQL query. To check if we have indeed populated the table, run the following:
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-8', 'tabcontent-8')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-8', 'tabcontent-8')">Python</button>
@@ -152,10 +154,12 @@ Notice from the above Julia code, the result of the <code>stmt</code> is an SQL 
 </div>
 
 ### Benchmark
-For the benchmark, I recorded the time interval of populating the table by sending request to the MySQL server. I also recorded the reading time of the server response on the populated table. The figure below, summarizes the results.
+For the benchmark, I added a timelapse recorder in populating and reading the table from the previous section. The figure below, summarizes the results.
 <img src="http://drive.google.com/uc?export=view&id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH">
+The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gadfly.jl</a>. Install this package using <code>Pkg</code> as described above (see the first code block under <i>MySQL Clients on Julia and Python</i> section), along with <a href="https://github.com/JuliaGraphics/Cairo.jl">Cario.jl</a> and <a href="https://github.com/JuliaGraphics/Fontconfig.jl">Fontconfig.jl</a>. The latter two packages are used to save the plot in PNG format, see the code below to reproduce:
+<script src="https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js"></script>
 ### Conclusion
-In conclusion, I would say MySQL.jl is a stable Julia library for interfacing with MySQL database. While both libraries are not directly comparable in terms of the language.
+The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL. Therefore, I would say, after testing, that MySQL.jl is a stable Julia library for interfacing with MySQL database server. The only error I got was during the installation related to building DecFP, which is done by simply runnning <code>Pkg.build("DecFP")</code>.
 ### Software Versions
 <script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
 
