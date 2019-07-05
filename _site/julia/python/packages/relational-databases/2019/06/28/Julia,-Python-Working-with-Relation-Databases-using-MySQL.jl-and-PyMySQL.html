@@ -97,7 +97,7 @@
     <div class="post-content" itemprop="articleBody">
         <p>Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor’s time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers. The figure below illustrates the request and response communcations between client and servers.
 <img src="http://drive.google.com/uc?export=view&amp;id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ" />
-As mentioned earlier, databases are meant to store data for <i>later use</i> — in the sense that we can use it as a response to client’s requests, such as viewing or data extraction for insights. In this article, we are interested in extracting insights from the database. In particular, the objective is to illustrate how to send request to MySQL server from both Julia and Python.</p>
+As mentioned earlier, databases are meant to store data for <i>later use</i> — in the sense that we can use it as a response to client’s requests, such as viewing or data extraction for insights. In this article, we are interested in data extraction from the database. In particular, the objective is to illustrate how to send request to MySQL server both from Julia and Python.</p>
 <h3 id="mysql-server-setup">MySQL Server Setup</h3>
 <p>To start with, we need to setup MySQL server in our machine. Click the following link to download and install the application.</p>
 
@@ -106,14 +106,15 @@ As mentioned earlier, databases are meant to store data for <i>later use</i> —
   <li><a href="https://docs.google.com/document/d/1GaZ5dPOH9o5rQPmxFWjGS4ZmUjEEeDM497UdXwcEgco/edit?usp=sharing">MySQL Server Download and Installation on Windows</a></li>
 </ul>
 
+<p>Note that I recommend you to download the latest version of MySQL since the setup above is using the old version.</p>
 <h3 id="query-creating-database">Query: Creating Database</h3>
-<p>In order to appreciate what we are aiming in this article, we need to go through some basic SQL queries, to understand what type of request to send to MySQL server. I’m using macOS, but the following should work on windows as well. For macOS user, open the MySQL Server Shell by running <code>mysql -u root -p</code> (hit Enter, and type in your MySQL root password you specified during the installation setup from the previous section) in ther terminal. For windows, try to look for it in the Start Menu.
+<p>In order to appreciate what we are aiming in this article, we need to go through some basic SQL queries, to understand what type of request to send to MySQL server. I’m using macOS, but the following should work on windows as well. For macOS user, open the MySQL Server Shell by running <code>mysql -u root -p</code> (hit Enter, and type in your MySQL root password you specified during the installation setup from the previous section) in the terminal. For windows, try to look for it in the Start Menu.
 <img src="http://drive.google.com/uc?export=view&amp;id=1wRuD_gG4tJpp1ZKj3jCbwbzWAtERSjsn" style="margin: -4px auto -30px auto;" />
 From here, we are going to check the available databases in MySQL server. To do this, run the following:
 <script src="https://gist.github.com/alstat/1dbad1187130a31091aead6145dc0151.js"></script>
-Indeed, there are four out-of-the-box defined databases. For this tutorial, we going to create our own database, let’s call it <code>tutorial</code>. To do this, run the following codes:
+Indeed, there are four out-of-the-box defined databases already, and we don’t want to touch that. Instead, we going to create our own database, let’s call it <code>tutorial</code>. To do this, run the following codes:
 <script src="https://gist.github.com/alstat/3d62031b3a0f2f2236568ffe0b9ec189.js"></script>
-The best thing about SQL syntax is that, everything is self-explanatory, except maybe for line 19, which simply verifies that we are using <code>tutorial</code> as our database.</p>
+The best thing about SQL syntax is that, everything is self-explanatory, except maybe for line 19, which simply confirmed that we are using <code>tutorial</code> as our database.</p>
 <h3 id="query-creating-table">Query: Creating Table</h3>
 <p>Next is to create a table for our database, we are going to use the <a href="https://halalanresults.abs-cbn.com/">2019 Philippine Senatorial Election results</a> with columns: Last Name, First Name, Party, Votes. Further, for purpose of illustration, we are going to use the top 5 only.
 <script src="https://gist.github.com/alstat/79d2c2c420a781d14834ef2307413045.js"></script></p>
@@ -124,7 +125,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 <p>To view the encoded data, we simply select all (<code>*</code>) the columns from the table.
 <script src="https://gist.github.com/alstat/dd620c5151a14261d8095d614d80b81a.js"></script></p>
 <h2 id="mysql-clients-on-julia-and-python">MySQL Clients on Julia and Python</h2>
-<p>In this section, we are going to interface with MySQL server on Julia and Python. This is possible using MySQL.jl and PyMySQL libraries. To do this, install the necessary libraries as follows:</p>
+<p>In this section, we are going to interface with MySQL server on Julia and Python. This is possible using <a href="https://github.com/JuliaDatabases/MySQL.jl">MySQL.jl</a> and <a href="https://pymysql.readthedocs.io/en/latest/index.html">PyMySQL</a> libraries. To start with, install the necessary libraries as follows:</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-1', 'tabcontent-1')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-1', 'tabcontent-1')">Python</button>
@@ -155,7 +156,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 </div>
 
 <h3 id="connect-to-mysql-server">Connect to MySQL Server</h3>
-<p>In order for the client to send request to the MySQL server, it needs to connect first using the credentials set in the installation.</p>
+<p>In order for the client to send request to the MySQL server, it needs to connect to it using the credentials set in the installation.</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-3', 'tabcontent-3')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-3', 'tabcontent-3')">Python</button>
@@ -168,7 +169,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 <div id="python-062819-3" class="tabcontent-3" style="display: none;">
   <script src="https://gist.github.com/alstat/e7b04fe16d4ae8f324ba2eab2fe3a47e.js"></script>
 </div>
-
+<p>Note that you need to have a strong password, and this configuration should not be exposed to the public, but we are doing it here for purpose of illustration.</p>
 <h3 id="first-request">First Request</h3>
 <p>To test the connection, let’s send our first request — to show the tables in the database:</p>
 <div class="tab" style="margin-bottom: -16px;">
@@ -198,7 +199,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 <div id="python-062819-5" class="tabcontent-5" style="display: none;">
   <script src="https://gist.github.com/alstat/890fe4cdc2e50f694a749448594cb248.js"></script>
 </div>
-<p>To check if we have indeed created the table, run the following codes:</p>
+<p>You can manually write the SQL query to create the table, or automate it like what we have above. To check if we have indeed created the table, run the following codes:</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-6', 'tabcontent-6')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-6', 'tabcontent-6')">Python</button>
@@ -211,7 +212,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 <div id="python-062819-6" class="tabcontent-6" style="display: none;">
   <script src="https://gist.github.com/alstat/789b5aae723486aee01b6c018e61c60a.js"></script>
 </div>
-
+<p>As you can see, we’ve created it with no entry yet.</p>
 <h3 id="populating-the-table">Populating the Table</h3>
 <p>Finally, we are going to populate the table in the database by inserting the values row by row.</p>
 <div class="tab" style="margin-bottom: -16px;">
@@ -226,7 +227,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 <div id="python-062819-7" class="tabcontent-7" style="display: none;">
   <script src="https://gist.github.com/alstat/2f22ad0b1dd5f3ed39f360d2244c32f7.js"></script>
 </div>
-<p>To check if we have indeed populated the table, run the following:</p>
+<p>Notice from the above code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 8 above pushes the values in vector into the SQL statement <code>stmt</code>, by mapping one-to-one the values of the vector into the tuples of <code>?</code> in <code>stmt</code>. To check if we have indeed populated the table, run the following:</p>
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-8', 'tabcontent-8')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-8', 'tabcontent-8')">Python</button>
@@ -241,10 +242,10 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 </div>
 
 <h3 id="benchmark">Benchmark</h3>
-<p>For the benchmark, I timed the population of the table by sending request to the MySQL server. I also recorded the reading time of the server response on populated table.
+<p>For the benchmark, I recorded the time interval of populating the table by sending request to the MySQL server. I also recorded the reading time of the server response on the populated table. The figure below, summarizes the results.
 <img src="http://drive.google.com/uc?export=view&amp;id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH" /></p>
 <h3 id="conclusion">Conclusion</h3>
-
+<p>In conclusion, I would say MySQL.jl is a stable Julia library for interfacing with MySQL database. While both libraries are not directly comparable in terms of the language.</p>
 <h3 id="software-versions">Software Versions</h3>
 <script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
 
