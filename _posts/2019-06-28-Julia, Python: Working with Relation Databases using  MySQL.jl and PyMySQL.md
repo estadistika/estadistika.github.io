@@ -137,7 +137,7 @@ Finally, we are going to populate the table in the database by inserting the val
 <div id="python-062819-7" class="tabcontent-7" style="display: none;">
   <script src="https://gist.github.com/alstat/2f22ad0b1dd5f3ed39f360d2244c32f7.js"></script>
 </div>
-Notice from the above code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 8 above pushes the values in vector into the SQL statement <code>stmt</code>, by mapping one-to-one the values of the vector into the tuples of <code>?</code> in <code>stmt</code>. To check if we have indeed populated the table, run the following:
+Notice from the above Julia code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 8 above pushes the values in vector into the SQL statement <code>stmt</code>, by mapping one-to-one the values of the vector into the tuples of <code>?</code> in <code>stmt</code>. To check if we have indeed populated the table, run the following:
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-8', 'tabcontent-8')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-8', 'tabcontent-8')">Python</button>
