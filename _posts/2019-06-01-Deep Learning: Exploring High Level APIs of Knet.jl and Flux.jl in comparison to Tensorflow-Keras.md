@@ -45,9 +45,9 @@ Flux.jl and Knet.jl, and we are going to use the <a href="https://en.wikipedia.o
 ### Loading and Partitioning the Data
 The Iris dataset is available in the <a href="https://github.com/JuliaStats/RDatasets.jl">RDatasets.jl</a> Julia package and in Python's <a href="https://scikit-learn.org/">Scikit-Learn</a>. The following codes load the libraries and the data itself.
 <div class="tab" style="margin-bottom: -16px;">
-  <button class="tablinks" onclick="openCity(event, 'julia-060319-knet-2', 'tabcontent-2')">Julia (Knet)</button>
-  <button class="tablinks" onclick="openCity(event, 'julia-060319-flux-2', 'tabcontent-2')">Julia (Flux)</button>
-  <button class="tablinks" onclick="openCity(event, 'python-060319-2', 'tabcontent-2')">Python (TensorFlow)</button>
+  <button class="tablinks" onclick="openCity(event, 'julia-060319-knet-2', 'tabcontent-2')">Julia (Knet.jl)</button>
+  <button class="tablinks" onclick="openCity(event, 'julia-060319-flux-2', 'tabcontent-2')">Julia (Flux.jl)</button>
+  <button class="tablinks" onclick="openCity(event, 'python-060319-2', 'tabcontent-2')">Python</button>
 </div>
 
 <div id="julia-060319-knet-2" class="tabcontent-2 first">
