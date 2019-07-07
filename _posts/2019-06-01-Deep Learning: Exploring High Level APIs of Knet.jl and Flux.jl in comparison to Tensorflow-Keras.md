@@ -45,12 +45,17 @@ Flux.jl and Knet.jl, and we are going to use the <a href="https://en.wikipedia.o
 ### Loading and Partitioning the Data
 The Iris dataset is available in the <a href="https://github.com/JuliaStats/RDatasets.jl">RDatasets.jl</a> Julia package and in Python's <a href="https://scikit-learn.org/">Scikit-Learn</a>. The following codes load the libraries and the data itself.
 <div class="tab" style="margin-bottom: -16px;">
-  <button class="tablinks" onclick="openCity(event, 'julia-060319-2', 'tabcontent-2')">Julia</button>
-  <button class="tablinks" onclick="openCity(event, 'python-060319-2', 'tabcontent-2')">Python</button>
+  <button class="tablinks" onclick="openCity(event, 'julia-060319-knet-2', 'tabcontent-2')">Julia (Knet)</button>
+  <button class="tablinks" onclick="openCity(event, 'julia-060319-flux-2', 'tabcontent-2')">Julia (Flux)</button>
+  <button class="tablinks" onclick="openCity(event, 'python-060319-2', 'tabcontent-2')">Python (TensorFlow)</button>
 </div>
 
-<div id="julia-060319-2" class="tabcontent-2 first">
-  <script src="https://gist.github.com/alstat/3d7e763b9869d63883df89fb5ff0bf47.js"></script>
+<div id="julia-060319-knet-2" class="tabcontent-2 first">
+  <script src="https://gist.github.com/alstat/e8dcf372308bf96df39b098a4b443d33.js"></script>
+</div>
+
+<div id="julia-060319-flux-2" class="tabcontent-2 first">
+  <script src="https://gist.github.com/alstat/d8bee345413942db404ab30609c91170.js"></script>
 </div>
 
 <div id="python-060319-2" class="tabcontent-2" style="display: none;">
