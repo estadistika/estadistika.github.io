@@ -54,7 +54,7 @@ The Iris dataset is available in the <a href="https://github.com/JuliaStats/RDat
   <script src="https://gist.github.com/alstat/e8dcf372308bf96df39b098a4b443d33.js"></script>
 </div>
 
-<div id="julia-060319-flux-2" class="tabcontent-2" >
+<div id="julia-060319-flux-2" class="tabcontent-2" style="display: none;">
   <script src="https://gist.github.com/alstat/d8bee345413942db404ab30609c91170.js"></script>
 </div>
 
