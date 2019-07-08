@@ -111,7 +111,7 @@ At this point, we can now create the table for our dataset. To do this, run the 
 <div id="python-062819-5" class="tabcontent-5" style="display: none;">
   <script src="https://gist.github.com/alstat/890fe4cdc2e50f694a749448594cb248.js"></script>
 </div>
-As shown in the previous section, sending request to the server both in Julia and in Python is done by simply using a string of SQL queries as input to MySQL.jl and PyMySQL APIs. Hence, the <code>query</code> object (referring to the Julia code) in line 3 above, simply automates the concatenation of SQL query for creating a table. Having said, you can of course write the query manually. To check if we have indeed created the table, run the following codes:
+As shown in the previous section, sending request to the server both in Julia and in Python is done by simply using a string of SQL queries as input to MySQL.jl and PyMySQL APIs. Hence, the <code>query</code> object (in line 3 of Julia code and line 4 of Python code) above, simply automates the concatenation of SQL query for creating a table. Having said, you can of course write the query manually. To check if we have indeed created the table, run the following codes:
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-6', 'tabcontent-6')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-6', 'tabcontent-6')">Python</button>
