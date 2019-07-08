@@ -50,7 +50,7 @@ In this section, we are going to interface with MySQL server on Julia and Python
 <div id="python-062819-1" class="tabcontent-1" style="display: none;">
   <script src="https://gist.github.com/alstat/f38f27e23bc74549930bd439af5075f9.js"></script>
 </div>
-For this exercise, our goal is to save the NYC Flights data into the database and query it from Julia and Python.
+For this exercise, our goal is to save the <a href="https://cran.r-project.org/web/packages/nycflights13/nycflights13.pdf">NYC Flights (2013)</a> data into the database and query it from Julia and Python.
 
 ### Downloading NYC Flights Data
 I have a copy of the dataset on Github, and so the following code will download the said data:
