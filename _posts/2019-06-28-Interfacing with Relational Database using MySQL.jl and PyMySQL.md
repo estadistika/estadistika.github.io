@@ -28,7 +28,7 @@ Indeed, there are four out-of-the-box defined databases already, and we don't wa
 <script src="https://gist.github.com/alstat/3d62031b3a0f2f2236568ffe0b9ec189.js"></script>
 The best thing about SQL syntax is that, everything is self-explanatory, except maybe for line 19, which simply confirmed that we are using <code>tutorial</code> as our database.
 ### Query: Creating Table
-Next is to create a table for our database, we are going to use the <a href="https://halalanresults.abs-cbn.com/">2019 Philippine Senatorial Election results</a> with columns: Last Name, First Name, Party, Votes. Further, for purpose of illustration, we are going to use the top 5 only.
+Next is to create a table for our database, we are going to use the <a href="https://halalanresults.abs-cbn.com/">2019 Philippine Election results</a> with columns: Last Name, First Name, Party, Votes. Further, for purpose of illustration, we are going to use the top 5 senators only.
 <script src="https://gist.github.com/alstat/79d2c2c420a781d14834ef2307413045.js"></script>
 ### Query: Inserting Values
 The following codes will insert the top five senators from the 2019 Philippine election results.
