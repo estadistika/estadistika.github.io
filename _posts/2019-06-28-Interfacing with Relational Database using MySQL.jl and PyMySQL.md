@@ -152,7 +152,7 @@ Notice from the above Julia code, the result of the <code>stmt</code> is an SQL 
 <div id="python-062819-8" class="tabcontent-8" style="display: none;">
   <script src="https://gist.github.com/alstat/09cf619f91773599b9902ba77fde7d76.js"></script>
 </div>
-
+To disconnect from the server, run <code>MySQL.disconnect(con)</code> (Julia) or <code>con.close()</code> (Python).
 ### Benchmark
 For the benchmark, I added a timelapse recorder in populating and reading the table in the previous section. The figure below summarizes the results.
 <img src="http://drive.google.com/uc?export=view&id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH">
@@ -160,8 +160,25 @@ The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gad
 <script src="https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js"></script>
 ### Conclusion
 The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL. Hence, I would say both libraries have similarities in APIs (as expected) and are stable for the tasks. I should emphasize though that, I do like the <code>con.commit</code> of PyMySQL since this adds a level of security, and I think this is a good addition to MySQL.jl in the future.
+### Complete Codes
+If you are impatient, here are the complete codes excluding the MySQL codes and the plots. These should work after installing the required libraries shown above:
+<div class="tab" style="margin-bottom: -16px;">
+  <button class="tablinks" onclick="openCity(event, 'julia-knet-060319-nn', 'tabcontent-nn')">Julia</button>
+  <button class="tablinks" onclick="openCity(event, 'python-060319-nn', 'tabcontent-nn')">Python</button>
+</div>
+
+<div id="julia-knet-060319-nn" class="tabcontent-nn first">
+  <script src="https://gist.github.com/alstat/eda562ebbd22f3de61385ec79dad2373.js"></script>
+</div>
+
+<div id="python-060319-nn" class="tabcontent-nn" style="display: none;">
+  <script src="https://gist.github.com/alstat/69d25cb0a6210b3e702fe582c2127ba4.js"></script>
+</div>
+
 ### Software Versions
 <script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
+
+
 
 
 
