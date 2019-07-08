@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Interfacing with Relational Database using MySQL.jl and PyMySQL"
-date:   2019-07-08 12:00:00 +0800
+date:   2019-07-07 12:00:00 +0800
 categories: Julia Python Packages Relational-Databases
 comments: true
 author: Al-Ahmadgaid B. Asaad
