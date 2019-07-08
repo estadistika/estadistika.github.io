@@ -68,7 +68,7 @@ I have a copy of the dataset on Github, and so the following code will download 
 </div>
 
 ### Connect to MySQL Server
-In order for the client to send request to the MySQL server, it needs to connect to it using the credentials set in the installation.
+In order for the client to send request to MySQL server, the user/client needs to connect to it using the credentials set in the installation.
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-3', 'tabcontent-3')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-3', 'tabcontent-3')">Python</button>
@@ -81,7 +81,7 @@ In order for the client to send request to the MySQL server, it needs to connect
 <div id="python-062819-3" class="tabcontent-3" style="display: none;">
   <script src="https://gist.github.com/alstat/e7b04fe16d4ae8f324ba2eab2fe3a47e.js"></script>
 </div>
-Note that you need to have a strong password, and this configuration should not be exposed to the public, but we are doing it here for purpose of illustration.
+Note that you need to have a strong password, and this configuration should not be exposed to the public. The above snippets are meant for illustration.
 ### First Request
 To test the connection, let's send our first request --- to show the tables in the database:
 <div class="tab" style="margin-bottom: -16px;">
@@ -96,7 +96,7 @@ To test the connection, let's send our first request --- to show the tables in t
 <div id="python-062819-4" class="tabcontent-4" style="display: none;">
   <script src="https://gist.github.com/alstat/84b1c60e618d93b00ab2294c13438c35.js"></script>
 </div>
-In Julia, the response is recieved as a MySQL.Query object, and can be viewed using DataFrame. For Python, however, you will a tuple object.
+In Julia, the response is recieved as a MySQL.Query object and can be viewed using DataFrame. For Python, however, you will get a tuple object.
 ### Create NYC Flights Table
 At this point, we can now create the table for our dataset. To do this, run the following:
 <div class="tab" style="margin-bottom: -16px;">
@@ -111,7 +111,7 @@ At this point, we can now create the table for our dataset. To do this, run the 
 <div id="python-062819-5" class="tabcontent-5" style="display: none;">
   <script src="https://gist.github.com/alstat/890fe4cdc2e50f694a749448594cb248.js"></script>
 </div>
-As shown in the previous section, sending request to the server both in Julia and in Python is done by simply using a string of SQL query as input to MySQL.jl and PyMySQL APIs. Hence, the <code>query</code> object (referring to the Julia code) in line 3 above, simply automates the concatenation of SQL query for creating a table. Having said, you can of course write the query manually. To check if we have indeed created the table, run the following codes:
+As shown in the previous section, sending request to the server both in Julia and in Python is done by simply using a string of SQL queries as input to MySQL.jl and PyMySQL APIs. Hence, the <code>query</code> object (referring to the Julia code) in line 3 above, simply automates the concatenation of SQL query for creating a table. Having said, you can of course write the query manually. To check if we have indeed created the table, run the following codes:
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-6', 'tabcontent-6')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-6', 'tabcontent-6')">Python</button>
@@ -139,7 +139,7 @@ Finally, we are going to populate the table in the database by inserting the val
 <div id="python-062819-7" class="tabcontent-7" style="display: none;">
   <script src="https://gist.github.com/alstat/2f22ad0b1dd5f3ed39f360d2244c32f7.js"></script>
 </div>
-Notice from the above Julia code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 9 above maps the values of the vector, one-to-one, to the elements (<code>?</code>) of the tuple in <code>stmt</code>. One major difference between these libraries is that, PyMySQL will not populate the table even after executing all sorts of SQL queries unless you commit it (<code>con.commit</code>), as shown above. This is contrary to MySQL.jl which automatically commits every execution of the SQL query. To check if we have indeed populated the table, run the following:
+Notice from the above Julia code, the result of the <code>stmt</code> is an SQL <code>INSERT</code> query with placeholder values indicated by <code>?</code>. The timed (<code>@time</code> in Julia code) loop in line 9 above maps the values of the vector, one-to-one, to the elements (<code>?</code>) of the tuple in <code>stmt</code>. One major difference between these libraries is that, PyMySQL will not populate the table even after executing all sorts of SQL queries unless you commit it (<code>con.commit</code>), as shown above. This is contrary to MySQL.jl which automatically commits every execution of the SQL queries. I do like the idea of having <code>con.commit</code> in PyMySQL, since this avoids accidental deletion or modification in the database, thus adding a layer of security. To check if we have indeed populated the table, run the following:
 <div class="tab" style="margin-bottom: -16px;">
   <button class="tablinks" onclick="openCity(event, 'julia-062819-8', 'tabcontent-8')">Julia</button>
   <button class="tablinks" onclick="openCity(event, 'python-062819-8', 'tabcontent-8')">Python</button>
@@ -154,12 +154,12 @@ Notice from the above Julia code, the result of the <code>stmt</code> is an SQL 
 </div>
 
 ### Benchmark
-For the benchmark, I added a timelapse recorder in populating and reading the table from the previous section. The figure below, summarizes the results.
+For the benchmark, I added a timelapse recorder in populating and reading the table in the previous section. The figure below summarizes the results.
 <img src="http://drive.google.com/uc?export=view&id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH">
-The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gadfly.jl</a>. Install this package using <code>Pkg</code> as described above (see the first code block under <i>MySQL Clients on Julia and Python</i> section), along with <a href="https://github.com/JuliaGraphics/Cairo.jl">Cario.jl</a> and <a href="https://github.com/JuliaGraphics/Fontconfig.jl">Fontconfig.jl</a>. The latter two packages are used to save the plot in PNG format, see the code below to reproduce:
+The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gadfly.jl</a>. Install this package using <code>Pkg</code> as described above (see the first code block under <i>MySQL Clients on Julia and Python</i> section), along with <a href="https://github.com/JuliaGraphics/Cairo.jl">Cario.jl</a> and <a href="https://github.com/JuliaGraphics/Fontconfig.jl">Fontconfig.jl</a>. The latter two packages are used to save the plot in PNG format. See the code below to reproduce:
 <script src="https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js"></script>
 ### Conclusion
-The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL. Therefore, I would say, after testing, that MySQL.jl is a stable Julia library for interfacing with MySQL database server. The only error I got was during the installation related to building DecFP, which is done by simply runnning <code>Pkg.build("DecFP")</code>.
+The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL. Hence, I would say both libraries have similarities in APIs (as expected) and are stable for the tasks. I should emphasize though that, I do like the <code>con.commit</code> of PyMySQL since this adds a level of security, and I think this is a good addition to MySQL.jl in the future.
 ### Software Versions
 <script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
 
