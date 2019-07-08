@@ -159,7 +159,7 @@ For the benchmark, I added a timelapse recorder in populating and reading the ta
 The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gadfly.jl</a>. Install this package using <code>Pkg</code> as described above (see the first code block under <i>MySQL Clients on Julia and Python</i> section), along with <a href="https://github.com/JuliaGraphics/Cairo.jl">Cario.jl</a> and <a href="https://github.com/JuliaGraphics/Fontconfig.jl">Fontconfig.jl</a>. The latter two packages are used to save the plot in PNG format. See the code below to reproduce:
 <script src="https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js"></script>
 ### Conclusion
-The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL. Hence, I would say both libraries have similarities in APIs (as expected) and are stable for the tasks. I should emphasize though that, I do like the <code>con.commit</code> of PyMySQL since this adds a level of security, and I think this is a good addition to MySQL.jl in the future.
+The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL; and I would say both libraries have similarities in APIs (as expected) and are stable for the tasks. I should emphasize though that, I do like the <code>con.commit</code> of PyMySQL since this adds a level of security, and I think this is a good addition to MySQL.jl in the future.
 
 ### Complete Codes
 If you are impatient, here are the complete codes excluding the MySQL codes and the plots. These should work after installing the required libraries shown above:
