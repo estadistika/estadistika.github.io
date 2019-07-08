@@ -160,6 +160,7 @@ The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gad
 <script src="https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js"></script>
 ### Conclusion
 The aim of this article was simply to illustrate the usage of MySQL.jl APIs in comparison to the PyMySQL. Hence, I would say both libraries have similarities in APIs (as expected) and are stable for the tasks. I should emphasize though that, I do like the <code>con.commit</code> of PyMySQL since this adds a level of security, and I think this is a good addition to MySQL.jl in the future.
+
 ### Complete Codes
 If you are impatient, here are the complete codes excluding the MySQL codes and the plots. These should work after installing the required libraries shown above:
 <div class="tab" style="margin-bottom: -16px;">
@@ -174,6 +175,10 @@ If you are impatient, here are the complete codes excluding the MySQL codes and 
 <div id="python-060319-nn" class="tabcontent-nn" style="display: none;">
   <script src="https://gist.github.com/alstat/69d25cb0a6210b3e702fe582c2127ba4.js"></script>
 </div>
+### References and Resources
+* MySQL.jl Github Repo: https://github.com/JuliaDatabases/MySQL.jl
+* PyMySQL Github Repo: https://github.com/PyMySQL/PyMySQL
+* Flaticon: https://www.flaticon.com/
 
 ### Software Versions
 <script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
