@@ -5,7 +5,7 @@ date:   2019-07-07 12:00:00 +0800
 categories: Julia Python Packages Relational-Databases
 comments: true
 author: Al-Ahmadgaid B. Asaad
-tag: julia python
+tags: julia python
 ---
 Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor's time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers (e.g. <a href="http://flask.pocoo.org/">Flask</a> and <a href="https://www.djangoproject.com/">Django</a>). The figure below illustrates the request and response communcations between client and servers.
 <img src="http://drive.google.com/uc?export=view&id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ">
