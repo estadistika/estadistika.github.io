@@ -24,7 +24,7 @@ In order to appreciate what we are aiming in this article, we need to go through
 <!-- https://drive.google.com/file/d/1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb/view?usp=sharing -->
 From here, we are going to check the available databases in MySQL server. To do this, run the following:
 <script src="https://gist.github.com/alstat/1dbad1187130a31091aead6145dc0151.js"></script>
-Indeed, there are four out-of-the-box defined databases already, and we don't want to touch that. Instead, we going to create our own database, let's call it <code>tutorial</code>. To do this, run the following codes:
+Indeed, there are four out-of-the-box defined databases already, and we don't want to touch that. Instead, we are going to create our own database, let's call it <code>tutorial</code>. To do this, run the following codes:
 <script src="https://gist.github.com/alstat/3d62031b3a0f2f2236568ffe0b9ec189.js"></script>
 The best thing about SQL syntax is that, everything is self-explanatory, except maybe for line 19, which simply confirmed that we are using <code>tutorial</code> as our database.
 ### Query: Creating Table
