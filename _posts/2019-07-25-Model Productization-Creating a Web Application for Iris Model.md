@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Model Productization: Crafting a Web Application for Iris Model"
-date:   2019-7-10 12:00:00 +0800
+date:   2019-7-25 12:00:00 +0800
 categories: Julia Python Software-Engineering UI-UX Model-Deployment Productization
 comments: true
 author: Al-Ahmadgaid B. Asaad
