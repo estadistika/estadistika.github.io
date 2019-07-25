@@ -27,7 +27,7 @@ The complete codes for this article are available <a href="https://github.com/es
 <script src="https://gist.github.com/alstat/1c5b9f777d05373f1be8801dc2bb100c.js"></script>
 ### Software Architecture
 As mentioned earlier, the application is powered by back-end servers that are instances of Julia and Python. The communication between the user-interface (client) and the servers is done via HTTP (HyperText Transfer Protocol). The following is the architecture of our application:
-
+<img src="http://drive.google.com/uc?export=view&id=1VdJFUubWb6Hc9q2960XFv7FUg-K5ieYe">
 As shown in the figure, the client side handles response asynchronously. That is, we can send multiple request without waiting for the response of the preceding request. On the other hand, the server side processes the request synchronously, that is, the request from the client are handled one-at-a-time. These networks work via <a href="https://github.com/JuliaWeb/HTTP.jl">HTTP.jl</a> for Julia, and <a href="https://palletsprojects.com/p/flask/">Flask</a> for Python. If you are interested in asynchronous back-end server, checkout Python's <a href="https://klein.readthedocs.io/en/latest/">Klein</a> library (Flask only works synchronously); and for Julia you can set HTTP.jl to work asynchronously. I should mention though that HTTP.jl is a bit lower in terms of API level compared to Flask. In fact, HTTP.jl is better compared to Python's <a href="https://2.python-requests.org/en/master/">Requests</a> library. For Flask counterpart, however, Julia offers <a href="https://github.com/GenieFramework/Genie.jl">Genie.jl</a> and I encourage you to check that out as well.
 
 ### HyperText Transfer Protocol (HTTP)
