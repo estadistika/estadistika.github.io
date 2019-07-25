@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre");
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,300i");
-@import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Aubrey");
 @import url("https://fonts.googleapis.com/css?family=Saira+Condensed:200");
 @import url("https://fonts.googleapis.com/css?family=Berkshire+Swash");
@@ -1008,11 +1008,62 @@ html body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   text-align: justify;
-  line-height: 26px; }
+  line-height: 26px;
+  /* Rounded sliders */ }
+  html body .img-magnifier-container {
+    position: relative; }
+  html body .img-magnifier-glass {
+    position: absolute;
+    border: 3px solid #000;
+    cursor: none;
+    /*Set the size of the magnifier glass:*/
+    width: 250px;
+    height: 100px; }
+  html body .switch {
+    position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 25px; }
+  html body .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0; }
+  html body .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s; }
+  html body .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s; }
+  html body input:checked + .slider {
+    background-color: #000000; }
+  html body input:focus + .slider {
+    box-shadow: 0 0 1px #000000; }
+  html body input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px); }
+  html body .slider.round {
+    border-radius: 34px; }
+  html body .slider.round:before {
+    border-radius: 50%; }
   html body kbd {
     border: 1px solid gray;
     font-size: 1em;
-    font-family: monospace,monospace;
+    font-family: monospace, monospace;
     box-shadow: 1px 0 1px 0 #eee, 0 2px 0 2px #ccc, 0 2px 0 3px #444;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -1028,7 +1079,9 @@ html body {
     display: block; }
   html body button {
     padding: 1px 7px; }
-  html body button, html body a.previous-article, html body a.next-article {
+  html body button,
+  html body a.previous-article,
+  html body a.next-article {
     background-color: #000000;
     color: #ffffff;
     border-width: 0px;
@@ -1036,7 +1089,9 @@ html body {
     font-size: 16px;
     cursor: pointer;
     transition: all .3s ease-in-out; }
-  html body button:hover, html body a.previous-article:hover, html body a.next-article:hover {
+  html body button:hover,
+  html body a.previous-article:hover,
+  html body a.next-article:hover {
     background-color: #000000;
     color: #d4af37; }
   html body button:active {
