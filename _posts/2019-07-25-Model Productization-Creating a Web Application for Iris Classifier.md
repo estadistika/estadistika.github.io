@@ -95,7 +95,7 @@ The following video shows how the application works with the back-end servers ru
 <!-- <iframe width="100%" height="400px" src="https://www.youtube.com/watch?v=jxM_U9USkv4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 <iframe width="100%" height="400px" src="https://www.youtube.com/embed/jxM_U9USkv4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 ### Conclusion
-The aim of this exercise is to demonstrate the capability of Julia in production, and one of my concern was precompilations. Specifically, if these occur for every client's request. Fortunately, these only happen at the first request, the succeeding ones are guaranteed to be fast. Having said, just as the stability of Python for production, I think Julia is already stable for creating a fully featured web application, and is therefore capable enough for an end-to-end project.
+The aim of this exercise is to demonstrate the capability of Julia in production, and one of my concern was precompilations. Specifically, if these occur for every client's request. Fortunately, these only happen at the first request, the succeeding ones are guaranteed to be fast. Having said, just as the stability of Python for production, I think Julia is already stable as a back-end language for creating a fully featured web application, and is therefore capable enough for an end-to-end project.
 
 ### Software Versions
 <script src="https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js"></script>
