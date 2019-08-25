@@ -2,8 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Serif");
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Aubrey");
-@import url("https://fonts.googleapis.com/css?family=Saira+Condensed:200");
+@import url("https://fonts.googleapis.com/css?family=Saira+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Berkshire+Swash");
 @import url("https://fonts.googleapis.com/css?family=Reem+Kufi");
 @import url("https://fonts.googleapis.com/css?family=Amita|Galdeano|Offside");
@@ -1009,7 +1010,7 @@ html body {
   font-family: "Roboto", sans-serif;
   text-align: justify;
   line-height: 26px;
-  color: #4c4c4c; }
+  color: #525252; }
   html body kbd {
     border: 1px solid gray;
     font-size: 1em;
@@ -1110,6 +1111,9 @@ html body {
       margin-bottom: 30px; }
       html body main.site-main-content .post-content img {
         width: 100%; }
+      html body main.site-main-content .post-content h1, html body main.site-main-content .post-content h2, html body main.site-main-content .post-content h3, html body main.site-main-content .post-content h4 {
+        font-family: 'Roboto Condensed', sans-serif;
+        text-transform: uppercase; }
     html body main.site-main-content .tab {
       overflow: hidden; }
     html body main.site-main-content .tab button {
