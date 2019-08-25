@@ -1008,7 +1008,8 @@ html body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   text-align: justify;
-  line-height: 26px; }
+  line-height: 26px;
+  color: #4c4c4c; }
   html body kbd {
     border: 1px solid gray;
     font-size: 1em;
