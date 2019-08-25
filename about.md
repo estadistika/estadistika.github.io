@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
-Estadistika /estadistika/ is the Filipino word for Statistics and is one of the core topics of this blog. My name is <a href="https://alstat.github.io/" target="_blank">Al-Ahmadgaid B. Asaad</a>, AL for short -- 
+Estadistika /estadistika/ is the Filipino word for Statistics and is one of the core topics of this blog. My name is <a href="https://alstat.github.io/" target="_blank">Al-Ahmadgaid B. Asaad</a>, AL for short --- 
 Senior Data Scientist at <a href="https://aboitiz.com/">Aboitiz Equity Ventures, Inc.</a> --- and I'm the author. Prior to joining Aboitiz, I spent two years as a Data Scientist at <a href="http://neuralmechanics.net/" target="_blank">NeuralMechanics, Inc.</a> and <a href="http://digenomix.com/">DiGenomiX, Inc.</a>; (see my <a href="https://www.linkedin.com/in/al-ahmadgaid-asaad-68613a44/" target="_blank">LinkedIn profile</a>). Statistician by training with <a href="http://www.stat.upd.edu.ph/" target="_blank">MSc in Statistics</a> from University of the Philippines Diliman. My research interest is in the field of Bayesian inference for big data and its application to deep learning models, both for computer vision and natural language processing. I worked with Dr. Magadia on my thesis entitled *Bayesian Autoregressive Distributed Lag* via *Stochastic Gradient Hamiltonian Monte Carlo*.
 
 Estadistika will serve as my notes for possible research I want to pursue in the future, and its main purpose is to share my thoughts about Data Science, Machine/Deep Learning, and Artificial Intelligence. Needless to say, everything I post here represents my views and not the opinions of my employer.
