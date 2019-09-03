@@ -10,7 +10,7 @@ Estadistika will serve as my notes for possible research I want to pursue in the
 
 Lastly, I am the owner of <a href="http://alstatr.blogspot.com/" target="_blank">Analysis with Programming</a> website, which I maintained from 2013 to 2017, and I made Estadistika as a successor to it. You can contact me at 
 
-<center>al-ahmadgaid.asaad@g.msuiit.edu.ph</center>
+<center>alahmadgaid@gmail.com</center>
 
 or follow me on twitter <a href="https://twitter.com/iamalstat" target="_blank">@iamalstat</a>. You can find me on github (<a href="https://github.com/alstat" target="_blank">@alstat</a>) as well where most of my projects are hosted including this website.
 
