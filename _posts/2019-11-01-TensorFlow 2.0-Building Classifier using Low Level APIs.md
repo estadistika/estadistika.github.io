@@ -5,7 +5,7 @@ date:   2019-11-01 12:00:00 +0800
 categories: Python TensorFlow
 comments: true
 author: Al-Ahmadgaid B. Asaad
-tags: julia python software-engineering
+tags: python tensorflow
 ---
 At the end of my comparison --- <a href="https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html">TensorFlow 1.14 Keras' API versus Julia's Flux.jl and Knet.jl high level APIs</a> --- I indicated some future write-ups I plan to do, one of which is to compare (obviously) on the low level APIs. However, with the release of the much anticipated TensorFlow 2.0, I decided not to wait for the next comparison and instead dedicate a separate article for the said release. The goal of this blog post then is to simply replicate the modeling in my <a href="https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html">previous article</a>, without using the Keras API. Specifically, I'll discuss the steps on constructing a custom layer, how we can chain multiple layers as in Keras' <code>Sequential</code>, do a feedforward, a backward by updating the gradient, and batching the training datasets. 
 
