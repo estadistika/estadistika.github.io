@@ -92,12 +92,12 @@ The corresponding accuracy is depicted below:
 For the codes of the above figures, please refer to this <a href="https://gist.github.com/alstat/a2f7f2725a2456ddfe86b83f9e6c1df6">link</a>. With regards to the series above, the optimization using three minibatches overfitted the data after 400+ epochs. This is evident on both figures, where we find a decrease in accuracy. Thus, it is recommended to have a model-checkpoint and early-stopping during calibration, and I'll leave that to the reader.
 
 ### End Note
-In this article, I have shown you how to do modeling using TensorFlow 2.0's Core APIs; and as an end note, I want to highlight two key points on the importance of using the low-level APIs. The first one, is having full control on your end-to-end modeling process. Having the flexibility on your tools, enables the user to solve problems with custom models, custom objective function, custom optimization algorithms, and whatnot. The second point, is the appreciation of the theory. It is simply fulfilling to see how the theory works in practice, and it gives the user the confidence to experiment, for example on the gradients and other internals. 
+That's it, I have shown you how to do modeling using TensorFlow 2.0's Core APIs. As an end note, I want to highlight two key points on the importance of using the low-level APIs. The first one, is having full control on your end-to-end modeling process. Having the flexibility on your tools, enables the user to solve problems with custom models, custom objective function, custom optimization algorithms, and whatnot. The second point, is the appreciation of the theory. It is simply fulfilling to see how the theory works in practice, and it gives the user the confidence to experiment, for example on the gradients and other internals. 
 
-Lastly, I am pleased with the clean API of the TF 2.0 as opposed to the redundant APIs we have in the previous versions; and with eager-execution as the default configuration, makes the library pythonic --- and that matters to me. Feel free to share your thoughts, if you have comments/suggestions.
+Lastly, I am pleased with the clean API of the TF 2.0 as opposed to the redundant APIs we have in the previous versions; and with eager-execution as the default configuration, makes the library pythonic. Feel free to share your thoughts, if you have comments/suggestions.
 
 ### Next Steps
-In my next article, I will likely start on TensorFlow Probability, which extends the TF core APIs by incorporating Bayesian approach to modeling and statistical analyses --- and these are areas of my expertise. Otherwise, I will touch on modeling image datasets.
+In my next article, I will likely start on TensorFlow Probability, which extends the TF core APIs by incorporating Bayesian approach to modeling and statistical analyses. Otherwise, I will touch on modeling image datasets, or present new topic.
 
 ### Complete Codes
 If you are impatient, here is the complete code excluding the plots. These should work after installing the required libraries:
