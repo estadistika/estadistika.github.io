@@ -8,7 +8,7 @@ author: Al-Ahmadgaid B. Asaad
 tags: julia python
 ---
 Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor's time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers (e.g. <a href="http://flask.pocoo.org/">Flask</a> and <a href="https://www.djangoproject.com/">Django</a>). The figure below illustrates the request and response communcations between client and servers.
-<img src="http://drive.google.com/uc?export=view&id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ">
+<img src="https://drive.google.com/uc?export=view&id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ">
 As mentioned earlier, databases are meant to store data for <i>later use</i> --- in the sense that we can use it as a response to client's requests, such as viewing or data extraction for insights. In this article, we are interested in data extraction from the database. In particular, the objective is to illustrate how to send request to MySQL server, and how to process response both from Julia and Python.
 ### MySQL Server Setup
 To start with, we need to setup MySQL server in our machine. Click the following link to download and install the application.
@@ -20,7 +20,7 @@ Note that I recommend you to download the latest version of MySQL since the setu
 ### Query: Creating Database
 In order to appreciate what we are aiming in this article, we need to go through some basic SQL queries to understand what type of request to send to MySQL server. I'm using macOS, but the following should work on Windows as well. For macOS users, open the MySQL Server Shell by running <code>mysql -u root -p</code> (hit <kbd>return</kbd> or <kbd>enter</kbd> , and type in your MySQL root password you specified during the installation setup from the previous section) in the terminal. For windows, try to look for it in the Start Menu.
 <!-- <img src="http://drive.google.com/uc?export=view&id=1wRuD_gG4tJpp1ZKj3jCbwbzWAtERSjsn" style="margin: -4px auto -30px auto;"> -->
-<img src="http://drive.google.com/uc?export=view&id=1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb" style="margin: -4px auto -30px auto;">
+<img src="https://drive.google.com/uc?export=view&id=1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb" style="margin: -4px auto -30px auto;">
 <!-- https://drive.google.com/file/d/1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb/view?usp=sharing -->
 From here, we are going to check the available databases in MySQL server. To do this, run the following:
 <script src="https://gist.github.com/alstat/1dbad1187130a31091aead6145dc0151.js"></script>
@@ -155,7 +155,7 @@ From the above Julia code, the result of the <code>stmt</code> is an SQL <code>I
 To disconnect from the server, run <code>MySQL.disconnect(con)</code> (Julia) or <code>con.close()</code> (Python).
 ### Benchmark
 For the benchmark, I added a timelapse recorder in populating and reading the table in the previous section. The figure below summarizes the results.
-<img src="http://drive.google.com/uc?export=view&id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH">
+<img src="https://drive.google.com/uc?export=view&id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH">
 The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gadfly.jl</a>. Install this package using <code>Pkg</code> as described above (see the first code block under <i>MySQL Clients on Julia and Python</i> section), along with <a href="https://github.com/JuliaGraphics/Cairo.jl">Cario.jl</a> and <a href="https://github.com/JuliaGraphics/Fontconfig.jl">Fontconfig.jl</a>. The latter two packages are used to save the plot in PNG format. See the code below to reproduce:
 <script src="https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js"></script>
 ### Conclusion
