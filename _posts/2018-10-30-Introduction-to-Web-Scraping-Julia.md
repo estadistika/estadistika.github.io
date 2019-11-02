@@ -25,7 +25,7 @@ I used Julia in my master's thesis for my <a href="https://en.wikipedia.org/wiki
 
 ### Getting to know HTML
 Since the data published in the websites are usually encoded as a table, it is therefore best to understand the structure of the HTML document before performing web scraping. HTML (Hypertext Markup Language) is a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages \[<a href="https://www.google.com/search?q=what+is+HTML&ie=utf-8&oe=utf-8&client=firefox-b-ab" target="_blank">1</a>\]. For example, bold text in HTML is enclosed inside the `<b>` tag, e.g. `<b>`text`</b>`, the result is <b>text</b>. A webpage is a HTML document that can be structured in several ways, one possible case is as follows:
-<img src="http://drive.google.com/uc?export=view&id=1WW3yUzJ5ZhGRNPYolM_S4dsJ5ts5urPU">
+<img src="https://drive.google.com/uc?export=view&id=1WW3yUzJ5ZhGRNPYolM_S4dsJ5ts5urPU">
 Scrapers must be familiar with the hierarchy of the HTML document as this will be the template for the frontend source code of every website. Following the structure of the above figure, data encoded in HTML table are placed inside the `td` (table data) tag, where `td` is under `tr` (table row), `tr` is under `tbody` (table body), and so on. `td` is the lowest level tag (sorting by hierarchy) from the figure above that can contain data. However, `td` can also take precedence over `p` (paragraph), `a` (hyperlink), `b` (bold), `i` (italic), `span` (span), and even `div` (division). So expect to encounter these under `td` as well.
 
 As indicated in the figure, each HTML tag can have attributes, such as `id` and `class`. To understand how the two differ, consider `id="yellow"` and `id="orange"`, these are unique identities (`id`s) of colors. These `id`s can be grouped into a class, e.g. `class="colors"`. HTML tags are not required to have these attributes but are useful for adding custom styles and behavior when doing web development. This article will not dive into the details of the HTML document, but rather to give the reader a high level understanding. There are many resources available on the web, just google.
@@ -41,14 +41,14 @@ To start with, the following code will download the frontend source code of the 
 Extract the HTML source code and parsed it as follows:
 <script src="https://gist.github.com/alstat/deb9ef2abe52af58fc03be63f0482ccf.js"></script>
 Now to extract the header of the HTML table, use the Web Developer Tools for preliminary inspection on the components of the website. As shown in the screenshot below, the header of the table is enclosed inside the `p` tag of the `td`. Further, the `p` tag is of class `auto-style33`, which can be accessed via CSS selector by simply prefixing it with `.`, i.e. `.auto-style33`.
-<img src="http://drive.google.com/uc?export=view&id=1LVNFZRHdT-o-vX-0dLiBMiVv3872LXpE">
+<img src="https://drive.google.com/uc?export=view&id=1LVNFZRHdT-o-vX-0dLiBMiVv3872LXpE">
 <script src="https://gist.github.com/alstat/63c8855a48c9a33669c9bdd4d3ae2e9a.js"></script>
 `qres` contains the HTML tags that matched the CSS selector's query. The result is further cleaned by removing the tabs, spaces and line breaks via <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">Regular Expressions</a>, and is done as follows:
 <script src="https://gist.github.com/alstat/94e5af21b303b995d93af24a8ae69841.js"></script>
 Having the header names, next is to extract the data from the HTML table. Upon inspection, the `td`s containing the data next to the header rows seem to have the following classes (see screenshot below): `auto-style21` for first column (Date-Time), `auto-style81` for second column (Latitude), `auto-style80` for third and fourth columns (Longitude and Depth), `auto-style74` for fifth column (Magnitude), and `auto-style79` for sixth column (Location). Unfortunately, this is not consistent across rows (`tr`s), and is therefore best not to use it with <a href="https://github.com/Algocircle/Cascadia.jl" target="_blank">Cascadia.jl</a>. Instead, use <a href="https://github.com/JuliaWeb/Gumbo.jl" target="_blank">Gumbo.jl</a> to navigate down the hierarchy of the <a href="" target="_blank">Document Object Model</a> of the HTML.
-<img src="http://drive.google.com/uc?export=view&id=1XEkudOAB7o4Cix5CY4tqSJe2J0BpoJ_G">
+<img src="https://drive.google.com/uc?export=view&id=1XEkudOAB7o4Cix5CY4tqSJe2J0BpoJ_G">
 Starting with the `table` tag which is of class `.MsoNormalTable` (see screenshot below), the extraction proceeds down to `tbody` then to `tr` and finally to `td`.
-<img src="http://drive.google.com/uc?export=view&id=1x3N58LE_5ENyzMbyyhrx8Zrlgp40EBNI">
+<img src="https://drive.google.com/uc?export=view&id=1x3N58LE_5ENyzMbyyhrx8Zrlgp40EBNI">
 The following code describes how parsing is done, read the comments:
 <script src="https://gist.github.com/alstat/b4fbfe5dc8330ef16ad1abc05d44056f.js"></script>
 
