@@ -100,7 +100,7 @@ Lastly, I am pleased with the clean API of the TF 2.0 as opposed to the redundan
 In my next article, I will likely start on TensorFlow Probability, which extends the TF core APIs by incorporating Bayesian approach to modeling and statistical analyses. Otherwise, I will touch on modeling image datasets, or present new topic.
 
 ### Complete Codes
-If you are impatient, here is the complete code excluding the plots. These should work after installing the required libraries:
+If you are impatient, here is the complete code excluding the plots. This should work after installing the required libraries:
 <script src="https://gist.github.com/alstat/8e5af440bc199b8ee8dfc53056c848ec.js"></script>
 
 ### References
