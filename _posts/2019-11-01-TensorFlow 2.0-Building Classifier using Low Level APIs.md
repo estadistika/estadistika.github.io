@@ -86,9 +86,9 @@ Here's the code for weight's estimation:
 As you can see, we have three loops, two of which are inner-loops for the minibatches on both training and testing datasets. Needless to say, the minibatches used in the testing dataset above are not really necessary, since we can have a single batch for validation. However, we have them for purpose of comparing the performance of the optimization algorithm on both single batch and three minibatches. Finally, the following tabularizes the statistics we obtained from model estimation.
 <script src="https://gist.github.com/alstat/35a1f774a548e60198e9773c79edca6a.js"></script>
 The following plot shows the loss of the model across 500 epochs. Since I did not specify any seed on weights' initial values, you will likely get a different curve:
-<img src="http://drive.google.com/uc?export=view&id=1PPMJVt2RPtj7OYnTlPGbpOqS9ffzv89O">
+<img src="https://drive.google.com/uc?export=view&id=1PPMJVt2RPtj7OYnTlPGbpOqS9ffzv89O">
 The corresponding accuracy is depicted below:
-<img src="http://drive.google.com/uc?export=view&id=1ROu_mLT7t2D4RFj79YF17g9b-GXXIQAM">
+<img src="https://drive.google.com/uc?export=view&id=1ROu_mLT7t2D4RFj79YF17g9b-GXXIQAM">
 For the codes of the above figures, please refer to this <a href="https://gist.github.com/alstat/a2f7f2725a2456ddfe86b83f9e6c1df6">link</a>. With regards to the series above, the optimization using three minibatches overfitted the data after 400+ epochs. This is evident on both figures, where we find a decrease in accuracy. Thus, it is recommended to have a model-checkpoint and early-stopping during calibration, and I'll leave that to the reader.
 
 ### End Note
