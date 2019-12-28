@@ -1,4 +1,198 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-07-09T05:33:51+08:00</updated><id>http://localhost:4000/</id><title type="html">Estadistika</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Interfacing with Relational Database using MySQL.jl and PyMySQL</title><link href="http://localhost:4000/julia/python/packages/relational-databases/2019/07/07/Interfacing-with-Relational-Database-using-MySQL.jl-and-PyMySQL.html" rel="alternate" type="text/html" title="Interfacing with Relational Database using MySQL.jl and PyMySQL" /><published>2019-07-07T12:00:00+08:00</published><updated>2019-07-07T12:00:00+08:00</updated><id>http://localhost:4000/julia/python/packages/relational-databases/2019/07/07/Interfacing%20with%20Relational%20Database%20using%20MySQL.jl%20and%20PyMySQL</id><content type="html" xml:base="http://localhost:4000/julia/python/packages/relational-databases/2019/07/07/Interfacing-with-Relational-Database-using-MySQL.jl-and-PyMySQL.html">&lt;p&gt;Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor’s time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers (e.g. &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; and &lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;). The figure below illustrates the request and response communcations between client and servers.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-02T00:05:25+08:00</updated><id>http://localhost:4000/</id><title type="html">Estadistika</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">TensorFlow 2.0: Building Simple Classifier using Low Level APIs</title><link href="http://localhost:4000/python/tensorflow/2019/11/01/TensorFlow-2.0-Building-Classifier-using-Low-Level-APIs.html" rel="alternate" type="text/html" title="TensorFlow 2.0: Building Simple Classifier using Low Level APIs" /><published>2019-11-01T12:00:00+08:00</published><updated>2019-11-01T12:00:00+08:00</updated><id>http://localhost:4000/python/tensorflow/2019/11/01/TensorFlow%202.0-Building%20Classifier%20using%20Low%20Level%20APIs</id><content type="html" xml:base="http://localhost:4000/python/tensorflow/2019/11/01/TensorFlow-2.0-Building-Classifier-using-Low-Level-APIs.html">&lt;p&gt;At the end of my comparison — &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;TensorFlow 1.14 Keras’ API versus Julia’s Flux.jl and Knet.jl high level APIs&lt;/a&gt; — I indicated some future write-ups I plan to do, one of which is to compare (obviously) on the low level APIs. However, with the release of the much anticipated TensorFlow 2.0, I decided not to wait for the next comparison and instead dedicate a separate article for the said release. The goal of this blog post then is to simply replicate the modeling in my &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;previous article&lt;/a&gt;, without using the Keras API. Specifically, I’ll discuss the steps on constructing a custom layer, how we can chain multiple layers as in Keras’ &lt;code&gt;Sequential&lt;/code&gt;, do a feedforward, a backward by updating the gradient, and batching the training datasets.&lt;/p&gt;
+
+&lt;h3 id=&quot;load-the-libraries&quot;&gt;Load the Libraries&lt;/h3&gt;
+&lt;p&gt;To start with, load the necessary libraries by running the following codes:
+&lt;script src=&quot;https://gist.github.com/alstat/6ca5094612c2031fa80a6ca42fac34b7.js&quot;&gt;&lt;/script&gt;
+I should emphasize that Line 7 is optional, and I’m using this for annotation purposes on function parameters.&lt;/p&gt;
+
+&lt;h3 id=&quot;define-the-constants&quot;&gt;Define the Constants&lt;/h3&gt;
+&lt;p&gt;The following are the constants that we will be using on the specification of the succeeding codes:
+&lt;script src=&quot;https://gist.github.com/alstat/454aa49e0ccf7d3ca86d65c35a1002c7.js&quot;&gt;&lt;/script&gt;
+As you notice, these are the hyperparameters that we configured for the model below. Specifically, we use ReLU (&lt;code&gt;tf.nn.relu&lt;/code&gt;) as the activation for the first hidden layer and a softmax (&lt;code&gt;tf.nn.softmax&lt;/code&gt;) for the output layer. Other parameters include batch-size, the number of epochs, and the optimizer which in this case is Adam (&lt;code&gt;tf.keras.optimizers.Adam&lt;/code&gt;). Feel free to change the items above, for example, you can explore on the different optimizers, or on the activation functions.&lt;/p&gt;
+
+&lt;h3 id=&quot;load-the-data&quot;&gt;Load the Data&lt;/h3&gt;
+&lt;p&gt;The Iris dataset is available in Python’s &lt;a href=&quot;https://scikit-learn.org/&quot;&gt;Scikit-Learn&lt;/a&gt; library and can be loaded as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/80e748cd186d94d51736348d607efc03.js&quot;&gt;&lt;/script&gt;
+&lt;code&gt;xdat&lt;/code&gt; and &lt;code&gt;ydat&lt;/code&gt; are both &lt;code&gt;np.ndarray&lt;/code&gt; objects, and we are going to partition these into training and testing datasets using the &lt;code&gt;Data&lt;/code&gt; class defined in the next section.&lt;/p&gt;
+
+&lt;h3 id=&quot;define-the-data-class&quot;&gt;Define the Data Class&lt;/h3&gt;
+&lt;p&gt;To organize the data processing, below is the class with methods on partitioning, tensorizing, and batching the input data:
+&lt;script src=&quot;https://gist.github.com/alstat/e24d40807d6816b92076c300b57a4bce.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;data-cleaningprocessing&quot;&gt;Data Cleaning/Processing&lt;/h3&gt;
+&lt;p&gt;We then apply the above codes to the iris dataset as shown below:
+&lt;script src=&quot;https://gist.github.com/alstat/0284a46ed09b92bcf19de4e5cee527d2.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;!-- The unit that TensorFlow crunches during computation is of type &lt;code&gt;tf.Tensor&lt;/code&gt;. Thus, we need to convert the &lt;code&gt;np.ndarray&lt;/code&gt; to &lt;code&gt;tf.Tensor&lt;/code&gt; objects, as in Lines 2-5 above. --&gt;
+
+&lt;h3 id=&quot;defining-the-dense-layer&quot;&gt;Defining the Dense Layer&lt;/h3&gt;
+&lt;p&gt;The model as mentioned in my &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;previous article&lt;/a&gt; is a MultiLayer Perceptron (MLP) with one hidden layer, please refer to the said article for more details. In order to use the low level APIs, we need to define the &lt;code&gt;Dense&lt;/code&gt; layer from scratch. As a guide, below is the mathematical formulation of the said layer:
+\begin{equation}
+\mathbf{y} = \sigma\left(\mathbf{x}\cdot\mathbf{W} +  \mathbf{b}\right),
+\end{equation}
+where $\sigma$ is the activation function, which can either be ReLU, sigmoid, etc. Now in order for the above dot product to work, $\mathbf{x}$ must be a row-vector, i.e.:
+\begin{equation}
+\mathbf{x} = \left[
+  x_1,x_2,\cdots,x_n 
+\right]
+\end{equation}
+where $n$ is the number of features. Thus, $\mathbf{W}$ is a $n\times j$-matrix, with $n$ as the dimension of the input layer and  $j$ as the dimension of the next layer (it could be hidden or output). With regards to the weights matrix and the bias vector, we need to initialize them to some random starting values. There are several ways to do this, one of which is to use samples from the standard Gaussian distribution, i.e.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\mathbf{W} = [(w_{ij})]\quad &amp;\textrm{and}\quad \mathbf{b} = [(b_i)],\nonumber\\
+w_{ij}, b_i \sim \mathcal{N}(0,1), \;i = &amp;\{1,\cdots,m\}, \;j=\{1,\cdots,n\}\nonumber
+\end{align} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Translating all these into codes, we have the following:
+&lt;script src=&quot;https://gist.github.com/alstat/6b743375c1b3b5a468de559f77408aa7.js&quot;&gt;&lt;/script&gt;
+Lines 3-6 initialize the &lt;code&gt;Dense&lt;/code&gt; layer by assigning starting values to the weights, and Lines 8-12 define the feedforward. Further, if there is something special in the above code, it’s the &lt;code&gt;tf.Variable&lt;/code&gt;. This class tells TensorFlow which object are learnable during gradient optimization. Lastly, I want to emphasize that prior to TensorFlow 2.0, &lt;code&gt;tf.random.normal&lt;/code&gt; was defined as &lt;code&gt;tf.random_normal&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;feedforward&quot;&gt;Feedforward&lt;/h3&gt;
+&lt;p&gt;We can now use the &lt;code&gt;Dense&lt;/code&gt; layer to perform feedforward computation as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/7ade32577acd6c5f22007eaa6e3ac894.js&quot;&gt;&lt;/script&gt;
+The above code uses the first and the first five rows, respectively, of the &lt;code&gt;data.xtrn&lt;/code&gt; as input. Of course, these values may change since we did not specify any seed for the initial weights and biases.&lt;/p&gt;
+
+&lt;h3 id=&quot;defining-the-chain&quot;&gt;Defining the Chain&lt;/h3&gt;
+&lt;p&gt;Now that we know how to initialize a single &lt;code&gt;Dense&lt;/code&gt; layer, we need to extend it to multiple layers to come up with a MLP architecture. Hence, what we need to have now is a &lt;code&gt;Chain&lt;/code&gt; for layers. In short, we need to replicate (not all attributes and methods) the Keras’ &lt;code&gt;Sequential&lt;/code&gt;, and this is done as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/832bf930c99beeae550c93c3d8fbb0e8.js&quot;&gt;&lt;/script&gt;
+Let me walk you through, method-by-method. To initialize this class, we need to have a list of &lt;code&gt;Dense&lt;/code&gt; layers (referring to &lt;code&gt;self.layers&lt;/code&gt; at Line 4 above) as input. Once we have that, we can do feedforward computation using the untrained weights by simply calling the object (as defined by &lt;code&gt;__call__&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;To train the weights, we need to call the &lt;code&gt;backward&lt;/code&gt; method, which does backpropagation. This is done by &lt;code&gt;optimize&lt;/code&gt;-ing the weights, using the &lt;code&gt;grad&lt;/code&gt;ient obtained by differentiating the &lt;code&gt;loss&lt;/code&gt; function of the model, with respect to the learnable parameters (referring to &lt;code&gt;self.params&lt;/code&gt; in Line 12 above). In TensorFlow 2.0, it is recommended to use the Keras optimizers (&lt;code&gt;keras.optimizers&lt;/code&gt;) instead of the &lt;code&gt;tf.train.GradientDescentOptimizer&lt;/code&gt;. One thing to note as well, is the loss function which is a &lt;code&gt;.categorical_crossentropy&lt;/code&gt; as opposed to &lt;code&gt;.sparse_categorical_crossentropy&lt;/code&gt; which is used in my &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;previous article&lt;/a&gt;. The difference follows from the fact that the target variable we have here is encoded as one-hot vector (you can confirm this under the &lt;code&gt;to_tensor&lt;/code&gt; method of the &lt;code&gt;Data&lt;/code&gt; class above), and thus &lt;i&gt;cross entropy&lt;/i&gt; is used as opposed to integer encoding, in which case &lt;i&gt;sparse cross entropy&lt;/i&gt; is more appropriate.&lt;/p&gt;
+
+&lt;p&gt;Referring back to the codes, I think Lines 33-34 are self-explanatory and should redirect us to the &lt;code&gt;grad&lt;/code&gt; function where we find the &lt;code&gt;tf.GradientTape&lt;/code&gt;, which is not obvious as to what exactly it does at first glance, apart from the high level understanding that it has something to do with the gradient computation (or it could really be the main moving part). Well, from the name itself, we can think of it as a “Tape Recorder”, which records the gradient of the trainable variables (referring to &lt;code&gt;tf.Variable&lt;/code&gt; in Lines 4-5 of the &lt;code&gt;Dense&lt;/code&gt; layer) with respect to the loss of the model. That is, when we do forward operation (referring to &lt;code&gt;self(inputs)&lt;/code&gt; at Line 28 above), TensorFlow automatically differentiate the loss with respect to the parameters. In order then to update the weights under the Adam (referring to &lt;code&gt;opt&lt;/code&gt; in Line 34 above) algorithm, we need to have these gradients at the given iteration. Thus we have a recorder (&lt;code&gt;tf.GradientTape&lt;/code&gt; in this case), meant to extract the recorded gradients.&lt;/p&gt;
+
+&lt;p&gt;Finally, we chain the layers as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/94cbf6f01918a7d19d370cbc7b4cc83b.js&quot;&gt;&lt;/script&gt;
+This extends the previous model (referring to &lt;code&gt;layer&lt;/code&gt; object above) into chains of two layers, and we can call it as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/f71a1f966ede34a473ee4308ca6a0dc6.js&quot;&gt;&lt;/script&gt;
+The output above is the prediction of the model using the untrained weights.&lt;/p&gt;
+
+&lt;h3 id=&quot;training&quot;&gt;Training&lt;/h3&gt;
+&lt;p&gt;At this point, we can now optimize the parameters by calling the &lt;code&gt;backward&lt;/code&gt; method; and because we are not using the Keras’ &lt;code&gt;Sequential([...]).fit&lt;/code&gt;, we can customize our training procedure to suit our needs — starting with the custom definition of the model accuracy:
+&lt;script src=&quot;https://gist.github.com/alstat/757b6796c9cd62c9b6bbadec179c254f.js&quot;&gt;&lt;/script&gt;
+Here’s the code for calibration:
+&lt;script src=&quot;https://gist.github.com/alstat/6e515094992afecb508bfd3ec5e0d7bf.js&quot;&gt;&lt;/script&gt;
+As you can see, we have three loops, two of which are inner-loops for the minibatches on both training and testing datasets. Needless to say, the minibatches used in the testing dataset above are not really necessary, since we can have a single batch for validation. However, we have them for purpose of comparing the performance of the optimization algorithm on both single batch and three minibatches. Finally, the following tabularizes the statistics we obtained from model estimation.
+&lt;script src=&quot;https://gist.github.com/alstat/35a1f774a548e60198e9773c79edca6a.js&quot;&gt;&lt;/script&gt;
+The following plot shows the loss of the model across 500 epochs. Since we did not specify any seed in weights initial values, you would likely get a different curve:
+&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1PPMJVt2RPtj7OYnTlPGbpOqS9ffzv89O&quot; /&gt;
+The corresponding accuracy is depicted below:
+&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1ROu_mLT7t2D4RFj79YF17g9b-GXXIQAM&quot; /&gt;
+For the codes of the above figures, please refer to this &lt;a href=&quot;https://gist.github.com/alstat/a2f7f2725a2456ddfe86b83f9e6c1df6&quot;&gt;link&lt;/a&gt;. With regards to the series above, the optimization using three minibatches overfitted the data after 400+ epochs. This is evident in both figures, where we find a decrease in accuracy. Thus, it is recommended to have a model-checkpoint and early-stopping during calibration, and I’ll leave that to the reader.&lt;/p&gt;
+
+&lt;h3 id=&quot;end-note&quot;&gt;End Note&lt;/h3&gt;
+&lt;p&gt;In this article, I have shown you how to do modeling using TensorFlow 2.0’s Core APIs; and as an end note, I want to highlight two key points on the importance of using the low-level APIs. The first one, is having full control on your end-to-end modeling process. The ability of having the flexibility on your tools, enables the user to solve problems with custom models, custom objective function, custom optimization algorithms, and whatnot. The second point, is the appreciation of the theory. It is simply fulfilling to see how the theory works in practice, and it gives the user the confidence to experiment, for example on the gradients and other internals.&lt;/p&gt;
+
+&lt;p&gt;Lastly, I am pleased with the clean API of the TF 2.0 as opposed to the redundant APIs we have in the previous versions; and with eager-execution as the default configuration, makes the library pythonic — and that matters to me. Feel free to share your thoughts, if you have comments/suggestions.&lt;/p&gt;
+
+&lt;h3 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h3&gt;
+&lt;p&gt;In my next article, I will likely start on TensorFlow Probability, which extends the TF core APIs by incorporating Bayesian approach to modeling and statistical analyses — and these are areas of my expertise. Otherwise, I will touch on modeling image datasets.&lt;/p&gt;
+
+&lt;h3 id=&quot;complete-codes&quot;&gt;Complete Codes&lt;/h3&gt;
+&lt;p&gt;If you are impatient, here is the complete code excluding the plots. These should work after installing the required libraries:
+&lt;script src=&quot;https://gist.github.com/alstat/8e5af440bc199b8ee8dfc53056c848ec.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.tensorflow.org/api/stable&quot;&gt;TensorFlow 2.0 API Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://datascience.stackexchange.com/questions/41921/sparse-categorical-crossentropy-vs-categorical-crossentropy-keras-accuracy&quot;&gt;Difference of Sparse Categorical Crossentropy and Categorical Crossentropy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;software-versions&quot;&gt;Software Versions&lt;/h3&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/662ddb50fbe5c61bbebd6dbb6bf21e20.js&quot;&gt;&lt;/script&gt;</content><author><name>Al-Ahmadgaid B. Asaad</name></author><category term="julia" /><category term="python" /><category term="software-engineering" /><summary type="html">At the end of my comparison — TensorFlow 1.14 Keras’ API versus Julia’s Flux.jl and Knet.jl high level APIs — I indicated some future write-ups I plan to do, one of which is to compare (obviously) on the low level APIs. However, with the release of the much anticipated TensorFlow 2.0, I decided not to wait for the next comparison and instead dedicate a separate article for the said release. The goal of this blog post then is to simply replicate the modeling in my previous article, without using the Keras API. Specifically, I’ll discuss the steps on constructing a custom layer, how we can chain multiple layers as in Keras’ Sequential, do a feedforward, a backward by updating the gradient, and batching the training datasets.</summary></entry><entry><title type="html">Model Productization: Crafting a Web Application for Iris Classifier</title><link href="http://localhost:4000/julia/python/software-engineering/ui-ux/model-deployment/productization/2019/07/25/Model-Productization-Creating-a-Web-Application-for-Iris-Classifier.html" rel="alternate" type="text/html" title="Model Productization: Crafting a Web Application for Iris Classifier" /><published>2019-07-25T12:00:00+08:00</published><updated>2019-07-25T12:00:00+08:00</updated><id>http://localhost:4000/julia/python/software-engineering/ui-ux/model-deployment/productization/2019/07/25/Model%20Productization-Creating%20a%20Web%20Application%20for%20Iris%20Classifier</id><content type="html" xml:base="http://localhost:4000/julia/python/software-engineering/ui-ux/model-deployment/productization/2019/07/25/Model-Productization-Creating-a-Web-Application-for-Iris-Classifier.html">&lt;p&gt;Any successful data science project must end with productization. This is the stage where trained models are deployed as application that can be easily accessed by the end users. The application can either be part of already existing system, or it could also be a standalone application working in the back-end of any interface. In any case, this part of the project deals mainly with software engineering — a task that involves front-end programming.&lt;/p&gt;
+
+&lt;p&gt;In my previous article, we talked about data engineering by &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/relational-databases/2019/07/07/Interfacing-with-Relational-Database-using-MySQL.jl-and-PyMySQL.html&quot;&gt;interfacing with relational database using MySQL.jl and PyMySQL&lt;/a&gt;; and we’ve done &lt;a href=&quot;https://estadistika.github.io/data/analyses/wrangling/julia/programming/packages/2018/06/08/Julia-Introduction-to-Data-Wrangling.html&quot;&gt;data wrangling&lt;/a&gt; as well. Moreover,  we also touched on modeling using &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;Multilayer Perceptron (MLP) for classifying the Iris species&lt;/a&gt;. Hence, to cover the end-to-end spectrum of a typical data science project (excluding the business part), we’re going to deploy our Iris model as a web application.&lt;/p&gt;
+
+&lt;p&gt;There are of course several options for user-interface other than web, for example desktop and mobile front-ends; but I personally prefer web-based since you can access the application without having to install anything — only the browser.&lt;/p&gt;
+&lt;h3 id=&quot;final-output&quot;&gt;Final Output&lt;/h3&gt;
+&lt;p&gt;The final interface of our application is given below. The app is powered by a server on both ends, with two models (Julia and Python) running in the back-end. Try playing with the app to see how it works.&lt;/p&gt;
+&lt;p class=&quot;codepen&quot; data-height=&quot;747&quot; data-theme-id=&quot;dark&quot; data-default-tab=&quot;result&quot; data-user=&quot;alstat&quot; data-slug-hash=&quot;YoMMOY&quot; style=&quot;height: 550px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;&quot; data-pen-title=&quot;Tutorial&quot;&gt;
+  &lt;span&gt;See the Pen &lt;a href=&quot;https://codepen.io/alstat/pen/YoMMOY/&quot;&gt;
+  Tutorial&lt;/a&gt; by Al Asaad (&lt;a href=&quot;https://codepen.io/alstat&quot;&gt;@alstat&lt;/a&gt;)
+  on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/span&gt;
+&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;https://static.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;As indicated in the status pane of the application, the UI above is not powered by the back-end servers. That is, the prediction is not coming from the model, but rather randomly sampled from a set of possible values of Iris species, i.e. Setosa, Versicolor, and Virginica. The same case when estimating the model, the app simply mimics the model training. This is because I don’t have a cloud server, so this only works in the local server in my machine. The application above, however, does send request to the server (localhost:8081 and port 8082, in this case), but if unaccessible, then it will randomly sample from the set of species when classifying; and randomly generates a test accuracy when training — and this is why we still get prediction despite no communication to the back-end servers. In succeeding sections though, I will show you (via screencast) how the application works with the back-end servers.&lt;/p&gt;
+
+&lt;h3 id=&quot;project-source-codes&quot;&gt;Project Source Codes&lt;/h3&gt;
+&lt;p&gt;The complete codes for this article are available &lt;a href=&quot;https://github.com/estadistika/projects/tree/master/2019-07-25-Iris-Web-App/model-deployment&quot;&gt;here&lt;/a&gt; as a Github repo, and I encourage you to have it in your machine if you want to follow the succeeding discussions. The repo has the following folder structure:
+&lt;script src=&quot;https://gist.github.com/alstat/1c5b9f777d05373f1be8801dc2bb100c.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 id=&quot;software-architecture&quot;&gt;Software Architecture&lt;/h3&gt;
+&lt;p&gt;As mentioned earlier, the application is powered by back-end servers that are instances of Julia and Python. The communication between the user-interface (client) and the servers is done via HTTP (HyperText Transfer Protocol). The following is the architecture of our application:
+&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1zRt5mOCgy5hY2F23QVHpFcvzA4TtCsIS&quot; /&gt;
+As shown in the figure, the client side handles response asynchronously. That is, we can send multiple request without waiting for the response of the preceding request. On the other hand, the server side processes the request synchronously, that is, the request from the client are handled one-at-a-time. These networks work via &lt;a href=&quot;https://github.com/JuliaWeb/HTTP.jl&quot;&gt;HTTP.jl&lt;/a&gt; for Julia, and &lt;a href=&quot;https://palletsprojects.com/p/flask/&quot;&gt;Flask&lt;/a&gt; for Python. If you are interested in asynchronous back-end server, checkout Python’s &lt;a href=&quot;https://klein.readthedocs.io/en/latest/&quot;&gt;Klein&lt;/a&gt; library (Flask only works synchronously); and for Julia you can set HTTP.jl to work asynchronously. I should mention though that HTTP.jl is a bit lower in terms of API level compared to Flask. In fact, HTTP.jl is better compared to Python’s &lt;a href=&quot;https://2.python-requests.org/en/master/&quot;&gt;Requests&lt;/a&gt; library. For Flask counterpart, however, Julia offers &lt;a href=&quot;https://github.com/GenieFramework/Genie.jl&quot;&gt;Genie.jl&lt;/a&gt; and I encourage you to check that out as well.&lt;/p&gt;
+
+&lt;h3 id=&quot;hypertext-transfer-protocol-http&quot;&gt;HyperText Transfer Protocol (HTTP)&lt;/h3&gt;
+&lt;p&gt;We’ve emphasized in the previous section that, the communication between the interface and the model is done via HTTP. In this section, we’ll attempt to briefly cover the basics of this protocol. To do this, we’ll setup a client and server instances both in Julia and in Python. This is done by first running the server in the Terminal/CMD, before running the client in a separate Terminal/CMD (follow the order, execute the server first before the client). Here are the codes:&lt;/p&gt;
+&lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-072019-1', 'tabcontent-1')&quot;&gt;Julia (Client)&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-072019-2', 'tabcontent-1')&quot;&gt;Julia (Server)&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-072019-1', 'tabcontent-1')&quot;&gt;Python (Client)&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-072019-2', 'tabcontent-1')&quot;&gt;Python (Server)&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;julia-072019-1&quot; class=&quot;tabcontent-1 first&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/efd32b484f5c3066db4aba073d7232e5.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;julia-072019-2&quot; class=&quot;tabcontent-1&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/14ac41a9aa0e4f84636dfe0d225e40ab.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;python-072019-1&quot; class=&quot;tabcontent-1&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/4a1b41e4ea3cf56dcbbd627245c079fd.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;python-072019-2&quot; class=&quot;tabcontent-1&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/47b77733fb514036c1c7483ff4e2eb33.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;For your reference, here are the outputs of the above codes.&lt;/p&gt;
+&lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-072019-output-1', 'tabcontent-1-out')&quot;&gt;Julia (Output)&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-072019-output-1', 'tabcontent-1-out')&quot;&gt;Python (Output)&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id=&quot;julia-072019-output-1&quot; class=&quot;tabcontent-1-out first&quot;&gt;
+  &lt;img id=&quot;julia-output&quot; src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1gpJIaqpP7Y4dye0-2dtGLEglcjvcezG0&quot; style=&quot;margin-top: 16px&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;python-072019-output-1&quot; class=&quot;tabcontent-1-out&quot; style=&quot;display: none;&quot;&gt;
+  &lt;img id=&quot;python-output&quot; src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1vqYNskzKAJiZGfYTmh0gQoshjUI6F88h&quot; style=&quot;margin-top: 16px&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As shown in the screenshots above, the codes were executed at the root folder of the project repo (see the Project Source Codes section for folder tree structure). The server we setup is running at localhost:8081 or 127.0.0.1:8081 — waiting (or listening) for any incoming request from the client. Thus, when we ran the client codes, which send POST request with the data &lt;code&gt;{&quot;Hello&quot; : &quot;World&quot;}&lt;/code&gt;, to localhost:8081, the server immediately responded back to the client — throwing the data received. The header specified in the response, &lt;code&gt;&quot;Access-Control-Allow-Origin&quot; =&amp;gt; &quot;*&quot;&lt;/code&gt;, simply tells the server to respond to any (&lt;code&gt;*&lt;/code&gt;) client. For more details on HTTP, I think &lt;a href=&quot;https://www.youtube.com/watch?v=eesqK59rhGA&quot;&gt;this video&lt;/a&gt; is useful.&lt;/p&gt;
+&lt;h3 id=&quot;server-iris-classifier&quot;&gt;Server: Iris Classifier&lt;/h3&gt;
+&lt;p&gt;At this point, you should have at least an idea of how HTTP works. To set this up in Julia and in Python, here are the codes for the REST API:&lt;/p&gt;
+&lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'julia-072019-3', 'tabcontent-2')&quot;&gt;Julia&lt;/button&gt;
+  &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-072019-3', 'tabcontent-2')&quot;&gt;Python&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;julia-072019-3&quot; class=&quot;tabcontent-2 first&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/0b6a33e478979665e9adf10c17969f92.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;python-072019-3&quot; class=&quot;tabcontent-2&quot; style=&quot;display: none;&quot;&gt;
+  &lt;script src=&quot;https://gist.github.com/alstat/d1099efc4d6071488b16f5dbf17bcaee.js&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;p&gt;The requests are received at line 38 of the Julia code, and are handled depending on the target URL. If the target URL of the client’s request is &lt;code&gt;/classify&lt;/code&gt;, then the &lt;code&gt;classifier&lt;/code&gt; router will handle the request via the &lt;code&gt;classify&lt;/code&gt; function defined in line 7. The same case when we receive training request, the &lt;code&gt;train&lt;/code&gt; function defined in line 19 will handle the request. Each of these functions then returns a response back to the client with the data. On the other hand, we see that Python’s Flask library uses a decorator for specifying the router, with two main helper functions defined in line 32 and 37. The two approaches are indeed easy to follow, despite the difference in implementation. I should emphasize though that the above codes refer to other files to perform the training and classification. These files include &lt;i&gt;model-training.jl&lt;/i&gt; and &lt;i&gt;model_training.py&lt;/i&gt;, etc. I will leave these to the reader to explore the scripts in the project repo.&lt;/p&gt;
+&lt;h3 id=&quot;client-web-interface&quot;&gt;Client: Web Interface&lt;/h3&gt;
+&lt;p&gt;Now that we have an idea of how the request in the servers are processed, in this section, we need to understand how the client prepares and sends requests to the server, and how it processes the response. In the CodePen embedded above, the client codes are in the JS (Javascript) tab. The following is a copy of it:
+&lt;script src=&quot;https://gist.github.com/alstat/b53164002475b06c559a0b9cc1177365.js&quot;&gt;&lt;/script&gt;
+Lines 23-28 define the event listener for the buttons in the application. Line 24, for example, adds functionality to the &lt;kbd&gt;Classify&lt;/kbd&gt; button, which is defined in line 44. This is a void function, but it sends HTTP request in line 79 to the specified url defined in lines 63-67. The &lt;code&gt;httpRequest&lt;/code&gt; function in line 5, is the one that handles the communication with the servers. It takes three arguments, the &lt;code&gt;URL&lt;/code&gt; (the address of the server), the &lt;code&gt;data&lt;/code&gt; (the request data to be sent to the server), and the &lt;code&gt;callback&lt;/code&gt; (the function that will handle the response from the server). The request as mentioned is handled asynchronously, and is specified by the third argument — &lt;code&gt;true&lt;/code&gt; (asynchronous) — of the &lt;code&gt;xhr.open&lt;/code&gt; method defined in line 8. The rest of the codes are functions defining the functionalities of the buttons, status pane, output display, etc. of the app.&lt;/p&gt;
+
+&lt;h3 id=&quot;htmlcss&quot;&gt;HTML/CSS&lt;/h3&gt;
+&lt;p&gt;The other codes that are part of the application are the HTML and CSS files. I will leave these to the reader, since these codes are simply declarations of how the layout and style of the app should look like.&lt;/p&gt;
+
+&lt;h3 id=&quot;screencast&quot;&gt;Screencast&lt;/h3&gt;
+&lt;p&gt;The following video shows how the application works with the back-end servers running.
+&lt;!-- &lt;iframe width=&quot;100%&quot; height=&quot;400px&quot; src=&quot;https://www.youtube.com/watch?v=jxM_U9USkv4&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt; --&gt;&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;400px&quot; src=&quot;https://www.youtube.com/embed/jxM_U9USkv4&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;The aim of this exercise is to demonstrate the capability of Julia in production, and one of my concern was precompilations. Specifically, if these occur for every client’s request. Fortunately, these only happen at the first request, the succeeding ones are guaranteed to be fast. Having said, just as the stability of Python for production, I think Julia is already stable as a back-end language for creating a fully featured web application, and is therefore capable enough for an end-to-end project.&lt;/p&gt;
+
+&lt;h3 id=&quot;software-versions&quot;&gt;Software Versions&lt;/h3&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/65dab0d062ea0fd229b4aa23c18fcd21.js&quot;&gt;&lt;/script&gt;</content><author><name>Al-Ahmadgaid B. Asaad</name></author><category term="julia" /><category term="python" /><category term="software-engineering" /><summary type="html">Any successful data science project must end with productization. This is the stage where trained models are deployed as application that can be easily accessed by the end users. The application can either be part of already existing system, or it could also be a standalone application working in the back-end of any interface. In any case, this part of the project deals mainly with software engineering — a task that involves front-end programming.</summary></entry><entry><title type="html">Interfacing with Relational Database using MySQL.jl and PyMySQL</title><link href="http://localhost:4000/julia/python/packages/relational-databases/2019/07/07/Interfacing-with-Relational-Database-using-MySQL.jl-and-PyMySQL.html" rel="alternate" type="text/html" title="Interfacing with Relational Database using MySQL.jl and PyMySQL" /><published>2019-07-07T12:00:00+08:00</published><updated>2019-07-07T12:00:00+08:00</updated><id>http://localhost:4000/julia/python/packages/relational-databases/2019/07/07/Interfacing%20with%20Relational%20Database%20using%20MySQL.jl%20and%20PyMySQL</id><content type="html" xml:base="http://localhost:4000/julia/python/packages/relational-databases/2019/07/07/Interfacing-with-Relational-Database-using-MySQL.jl-and-PyMySQL.html">&lt;p&gt;Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor’s time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers (e.g. &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; and &lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;). The figure below illustrates the request and response communcations between client and servers.
 &lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ&quot; /&gt;
 As mentioned earlier, databases are meant to store data for &lt;i&gt;later use&lt;/i&gt; — in the sense that we can use it as a response to client’s requests, such as viewing or data extraction for insights. In this article, we are interested in data extraction from the database. In particular, the objective is to illustrate how to send request to MySQL server, and how to process response both from Julia and Python.&lt;/p&gt;
 &lt;h3 id=&quot;mysql-server-setup&quot;&gt;MySQL Server Setup&lt;/h3&gt;
@@ -17,7 +211,7 @@ As mentioned earlier, databases are meant to store data for &lt;i&gt;later use&l
 &lt;!-- https://drive.google.com/file/d/1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb/view?usp=sharing --&gt;
 From here, we are going to check the available databases in MySQL server. To do this, run the following:
 &lt;script src=&quot;https://gist.github.com/alstat/1dbad1187130a31091aead6145dc0151.js&quot;&gt;&lt;/script&gt;
-Indeed, there are four out-of-the-box defined databases already, and we don’t want to touch that. Instead, we going to create our own database, let’s call it &lt;code&gt;tutorial&lt;/code&gt;. To do this, run the following codes:
+Indeed, there are four out-of-the-box defined databases already, and we don’t want to touch that. Instead, we are going to create our own database, let’s call it &lt;code&gt;tutorial&lt;/code&gt;. To do this, run the following codes:
 &lt;script src=&quot;https://gist.github.com/alstat/3d62031b3a0f2f2236568ffe0b9ec189.js&quot;&gt;&lt;/script&gt;
 The best thing about SQL syntax is that, everything is self-explanatory, except maybe for line 19, which simply confirmed that we are using &lt;code&gt;tutorial&lt;/code&gt; as our database.&lt;/p&gt;
 &lt;h3 id=&quot;query-creating-table&quot;&gt;Query: Creating Table&lt;/h3&gt;
