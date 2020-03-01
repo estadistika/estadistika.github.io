@@ -3,7 +3,6 @@
 @import "screens/mobile-high-landscape";
 @import "screens/tablet";
 @import "screens/tablet-landscape";
-
 html {
     @include mobile_low();
     @include mobile_high();
@@ -11,17 +10,15 @@ html {
     @include tablet();
     @include tablet_landscape();
     body {
-        
         font-size: $font-size-body;
         font-family: $font-body;
         text-align: $body-text-align;
         line-height: $body-line-height;
-        color: #525252;
-
+        color: #2e2e2e;
         kbd {
             border: 1px solid gray;
             font-size: 1em;
-            font-family: monospace,monospace;
+            font-family: monospace, monospace;
             box-shadow: 1px 0 1px 0 #eee, 0 2px 0 2px #ccc, 0 2px 0 3px #444;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
@@ -29,76 +26,65 @@ html {
             margin: 2px 3px;
             padding: 1px 5px;
         }
-        
         a {
-            text-decoration: none;    
+            text-decoration: none;
             color: $link-color;
             padding: 0;
         }
-        
         img {
             margin: 20px auto;
             display: block;
         }
-
         button {
             padding: 1px 7px;
         }
-
-        button, a.previous-article, a.next-article {
+        button,
+        a.previous-article,
+        a.next-article {
             background-color: #000000;
             color: #ffffff;
-
             border-width: 0px;
             font-family: $font-post-meta, sans-serif;
             font-size: $font-size-post-meta;
             cursor: pointer;
             transition: all .3s ease-in-out;
         }
-
-        button:hover, a.previous-article:hover, a.next-article:hover  {
+        button:hover,
+        a.previous-article:hover,
+        a.next-article:hover {
             background-color: #000000;
             color: $sb-nav-color;
         }
-
         button:active {
             background-color: rgba(0, 0, 0, .7);
         }
-
         table {
             width: 100%;
             max-width: 100%;
-            border-collapse:collapse;
-
+            border-collapse: collapse;
             thead {
                 background-color: $sb-bg-color;
-                padding: 5px; 
-
+                padding: 5px;
                 td {
-                    font-family: $font-post-meta; 
+                    font-family: $font-post-meta;
                     color: $sb-nav-color;
-                    padding: 5px; 
+                    padding: 5px;
                     text-align: center;
                 }
             }
-
             tbody {
                 background-color: $quran-bg-color;
                 border-width: 0;
                 font-size: 14px;
-
                 td {
                     padding: 5px 10px;
-                    border-bottom: 1px solid rgba(0,0,0,.05);
+                    border-bottom: 1px solid rgba(0, 0, 0, .05);
                 }
-                
             }
         }
-
         @include parent();
         @include site-sidebar();
         @include site-main-content();
-
     }
 }
 
@@ -113,8 +99,8 @@ html {
 // @import url('https://fonts.googleapis.com/css?family=Amiri');
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
 @import url('https://fonts.googleapis.com/css?family=Reem+Kufi');
-
 @import url('https://fonts.googleapis.com/css?family=Amita|Galdeano|Offside');
 @import url('https://fonts.googleapis.com/css?family=Rochester');
 @import url('https://fonts.googleapis.com/css?family=Bungee+Outline');
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i&display=swap');
 // @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css');
