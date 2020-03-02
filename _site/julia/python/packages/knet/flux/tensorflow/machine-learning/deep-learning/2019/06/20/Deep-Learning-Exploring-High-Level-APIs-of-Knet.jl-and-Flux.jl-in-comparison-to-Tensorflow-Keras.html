@@ -192,7 +192,7 @@ Flux.jl and Knet.jl, and we are going to use the <a href="https://en.wikipedia.o
 
 <h3 id="specify-the-model">Specify the Model</h3>
 <p>The model that we are going to use is a <a href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer Perceptron</a> with the following architecture: 4 neurons for the input layer, 10 neurons for the hidden layer, and 3 neurons for the output layer.  The first two layers contain bias, and the neurons of the last two layers are activated with Rectified Linear Unit (ReLU) and softmax functions, respectively.  The diagram below illustrates the architecture described:
-<img src="http://drive.google.com/uc?export=view&amp;id=1oYnD8KZ1NQqbJccw8NYugj0kqihQZBJX" />
+<img src="https://drive.google.com/uc?export=view&amp;id=1oYnD8KZ1NQqbJccw8NYugj0kqihQZBJX" />
 <!-- https://drive.google.com/file/d/1jqASeBjmbSImp5hEoEZxHMizKUkSLyC8/view?usp=sharing -->
 The codes below specify the model:</p>
 <div class="tab" style="margin-bottom: -16px;">
@@ -213,9 +213,9 @@ The codes below specify the model:</p>
   <script src="https://gist.github.com/alstat/b99baeaf255f8704e64a0ff9077e0283.js"></script>
 </div>
 <p>Coming from TensorFlow-Keras, Flux.jl provides Keras-like API for model specification, with <code>Flux.Chain</code> as the counterpart for Keras’ <code>Sequential</code>. This is different from Knet.jl where the highest level API you can get are the nuts and bolts for constructing the layers. Having said, however, <code>Flux.Dense</code> is defined almost exactly as the Dense struct of the Knet.jl code above (check the source code <a href="https://github.com/FluxML/Flux.jl/blob/1902c0e7c568a1bdb0cda7dca4d69f3896c023c7/src/layers/basic.jl#L82-L100">here</a>). In addition, since both Flux.jl and Knet.jl are written purely in Julia, makes the source codes under the hood accessible to beginners. Thus, giving the user a full understanding of not just the code, but also the math. Check the screenshots below for the distribution of the file types in the Github repos of the three frameworks:
-<img src="http://drive.google.com/uc?export=view&amp;id=1hmWiYy6C01q_X8HGl5xDSjQClJz5H7Ym" />
-<img src="http://drive.google.com/uc?export=view&amp;id=17VAf7wOT9Ej47OZQu9B6o4kOCCs4G_tw" />
-<img src="http://drive.google.com/uc?export=view&amp;id=18RmeurpIX0uzBP9sKwiN24QI_VVLicYF" />
+<img src="https://drive.google.com/uc?export=view&amp;id=1hmWiYy6C01q_X8HGl5xDSjQClJz5H7Ym" />
+<img src="https://drive.google.com/uc?export=view&amp;id=17VAf7wOT9Ej47OZQu9B6o4kOCCs4G_tw" />
+<img src="https://drive.google.com/uc?export=view&amp;id=18RmeurpIX0uzBP9sKwiN24QI_VVLicYF" />
 From the above figure, it’s clear that Flux.jl is 100% Julia. On the other hand, Knet.jl while not apparent is actually 100% Julia as well. The 41.4% of Jupyter Notebooks and other small percentages account for the tutorials, tests and examples and not the <a href="https://github.com/denizyuret/Knet.jl/tree/master/src">source codes</a>.
 <!-- There are several -->
 <!-- <img src="http://drive.google.com/uc?export=view&id=1HKlC04oVF_3ggraWE7qnMNvW-Atxc89N"> -->
@@ -251,7 +251,7 @@ From the above figure, it’s clear that Flux.jl is 100% Julia. On the other han
   <script src="https://gist.github.com/alstat/5002d261a67eccebd174ad0ea43969e4.js"></script>
 </div>
 <p>The Flux.jl code above simply illustrates the use of <code>Flux.@epochs</code> macro for looping instead of the <code>for</code> loop. The loss of the model for 100 epochs is visualized below across frameworks:
-<img src="http://drive.google.com/uc?export=view&amp;id=11y4RGyrY1e62cNl9H6Kce6tdcVug8AHt" />
+<img src="https://drive.google.com/uc?export=view&amp;id=11y4RGyrY1e62cNl9H6Kce6tdcVug8AHt" />
 From the above figure, one can observe that Flux.jl had a bad starting values set by the random seed earlier, good thing <a href="https://arxiv.org/abs/1412.6980">Adam</a> drives the gradient vector rapidly to the global minimum. The figure was plotted using <a href="http://gadflyjl.org/stable/index.html">Gadfly.jl</a>. Install this package using <code>Pkg</code> as described in the first code block, along with <a href="https://github.com/JuliaGraphics/Cairo.jl">Cario.jl</a> and <a href="https://github.com/JuliaGraphics/Fontconfig.jl">Fontconfig.jl</a>. The latter two packages are used to save the plot in PNG format, see the code below to reproduce:
 <script src="https://gist.github.com/alstat/f0d63cf8cd0b41125f9bc072e0fc451b.js"></script></p>
 <h3 id="evaluate-the-model">Evaluate the Model</h3>
@@ -274,7 +274,7 @@ From the above figure, one can observe that Flux.jl had a bad starting values se
   <script src="https://gist.github.com/alstat/59d17503d149abbe4ec338b4190affec.js"></script>
 </div>
 <p>The figure below shows the traces of the accuracy during training:
-<img src="http://drive.google.com/uc?export=view&amp;id=1L2d8mfkC-9zl3KeLXdVpynXR_OuyyzC1" />
+<img src="https://drive.google.com/uc?export=view&amp;id=1L2d8mfkC-9zl3KeLXdVpynXR_OuyyzC1" />
 TensorFlow took 25 epochs before surpassing 50% again. To reproduce the figure, run the following codes (make sure to load Gadfly.jl and other related libraries mentioned earlier in generating the loss plots):
 <script src="https://gist.github.com/alstat/9539e00aef208062b1c6b900efa6c258.js"></script></p>
 <h3 id="benchmark">Benchmark</h3>
@@ -297,7 +297,7 @@ TensorFlow took 25 epochs before surpassing 50% again. To reproduce the figure, 
   <script src="https://gist.github.com/alstat/cf2bf0fac9fe9e55051f524d353aaf97.js"></script>  
 </div>
 <p>The benchmark was done by running the above code repeatedly for about 10 times for each framework, I then took the lowest timestamp out of the results. In addition, before running the code for each framework, I keep a fresh start of my machine.
-<img src="http://drive.google.com/uc?export=view&amp;id=1u0selT5l8vP7n-LNdvac_bzyMGC1vSDD" />
+<img src="https://drive.google.com/uc?export=view&amp;id=1u0selT5l8vP7n-LNdvac_bzyMGC1vSDD" />
 The code of the above figure is given below (make sure to load Gadfly.jl and other related libraries mentioned earlier in generating the loss plots):
 <script src="https://gist.github.com/alstat/c1bc13ab6e772a4104b51d164f4e172d.js"></script></p>
 <h3 id="conclusion">Conclusion</h3>

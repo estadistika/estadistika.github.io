@@ -9,117 +9,169 @@
 				
 				
 				  <item>
-					  <title>TensorFlow 2.0: Building Simple Classifier using Low Level APIs</title>
-					  <description>&lt;p&gt;At the end of my comparison — &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;TensorFlow 1.14 Keras’ API versus Julia’s Flux.jl and Knet.jl high level APIs&lt;/a&gt; — I indicated some future write-ups I plan to do, one of which is to compare (obviously) on the low level APIs. However, with the release of the much anticipated TensorFlow 2.0, I decided not to wait for the next comparison and instead dedicate a separate article for the said release. The goal of this blog post then is to simply replicate the modeling in my &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;previous article&lt;/a&gt;, without using the Keras API. Specifically, I’ll discuss the steps on constructing a custom layer, how we can chain multiple layers as in Keras’ &lt;code&gt;Sequential&lt;/code&gt;, do a feedforward, a backward by updating the gradient, and batching the training datasets.&lt;/p&gt;
+					  <title>Bayesian Sequential Learning</title>
+					  <description>&lt;p&gt;In my previous &lt;a href=&quot;https://estadistika.github.io/data/analyses/wrangling/julia/programming/packages/2018/10/14/Introduction-to-Bayesian-Linear-Regression.html&quot; target=&quot;_blank&quot;&gt;article&lt;/a&gt;, I discussed how we can use Bayesian approach in estimating the parameters of the model. The process revolves around solving the following conditional probability, popularly known as the &lt;i&gt;Bayes’ Theorem&lt;/i&gt;:&lt;/p&gt;
 
-&lt;h3 id=&quot;load-the-libraries&quot;&gt;Load the Libraries&lt;/h3&gt;
-&lt;p&gt;To start with, load the necessary libraries by running the following codes:
-&lt;script src=&quot;https://gist.github.com/alstat/6ca5094612c2031fa80a6ca42fac34b7.js&quot;&gt;&lt;/script&gt;
-I should emphasize that Line 7 is optional, and I’m using this for annotation purposes on function parameters.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{equation}
+	\mathbb{P}(\mathbf{w}|\mathbf{y})=\frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})},
+\end{equation}&lt;/script&gt;
 
-&lt;h3 id=&quot;define-the-constants&quot;&gt;Define the Constants&lt;/h3&gt;
-&lt;p&gt;The following are the constants that we will be using on the specification of the succeeding codes:
-&lt;script src=&quot;https://gist.github.com/alstat/454aa49e0ccf7d3ca86d65c35a1002c7.js&quot;&gt;&lt;/script&gt;
-As you notice, these are the hyperparameters that we configured for the model below. Specifically, we use ReLU (&lt;code&gt;tf.nn.relu&lt;/code&gt;) as the activation for the first hidden layer and a softmax (&lt;code&gt;tf.nn.softmax&lt;/code&gt;) for the output layer. Other parameters include batch-size, the number of epochs, and the optimizer which in this case is Adam (&lt;code&gt;tf.keras.optimizers.Adam&lt;/code&gt;). Feel free to change the items above, for example, you can explore on the different optimizers, or on the activation functions.&lt;/p&gt;
+&lt;p&gt;where $\mathbb{P}(\mathbf{w})$ is the &lt;em&gt;a priori&lt;/em&gt; (prior distribution) for the objective parameters, $\mathbb{P}(\mathbf{y}|\mathbf{w})$ is the &lt;em&gt;likelihood&lt;/em&gt; or model evidence, and $\mathbb{P}(\mathbf{y})$ is the &lt;em&gt;normalizing constant&lt;/em&gt; with the following form:&lt;/p&gt;
 
-&lt;h3 id=&quot;load-the-data&quot;&gt;Load the Data&lt;/h3&gt;
-&lt;p&gt;The Iris dataset is available in Python’s &lt;a href=&quot;https://scikit-learn.org/&quot;&gt;Scikit-Learn&lt;/a&gt; library and can be loaded as follows:
-&lt;script src=&quot;https://gist.github.com/alstat/80e748cd186d94d51736348d607efc03.js&quot;&gt;&lt;/script&gt;
-&lt;code&gt;xdat&lt;/code&gt; and &lt;code&gt;ydat&lt;/code&gt; are both &lt;code&gt;np.ndarray&lt;/code&gt; objects, and we are going to partition these into training and testing datasets using the &lt;code&gt;Data&lt;/code&gt; class defined in the next section.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{equation}
+\mathbb{P}(\mathbf{y})=\int_{\forall\mathbf{w}\in\mathscr{P}}\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})\operatorname{d}\mathbf{w},
+\end{equation}&lt;/script&gt;
 
-&lt;h3 id=&quot;define-the-data-class&quot;&gt;Define the Data Class&lt;/h3&gt;
-&lt;p&gt;To organize the data processing, below is the class with methods on partitioning, tensorizing, and batching the input data:
-&lt;script src=&quot;https://gist.github.com/alstat/e24d40807d6816b92076c300b57a4bce.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;where $\mathscr{P}$ is the parameter space.&lt;/p&gt;
 
-&lt;h3 id=&quot;data-cleaningprocessing&quot;&gt;Data Cleaning/Processing&lt;/h3&gt;
-&lt;p&gt;We then apply the above codes to the iris dataset as shown below:
-&lt;script src=&quot;https://gist.github.com/alstat/0284a46ed09b92bcf19de4e5cee527d2.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+&lt;h3 id=&quot;posterior-distribution&quot;&gt;Posterior Distribution&lt;/h3&gt;
+&lt;p&gt;The details on the derivation of the &lt;em&gt;a posteriori&lt;/em&gt; were also provided in the said article, but there were missing pieces, which I think is necessary for us to support our proposition, and thus we have the following result:&lt;/p&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+&lt;div class=&quot;title-label&quot; style=&quot;background-color: #5e5e5e; color: #fff; padding: 2px 10px; font-family: 'Saira Condensed', sans-serif;&quot;&gt;&lt;b&gt;Proposition&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;proposition&quot; style=&quot;padding: 10px; background-color: #efefef; font-family: 'Amita', cursive; text-align: left !important;&quot;&gt;
+Let $\mathscr{D}\triangleq\{(\mathbf{x}_1,y_1),\cdots,(\mathbf{x}_n,y_n)\}$ be the set of data points s.t. $\mathbf{x}\in\mathbb{R}^{p}$. If 
+$$y_i\overset{\text{iid}}{\sim}\mathcal{N}(w_0+w_1x_i,\alpha^{-1})$$
+and $\mathbf{w}\triangleq[w_0,w_1]^{\text{T}}$ s.t. $\mathbf{w}\overset{\text{iid}}{\sim}\mathcal{N}_2(\mathbf{0},\mathbf{I})$, then $\mathbf{w}|\mathbf{y}\overset{\text{iid}}{\sim}\mathcal{N}_2(\boldsymbol{\mu},\boldsymbol{\Sigma})$ where
 
-&lt;!-- The unit that TensorFlow crunches during computation is of type &lt;code&gt;tf.Tensor&lt;/code&gt;. Thus, we need to convert the &lt;code&gt;np.ndarray&lt;/code&gt; to &lt;code&gt;tf.Tensor&lt;/code&gt; objects, as in Lines 2-5 above. --&gt;
-
-&lt;h3 id=&quot;defining-the-dense-layer&quot;&gt;Defining the Dense Layer&lt;/h3&gt;
-&lt;p&gt;The model as mentioned in my &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;previous article&lt;/a&gt; is a MultiLayer Perceptron (MLP) with one hidden layer, please refer to the said article for more details. In order to use the low level APIs, we need to define the &lt;code&gt;Dense&lt;/code&gt; layer from scratch. As a guide, below is the mathematical formulation of the said layer:
-\begin{equation}
-\mathbf{y} = \sigma\left(\mathbf{x}\cdot\mathbf{W} +  \mathbf{b}\right),
-\end{equation}
-where $\sigma$ is the activation function, which can either be ReLU, sigmoid, etc. Now in order for the above dot product to work, $\mathbf{x}$ must be a row-vector, i.e.:
-\begin{equation}
-\mathbf{x} = \left[
-  x_1,x_2,\cdots,x_n 
-\right]
-\end{equation}
-where $n$ is the number of features. Thus, $\mathbf{W}$ is a $n\times j$-matrix, with $n$ as the dimension of the input layer and  $j$ as the dimension of the next layer (it could be hidden or output). With regards to the weights matrix and the bias vector, we need to initialize them to some random starting values. There are several ways to do this, one of which is to use samples from the standard Gaussian distribution, i.e.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+$$
 \begin{align}
-\mathbf{W} = [(w_{ij})]\quad &amp;\textrm{and}\quad \mathbf{b} = [(b_i)],\nonumber\\
-w_{ij}, b_i \sim \mathcal{N}(0,1), \;i = &amp;\{1,\cdots,m\}, \;j=\{1,\cdots,n\}\nonumber
-\end{align} %]]&gt;&lt;/script&gt;
+\boldsymbol{\mu}&amp;amp;=\alpha\boldsymbol{\Sigma}\mathbf{\mathfrak{A}}^{\text{T}}\mathbf{y},\\
+\boldsymbol{\Sigma}&amp;amp;=(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathfrak{A}+\beta\mathbf{I})^{-1}
+\end{align}
+$$
 
-&lt;p&gt;Translating all these into codes, we have the following:
-&lt;script src=&quot;https://gist.github.com/alstat/6b743375c1b3b5a468de559f77408aa7.js&quot;&gt;&lt;/script&gt;
-Lines 3-6 initialize the &lt;code&gt;Dense&lt;/code&gt; layer by assigning starting values to the weights, and Lines 8-12 define the feedforward. Further, if there is something special in the above code, it’s the &lt;code&gt;tf.Variable&lt;/code&gt;. This class tells TensorFlow which object are learnable during gradient optimization. Lastly, I want to emphasize that prior to TensorFlow 2.0, &lt;code&gt;tf.random.normal&lt;/code&gt; was defined as &lt;code&gt;tf.random_normal&lt;/code&gt;.&lt;/p&gt;
+and $\boldsymbol{\mathfrak{A}}\triangleq\left[(\mathbf{x}_i^{\text{T}})\right]_{\forall i}$.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;wrapper&quot; style=&quot;margin-top: 10px&quot;&gt;
+&lt;div class=&quot;title-label&quot; style=&quot;background-color: #efefef; color: #000; border: 1px solid #5e5e5e; padding: 2px 10px; font-family: 'Saira Condensed', sans-serif;&quot;&gt;&lt;b&gt;Proof&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;proposition&quot; style=&quot;padding: 10px; border: 1px solid #5e5e5e; text-align: left !important;&quot;&gt;
+Let $\hat{y}_i\triangleq w_0+w_1x_i$ be the model, then the data can be described as follows:
+\begin{align}
+y_i=\hat{y}_i+\varepsilon_i,\quad\varepsilon_i\overset{\text{iid}}{\sim}\mathcal{N}(0,1/\alpha),
+\end{align}
+where $\varepsilon_i$ is the innovation that the model can't explain, and $\mathbb{Var}(\varepsilon_i)=\alpha^{-1}$ since $\mathbb{Var}(y_i)=\alpha^{-1}$ as given above. Then the likelihood of the model is given by:
+\begin{align}
+\mathcal{L}(\mathbf{w}|\mathbf{y})\triangleq\mathbb{P}(\mathbf{y}|\mathbf{w})&amp;amp;=\prod_{\forall i}\frac{1}{\sqrt{2\pi}\alpha^{-1}}\text{exp}\left[-\frac{(y_i-\hat{y}_i)^2}{2\alpha^{-1}}\right]\\
+&amp;amp;=\frac{\alpha^n}{(2\pi)^{n/2}}\text{exp}\left[-\alpha\sum_{\forall i}\frac{(y_i-\hat{y}_i)^2}{2}\right],
+\end{align}
+or in vector form:
+\begin{align}
+\mathcal{L}(\mathbf{w}|\mathbf{y})\propto\text{exp}\left[-\frac{\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})}{2}\right],
+\end{align}
+where $\mathbf{\mathfrak{A}}\triangleq[(\mathbf{x}_i^{\text{T}})]_{\forall i}$ is the &lt;i&gt;design matrix&lt;/i&gt; given above. If the &lt;i&gt;a priori&lt;/i&gt; of the parameter is assumed to be standard bivariate Gaussian distribution, i.e. $\mathbf{w}\overset{\text{iid}}{\sim}\mathcal{N}_2(\mathbf{0}, \mathbf{I})$, then 
+\begin{align}
+\mathbb{P}(\mathbf{w}|\mathbf{y})&amp;amp;\propto\mathcal{L}(\mathbf{w}|\mathbf{y})\mathbb{P}(\mathbf{w})\\
+&amp;amp;\propto\text{exp}\left[-\frac{\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})}{2}\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\\
+&amp;amp;\propto\text{exp}\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
+\end{align}
+Expanding the terms in the exponential function returns the following:
+$$
+\alpha\mathbf{y}^{\text{T}}\mathbf{y}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}+\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w},
+$$
+thus
+\begin{equation}
+\mathbb{P}(\mathbf{w}|\mathbf{y})\propto\mathcal{C}\text{exp}\left\{-\frac{1}{2}\left[\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\right]\right\}.
+\end{equation}
+The inner terms of the exponential function is of the form $ax^2-2bx$. This a quadratic equation and therefore can be factored by completing the square. To do so, let $\mathbf{D}\triangleq\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I}$ and $\mathbf{b}\triangleq\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}$, then
+\begin{align}
+\mathbb{P}(\mathbf{w}|\mathbf{y})&amp;amp;\propto\mathcal{C}\text{exp}\left[-\frac{1}{2}\left(\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{w}-2\mathbf{w}^{\text{T}}\mathbf{b}\right)\right]\\&amp;amp;=\mathcal{C}\text{exp}\left[-\frac{1}{2}\left(\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{w}-\mathbf{w}^{\text{T}}\mathbf{b}-\mathbf{b}^{\text{T}}\mathbf{w}\right)\right].
+\end{align}
+In order to proceed, the matrix $\mathbf{D}$ must be symmetric and invertible (&lt;i&gt;this can be proven separately&lt;/i&gt;). If satisfied, then $\mathbf{I}\triangleq\mathbf{D}\mathbf{D}^{-1}=\mathbf{D}^{-1}\mathbf{D}$, so that the terms inside the exponential function above become:
+$$
+\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{w}-\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{D}^{-1}\mathbf{b}-\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{w}+\underset{\text{constant introduced}}{\underbrace{(\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{D}^{-1}\mathbf{b}-\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{D}^{-1}\mathbf{b})}}.
+$$
+Finally, let $\boldsymbol{\Sigma}\triangleq\mathbf{D}^{-1}$ and $\boldsymbol{\mu}\triangleq\mathbf{D}^{-1}\mathbf{b}$, then 
+\begin{align}
+\mathbb{P}(\mathbf{w}|\mathbf{y})&amp;amp;\propto\mathcal{C}\text{exp}\left[-\frac{1}{2}\left(\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}-\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}\right)\right]\\
+&amp;amp;=\mathcal{C}\text{exp}\left[-\frac{(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})}{2}\right],
+\end{align}
+where $-\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{D}^{-1}\mathbf{b}$ becomes part of $\mathcal{C}$, and that proves the proposition. $\blacksquare$
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;simulation-experiment&quot;&gt;Simulation Experiment&lt;/h3&gt;
+&lt;p&gt;The above result can be applied to any linear models (&lt;em&gt;cross-sectional&lt;/em&gt; or &lt;em&gt;time series&lt;/em&gt;), and I’m going to demonstrate how we can use it to model the following simulated data. I will be using Julia in &lt;a href=&quot;https://nextjournal.com/&quot;&gt;Nextjournal&lt;/a&gt; (be sure to head over to &lt;a href=&quot;https://nextjournal.com/al-asaad/bayesian-sequential-learning&quot;&gt;this link&lt;/a&gt; for reproducibility), which already has an image available for version 1.3.1. Having said, some of the libraries are already pre-installed in the said image, for example &lt;a href=&quot;https://github.com/JuliaPlots/Plots.jl&quot; target=&quot;_blank&quot;&gt;Plots.jl&lt;/a&gt;. Thus, we only have to install the remaining libraries that we will need for this experiment.
+&lt;script src=&quot;https://gist.github.com/alstat/b444c7054c0f119f38ce773e6040ba07.js&quot;&gt;&lt;/script&gt;
+Load the libraries as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/5eb8fba973b4527b578bba9874642818.js&quot;&gt;&lt;/script&gt;
+The &lt;code&gt;theme&lt;/code&gt; above simply sets the theme of the plots below. Further, for reproducibility purposes, I provided a seed as well. The following functions will be used to simulate a cross-sectional data with population parameters set to $w_0$= -.3 and $w_1$= -.5 for 20 sample size. 
+&lt;script src=&quot;https://gist.github.com/alstat/3c4e971a5aa2bd40e019b5c2f500f585.js&quot;&gt;&lt;/script&gt;
+From the results above, the parameters of the &lt;i&gt;a posteriori&lt;/i&gt; can be implemented as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/00fb06b4b55c23a85b0c05801c5c4afb.js&quot;&gt;&lt;/script&gt;
+One feature of Julia is it supports unicode, making it easy to relate the codes to the math above, i.e. &lt;code&gt;Σ&lt;/code&gt; and &lt;code&gt;μ&lt;/code&gt; in the code are obviously $\boldsymbol{\mu}$ and $\boldsymbol{\Sigma}$ above, respectively. The vector operations in Julia are also cleaner compared to that in R and in Python, for example we can encode Julia’s &lt;code&gt;A'A&lt;/code&gt; above as &lt;code&gt;t(A) %*% A&lt;/code&gt; in R, and &lt;code&gt;A.T.dot(A)&lt;/code&gt; in Python.&lt;/p&gt;
 
-&lt;h3 id=&quot;feedforward&quot;&gt;Feedforward&lt;/h3&gt;
-&lt;p&gt;We can now use the &lt;code&gt;Dense&lt;/code&gt; layer to perform feedforward computation as follows:
-&lt;script src=&quot;https://gist.github.com/alstat/7ade32577acd6c5f22007eaa6e3ac894.js&quot;&gt;&lt;/script&gt;
-The above code uses the first and the first five rows, respectively, of the &lt;code&gt;data.xtrn&lt;/code&gt; as input. Of course, these values may change since we did not specify any seed for the initial weights and biases.&lt;/p&gt;
+&lt;p&gt;Finally, we simulate the data as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/2664db066600c54ea2e31edffe17831a.js&quot;&gt;&lt;/script&gt;
+We don’t really have to right down the &lt;code&gt;wtrue&lt;/code&gt; variable above since that’s the default values of &lt;code&gt;w0&lt;/code&gt; and &lt;code&gt;w1&lt;/code&gt; arguments, but we do so just for emphasis.&lt;/p&gt;
 
-&lt;h3 id=&quot;defining-the-chain&quot;&gt;Defining the Chain&lt;/h3&gt;
-&lt;p&gt;Now that we know how to initialize a single &lt;code&gt;Dense&lt;/code&gt; layer, we need to extend it to multiple layers to come up with a MLP architecture. Hence, what we need to have now is a &lt;code&gt;Chain&lt;/code&gt; for layers. In short, we need to replicate (not all attributes and methods) the Keras’ &lt;code&gt;Sequential&lt;/code&gt;, and this is done as follows:
-&lt;script src=&quot;https://gist.github.com/alstat/832bf930c99beeae550c93c3d8fbb0e8.js&quot;&gt;&lt;/script&gt;
-Let me walk you through, method-by-method. To initialize this class, we need to have a list of &lt;code&gt;Dense&lt;/code&gt; layers (referring to &lt;code&gt;self.layers&lt;/code&gt; at Line 4 above) as input. Once we have that, we can do feedforward computation using the untrained weights by simply calling the object (as defined by &lt;code&gt;__call__&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;While the main subject here is Bayesian Statistics, it would be better as well if we have an idea of what the Frequentist solution would be. As most of you are aware of, the solution to the weights above is given by the following &lt;i&gt;normal equation&lt;/i&gt;:
+&lt;script type=&quot;math/tex&quot;&gt;\hat{\mathbf{w}}=(\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}})^{-1}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y},&lt;/script&gt;
+this is a known result, and we can prove this in a separate post. The above equation is implemented as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/a13f83140f692ca94fe67c8569c0ba31.js&quot;&gt;&lt;/script&gt;
+Therefore, for the current sample data, the estimate we got when assuming the weights as fixed and unknown is $\hat{\mathbf{w}}=[-0.32264, -0.59357]^{\text{T}}$. Therefore, if we plot this, we have the following:
+&lt;script src=&quot;https://gist.github.com/alstat/42d38f37c05b4cc6249bd10f4a81a433.js&quot;&gt;&lt;/script&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1LpAcFwC3pCOzCvsMsINmR-d52D83X8bi&quot; /&gt;
+Not bad given that we have very small dataset.&lt;/p&gt;
 
-&lt;p&gt;To train the weights, we need to call the &lt;code&gt;backward&lt;/code&gt; method, which does backpropagation. This is done by &lt;code&gt;optimize&lt;/code&gt;-ing the weights, using the &lt;code&gt;grad&lt;/code&gt;ient obtained by differentiating the &lt;code&gt;loss&lt;/code&gt; function of the model, with respect to the learnable parameters (referring to &lt;code&gt;self.params&lt;/code&gt; in Line 12 above). In TensorFlow 2.0, it is recommended to use the Keras optimizers (&lt;code&gt;keras.optimizers&lt;/code&gt;) instead of the &lt;code&gt;tf.train.GradientDescentOptimizer&lt;/code&gt;. One thing to note as well, is the loss function which is a &lt;code&gt;.categorical_crossentropy&lt;/code&gt; as opposed to &lt;code&gt;.sparse_categorical_crossentropy&lt;/code&gt; which is used in my &lt;a href=&quot;https://estadistika.github.io/julia/python/packages/knet/flux/tensorflow/machine-learning/deep-learning/2019/06/20/Deep-Learning-Exploring-High-Level-APIs-of-Knet.jl-and-Flux.jl-in-comparison-to-Tensorflow-Keras.html&quot;&gt;previous article&lt;/a&gt;. The difference follows from the fact that the target variable we have here is encoded as one-hot vector (you can confirm this under the &lt;code&gt;to_tensor&lt;/code&gt; method of the &lt;code&gt;Data&lt;/code&gt; class above), and thus &lt;i&gt;cross entropy&lt;/i&gt; is used as opposed to integer encoding, in which case &lt;i&gt;sparse cross entropy&lt;/i&gt; is more appropriate.&lt;/p&gt;
+&lt;p&gt;Let’s continue and see how we can infer the parameters in Bayesian framework. The prior distribution can be implemented as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/ab32e9a8f171975532910c6305a4f95f.js&quot;&gt;&lt;/script&gt;
+As indicated in the above proposition, the parameters are jointly modelled from a bivariate Normal distribution, as indicated by the dimension of the hyperparameter &lt;code&gt;μ&lt;/code&gt; above. Indeed, the true parameter we are interested in is the weight vector, $\mathbf{w}$, but because we also considered it to be random, then the parameters of the model we assign to it are called &lt;i&gt;hyperparameters&lt;/i&gt;, in this case the vector $\boldsymbol{\mu}$ and the identity matrix $\mathbf{I}$ of the prior distribution.&lt;/p&gt;
 
-&lt;p&gt;Referring back to the codes, I think Lines 33-34 are self-explanatory and should redirect us to the &lt;code&gt;grad&lt;/code&gt; function where we find the &lt;code&gt;tf.GradientTape&lt;/code&gt;, which is not obvious as to what exactly it does at first glance, apart from the high level understanding that it has something to do with the gradient computation (or it could really be the main moving part). Well, from the name itself, we can think of it as a “Tape Recorder”, which records the gradient of the trainable variables (referring to &lt;code&gt;tf.Variable&lt;/code&gt; in Lines 4-5 of the &lt;code&gt;Dense&lt;/code&gt; layer) with respect to the loss of the model. That is, when we do forward operation (referring to &lt;code&gt;self(inputs)&lt;/code&gt; at Line 28 above), TensorFlow automatically differentiate the loss with respect to the parameters. In order then to update the weights under the Adam (referring to &lt;code&gt;opt&lt;/code&gt; in Line 34 above) algorithm, we need to have these gradients at the given iteration. Thus we have a recorder (&lt;code&gt;tf.GradientTape&lt;/code&gt; in this case), meant to extract the recorded gradients.&lt;/p&gt;
+&lt;p&gt;Moreover, the likelihood of the data can be implemented as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/b0fa92ec05c0a03c2d91bb82c1c5ca5e.js&quot;&gt;&lt;/script&gt;
+The mean of the likelihood is the model itself, which in vector form is the inner product of the transformed &lt;i&gt;design matrix&lt;/i&gt;, $\boldsymbol{\mathfrak{A}}$, and the weights vector, $\mathbf{w}$, i.e. &lt;code&gt;A[i, :]'w&lt;/code&gt;. This assumption is valid since the fitted line must be at the center of the data points, and that the error should be random. One of my favorite features of Julia language is the &lt;i&gt;multiple dispatch&lt;/i&gt;. For example, the two likelihood functions defined above are not in conflict since Julia evaluates the inputs based on the type of the function arguments. The same is true for the posterior distribution implemented below. Unlike in R and in Python, I usually have to write this as a helper function, e.g. &lt;code&gt;likelihood_helper&lt;/code&gt;.
+&lt;script src=&quot;https://gist.github.com/alstat/1eb7917d65287d6726cb800955c99077.js&quot;&gt;&lt;/script&gt;
+Finally, the prediction is done by sampling the weights from the posterior distribution. The center of these weights is of course the mean of the &lt;i&gt;a posteriori&lt;/i&gt;.
+&lt;script src=&quot;https://gist.github.com/alstat/cfc5d39166922ca852c781517beed170.js&quot;&gt;&lt;/script&gt;
+For example, to sample 30 weights from the posterior distribution using all the sampled data is done as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/f284bacb094b5f4eca795a6606ef0fc6.js&quot;&gt;&lt;/script&gt;
+The predicted function returns both the &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt; values. Thus, we indexed the above result to 2, to show the predicted &lt;i&gt;y&lt;/i&gt;s only. To use only the first 10 observations of the data for calculating the $\hat{y}$, is done as follows:
+&lt;script src=&quot;https://gist.github.com/alstat/17861ce8cea5cdb67cd0104c4d74c794.js&quot;&gt;&lt;/script&gt;
+So you might be wondering, what’s the motivation of only using the first 10 and not all observations? Well, we want to demonstrate how Bayesian inference learns the weights or the parameters sequentially.&lt;/p&gt;
 
-&lt;p&gt;Finally, we chain the layers as follows:
-&lt;script src=&quot;https://gist.github.com/alstat/94cbf6f01918a7d19d370cbc7b4cc83b.js&quot;&gt;&lt;/script&gt;
-This extends the previous model (referring to &lt;code&gt;layer&lt;/code&gt; object above) into chains of two layers, and we can call it as follows:
-&lt;script src=&quot;https://gist.github.com/alstat/f71a1f966ede34a473ee4308ca6a0dc6.js&quot;&gt;&lt;/script&gt;
-The output above is the prediction of the model using the untrained weights.&lt;/p&gt;
+&lt;h3 id=&quot;visualization&quot;&gt;Visualization&lt;/h3&gt;
+&lt;p&gt;At this point, we are ready to generate our main vis, which is the sequential learning of fitting a linear model in Bayesian framework. The first function (&lt;code&gt;dataplot&lt;/code&gt;) plots the generated fitted lines from the &lt;i&gt;a priori&lt;/i&gt; or &lt;i&gt;a posteriori&lt;/i&gt;, both of which is plotted using the extended method of &lt;code&gt;contour&lt;/code&gt; we defined below.
+&lt;script src=&quot;https://gist.github.com/alstat/dda95d054b6cc702dd78ed61062d56de.js&quot;&gt;&lt;/script&gt;
+Tying all the codes together, gives us this beautiful grid plot.
+&lt;script src=&quot;https://gist.github.com/alstat/8fca90fe8e0cbb84b36f59367fe130aa.js&quot;&gt;&lt;/script&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1rKM8d9ROHw63MvBf83EGoNMOoHe6vx__&quot; /&gt;
+Since we went with style first, let me guide you with the axes. All figures has a unit square space, with contour plots having the following axes: $w_0$ (the &lt;i&gt;x&lt;/i&gt;-axis) and $w_1$ (the &lt;i&gt;y&lt;/i&gt;-axis). Obviously, the data space has the following axes: predictor (the &lt;i&gt;x&lt;/i&gt;-axis) and response (the &lt;i&gt;y&lt;/i&gt;-axis).&lt;/p&gt;
+&lt;h3 id=&quot;discussion&quot;&gt;Discussion&lt;/h3&gt;
+&lt;p&gt;We commenced the article with emphasis on the approach of Bayesian Statistics to modeling, whereby the estimation of the parameters as mentioned is based on the &lt;i&gt;Bayes’ Theorem&lt;/i&gt;, which is a conditional probability with the following form:
+\begin{equation}
+	\mathbb{P}(\mathbf{w}|\mathbf{y})=\frac{\mathbb{P}(\mathbf{w})\mathbb{P}(\mathbf{y}|\mathbf{w})}{\mathbb{P}(\mathbf{y})}.
+\end{equation}
+Now we can relate this to the above figure using some analogy, as to how the model sequentially learns the optimal estimate for the parameter of the linear model.&lt;/p&gt;
 
-&lt;h3 id=&quot;training&quot;&gt;Training&lt;/h3&gt;
-&lt;p&gt;At this point, we can now optimize the parameters by calling the &lt;code&gt;backward&lt;/code&gt; method; and because we are not using the Keras’ &lt;code&gt;Sequential([...]).fit&lt;/code&gt;, we can customize our training procedure to suit our needs — starting with the custom definition of the model accuracy:
-&lt;script src=&quot;https://gist.github.com/alstat/757b6796c9cd62c9b6bbadec179c254f.js&quot;&gt;&lt;/script&gt;
-Here’s the code for calibration:
-&lt;script src=&quot;https://gist.github.com/alstat/6e515094992afecb508bfd3ec5e0d7bf.js&quot;&gt;&lt;/script&gt;
-As you can see, we have three loops, two of which are inner-loops for the minibatches on both training and testing datasets. Needless to say, the minibatches used in the testing dataset above are not really necessary, since we can have a single batch for validation. However, we have them for purpose of comparing the performance of the optimization algorithm on both single batch and three minibatches. Finally, the following tabularizes the statistics we obtained from model estimation.
-&lt;script src=&quot;https://gist.github.com/alstat/35a1f774a548e60198e9773c79edca6a.js&quot;&gt;&lt;/script&gt;
-The following plot shows the loss of the model across 500 epochs. Since we did not specify any seed in weights initial values, you would likely get a different curve:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1PPMJVt2RPtj7OYnTlPGbpOqS9ffzv89O&quot; /&gt;
-The corresponding accuracy is depicted below:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1ROu_mLT7t2D4RFj79YF17g9b-GXXIQAM&quot; /&gt;
-For the codes of the above figures, please refer to this &lt;a href=&quot;https://gist.github.com/alstat/a2f7f2725a2456ddfe86b83f9e6c1df6&quot;&gt;link&lt;/a&gt;. With regards to the series above, the optimization using three minibatches overfitted the data after 400+ epochs. This is evident in both figures, where we find a decrease in accuracy. Thus, it is recommended to have a model-checkpoint and early-stopping during calibration, and I’ll leave that to the reader.&lt;/p&gt;
+&lt;p&gt;Consider the following: say you forgot where you left your phone, and for some reason you can’t ring it up, because it could be dead or can’t pick up some signals. Further, suppose you don’t wanna look for it, rather you let Mr. Bayes, your staff, to do the task. How would he then proceed? Well, let us consider the weight vector, &lt;span&gt;$\mathbf{w}\triangleq[w_0,w_1]^{\text{T}}$&lt;/span&gt;,be the location of your phone. In order to find or at least best approximate the exact location, we need to first consider some prior knowledge of the event. In this case, we need to ask the following questions: where were you the last time you have the phone? Were you in the living room? Or in the kitchen? Or in the garage? And so on. In the context of modeling, this prior knowledge about the true location can be described by a probability distribution, and we refer to this as the &lt;i&gt;a priori&lt;/i&gt; (or the prior distribution). These set of possible distributions obviously are models itself with parameters referred to as the &lt;i&gt;hyperparameters&lt;/i&gt;, which we can tweak to describe our prior knowledge of the event. For example, you might consider the kitchen as the most probable place where you left your phone. So we adjust the &lt;i&gt;location&lt;/i&gt; parameter of our &lt;i&gt;a priori&lt;/i&gt; model to where the kitchen is. Hence Mr. Bayes should be in the kitchen already, assessing the coverage of his search area. Of course, you need to help Mr. Bayes on the extent of the coverage that he needs to cover to look for the item. This coverage can be described by the &lt;i&gt;scale&lt;/i&gt; parameter of your &lt;i&gt;a priori&lt;/i&gt;. If we relate this to the main plot, we assumed the prior distribution over the weight vector to be standard bivariate Gaussian distribution, centered at zero vector with identity variance-covariance matrix. Since the prior knowledge can have broad domain or coverage on the possible values of the weight vector, the samples we get generates random fitted lines as we see in the right-most plot of the first row of the figure above.&lt;/p&gt;
 
-&lt;h3 id=&quot;end-note&quot;&gt;End Note&lt;/h3&gt;
-&lt;p&gt;In this article, I have shown you how to do modeling using TensorFlow 2.0’s Core APIs; and as an end note, I want to highlight two key points on the importance of using the low-level APIs. The first one, is having full control on your end-to-end modeling process. The ability of having the flexibility on your tools, enables the user to solve problems with custom models, custom objective function, custom optimization algorithms, and whatnot. The second point, is the appreciation of the theory. It is simply fulfilling to see how the theory works in practice, and it gives the user the confidence to experiment, for example on the gradients and other internals.&lt;/p&gt;
+&lt;p&gt;Once we have the prior knowledge in place, that is, we are already in the kitchen and we know how wide the search area likely to be, we can start looking for the evidence. The evidence is the realization of your true model, relating to the math above, these realizations are the &lt;span&gt;$y_i$&lt;/span&gt;s, coming from &lt;span&gt;$y_i=f(x|\mathbf{w})$&lt;/span&gt;, where &lt;span&gt;$f(x|\mathbf{w})$&lt;/span&gt; is the link function of the &lt;i&gt;true&lt;/i&gt; model, which we attempt to approximate with our hypothesized link function &lt;span&gt;$h(x|\hat{\mathbf{w}})$&lt;/span&gt; that generated the predicted &lt;span&gt;$\hat{y}_i$&lt;/span&gt;s. For example, you may not know where exactly your phone is, but you are sure with your habits. So you inform Mr. Bayes, that the last time you were with your phone in the kitchen was drinking some coffee. Mr. Bayes will then use this as his first evidence, and assess the likelihood of each suspected location in the kitchen. That is, what is the likelihood that a particular location, formed (or realized, generated or connected to) the first evidence (taking some coffee)? For example, is it even comfortable to drink coffee in the sink? Obviously not, so very low likelihood, but likely in the dining table or close to where the coffee maker is. If we assess all possible location within our coverage using the first evidence, we get the &lt;i&gt;profile likelihood&lt;/i&gt;, which is what we have in the first column of the grid plot above, &lt;i&gt;profile likelihood for the i&lt;/i&gt;th &lt;i&gt;evidence&lt;/i&gt;. Further, with the first evidence observed, the prior assumption of Mr. Bayes needs to be updated to obtain the posterior distribution. The new distribution will have an updated location and scale parameters. If relate to the figure above, we can see the samples of the fitted lines in the &lt;i&gt;data space&lt;/i&gt; plot (third column, second row), starting to make guesses of possible lines given the first evidence observed. Moving on, you inform Mr. Bayes of the second evidence, that you were reading some newspaper while having some coffee. At this point, the prior assumption of Mr. Bayes, for the next posterior, will be the posterior of the first evidence, and so the coverage is a little restrictive already and with new location, which further helps Mr. Bayes on managing the search area. The second evidence, as mentioned, will then return a new posterior. You do this again and again, informing Mr. Bayes of other evidences sequentially until the last evidence. The final evidence will end up with the final posterior distribution, which we expect to have new &lt;i&gt;location&lt;/i&gt; parameter, closer to the exact location, and small &lt;i&gt;scale&lt;/i&gt; parameter, covering the small circle of the exact solution. The final posterior will then be your best guess that would describe the exact location of your phone.&lt;/p&gt;
 
-&lt;p&gt;Lastly, I am pleased with the clean API of the TF 2.0 as opposed to the redundant APIs we have in the previous versions; and with eager-execution as the default configuration, makes the library pythonic — and that matters to me. Feel free to share your thoughts, if you have comments/suggestions.&lt;/p&gt;
+&lt;p&gt;This may not be the best analogy, but that is how the above figure sequentially learns the optimal estimate for the weight vector in Bayesian framework.&lt;/p&gt;
+&lt;h3 id=&quot;bayesian-deep-learning&quot;&gt;Bayesian Deep Learning&lt;/h3&gt;
+&lt;p&gt;This section deserves a separate post, but I will briefly give some motivation on how we can generalize the above discussion into complex modeling.&lt;/p&gt;
 
+&lt;p&gt;Any model indexed by or a function of some parameters or weights &lt;span&gt;$\mathbf{w}$&lt;/span&gt;, can be modeled in Bayesian framework once we assume the solution to be random and govern by some probability distribution. Complex modeling such as in Deep Learning are usually based on the assumption that the weights are fixed and unknown, which in Statistics is the Frequentist approach to inference, but without assuming some probability distribution on the error of the model. Therefore, if we are to assume some randomness on the weights, we can then use Bayesian inference to derive or at least approximate (for models with no closed-form solution) the posterior distribution. Approximate Bayesian inference are done via Markov Chain Monte Carlo (MCMC) or Variational Inference.&lt;/p&gt;
+
+&lt;h3 id=&quot;libraries&quot;&gt;Libraries&lt;/h3&gt;
+&lt;p&gt;There are several libraries for doing Bayesian inference, the classic and still one of the most powertful library is &lt;a href=&quot;https://mc-stan.org/&quot;&gt;Stan&lt;/a&gt;. For Python, we have &lt;a href=&quot;https://docs.pymc.io/&quot;&gt;PyMC3&lt;/a&gt;, &lt;a href=&quot;http://pyro.ai/examples/index.html&quot;&gt;Pyro&lt;/a&gt; (based on &lt;a href=&quot;https://pytorch.org/&quot;&gt;Pytorch&lt;/a&gt;), and &lt;a href=&quot;https://www.tensorflow.org/probability&quot;&gt;TensorFlow Porbability&lt;/a&gt;. For Julia, we have &lt;a href=&quot;https://turing.ml/dev/&quot;&gt;Turing.jl&lt;/a&gt;, &lt;a href=&quot;https://mambajl.readthedocs.io/en/latest/index.html&quot;&gt;Mamba.jl&lt;/a&gt;, &lt;a href=&quot;http://probcomp.csail.mit.edu/&quot;&gt;Gen.jl&lt;/a&gt;, and &lt;a href=&quot;https://mc-stan.org/users/interfaces/julia-stan&quot;&gt;Stan.jl&lt;/a&gt;. I will have a separate article for these libraries.&lt;/p&gt;
 &lt;h3 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h3&gt;
-&lt;p&gt;In my next article, I will likely start on TensorFlow Probability, which extends the TF core APIs by incorporating Bayesian approach to modeling and statistical analyses — and these are areas of my expertise. Otherwise, I will touch on modeling image datasets.&lt;/p&gt;
-
-&lt;h3 id=&quot;complete-codes&quot;&gt;Complete Codes&lt;/h3&gt;
-&lt;p&gt;If you are impatient, here is the complete code excluding the plots. These should work after installing the required libraries:
-&lt;script src=&quot;https://gist.github.com/alstat/8e5af440bc199b8ee8dfc53056c848ec.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.tensorflow.org/api/stable&quot;&gt;TensorFlow 2.0 API Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://datascience.stackexchange.com/questions/41921/sparse-categorical-crossentropy-vs-categorical-crossentropy-keras-accuracy&quot;&gt;Difference of Sparse Categorical Crossentropy and Categorical Crossentropy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
+&lt;p&gt;The obvious next steps for readers to try out is to model the variance as well, since in the above result, the variance of the innovation or the error is known and is equal to $\alpha$. Further, one might consider the Frequentist sequential learning as well. Or proceed with other nonlinear complex models, such as Neural Networks. We can have these in a separate article.&lt;/p&gt;
 &lt;h3 id=&quot;software-versions&quot;&gt;Software Versions&lt;/h3&gt;
-&lt;script src=&quot;https://gist.github.com/alstat/662ddb50fbe5c61bbebd6dbb6bf21e20.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://gist.github.com/alstat/f7b473b4919e3d76681c97dee178fcbc.js&quot;&gt;&lt;/script&gt;
 
 </description>
-					  <pubDate>2019-11-01T12:00:00+08:00</pubDate>
-					  <link>http://localhost:4000/python/tensorflow/2019/11/01/TensorFlow-2.0-Building-Classifier-using-Low-Level-APIs.html</link>
-					  <guid isPermaLink="true">http://localhost:4000/python/tensorflow/2019/11/01/TensorFlow-2.0-Building-Classifier-using-Low-Level-APIs.html</guid>
+					  <pubDate>2020-03-01T12:00:00+08:00</pubDate>
+					  <link>http://localhost:4000/bayesian/probability/modeling/inference/julia/2020/03/01/Bayesian-Sequential-Learning.html</link>
+					  <guid isPermaLink="true">http://localhost:4000/bayesian/probability/modeling/inference/julia/2020/03/01/Bayesian-Sequential-Learning.html</guid>
 				  </item>
 				
+				
+				
+			
+		 
+    
+		
 				
 				
 				
@@ -153,7 +205,7 @@ For the codes of the above figures, please refer to this &lt;a href=&quot;https:
 &lt;script src=&quot;https://gist.github.com/alstat/1c5b9f777d05373f1be8801dc2bb100c.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;h3 id=&quot;software-architecture&quot;&gt;Software Architecture&lt;/h3&gt;
 &lt;p&gt;As mentioned earlier, the application is powered by back-end servers that are instances of Julia and Python. The communication between the user-interface (client) and the servers is done via HTTP (HyperText Transfer Protocol). The following is the architecture of our application:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1zRt5mOCgy5hY2F23QVHpFcvzA4TtCsIS&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1zRt5mOCgy5hY2F23QVHpFcvzA4TtCsIS&quot; /&gt;
 As shown in the figure, the client side handles response asynchronously. That is, we can send multiple request without waiting for the response of the preceding request. On the other hand, the server side processes the request synchronously, that is, the request from the client are handled one-at-a-time. These networks work via &lt;a href=&quot;https://github.com/JuliaWeb/HTTP.jl&quot;&gt;HTTP.jl&lt;/a&gt; for Julia, and &lt;a href=&quot;https://palletsprojects.com/p/flask/&quot;&gt;Flask&lt;/a&gt; for Python. If you are interested in asynchronous back-end server, checkout Python’s &lt;a href=&quot;https://klein.readthedocs.io/en/latest/&quot;&gt;Klein&lt;/a&gt; library (Flask only works synchronously); and for Julia you can set HTTP.jl to work asynchronously. I should mention though that HTTP.jl is a bit lower in terms of API level compared to Flask. In fact, HTTP.jl is better compared to Python’s &lt;a href=&quot;https://2.python-requests.org/en/master/&quot;&gt;Requests&lt;/a&gt; library. For Flask counterpart, however, Julia offers &lt;a href=&quot;https://github.com/GenieFramework/Genie.jl&quot;&gt;Genie.jl&lt;/a&gt; and I encourage you to check that out as well.&lt;/p&gt;
 
 &lt;h3 id=&quot;hypertext-transfer-protocol-http&quot;&gt;HyperText Transfer Protocol (HTTP)&lt;/h3&gt;
@@ -186,10 +238,10 @@ As shown in the figure, the client side handles response asynchronously. That is
   &lt;button class=&quot;tablinks&quot; onclick=&quot;openCity(event, 'python-072019-output-1', 'tabcontent-1-out')&quot;&gt;Python (Output)&lt;/button&gt;
 &lt;/div&gt;
 &lt;div id=&quot;julia-072019-output-1&quot; class=&quot;tabcontent-1-out first&quot;&gt;
-  &lt;img id=&quot;julia-output&quot; src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1gpJIaqpP7Y4dye0-2dtGLEglcjvcezG0&quot; style=&quot;margin-top: 16px&quot; /&gt;
+  &lt;img id=&quot;julia-output&quot; src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1gpJIaqpP7Y4dye0-2dtGLEglcjvcezG0&quot; style=&quot;margin-top: 16px&quot; /&gt;
 &lt;/div&gt;
 &lt;div id=&quot;python-072019-output-1&quot; class=&quot;tabcontent-1-out&quot; style=&quot;display: none;&quot;&gt;
-  &lt;img id=&quot;python-output&quot; src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1vqYNskzKAJiZGfYTmh0gQoshjUI6F88h&quot; style=&quot;margin-top: 16px&quot; /&gt;
+  &lt;img id=&quot;python-output&quot; src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1vqYNskzKAJiZGfYTmh0gQoshjUI6F88h&quot; style=&quot;margin-top: 16px&quot; /&gt;
 &lt;/div&gt;
 
 &lt;p&gt;As shown in the screenshots above, the codes were executed at the root folder of the project repo (see the Project Source Codes section for folder tree structure). The server we setup is running at localhost:8081 or 127.0.0.1:8081 — waiting (or listening) for any incoming request from the client. Thus, when we ran the client codes, which send POST request with the data &lt;code&gt;{&quot;Hello&quot; : &quot;World&quot;}&lt;/code&gt;, to localhost:8081, the server immediately responded back to the client — throwing the data received. The header specified in the response, &lt;code&gt;&quot;Access-Control-Allow-Origin&quot; =&amp;gt; &quot;*&quot;&lt;/code&gt;, simply tells the server to respond to any (&lt;code&gt;*&lt;/code&gt;) client. For more details on HTTP, I think &lt;a href=&quot;https://www.youtube.com/watch?v=eesqK59rhGA&quot;&gt;this video&lt;/a&gt; is useful.&lt;/p&gt;
@@ -245,7 +297,7 @@ Lines 23-28 define the event listener for the buttons in the application. Line 2
 				  <item>
 					  <title>Interfacing with Relational Database using MySQL.jl and PyMySQL</title>
 					  <description>&lt;p&gt;Prior to the advent of computing, relational database can be thought of log books typically used for inventory and visitor’s time-in time-out. These books contain rows that define the item/transaction, and columns describing the features of each row. Indeed, these are the core attributes of any relational database. Unlike spreadsheets, which are used for handling small datasets, databases are mostly used for storing huge transactional data for later use. They run on a server and often at the backend of any user (client) interface such as websites and mobile applications. These applications communicate with database via processing servers (e.g. &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; and &lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;). The figure below illustrates the request and response communcations between client and servers.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1cedn62AXe6LS-jxCjXBxCYmL1iDFRlYQ&quot; /&gt;
 As mentioned earlier, databases are meant to store data for &lt;i&gt;later use&lt;/i&gt; — in the sense that we can use it as a response to client’s requests, such as viewing or data extraction for insights. In this article, we are interested in data extraction from the database. In particular, the objective is to illustrate how to send request to MySQL server, and how to process response both from Julia and Python.&lt;/p&gt;
 &lt;h3 id=&quot;mysql-server-setup&quot;&gt;MySQL Server Setup&lt;/h3&gt;
 &lt;p&gt;To start with, we need to setup MySQL server in our machine. Click the following link to download and install the application.&lt;/p&gt;
@@ -259,7 +311,7 @@ As mentioned earlier, databases are meant to store data for &lt;i&gt;later use&l
 &lt;h3 id=&quot;query-creating-database&quot;&gt;Query: Creating Database&lt;/h3&gt;
 &lt;p&gt;In order to appreciate what we are aiming in this article, we need to go through some basic SQL queries to understand what type of request to send to MySQL server. I’m using macOS, but the following should work on Windows as well. For macOS users, open the MySQL Server Shell by running &lt;code&gt;mysql -u root -p&lt;/code&gt; (hit &lt;kbd&gt;return&lt;/kbd&gt; or &lt;kbd&gt;enter&lt;/kbd&gt; , and type in your MySQL root password you specified during the installation setup from the previous section) in the terminal. For windows, try to look for it in the Start Menu.
 &lt;!-- &lt;img src=&quot;http://drive.google.com/uc?export=view&amp;id=1wRuD_gG4tJpp1ZKj3jCbwbzWAtERSjsn&quot; style=&quot;margin: -4px auto -30px auto;&quot;&gt; --&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb&quot; style=&quot;margin: -4px auto -30px auto;&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb&quot; style=&quot;margin: -4px auto -30px auto;&quot; /&gt;
 &lt;!-- https://drive.google.com/file/d/1hcAnM6KYuASiBhu5AzHqZpf2P1EBneYb/view?usp=sharing --&gt;
 From here, we are going to check the available databases in MySQL server. To do this, run the following:
 &lt;script src=&quot;https://gist.github.com/alstat/1dbad1187130a31091aead6145dc0151.js&quot;&gt;&lt;/script&gt;
@@ -394,7 +446,7 @@ The best thing about SQL syntax is that, everything is self-explanatory, except 
 &lt;p&gt;To disconnect from the server, run &lt;code&gt;MySQL.disconnect(con)&lt;/code&gt; (Julia) or &lt;code&gt;con.close()&lt;/code&gt; (Python).&lt;/p&gt;
 &lt;h3 id=&quot;benchmark&quot;&gt;Benchmark&lt;/h3&gt;
 &lt;p&gt;For the benchmark, I added a timelapse recorder in populating and reading the table in the previous section. The figure below summarizes the results.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1fhMJg3qIPupf3xhvyCW1p5Ph7tzn7UAH&quot; /&gt;
 The figure was plotted using &lt;a href=&quot;http://gadflyjl.org/stable/index.html&quot;&gt;Gadfly.jl&lt;/a&gt;. Install this package using &lt;code&gt;Pkg&lt;/code&gt; as described above (see the first code block under &lt;i&gt;MySQL Clients on Julia and Python&lt;/i&gt; section), along with &lt;a href=&quot;https://github.com/JuliaGraphics/Cairo.jl&quot;&gt;Cario.jl&lt;/a&gt; and &lt;a href=&quot;https://github.com/JuliaGraphics/Fontconfig.jl&quot;&gt;Fontconfig.jl&lt;/a&gt;. The latter two packages are used to save the plot in PNG format. See the code below to reproduce:
 &lt;script src=&quot;https://gist.github.com/alstat/370b6b9eb33089f52c3f2f721e10e5d2.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
@@ -529,7 +581,7 @@ Flux.jl and Knet.jl, and we are going to use the &lt;a href=&quot;https://en.wik
 
 &lt;h3 id=&quot;specify-the-model&quot;&gt;Specify the Model&lt;/h3&gt;
 &lt;p&gt;The model that we are going to use is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Multilayer_perceptron&quot;&gt;Multilayer Perceptron&lt;/a&gt; with the following architecture: 4 neurons for the input layer, 10 neurons for the hidden layer, and 3 neurons for the output layer.  The first two layers contain bias, and the neurons of the last two layers are activated with Rectified Linear Unit (ReLU) and softmax functions, respectively.  The diagram below illustrates the architecture described:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1oYnD8KZ1NQqbJccw8NYugj0kqihQZBJX&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1oYnD8KZ1NQqbJccw8NYugj0kqihQZBJX&quot; /&gt;
 &lt;!-- https://drive.google.com/file/d/1jqASeBjmbSImp5hEoEZxHMizKUkSLyC8/view?usp=sharing --&gt;
 The codes below specify the model:&lt;/p&gt;
 &lt;div class=&quot;tab&quot; style=&quot;margin-bottom: -16px;&quot;&gt;
@@ -550,9 +602,9 @@ The codes below specify the model:&lt;/p&gt;
   &lt;script src=&quot;https://gist.github.com/alstat/b99baeaf255f8704e64a0ff9077e0283.js&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
 &lt;p&gt;Coming from TensorFlow-Keras, Flux.jl provides Keras-like API for model specification, with &lt;code&gt;Flux.Chain&lt;/code&gt; as the counterpart for Keras’ &lt;code&gt;Sequential&lt;/code&gt;. This is different from Knet.jl where the highest level API you can get are the nuts and bolts for constructing the layers. Having said, however, &lt;code&gt;Flux.Dense&lt;/code&gt; is defined almost exactly as the Dense struct of the Knet.jl code above (check the source code &lt;a href=&quot;https://github.com/FluxML/Flux.jl/blob/1902c0e7c568a1bdb0cda7dca4d69f3896c023c7/src/layers/basic.jl#L82-L100&quot;&gt;here&lt;/a&gt;). In addition, since both Flux.jl and Knet.jl are written purely in Julia, makes the source codes under the hood accessible to beginners. Thus, giving the user a full understanding of not just the code, but also the math. Check the screenshots below for the distribution of the file types in the Github repos of the three frameworks:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1hmWiYy6C01q_X8HGl5xDSjQClJz5H7Ym&quot; /&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=17VAf7wOT9Ej47OZQu9B6o4kOCCs4G_tw&quot; /&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=18RmeurpIX0uzBP9sKwiN24QI_VVLicYF&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1hmWiYy6C01q_X8HGl5xDSjQClJz5H7Ym&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=17VAf7wOT9Ej47OZQu9B6o4kOCCs4G_tw&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=18RmeurpIX0uzBP9sKwiN24QI_VVLicYF&quot; /&gt;
 From the above figure, it’s clear that Flux.jl is 100% Julia. On the other hand, Knet.jl while not apparent is actually 100% Julia as well. The 41.4% of Jupyter Notebooks and other small percentages account for the tutorials, tests and examples and not the &lt;a href=&quot;https://github.com/denizyuret/Knet.jl/tree/master/src&quot;&gt;source codes&lt;/a&gt;.
 &lt;!-- There are several --&gt;
 &lt;!-- &lt;img src=&quot;http://drive.google.com/uc?export=view&amp;id=1HKlC04oVF_3ggraWE7qnMNvW-Atxc89N&quot;&gt; --&gt;
@@ -588,7 +640,7 @@ From the above figure, it’s clear that Flux.jl is 100% Julia. On the other han
   &lt;script src=&quot;https://gist.github.com/alstat/5002d261a67eccebd174ad0ea43969e4.js&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
 &lt;p&gt;The Flux.jl code above simply illustrates the use of &lt;code&gt;Flux.@epochs&lt;/code&gt; macro for looping instead of the &lt;code&gt;for&lt;/code&gt; loop. The loss of the model for 100 epochs is visualized below across frameworks:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=11y4RGyrY1e62cNl9H6Kce6tdcVug8AHt&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=11y4RGyrY1e62cNl9H6Kce6tdcVug8AHt&quot; /&gt;
 From the above figure, one can observe that Flux.jl had a bad starting values set by the random seed earlier, good thing &lt;a href=&quot;https://arxiv.org/abs/1412.6980&quot;&gt;Adam&lt;/a&gt; drives the gradient vector rapidly to the global minimum. The figure was plotted using &lt;a href=&quot;http://gadflyjl.org/stable/index.html&quot;&gt;Gadfly.jl&lt;/a&gt;. Install this package using &lt;code&gt;Pkg&lt;/code&gt; as described in the first code block, along with &lt;a href=&quot;https://github.com/JuliaGraphics/Cairo.jl&quot;&gt;Cario.jl&lt;/a&gt; and &lt;a href=&quot;https://github.com/JuliaGraphics/Fontconfig.jl&quot;&gt;Fontconfig.jl&lt;/a&gt;. The latter two packages are used to save the plot in PNG format, see the code below to reproduce:
 &lt;script src=&quot;https://gist.github.com/alstat/f0d63cf8cd0b41125f9bc072e0fc451b.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;h3 id=&quot;evaluate-the-model&quot;&gt;Evaluate the Model&lt;/h3&gt;
@@ -611,7 +663,7 @@ From the above figure, one can observe that Flux.jl had a bad starting values se
   &lt;script src=&quot;https://gist.github.com/alstat/59d17503d149abbe4ec338b4190affec.js&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
 &lt;p&gt;The figure below shows the traces of the accuracy during training:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1L2d8mfkC-9zl3KeLXdVpynXR_OuyyzC1&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1L2d8mfkC-9zl3KeLXdVpynXR_OuyyzC1&quot; /&gt;
 TensorFlow took 25 epochs before surpassing 50% again. To reproduce the figure, run the following codes (make sure to load Gadfly.jl and other related libraries mentioned earlier in generating the loss plots):
 &lt;script src=&quot;https://gist.github.com/alstat/9539e00aef208062b1c6b900efa6c258.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;h3 id=&quot;benchmark&quot;&gt;Benchmark&lt;/h3&gt;
@@ -634,7 +686,7 @@ TensorFlow took 25 epochs before surpassing 50% again. To reproduce the figure, 
   &lt;script src=&quot;https://gist.github.com/alstat/cf2bf0fac9fe9e55051f524d353aaf97.js&quot;&gt;&lt;/script&gt;  
 &lt;/div&gt;
 &lt;p&gt;The benchmark was done by running the above code repeatedly for about 10 times for each framework, I then took the lowest timestamp out of the results. In addition, before running the code for each framework, I keep a fresh start of my machine.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1u0selT5l8vP7n-LNdvac_bzyMGC1vSDD&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1u0selT5l8vP7n-LNdvac_bzyMGC1vSDD&quot; /&gt;
 The code of the above figure is given below (make sure to load Gadfly.jl and other related libraries mentioned earlier in generating the loss plots):
 &lt;script src=&quot;https://gist.github.com/alstat/c1bc13ab6e772a4104b51d164f4e172d.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
@@ -710,7 +762,7 @@ The code of the above figure is given below (make sure to load Gadfly.jl and oth
 
 &lt;h3 id=&quot;getting-to-know-html&quot;&gt;Getting to know HTML&lt;/h3&gt;
 &lt;p&gt;Since the data published in the websites are usually encoded as a table, it is therefore best to understand the structure of the HTML document before performing web scraping. HTML (Hypertext Markup Language) is a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages [&lt;a href=&quot;https://www.google.com/search?q=what+is+HTML&amp;amp;ie=utf-8&amp;amp;oe=utf-8&amp;amp;client=firefox-b-ab&quot; target=&quot;_blank&quot;&gt;1&lt;/a&gt;]. For example, bold text in HTML is enclosed inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;b&amp;gt;&lt;/code&gt; tag, e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;b&amp;gt;&lt;/code&gt;text&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/b&amp;gt;&lt;/code&gt;, the result is &lt;b&gt;text&lt;/b&gt;. A webpage is a HTML document that can be structured in several ways, one possible case is as follows:
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1WW3yUzJ5ZhGRNPYolM_S4dsJ5ts5urPU&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1WW3yUzJ5ZhGRNPYolM_S4dsJ5ts5urPU&quot; /&gt;
 Scrapers must be familiar with the hierarchy of the HTML document as this will be the template for the frontend source code of every website. Following the structure of the above figure, data encoded in HTML table are placed inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; (table data) tag, where &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; is under &lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt; (table row), &lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt; is under &lt;code class=&quot;highlighter-rouge&quot;&gt;tbody&lt;/code&gt; (table body), and so on. &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; is the lowest level tag (sorting by hierarchy) from the figure above that can contain data. However, &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; can also take precedence over &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; (paragraph), &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; (hyperlink), &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; (bold), &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; (italic), &lt;code class=&quot;highlighter-rouge&quot;&gt;span&lt;/code&gt; (span), and even &lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt; (division). So expect to encounter these under &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt; as well.&lt;/p&gt;
 
 &lt;p&gt;As indicated in the figure, each HTML tag can have attributes, such as &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt;. To understand how the two differ, consider &lt;code class=&quot;highlighter-rouge&quot;&gt;id=&quot;yellow&quot;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;id=&quot;orange&quot;&lt;/code&gt;, these are unique identities (&lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;s) of colors. These &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;s can be grouped into a class, e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;class=&quot;colors&quot;&lt;/code&gt;. HTML tags are not required to have these attributes but are useful for adding custom styles and behavior when doing web development. This article will not dive into the details of the HTML document, but rather to give the reader a high level understanding. There are many resources available on the web, just google.&lt;/p&gt;
@@ -726,14 +778,14 @@ Scrapers must be familiar with the hierarchy of the HTML document as this will b
 Extract the HTML source code and parsed it as follows:
 &lt;script src=&quot;https://gist.github.com/alstat/deb9ef2abe52af58fc03be63f0482ccf.js&quot;&gt;&lt;/script&gt;
 Now to extract the header of the HTML table, use the Web Developer Tools for preliminary inspection on the components of the website. As shown in the screenshot below, the header of the table is enclosed inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; tag of the &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt;. Further, the &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; tag is of class &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style33&lt;/code&gt;, which can be accessed via CSS selector by simply prefixing it with &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;, i.e. &lt;code class=&quot;highlighter-rouge&quot;&gt;.auto-style33&lt;/code&gt;.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1LVNFZRHdT-o-vX-0dLiBMiVv3872LXpE&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1LVNFZRHdT-o-vX-0dLiBMiVv3872LXpE&quot; /&gt;
 &lt;script src=&quot;https://gist.github.com/alstat/63c8855a48c9a33669c9bdd4d3ae2e9a.js&quot;&gt;&lt;/script&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;qres&lt;/code&gt; contains the HTML tags that matched the CSS selector’s query. The result is further cleaned by removing the tabs, spaces and line breaks via &lt;a href=&quot;https://en.wikipedia.org/wiki/Regular_expression&quot; target=&quot;_blank&quot;&gt;Regular Expressions&lt;/a&gt;, and is done as follows:
 &lt;script src=&quot;https://gist.github.com/alstat/94e5af21b303b995d93af24a8ae69841.js&quot;&gt;&lt;/script&gt;
 Having the header names, next is to extract the data from the HTML table. Upon inspection, the &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt;s containing the data next to the header rows seem to have the following classes (see screenshot below): &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style21&lt;/code&gt; for first column (Date-Time), &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style81&lt;/code&gt; for second column (Latitude), &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style80&lt;/code&gt; for third and fourth columns (Longitude and Depth), &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style74&lt;/code&gt; for fifth column (Magnitude), and &lt;code class=&quot;highlighter-rouge&quot;&gt;auto-style79&lt;/code&gt; for sixth column (Location). Unfortunately, this is not consistent across rows (&lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt;s), and is therefore best not to use it with &lt;a href=&quot;https://github.com/Algocircle/Cascadia.jl&quot; target=&quot;_blank&quot;&gt;Cascadia.jl&lt;/a&gt;. Instead, use &lt;a href=&quot;https://github.com/JuliaWeb/Gumbo.jl&quot; target=&quot;_blank&quot;&gt;Gumbo.jl&lt;/a&gt; to navigate down the hierarchy of the &lt;a href=&quot;&quot; target=&quot;_blank&quot;&gt;Document Object Model&lt;/a&gt; of the HTML.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1XEkudOAB7o4Cix5CY4tqSJe2J0BpoJ_G&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1XEkudOAB7o4Cix5CY4tqSJe2J0BpoJ_G&quot; /&gt;
 Starting with the &lt;code class=&quot;highlighter-rouge&quot;&gt;table&lt;/code&gt; tag which is of class &lt;code class=&quot;highlighter-rouge&quot;&gt;.MsoNormalTable&lt;/code&gt; (see screenshot below), the extraction proceeds down to &lt;code class=&quot;highlighter-rouge&quot;&gt;tbody&lt;/code&gt; then to &lt;code class=&quot;highlighter-rouge&quot;&gt;tr&lt;/code&gt; and finally to &lt;code class=&quot;highlighter-rouge&quot;&gt;td&lt;/code&gt;.
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1x3N58LE_5ENyzMbyyhrx8Zrlgp40EBNI&quot; /&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1x3N58LE_5ENyzMbyyhrx8Zrlgp40EBNI&quot; /&gt;
 The following code describes how parsing is done, read the comments:
 &lt;script src=&quot;https://gist.github.com/alstat/b4fbfe5dc8330ef16ad1abc05d44056f.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 
@@ -877,7 +929,7 @@ Thus the &lt;i&gt;a posteriori&lt;/i&gt; is a Gaussian distribution with locatio
 &lt;/div&gt;
 &lt;p&gt;Finally, plot the fitted lines whose weights are samples from the &lt;i&gt;a posteriori&lt;/i&gt;. The red line in the plot below is the Maximum &lt;i&gt;A Posteriori&lt;/i&gt; (MAP) of the parameter of interest. Note that, however, the code provided for the animated plot below is Julia. Python and R users can use &lt;a href=&quot;https://matplotlib.org/index.html&quot; target=&quot;_blank&quot;&gt;matplotlib.pyplot&lt;/a&gt; (Julia’s Plots backend) and &lt;a href=&quot;https://github.com/thomasp85/gganimate&quot; target=&quot;_blank&quot;&gt;gganimate&lt;/a&gt;, respectively.
 &lt;script src=&quot;https://gist.github.com/alstat/023ff855025d0da2fa50b7923b834fd8.js&quot;&gt;&lt;/script&gt;
-&lt;img src=&quot;http://drive.google.com/uc?export=view&amp;amp;id=1XhKHztWM4OpxL1t_KzPxeU1kd40czUvK&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1XhKHztWM4OpxL1t_KzPxeU1kd40czUvK&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;end-note&quot;&gt;End Note&lt;/h3&gt;
 &lt;p&gt;There are many libraries available for Bayesian modeling, for Julia we have: &lt;a href=&quot;https://github.com/JuliaStats/Klara.jl&quot; target=&quot;_blank&quot;&gt;Klara.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/brian-j-smith/Mamba.jl&quot; target=&quot;_blank&quot;&gt;Mamba.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/goedman/Stan.jl&quot; target=&quot;_blank&quot;&gt;Stan.jl&lt;/a&gt;, &lt;a href=&quot;https://github.com/TuringLang/Turing.jl&quot; target=&quot;_blank&quot;&gt;Turing.jl&lt;/a&gt; and &lt;a href=&quot;https://juliaobserver.com/categories/Bayesian&quot; target=&quot;_blank&quot;&gt;more related&lt;/a&gt;;
