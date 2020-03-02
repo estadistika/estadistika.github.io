@@ -116,7 +116,7 @@ One feature of Julia is it supports unicode, making it easy to relate the codes 
 
 Finally, we simulate the data as follows:
 <script src="https://gist.github.com/alstat/2664db066600c54ea2e31edffe17831a.js"></script>
-We don't really have to right down the <code>wtrue</code> variable above since that's the default values of <code>w0</code> and <code>w1</code> arguments, but we do so just for emphasis. 
+We don't really have to write down the <code>wtrue</code> variable above since that's the default values of <code>w0</code> and <code>w1</code> arguments, but we do so just for emphasis. 
 
 While the main subject here is Bayesian Statistics, it would be better as well if we have an idea of what the Frequentist solution would be. As most of you are aware of, the solution to the weights above is given by the following <i>normal equation</i>:
 $$
