@@ -43,48 +43,63 @@ and $\boldsymbol{\mathfrak{A}}\triangleq\left[(\mathbf{x}_i^{\text{T}})\right]_{
 </div>
 </div>
 <div class="wrapper" style="margin-top: 10px">
-<div class="title-label" style="background-color: #efefef; color: #000; border: 1px solid #5e5e5e; padding: 2px 10px; font-family: 'Saira Condensed', sans-serif;"><b>Proof</b></div>
-<div class="proposition" style="padding: 10px; border: 1px solid #5e5e5e; text-align: left !important;">
-Let $\hat{y}_i\triangleq w_0+w_1x_i$ be the model, then the data can be described as follows:
+<div style="text-align: left !important;">
+<b><i>Proof</i></b>. Let $\hat{y}_i\triangleq w_0+w_1x_i$ be the model, then the data can be described as follows:
 \begin{align}
 y_i=\hat{y}_i+\varepsilon_i,\quad\varepsilon_i\overset{\text{iid}}{\sim}\mathcal{N}(0,1/\alpha),
 \end{align}
 where $\varepsilon_i$ is the innovation that the model can't explain, and $\mathbb{Var}(\varepsilon_i)=\alpha^{-1}$ since $\mathbb{Var}(y_i)=\alpha^{-1}$ as given above. Then the likelihood of the model is given by:
+<div style="overflow-x: auto;">
 \begin{align}
 \mathcal{L}(\mathbf{w}|\mathbf{y})\triangleq\mathbb{P}(\mathbf{y}|\mathbf{w})&=\prod_{\forall i}\frac{1}{\sqrt{2\pi}\alpha^{-1}}\text{exp}\left[-\frac{(y_i-\hat{y}_i)^2}{2\alpha^{-1}}\right]\\
 &=\frac{\alpha^n}{(2\pi)^{n/2}}\text{exp}\left[-\alpha\sum_{\forall i}\frac{(y_i-\hat{y}_i)^2}{2}\right],
 \end{align}
+</div>
 or in vector form:
+<div style="overflow-x: auto;">
 \begin{align}
 \mathcal{L}(\mathbf{w}|\mathbf{y})\propto\text{exp}\left[-\frac{\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})}{2}\right],
 \end{align}
+</div>
 where $\mathbf{\mathfrak{A}}\triangleq[(\mathbf{x}_i^{\text{T}})]_{\forall i}$ is the <i>design matrix</i> given above. If the <i>a priori</i> of the parameter is assumed to be standard bivariate Gaussian distribution, i.e. $\mathbf{w}\overset{\text{iid}}{\sim}\mathcal{N}_2(\mathbf{0}, \mathbf{I})$, then 
+<div style="overflow-x: auto;">
 \begin{align}
 \mathbb{P}(\mathbf{w}|\mathbf{y})&\propto\mathcal{L}(\mathbf{w}|\mathbf{y})\mathbb{P}(\mathbf{w})\\
 &\propto\text{exp}\left[-\frac{\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})}{2}\right]\exp\left[-\frac{1}{2}\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\\
 &\propto\text{exp}\left\{-\frac{1}{2}\left[\alpha(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})^{\text{T}}(\mathbf{y}-\boldsymbol{\mathfrak{A}}\mathbf{w})+\mathbf{w}^{\text{T}}\beta\mathbf{I}\mathbf{w}\right]\right\}.
 \end{align}
+</div>
 Expanding the terms in the exponential function returns the following:
+<div style="overflow-x: auto;">
 $$
 \alpha\mathbf{y}^{\text{T}}\mathbf{y}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}+\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w},
 $$
+</div>
 thus
+<div style="overflow-x: auto;">
 \begin{equation}
 \mathbb{P}(\mathbf{w}|\mathbf{y})\propto\mathcal{C}\text{exp}\left\{-\frac{1}{2}\left[\mathbf{w}^{\text{T}}(\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I})\mathbf{w}-2\alpha\mathbf{w}^{\text{T}}\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}\right]\right\}.
 \end{equation}
+</div>
 The inner terms of the exponential function is of the form $ax^2-2bx$. This a quadratic equation and therefore can be factored by completing the square. To do so, let $\mathbf{D}\triangleq\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\boldsymbol{\mathfrak{A}}+\beta\mathbf{I}$ and $\mathbf{b}\triangleq\alpha\boldsymbol{\mathfrak{A}}^{\text{T}}\mathbf{y}$, then
+<div style="overflow-x: auto;">
 \begin{align}
 \mathbb{P}(\mathbf{w}|\mathbf{y})&\propto\mathcal{C}\text{exp}\left[-\frac{1}{2}\left(\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{w}-2\mathbf{w}^{\text{T}}\mathbf{b}\right)\right]\\&=\mathcal{C}\text{exp}\left[-\frac{1}{2}\left(\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{w}-\mathbf{w}^{\text{T}}\mathbf{b}-\mathbf{b}^{\text{T}}\mathbf{w}\right)\right].
 \end{align}
+</div>
 In order to proceed, the matrix $\mathbf{D}$ must be symmetric and invertible (<i>this can be proven separately</i>). If satisfied, then $\mathbf{I}\triangleq\mathbf{D}\mathbf{D}^{-1}=\mathbf{D}^{-1}\mathbf{D}$, so that the terms inside the exponential function above become:
+<div style="overflow-x: auto;">
 $$
 \mathbf{w}^{\text{T}}\mathbf{D}\mathbf{w}-\mathbf{w}^{\text{T}}\mathbf{D}\mathbf{D}^{-1}\mathbf{b}-\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{w}+\underset{\text{constant introduced}}{\underbrace{(\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{D}^{-1}\mathbf{b}-\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{D}^{-1}\mathbf{b})}}.
 $$
+</div>
 Finally, let $\boldsymbol{\Sigma}\triangleq\mathbf{D}^{-1}$ and $\boldsymbol{\mu}\triangleq\mathbf{D}^{-1}\mathbf{b}$, then 
+<div style="overflow-x: auto;">
 \begin{align}
 \mathbb{P}(\mathbf{w}|\mathbf{y})&\propto\mathcal{C}\text{exp}\left[-\frac{1}{2}\left(\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}-\mathbf{w}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}-\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\mathbf{w}+\boldsymbol{\mu}^{\text{T}}\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}\right)\right]\\
 &=\mathcal{C}\text{exp}\left[-\frac{(\mathbf{w}-\boldsymbol{\mu})^{\text{T}}\boldsymbol{\Sigma}^{-1}(\mathbf{w}-\boldsymbol{\mu})}{2}\right],
 \end{align}
+</div>
 where $-\mathbf{b}^{\text{T}}\mathbf{D}^{-1}\mathbf{D}\mathbf{D}^{-1}\mathbf{b}$ becomes part of $\mathcal{C}$, and that proves the proposition. $\blacksquare$
 </div>
 </div>
