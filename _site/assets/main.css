@@ -12,6 +12,7 @@
 @import url("https://fonts.googleapis.com/css?family=Bungee+Outline");
 @import url("https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap");
 @media (min-width: 320px) and (max-width: 480px) {
   html body {
     margin: 0; }
@@ -166,7 +167,6 @@
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
-              font-size: 24px;
               color: white; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
             display: none;
@@ -367,7 +367,6 @@
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
-              font-size: 24px;
               color: white; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
             display: none;
@@ -566,7 +565,6 @@
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
-              font-size: 24px;
               color: white; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
             display: none;
@@ -763,7 +761,6 @@
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
-              font-size: 24px;
               color: white; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
             display: none;
@@ -957,7 +954,6 @@
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
-              font-size: 24px;
               color: white; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown div.dropdown-content {
             display: none;
@@ -1001,7 +997,7 @@
           margin-bottom: 40px; } }
 html body {
   font-size: 17px;
-  font-family: "Playfair Display";
+  font-family: "Lora", serif;
   text-align: justify;
   line-height: 26px;
   color: #2e2e2e; }
@@ -1321,5 +1317,3 @@ html body {
     html body main.site-main-content .tooltip:hover .tooltiptext {
       visibility: visible;
       opacity: 1; }
-
-/*# sourceMappingURL=main.css.map */
