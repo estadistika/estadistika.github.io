@@ -1,5 +1,5 @@
 @mixin mobile_high_landscape() {
-    @media (min-width: 481px) and (max-width: 767px) and (orientation: landscape){
+    @media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
         body {
             margin: 0;
             div.site-parent-container {
@@ -7,14 +7,14 @@
                 padding: 0;
                 margin: 0;
                 background-color: #ffffff;
-                width: 100% !important; 
-                font-size: 14px !important;
+                width: 100% !important;
+                font-size: 15px !important;
                 text-align: left !important;
                 #particles-js {
                     display: none;
                 }
                 header {
-                    .site-sidebar {     
+                    .site-sidebar {
                         background-image: linear-gradient(rgb(29, 29, 29), #1f1e1e, #1f1e1e, rgb(29, 29, 29));
                         opacity: 0.97;
                         position: fixed;
@@ -25,153 +25,6 @@
                         height: 50px;
                         box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
                         z-index: 2;
-
-                        div#website-name-wrapper {
-                                margin: 3px 0;
-                                text-align: right;
-                                float: right;
-                                display: table !important;
-                            div#website-name {
-                                padding: 0px 10px 0px 0px;
-                                margin: 0;
-                                color: rgb(207, 207, 207);
-                                font-family: 'Saira Condensed', sans-serif;
-                                font-weight: bold;
-                                font-size: 20px;
-                                display: block;
-                                // display: inline-block;
-                            }
-
-                            div#website-description {
-                                padding-right: 10px;
-                                display: block;
-                                margin-top: -8px;
-                                font-size: 13px;
-                                font-family: 'Saira Condensed', sans-serif;
-                                color: rgb(185, 185, 185);
-                            }
-                        }
-
-                        div.dropdown {
-                            margin: 2px 0;
-                            position: relative;
-                            display: inline-block !important;
-                            box-sizing: border-box;
-                            button.dropbtn {
-                                box-sizing: border-box;
-                                background-color: #00000000;
-                                padding: 10px;
-                                font-size: 14px;
-                                border: none;
-                                cursor: pointer;
-                
-                                a {
-                                    // font-size: 24px;
-                                    color: rgb(255, 255, 255);
-                                }
-                            }
-                
-                            div.dropdown-content {
-                                display: none;
-                                position: absolute;
-                                background-color: #1f1e1e;
-                                min-width: 160px;
-                                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                                z-index: 1;
-                            }
-                            
-                            div.dropdown-content a {
-                                color: rgb(255, 255, 255) !important;
-                                padding: 12px 16px;
-                                text-decoration: none;
-                                display: block;
-                                font-family: 'Roboto', sans-serif;
-                            }
-                            
-                            div.dropdown-content a:hover {
-                                background-color: #161616;
-                                color: white !important;
-                            }   
-                        }
-                        
-                        div.dropdown:hover {
-                            div.dropdown-content {
-                                display: block;
-                
-                                a:hover {
-                                    font-weight: bold;
-                                    color: black;
-                                }
-                            }
-                            button.dropbtn {
-                                background-color: #161616;
-                                a {
-                                    color: white;
-                                }
-                            }
-                        }
-
-                        nav {
-                            display: none !important;
-                        }
-                    }
-                }
-
-                main.site-main-content {
-                    margin: 74px 65px 0 65px;
-                    // .gist .gist-file {
-                    //     font-size:16px !important;
-                    // }
-                    center.home {
-                        display: none;
-                    }
-
-                    div.home-mobile {
-                        display: block !important;
-                        // padding: 15px;
-                        margin-top: 40px;
-                        margin-bottom: 40px;
-
-                        header.post-header {
-                            h1.post-title {
-                                font-size: 22px !important;
-                            }
-                        }
-                    }
-
-                    article.post {
-                        // padding: 10px 15px;
-                        margin-top: 40px;
-
-                        header.post-header {
-                            h1.post-title {
-                                font-size: 22px !important;
-                            }
-                        }
-                    }
-                }
-            }
-
-            div.site-parent-container-blog {
-                padding: 0;
-                margin: 0;
-                background-color: #ffffff;
-                width: 100% !important; 
-                font-size: 14px !important;
-                text-align: left !important;
-                header {
-                    .site-sidebar {     
-                        background-image: linear-gradient(rgb(29, 29, 29), #1f1e1e, #1f1e1e, rgb(29, 29, 29));
-                        opacity: 0.97;
-                        position: fixed;
-                        top: 0%;
-                        width: 100%;
-                        border-radius: 0px;
-                        box-sizing: border-box;
-                        height: 50px;
-                        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
-                        z-index: 2;
-
                         div#website-name-wrapper {
                             margin: 3px 0;
                             text-align: right;
@@ -187,7 +40,6 @@
                                 display: block;
                                 // display: inline-block;
                             }
-
                             div#website-description {
                                 padding-right: 10px;
                                 display: block;
@@ -197,8 +49,6 @@
                                 color: rgb(185, 185, 185);
                             }
                         }
-
-
                         div.dropdown {
                             margin: 2px 0;
                             position: relative;
@@ -208,25 +58,22 @@
                                 box-sizing: border-box;
                                 background-color: #00000000;
                                 padding: 10px;
-                                // font-size: 16px;
+                                font-size: 14px;
                                 border: none;
                                 cursor: pointer;
-                
                                 a {
-                                    font-size: 24px;
+                                    // font-size: 24px;
                                     color: rgb(255, 255, 255);
                                 }
                             }
-                
                             div.dropdown-content {
                                 display: none;
                                 position: absolute;
                                 background-color: #1f1e1e;
                                 min-width: 160px;
-                                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                                 z-index: 1;
                             }
-                            
                             div.dropdown-content a {
                                 color: rgb(255, 255, 255) !important;
                                 padding: 12px 16px;
@@ -234,17 +81,14 @@
                                 display: block;
                                 font-family: 'Roboto', sans-serif;
                             }
-                            
                             div.dropdown-content a:hover {
                                 background-color: #161616;
                                 color: white !important;
-                            }   
+                            }
                         }
-                        
                         div.dropdown:hover {
                             div.dropdown-content {
                                 display: block;
-                
                                 a:hover {
                                     font-weight: bold;
                                     color: black;
@@ -257,19 +101,146 @@
                                 }
                             }
                         }
-
                         nav {
                             display: none !important;
                         }
                     }
                 }
-
+                main.site-main-content {
+                    margin: 74px 65px 0 65px;
+                    // .gist .gist-file {
+                    //     font-size:16px !important;
+                    // }
+                    center.home {
+                        display: none;
+                    }
+                    div.home-mobile {
+                        display: block !important;
+                        // padding: 15px;
+                        margin-top: 40px;
+                        margin-bottom: 40px;
+                        header.post-header {
+                            h1.post-title {
+                                font-size: 22px !important;
+                            }
+                        }
+                    }
+                    article.post {
+                        // padding: 10px 15px;
+                        margin-top: 40px;
+                        header.post-header {
+                            h1.post-title {
+                                font-size: 22px !important;
+                            }
+                        }
+                    }
+                }
+            }
+            div.site-parent-container-blog {
+                padding: 0;
+                margin: 0;
+                background-color: #ffffff;
+                width: 100% !important;
+                font-size: 15px !important;
+                text-align: left !important;
+                header {
+                    .site-sidebar {
+                        background-image: linear-gradient(rgb(29, 29, 29), #1f1e1e, #1f1e1e, rgb(29, 29, 29));
+                        opacity: 0.97;
+                        position: fixed;
+                        top: 0%;
+                        width: 100%;
+                        border-radius: 0px;
+                        box-sizing: border-box;
+                        height: 50px;
+                        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+                        z-index: 2;
+                        div#website-name-wrapper {
+                            margin: 3px 0;
+                            text-align: right;
+                            float: right;
+                            display: table !important;
+                            div#website-name {
+                                padding: 0px 10px 0px 0px;
+                                margin: 0;
+                                color: rgb(207, 207, 207);
+                                font-family: 'Saira Condensed', sans-serif;
+                                font-weight: bold;
+                                font-size: 20px;
+                                display: block;
+                                // display: inline-block;
+                            }
+                            div#website-description {
+                                padding-right: 10px;
+                                display: block;
+                                margin-top: -8px;
+                                font-size: 13px;
+                                font-family: 'Saira Condensed', sans-serif;
+                                color: rgb(185, 185, 185);
+                            }
+                        }
+                        div.dropdown {
+                            margin: 2px 0;
+                            position: relative;
+                            display: inline-block !important;
+                            box-sizing: border-box;
+                            button.dropbtn {
+                                box-sizing: border-box;
+                                background-color: #00000000;
+                                padding: 10px;
+                                // font-size: 16px;
+                                border: none;
+                                cursor: pointer;
+                                a {
+                                    font-size: 24px;
+                                    color: rgb(255, 255, 255);
+                                }
+                            }
+                            div.dropdown-content {
+                                display: none;
+                                position: absolute;
+                                background-color: #1f1e1e;
+                                min-width: 160px;
+                                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                                z-index: 1;
+                            }
+                            div.dropdown-content a {
+                                color: rgb(255, 255, 255) !important;
+                                padding: 12px 16px;
+                                text-decoration: none;
+                                display: block;
+                                font-family: 'Roboto', sans-serif;
+                            }
+                            div.dropdown-content a:hover {
+                                background-color: #161616;
+                                color: white !important;
+                            }
+                        }
+                        div.dropdown:hover {
+                            div.dropdown-content {
+                                display: block;
+                                a:hover {
+                                    font-weight: bold;
+                                    color: black;
+                                }
+                            }
+                            button.dropbtn {
+                                background-color: #161616;
+                                a {
+                                    color: white;
+                                }
+                            }
+                        }
+                        nav {
+                            display: none !important;
+                        }
+                    }
+                }
                 main.site-main-content {
                     margin: 40px 65px 0 65px;
                     center.home {
                         display: none;
                     }
-
                     article.post {
                         // padding: 10px 0;
                         margin-top: 73px;
@@ -279,14 +250,12 @@
                                 margin-top: 20px !important;
                             }
                         }
-
                         div.post-content {
                             img {
                                 width: 100%;
                             }
                         }
                     }
-
                     div.home {
                         margin-top: 40px;
                         margin-bottom: 40px;
