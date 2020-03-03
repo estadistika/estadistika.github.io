@@ -149,7 +149,7 @@ At this point, we are ready to generate our main vis. The first function (<code>
 Tying all the codes together, gives us this beautiful grid plot.
 <script src="https://gist.github.com/alstat/8fca90fe8e0cbb84b36f59367fe130aa.js"></script>
 <img src="https://drive.google.com/uc?export=view&id=1rKM8d9ROHw63MvBf83EGoNMOoHe6vx__">
-Since we went with style before comprehension, let me guide you then with the axes. All figures has a unit square space, with contour plots having the following axes: $w_0$ (the <i>x</i>-axis) and $w_1$ (the <i>y</i>-axis). Obviously, the data space has the following axes: predictor (the <i>x</i>-axis) and response (the <i>y</i>-axis).
+Since we went with style before comprehension, let me guide you then with the axes. All figures have unit square space, with contour plots having the following axes: $w_0$ (the <i>x</i>-axis) and $w_1$ (the <i>y</i>-axis). Obviously, the data space has the following axes: predictor (the <i>x</i>-axis) and response (the <i>y</i>-axis).
 ### Discussions
 We commenced the article with emphasis on the approach of Bayesian Statistics to modeling, whereby the estimation of the parameters as mentioned is based on the <i>Bayes' Theorem</i>, which is a conditional probability with the following form:
 \begin{equation}
