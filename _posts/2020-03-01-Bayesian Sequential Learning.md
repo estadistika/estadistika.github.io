@@ -165,7 +165,7 @@ This may not be the best analogy, but that is how the above figure sequentially 
 ### Bayesian Deep Learning
 This section deserves a separate article, but I will briefly give some motivation on how we can generalize the above discussion into complex modeling. 
 
-The intention of the article is to give the reader a low-level understanding of how the Bayes' theorem work, and without loss of generalization, I decided to go with simple linear regression to demonstrate the above subject. However, this can be applied to any model indexed by or a function of some parameters or weights $\mathbf{w}$, with the assumption that the solution is random but govern by some probability distribution. 
+The intention of the article is to give the reader a low-level understanding of how the Bayes' theorem works, and without loss of generalization, I decided to go with simple linear regression to demonstrate the above subject. However, this can be applied to any model indexed by or a function of some parameters or weights $\mathbf{w}$, with the assumption that the solution is random but govern by some probability distribution. 
 
 Complex modeling such as in Deep Learning are usually based on the assumption that the weights are fixed and unknown, which in Statistics is the Frequentist approach to inference, but without assuming some probability distribution on the error of the model. Therefore, if we are to assume some randomness on the weights, we can then use Bayesian inference to derive or at least approximate (for models with no closed-form solution) the posterior distribution. Approximate Bayesian inference are done via Markov Chain Monte Carlo (MCMC) or Variational Inference, which we can tackle in a separate post.
 
