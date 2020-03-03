@@ -129,7 +129,7 @@ Therefore, for the current sample data, the estimate we got when assuming the we
 <img src="https://drive.google.com/uc?export=view&id=1LpAcFwC3pCOzCvsMsINmR-d52D83X8bi">
 Not bad given that we have very small dataset. Now let's proceed and see how we can infer the parameters in Bayesian framework. The prior distribution can be implemented as follows:
 <script src="https://gist.github.com/alstat/ab32e9a8f171975532910c6305a4f95f.js"></script>
-As indicated in the above proposition, the parameters are jointly modelled from a bivariate Normal distribution, as indicated by the dimension of the hyperparameter <code>μ</code> above. Indeed, the true parameter we are interested in is the weight vector, $\mathbf{w}$, but because we considered it to be random, then the parameters of the model we assign to it are called <i>hyperparameters</i>, in this case the vector $\boldsymbol{\mu}$ and the identity matrix $\mathbf{I}$ of the prior distribution. 
+As indicated in the above proposition, the parameters are jointly modelled by a bivariate Normal distribution, as indicated by the dimension of the hyperparameter <code>μ</code> above. Indeed, the true parameter we are interested in is the weight vector, $\mathbf{w}$, but because we considered it to be random, then the parameters of the model we assign to it are called <i>hyperparameters</i>, in this case the vector $\boldsymbol{\mu}$ and the identity matrix $\mathbf{I}$ of the prior distribution. 
 
 Moreover, the likelihood of the data can be implemented as follows:
 <script src="https://gist.github.com/alstat/b0fa92ec05c0a03c2d91bb82c1c5ca5e.js"></script>
