@@ -26,7 +26,7 @@
       margin: 0;
       background-color: #ffffff;
       width: 100% !important;
-      font-size: 14px !important;
+      font-size: 15px !important;
       text-align: left !important; }
       html body div.site-parent-container #particles-js {
         display: none; }
@@ -121,7 +121,7 @@
       margin: 0;
       background-color: #ffffff;
       width: 100% !important;
-      font-size: 14px !important;
+      font-size: 15px !important;
       text-align: left !important; }
       html body div.site-parent-container-blog header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
@@ -225,7 +225,7 @@
       margin: 0;
       background-color: #ffffff;
       width: 100% !important;
-      font-size: 14px !important;
+      font-size: 15px !important;
       text-align: left !important; }
       html body div.site-parent-container #particles-js {
         display: none; }
@@ -322,7 +322,7 @@
       margin: 0;
       background-color: #ffffff;
       width: 100% !important;
-      font-size: 14px !important;
+      font-size: 15px !important;
       text-align: left !important; }
       html body div.site-parent-container-blog header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
@@ -426,7 +426,7 @@
       margin: 0;
       background-color: #ffffff;
       width: 100% !important;
-      font-size: 14px !important;
+      font-size: 15px !important;
       text-align: left !important; }
       html body div.site-parent-container #particles-js {
         display: none; }
@@ -521,7 +521,7 @@
       margin: 0;
       background-color: #ffffff;
       width: 100% !important;
-      font-size: 14px !important;
+      font-size: 15px !important;
       text-align: left !important; }
       html body div.site-parent-container-blog header .site-sidebar {
         background-image: linear-gradient(#1d1d1d, #1f1e1e, #1f1e1e, #1d1d1d);
@@ -1321,3 +1321,5 @@ html body {
     html body main.site-main-content .tooltip:hover .tooltiptext {
       visibility: visible;
       opacity: 1; }
+
+/*# sourceMappingURL=main.css.map */
