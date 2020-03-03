@@ -5,18 +5,18 @@
             img {
                 width: 100%;
             }
-
-            h1, h2, h3, h4 {
+            h1,
+            h2,
+            h3,
+            h4 {
                 font-family: 'Saira Condensed', sans-serif;
                 text-transform: uppercase;
             }
         }
-
         /* Style the tab */
         .tab {
             overflow: hidden;
         }
-
         /* Style the buttons inside the tab */
         .tab button {
             // background-color: inherit;
@@ -27,33 +27,28 @@
             padding: 0;
             transition: 0.3s;
         }
-
         /* Change background color of buttons on hover */
         // .tab button:hover {
         //     background-color: #ddd;
         // }
-
         // /* Create an active/current tablink class */
         .tab button.active {
             color: $link-color;
             font-weight: bold;
         }
-
         /* Style the tab content */
         .first {
             display: block;
         }
-
         // .tabcontent {
         //     display: none;
         //     padding: 0;
         //     border-width: none;
         // }
-        
         button.tablinks {
             padding: 0 10px;
+            margin: 0;
         }
-
         .section {
             margin-top: 25px;
             margin-bottom: 8px;
@@ -63,83 +58,66 @@
             border-width: 0;
             background-color: #f7f7f7 !important;
         }
-
         .gist .gist-file {
             border-bottom-width: 0;
             background-color: #ddd !important;
         }
-
         .gist .gist-data {
             border-radius: 2px;
         }
-
         .gist {
             margin-top: 15px;
             margin-bottom: 5px;
         }
-
         div.post-header {
             display: block !important;
         }
-        
         span.web-title {
             font-family: 'Berkshire Swash', cursive;
             font-size: 50px;
             color: $sb-nav-color;
-
             display: block;
-
             margin: 50px;
             text-align: center;
         }
-
         div.welcome-logo {
             margin: 230px auto 230px auto;
             font-size: 100px;
             font-family: 'Bungee Outline', cursive;
             display: block;
-
             text-align: center;
             transition: all .3s ease-in-out;
         }
-        
         div.welcome-logo:hover {
             color: $sb-nav-color;
         }
-
         div.home-desc {
             display: block;
         }
-
         .previous {
             margin: 0 10px 0 0;
         }
-
         .next {
             margin: 0 0 0 10px;
         }
-
         .previous-article {
             margin: 0 5px 0 0;
         }
-
         .next-article {
             margin: 0 0 0 5px;
         }
-
         button.more-button {
             font-size: 16px;
         }
-
-        a.post-link, h1.post-title {
+        a.post-link,
+        h1.post-title {
             font-family: $font-post-title-link;
             font-size: 28px;
-            text-decoration:  none;
+            text-decoration: none;
             color: $sb-bg-color;
             line-height: 1.1;
             text-align: left;
         }
-
         code {
             padding: 2px 4px;
             font-family: 'Ubuntu Mono', monospace;
@@ -149,24 +127,24 @@
             background-color: #f9f2f4;
             border-radius: 4px;
         }
-
         .title-more-margin {
             margin: 50px 0 0 0;
         }
-
-        span.post-meta, time, div.rss-subscribe, div.pagination, span.author-name {
+        span.post-meta,
+        time,
+        div.rss-subscribe,
+        div.pagination,
+        span.author-name {
             font-family: $font-post-meta, sans-serif;
             font-size: $font-size-post-meta;
         }
-
         div.pagination {
             float: right;
         }
-
-        time, div#rss-subscribe-post.rss-subscribe {
+        time,
+        div#rss-subscribe-post.rss-subscribe {
             display: inline;
         }
-
         ul.post-list {
             list-style: none;
             padding: 0;
@@ -174,22 +152,22 @@
                 padding: 30px 0;
             }
         }
-
-        div.with-left-border, div.question, div.question-christian, div.reference {
+        div.with-left-border,
+        div.question,
+        div.question-christian,
+        div.reference {
             padding: 10px;
             border-left: 2px solid rgba(0, 0, 0, .1);
         }
-
-        div.with-top-border, div.answer {
+        div.with-top-border,
+        div.answer {
             padding: 10px 0 0 0;
             border-top: 2px solid rgba(0, 0, 0, .1);
         }
-
         div.with-all-border {
             padding: 10px;
             border: 2px solid rgba(0, 0, 0, .1);
         }
-
         div.reference {
             margin: 0 0 50px 0;
             ol {
@@ -197,135 +175,122 @@
                 padding: 0 0 0 15px;
             }
         }
-
         div.question-christian {
             ol {
                 margin: 0;
                 padding: 0 0 0 15px;
             }
         }
-
-        span.question-label, span.answer-label, span.question-christian-label, span.reference-label, span.investigation-label, span.section-label {
+        span.question-label,
+        span.answer-label,
+        span.question-christian-label,
+        span.reference-label,
+        span.investigation-label,
+        span.section-label {
             font-family: $font-post-meta;
             color: #ffffff;
             padding: 2px 7px;
         }
-
         div.question-label-wrapper {
             margin: 35px 0 0 0;
             span.question-label {
                 background-color: #FF6961;
             }
         }
-
         div.answer-label-wrapper {
             margin: 30px 0 0 0;
             span.answer-label {
                 background-color: #FFB347;
             }
         }
-
         div.question-christian-wrapper {
             margin: 30px 0 0 0;
             span.question-christian-label {
                 background-color: #966FD6;
             }
         }
-        
         div.reference-label-wrapper {
             margin: 20px 0 0 0;
             span.reference-label {
                 background-color: #77DD77;
             }
         }
-
         div.investigation-wrapper {
             margin: 30px 0 0 0;
             span.investigation-label {
                 background-color: #779ECB;
             }
         }
-
         div.section-wrapper {
             margin: 30px 0 0 0;
             span.section-label {
                 background-color: $sec-bg-color;
             }
         }
-        
         .more-button-wrapper {
             text-align: right;
         }
-
         .translation {
             font-family: $font-quran-translation;
             display: block;
         }
-
         div.more-quran-wrapper {
             margin: 15px;
             div.quran-wrapper {
                 margin: 0px;
-            }    
+            }
         }
-
-        div.quran-wrapper, div.bible-wrapper {
+        div.quran-wrapper,
+        div.bible-wrapper {
             margin: 15px;
             background-color: $quran-bg-color;
         }
-
-        div.quran-verse, div.bible-verse {
+        div.quran-verse,
+        div.bible-verse {
             background-color: $quran-bg-color;
             padding: 10px;
         }
-
-        div.verse-no, div.bible-verse-no {
+        div.verse-no,
+        div.bible-verse-no {
             border-width: 1px;
             width: 100%;
-            clear:both;
+            clear: both;
             color: #ffffff;
-            
-            font-family: $font-post-meta; 
+            font-family: $font-post-meta;
             text-align: center;
-
             div.book {
                 float: left;
                 width: 100px
             }
-    
             div.chapter-verse {
                 float: right;
                 width: 100px;
             }
-
             div.chapter {
                 margin: 0 auto !important;
                 width: 300px;
-                display:inline-block;
+                display: inline-block;
             }
         }
-
         div.verse-no {
             background-color: $sb-bg-color;
         }
-
         div.bible-verse-no {
             background-color: $bb-bg-color;
         }
-        
-        div#more-quran-10-89-93, div#more-quran-3-151, {
+        div#more-quran-10-89-93,
+        div#more-quran-3-151,
+        {
             display: none;
-            opacity: 0; 
+            opacity: 0;
             transform: scaleX(0);
             transition: 1s ease opacity, 1s ease transform;
         }
-
         .tooltip {
             position: relative;
             display: inline-block;
             // border-bottom: 1px dotted black;
         }
-        
         .tooltip .tooltiptext {
             font-family: $font-post-meta;
             font-size: $font-size-post-meta;
@@ -345,7 +310,6 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
         .tooltip .tooltiptext::after {
             content: "";
             position: absolute;
@@ -356,7 +320,6 @@
             border-style: solid;
             border-color: #555 transparent transparent transparent;
         }
-        
         .tooltip:hover .tooltiptext {
             visibility: visible;
             opacity: 1;

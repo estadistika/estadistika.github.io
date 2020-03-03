@@ -70,7 +70,9 @@
           html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             font-size: 14px;
             border: none;
             cursor: pointer; }
@@ -98,7 +100,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container header .site-sidebar nav {
@@ -163,7 +165,9 @@
           html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
@@ -190,7 +194,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container-blog header .site-sidebar nav {
@@ -268,7 +272,9 @@
           html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             font-size: 14px;
             border: none;
             cursor: pointer; }
@@ -296,7 +302,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container header .site-sidebar nav {
@@ -363,7 +369,9 @@
           html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
@@ -390,7 +398,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container-blog header .site-sidebar nav {
@@ -468,7 +476,9 @@
           html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             font-size: 14px;
             border: none;
             cursor: pointer; }
@@ -496,7 +506,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container header .site-sidebar nav {
@@ -561,7 +571,9 @@
           html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
@@ -588,7 +600,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container-blog header .site-sidebar nav {
@@ -665,7 +677,9 @@
           html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             font-size: 14px;
             border: none;
             cursor: pointer; }
@@ -693,7 +707,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container header .site-sidebar nav {
@@ -757,7 +771,9 @@
           html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
@@ -784,7 +800,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container-blog header .site-sidebar nav {
@@ -858,7 +874,9 @@
           html body div.site-parent-container header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             font-size: 14px;
             border: none;
             cursor: pointer; }
@@ -886,7 +904,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container header .site-sidebar nav {
@@ -950,7 +968,9 @@
           html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn {
             box-sizing: border-box;
             background-color: #00000000;
-            padding: 10px;
+            margin-bottom: 8.4px;
+            margin-top: 10px;
+            margin-left: 5px;
             border: none;
             cursor: pointer; }
             html body div.site-parent-container-blog header .site-sidebar div.dropdown button.dropbtn a {
@@ -977,7 +997,7 @@
             font-weight: bold;
             color: black; }
         html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn {
-          background-color: #161616; }
+          background-color: #00000000; }
           html body div.site-parent-container-blog header .site-sidebar div.dropdown:hover button.dropbtn a {
             color: white; }
         html body div.site-parent-container-blog header .site-sidebar nav {
@@ -1105,7 +1125,10 @@ html body {
       margin-bottom: 30px; }
       html body main.site-main-content .post-content img {
         width: 100%; }
-      html body main.site-main-content .post-content h1, html body main.site-main-content .post-content h2, html body main.site-main-content .post-content h3, html body main.site-main-content .post-content h4 {
+      html body main.site-main-content .post-content h1,
+      html body main.site-main-content .post-content h2,
+      html body main.site-main-content .post-content h3,
+      html body main.site-main-content .post-content h4 {
         font-family: 'Saira Condensed', sans-serif;
         text-transform: uppercase; }
     html body main.site-main-content .tab {
@@ -1123,7 +1146,8 @@ html body {
     html body main.site-main-content .first {
       display: block; }
     html body main.site-main-content button.tablinks {
-      padding: 0 10px; }
+      padding: 0 10px;
+      margin: 0; }
     html body main.site-main-content .section {
       margin-top: 25px;
       margin-bottom: 8px; }
@@ -1169,7 +1193,8 @@ html body {
       margin: 0 0 0 5px; }
     html body main.site-main-content button.more-button {
       font-size: 16px; }
-    html body main.site-main-content a.post-link, html body main.site-main-content h1.post-title {
+    html body main.site-main-content a.post-link,
+    html body main.site-main-content h1.post-title {
       font-family: "Aubrey", cursive;
       font-size: 28px;
       text-decoration: none;
@@ -1186,22 +1211,31 @@ html body {
       border-radius: 4px; }
     html body main.site-main-content .title-more-margin {
       margin: 50px 0 0 0; }
-    html body main.site-main-content span.post-meta, html body main.site-main-content time, html body main.site-main-content div.rss-subscribe, html body main.site-main-content div.pagination, html body main.site-main-content span.author-name {
+    html body main.site-main-content span.post-meta,
+    html body main.site-main-content time,
+    html body main.site-main-content div.rss-subscribe,
+    html body main.site-main-content div.pagination,
+    html body main.site-main-content span.author-name {
       font-family: "Saira Condensed", sans-serif;
       font-size: 16px; }
     html body main.site-main-content div.pagination {
       float: right; }
-    html body main.site-main-content time, html body main.site-main-content div#rss-subscribe-post.rss-subscribe {
+    html body main.site-main-content time,
+    html body main.site-main-content div#rss-subscribe-post.rss-subscribe {
       display: inline; }
     html body main.site-main-content ul.post-list {
       list-style: none;
       padding: 0; }
       html body main.site-main-content ul.post-list li {
         padding: 30px 0; }
-    html body main.site-main-content div.with-left-border, html body main.site-main-content div.question, html body main.site-main-content div.question-christian, html body main.site-main-content div.reference {
+    html body main.site-main-content div.with-left-border,
+    html body main.site-main-content div.question,
+    html body main.site-main-content div.question-christian,
+    html body main.site-main-content div.reference {
       padding: 10px;
       border-left: 2px solid rgba(0, 0, 0, 0.1); }
-    html body main.site-main-content div.with-top-border, html body main.site-main-content div.answer {
+    html body main.site-main-content div.with-top-border,
+    html body main.site-main-content div.answer {
       padding: 10px 0 0 0;
       border-top: 2px solid rgba(0, 0, 0, 0.1); }
     html body main.site-main-content div.with-all-border {
@@ -1215,7 +1249,12 @@ html body {
     html body main.site-main-content div.question-christian ol {
       margin: 0;
       padding: 0 0 0 15px; }
-    html body main.site-main-content span.question-label, html body main.site-main-content span.answer-label, html body main.site-main-content span.question-christian-label, html body main.site-main-content span.reference-label, html body main.site-main-content span.investigation-label, html body main.site-main-content span.section-label {
+    html body main.site-main-content span.question-label,
+    html body main.site-main-content span.answer-label,
+    html body main.site-main-content span.question-christian-label,
+    html body main.site-main-content span.reference-label,
+    html body main.site-main-content span.investigation-label,
+    html body main.site-main-content span.section-label {
       font-family: "Saira Condensed";
       color: #ffffff;
       padding: 2px 7px; }
@@ -1252,26 +1291,32 @@ html body {
       margin: 15px; }
       html body main.site-main-content div.more-quran-wrapper div.quran-wrapper {
         margin: 0px; }
-    html body main.site-main-content div.quran-wrapper, html body main.site-main-content div.bible-wrapper {
+    html body main.site-main-content div.quran-wrapper,
+    html body main.site-main-content div.bible-wrapper {
       margin: 15px;
       background-color: rgba(0, 0, 0, 0.03); }
-    html body main.site-main-content div.quran-verse, html body main.site-main-content div.bible-verse {
+    html body main.site-main-content div.quran-verse,
+    html body main.site-main-content div.bible-verse {
       background-color: rgba(0, 0, 0, 0.03);
       padding: 10px; }
-    html body main.site-main-content div.verse-no, html body main.site-main-content div.bible-verse-no {
+    html body main.site-main-content div.verse-no,
+    html body main.site-main-content div.bible-verse-no {
       border-width: 1px;
       width: 100%;
       clear: both;
       color: #ffffff;
       font-family: "Saira Condensed";
       text-align: center; }
-      html body main.site-main-content div.verse-no div.book, html body main.site-main-content div.bible-verse-no div.book {
+      html body main.site-main-content div.verse-no div.book,
+      html body main.site-main-content div.bible-verse-no div.book {
         float: left;
         width: 100px; }
-      html body main.site-main-content div.verse-no div.chapter-verse, html body main.site-main-content div.bible-verse-no div.chapter-verse {
+      html body main.site-main-content div.verse-no div.chapter-verse,
+      html body main.site-main-content div.bible-verse-no div.chapter-verse {
         float: right;
         width: 100px; }
-      html body main.site-main-content div.verse-no div.chapter, html body main.site-main-content div.bible-verse-no div.chapter {
+      html body main.site-main-content div.verse-no div.chapter,
+      html body main.site-main-content div.bible-verse-no div.chapter {
         margin: 0 auto !important;
         width: 300px;
         display: inline-block; }
@@ -1279,7 +1324,8 @@ html body {
       background-color: #483c32; }
     html body main.site-main-content div.bible-verse-no {
       background-color: #003153; }
-    html body main.site-main-content div#more-quran-10-89-93, html body main.site-main-content div#more-quran-3-151 {
+    html body main.site-main-content div#more-quran-10-89-93,
+    html body main.site-main-content div#more-quran-3-151 {
       display: none;
       opacity: 0;
       transform: scaleX(0);
