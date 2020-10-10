@@ -128,7 +128,7 @@ Therefore, for the current sample data, the estimate we got when assuming the we
 &lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1LpAcFwC3pCOzCvsMsINmR-d52D83X8bi&quot; /&gt;
 Not bad given that we have very small dataset. Now let’s proceed and see how we can infer the parameters in Bayesian framework. The prior distribution can be implemented as follows:
 &lt;script src=&quot;https://gist.github.com/alstat/ab32e9a8f171975532910c6305a4f95f.js&quot;&gt;&lt;/script&gt;
-As indicated in the above proposition, the parameters are jointly modelled from a bivariate Normal distribution, as indicated by the dimension of the hyperparameter &lt;code&gt;μ&lt;/code&gt; above. Indeed, the true parameter we are interested in is the weight vector, $\mathbf{w}$, but because we considered it to be random, then the parameters of the model we assign to it are called &lt;i&gt;hyperparameters&lt;/i&gt;, in this case the vector $\boldsymbol{\mu}$ and the identity matrix $\mathbf{I}$ of the prior distribution.&lt;/p&gt;
+As indicated in the above proposition, the parameters are jointly modelled by a bivariate Normal distribution, as indicated by the dimension of the hyperparameter &lt;code&gt;μ&lt;/code&gt; above. Indeed, the true parameter we are interested in is the weight vector, $\mathbf{w}$, but because we considered it to be random, then the parameters of the model we assign to it are called &lt;i&gt;hyperparameters&lt;/i&gt;, in this case the vector $\boldsymbol{\mu}$ and the identity matrix $\mathbf{I}$ of the prior distribution.&lt;/p&gt;
 
 &lt;p&gt;Moreover, the likelihood of the data can be implemented as follows:
 &lt;script src=&quot;https://gist.github.com/alstat/b0fa92ec05c0a03c2d91bb82c1c5ca5e.js&quot;&gt;&lt;/script&gt;
@@ -148,7 +148,7 @@ So you might be wondering, what’s the motivation of only using the first 10 an
 Tying all the codes together, gives us this beautiful grid plot.
 &lt;script src=&quot;https://gist.github.com/alstat/8fca90fe8e0cbb84b36f59367fe130aa.js&quot;&gt;&lt;/script&gt;
 &lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1rKM8d9ROHw63MvBf83EGoNMOoHe6vx__&quot; /&gt;
-Since we went with style before comprehension, let me guide you then with the axes. All figures has a unit square space, with contour plots having the following axes: $w_0$ (the &lt;i&gt;x&lt;/i&gt;-axis) and $w_1$ (the &lt;i&gt;y&lt;/i&gt;-axis). Obviously, the data space has the following axes: predictor (the &lt;i&gt;x&lt;/i&gt;-axis) and response (the &lt;i&gt;y&lt;/i&gt;-axis).&lt;/p&gt;
+Since we went with style before comprehension, let me guide you then with the axes. All figures have unit square space, with contour plots having the following axes: $w_0$ (the &lt;i&gt;x&lt;/i&gt;-axis) and $w_1$ (the &lt;i&gt;y&lt;/i&gt;-axis). Obviously, the data space has the following axes: predictor (the &lt;i&gt;x&lt;/i&gt;-axis) and response (the &lt;i&gt;y&lt;/i&gt;-axis).&lt;/p&gt;
 &lt;h3 id=&quot;discussions&quot;&gt;Discussions&lt;/h3&gt;
 &lt;p&gt;We commenced the article with emphasis on the approach of Bayesian Statistics to modeling, whereby the estimation of the parameters as mentioned is based on the &lt;i&gt;Bayes’ Theorem&lt;/i&gt;, which is a conditional probability with the following form:
 \begin{equation}
@@ -164,7 +164,7 @@ Now we will relate this to the above figure using some analogy, as to how the mo
 &lt;h3 id=&quot;bayesian-deep-learning&quot;&gt;Bayesian Deep Learning&lt;/h3&gt;
 &lt;p&gt;This section deserves a separate article, but I will briefly give some motivation on how we can generalize the above discussion into complex modeling.&lt;/p&gt;
 
-&lt;p&gt;The intention of the article is to give the reader a low-level understanding of how the Bayes’ theorem work, and without loss of generalization, I decided to go with simple linear regression to demonstrate the above subject. However, this can be applied to any model indexed by or a function of some parameters or weights $\mathbf{w}$, with the assumption that the solution is random but govern by some probability distribution.&lt;/p&gt;
+&lt;p&gt;The intention of the article is to give the reader a low-level understanding of how the Bayes’ theorem works, and without loss of generalization, I decided to go with simple linear regression to demonstrate the above subject. However, this can be applied to any model indexed by or a function of some parameters or weights $\mathbf{w}$, with the assumption that the solution is random but govern by some probability distribution.&lt;/p&gt;
 
 &lt;p&gt;Complex modeling such as in Deep Learning are usually based on the assumption that the weights are fixed and unknown, which in Statistics is the Frequentist approach to inference, but without assuming some probability distribution on the error of the model. Therefore, if we are to assume some randomness on the weights, we can then use Bayesian inference to derive or at least approximate (for models with no closed-form solution) the posterior distribution. Approximate Bayesian inference are done via Markov Chain Monte Carlo (MCMC) or Variational Inference, which we can tackle in a separate post.&lt;/p&gt;
 
